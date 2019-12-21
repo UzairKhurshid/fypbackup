@@ -5,7 +5,7 @@
             <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                     <li class="breadcrumb-item"><a href="#"><i class="fas fa-users"></i></a></li>
-                    <li class="breadcrumb-item"><a href="#">Student</a></li>
+                    <li class="breadcrumb-item"><a href="#">Teacher</a></li>
                     <li class="breadcrumb-item active" aria-current="page">All</li>
                 </ol>
             </nav>
@@ -20,11 +20,11 @@
                         <div class="col-md-6">
                             <h3 class="mb-0">Datatable</h3>
                             <p class="text-sm mb-0">
-                                Showing all the students of the application.
+                                Showing all the teachers of the application.
                             </p>
                         </div>
                         <div class="col-md-6 text-right">
-                            <a class="btn btn-primary" href="/students/create">Create New Student</a>
+                            <a class="btn btn-primary" href="/teachers/create">Create New Teacher</a>
                         </div>
                     </div>
                 </div>
@@ -41,9 +41,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                            {{#if student}} 
-                                {{#each student}}
-                                    <!-- <th class="text-center" colspan="6">Show All Students Here.</th> --> 
+                            {{#if teacher}} 
+                                {{#each teacher}}
+                                    <!-- <th class="text-center" colspan="6">Show All teachers Here.</th> --> 
                                     <tr>
                                     <th>{{this.regNo}}</th>
                                     <th>{{this.name}}</th>
@@ -54,7 +54,7 @@
                                     </tr>
                                 {{/each}}
                             {{else}}
-                                <h2>No student Found</h2>
+                                <h2>No teacher Found</h2>
                             {{/if}}
                         </tbody>
                     </table>

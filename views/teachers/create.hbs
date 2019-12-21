@@ -6,7 +6,7 @@
             <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                     <li class="breadcrumb-item"><a href="#"><i class="fas fa-user-graduate"></i></a></li>
-                    <li class="breadcrumb-item"><a href="#">Student</a></li>
+                    <li class="breadcrumb-item"><a href="#">teacher</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Create</li>
                 </ol>
             </nav>
@@ -17,18 +17,18 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="mb-0">Create new student</h3>
+                    <h3 class="mb-0">Create new teacher</h3>
                     <p class="text-sm mb-0">
-                        Create new student for your application.
+                        Create new teacher for your application.
                     </p>
                 </div>
                 <div class="container py-4">
-                    <form method="POST" action="/students/create">
+                    <form method="POST" action="/teachers/create">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                <label for="regNo" class="form-control-label" >Register No</label>
-                               <input type="text" placeholder="Enter student register number" class="form-control" name="regNo" id="regNo">
+                               <input type="text" placeholder="Enter teacher register number" class="form-control" name="regNo" id="regNo">
                             </div>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                <label for="name" class="form-control-label" >Name</label>
-                               <input type="text" placeholder="Enter student name" class="form-control" name="name" id="name">
+                               <input type="text" placeholder="Enter teacher name" class="form-control" name="name" id="name">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -54,13 +54,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                <label for="email" class="form-control-label" >Email</label>
-                               <input type="email" placeholder="Enter student email" class="form-control" name="email" id="email">
+                               <input type="email" placeholder="Enter teacher email" class="form-control" name="email" id="email">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                <label for="phone" class="form-control-label" >Phone Number</label>
-                               <input type="phone" placeholder="Enter student phone number" class="form-control" name="phone" id="phone">
+                               <input type="phone" placeholder="Enter teacher phone number" class="form-control" name="phone" id="phone">
                             </div>
                         </div>
                     </div>
@@ -87,20 +87,10 @@
                         </div>
                     </div>
                      <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="semester" class="form-control-label" >Semester</label>
-                                 <select class="custom-select" name="semester" id="semester">
-                                   <option disabled selected value="">Select Semester</option>
-                                   <option value="6">Sixth Semester</option>
-                                   <option value="7">Seventh Semester</option>
-                               </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label for="password" class="form-control-label" >Password</label>
-                                   <input placeholder="Enter student password" type="password" name="password" id="password" class="form-control">
+                                   <input placeholder="Enter teacher password" type="password" name="password" id="password" class="form-control">
                             </div>
                         </div>
                     </div>

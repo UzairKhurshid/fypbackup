@@ -6,7 +6,7 @@
             <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                     <li class="breadcrumb-item"><a href="#"><i class="fas fa-user-graduate"></i></a></li>
-                    <li class="breadcrumb-item"><a href="#">Student</a></li>
+                    <li class="breadcrumb-item"><a href="#">Projects</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Create</li>
                 </ol>
             </nav>
@@ -17,61 +17,59 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="mb-0">Create new student</h3>
+                    <h3 class="mb-0">Create new Project</h3>
                     <p class="text-sm mb-0">
-                        Create new student for your application.
+                        Create new Project for your application.
                     </p>
                 </div>
                 <div class="container py-4">
-                    <form method="POST" action="/students/create">
+                    <form method="POST" action="/projects/create">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                               <label for="regNo" class="form-control-label" >Register No</label>
-                               <input type="text" placeholder="Enter student register number" class="form-control" name="regNo" id="regNo">
+                               <label for="regNo" class="form-control-label" >Name</label>
+                               <input type="text" placeholder="Enter Project Name " class="form-control" name="name" id="name">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                               <label for="name" class="form-control-label" >Name</label>
-                               <input type="text" placeholder="Enter student name" class="form-control" name="name" id="name">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="gender" class="form-control-label" >Gender</label>
-                               <select class="custom-select" name="gender" id="gender">
-                                   <option disabled selected value="">Select Gender</option>
-                                   <option value="male">Male</option>
-                                   <option value="female">Female</option>
+                                <label for="language" class="form-control-label" >Language</label>
+                               <select class="custom-select" name="language" id="language">
+                                   <option disabled selected value="">Select Language</option>
+                                   <option value="C">C</option>
+                                   <option value="C#">C#</option>
+                                   <option value="C++">C++</option>
+                                   <option value="Java">Java</option>
+                                   <option value="Node js">Node js</option>
+                                   <option value="php">Php</option>
                                </select>
                             </div>
                         </div>
-                    </div>
-                       <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                               <label for="email" class="form-control-label" >Email</label>
-                               <input type="email" placeholder="Enter student email" class="form-control" name="email" id="email">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                               <label for="phone" class="form-control-label" >Phone Number</label>
-                               <input type="phone" placeholder="Enter student phone number" class="form-control" name="phone" id="phone">
+                                <label for="IDE" class="form-control-label" >IDE</label>
+                               <select class="custom-select" name="IDE" id="IDE">
+                                   <option disabled selected value="">Select IDE</option>
+                                   <option value="Dev++">Dev++</option>
+                                   <option value="NetBeans">NetBeans</option>
+                                   <option value="Visual Studio">Visual Studio</option>
+                                   <option value="Visual Studio Code">Visual Studio Code</option>
+                                   <option value="Android Studio">Android Studio</option>
+                               </select>
                             </div>
                         </div>
                     </div>
                      <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="campus" class="form-control-label" >Campus</label>
-                                 <select class="custom-select" name="campus" id="campus">
-                                   <option disabled selected value="">Select Campus</option>
-                                   <option value="karachi">Karachi Campus</option>
-                                   <option value="islamabad">Islamabad Campus</option>
+                                <label for="type" class="form-control-label" >Type</label>
+                                 <select class="custom-select" name="type" id="type">
+                                   <option disabled selected value="">Select Type</option>
+                                   <option value="Desktop Application">Desktop Application</option>
+                                   <option value="Mobile Application">Mobile Application</option>
+                                   <option value="Web Application">Web Application</option>
                                </select>
                             </div>
                         </div>
@@ -99,8 +97,8 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="password" class="form-control-label" >Password</label>
-                                   <input placeholder="Enter student password" type="password" name="password" id="password" class="form-control">
+                                <label for="description" class="form-control-label" >Description</label>
+                                   <input placeholder="Enter Description About Project" type="text" name="description" id="description" class="form-control">
                             </div>
                         </div>
                     </div>

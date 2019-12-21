@@ -1,0 +1,126 @@
+
+    <!-- Header -->
+    <div class="row align-items-center py-4">
+        <div class="col-12">
+            <h6 class="h2 text-white d-inline-block mb-0">Users</h6>
+            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                    <li class="breadcrumb-item"><a href="#"><i class="fas fa-user-graduate"></i></a></li>
+                    <li class="breadcrumb-item"><a href="#">Student</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Update</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="mb-0"> Student</h3>
+                    <p class="text-sm mb-0">
+                        Updating Student.
+                    </p>
+                </div>
+
+
+
+                <div class="container py-4">
+                    <form method="POST" action="/students/update">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                               <label for="regNo" class="form-control-label" >Register No</label>
+                               <input type="text" placeholder="Enter student register number" class="form-control" name="regNo" id="regNo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                               <label for="name" class="form-control-label" >Name</label>
+                               <input type="text" placeholder="Enter student name" class="form-control" name="name" id="name">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="gender" class="form-control-label" >Gender</label>
+                               <select class="custom-select" name="gender" id="gender">
+                                   <option disabled selected value="">Select Gender</option>
+                                   <option value="male">Male</option>
+                                   <option value="female">Female</option>
+                               </select>
+                            </div>
+                        </div>
+                    </div>
+                       <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                               <label for="email" class="form-control-label" >Email</label>
+                               <input type="email" placeholder="Enter student email" class="form-control" name="email" id="email">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                               <label for="phone" class="form-control-label" >Phone Number</label>
+                               <input type="phone" placeholder="Enter student phone number" class="form-control" name="phone" id="phone">
+                            </div>
+                        </div>
+                    </div>
+                     <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="campus" class="form-control-label" >Campus</label>
+                                 <select class="custom-select" name="campus" id="campus">
+                                   <option disabled selected value="">Select Campus</option>
+                                   <option value="karachi">Karachi Campus</option>
+                                   <option value="islamabad">Islamabad Campus</option>
+                               </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="department" class="form-control-label" >Department</label>
+                                 <select class="custom-select" name="department" id="department">
+                                   <option disabled selected value="">Select Department</option>
+                                   <option value="cs">Computer Science</option>
+                                   <option value="se">Software Engineering</option>
+                               </select>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="semester" class="form-control-label" >Semester</label>
+                                 <select class="custom-select" name="semester" id="semester">
+                                   <option disabled selected value="">Select Semester</option>
+                                   <option value="6">Sixth Semester</option>
+                                   <option value="7">Seventh Semester</option>
+                               </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="password" class="form-control-label" >Password</label>
+                                   <input placeholder="Enter student password" type="password" name="password" id="password" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                   <input  type="hidden" name="_csrf" value="{{csrfToken}}" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                   </form>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>

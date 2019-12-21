@@ -1,0 +1,117 @@
+
+    <!-- Header -->
+    <div class="row align-items-center py-4">
+        <div class="col-12">
+            <h6 class="h2 text-white d-inline-block mb-0">Users</h6>
+            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                    <li class="breadcrumb-item"><a href="#"><i class="fas fa-user-graduate"></i></a></li>
+                    <li class="breadcrumb-item"><a href="#">Projects</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Create</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="mb-0">Create new Project</h3>
+                    <p class="text-sm mb-0">
+                        Create new Project for your application.
+                    </p>
+                </div>
+                <div class="container py-4">
+                    <form method="POST" action="/projects/create">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                               <label for="regNo" class="form-control-label" >Name</label>
+                               <input type="text" placeholder="Enter Project Name " class="form-control" name="name" id="name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="language" class="form-control-label" >Language</label>
+                               <select class="custom-select" name="language" id="language">
+                                   <option disabled selected value="">Select Language</option>
+                                   <option value="C">C</option>
+                                   <option value="C#">C#</option>
+                                   <option value="C++">C++</option>
+                                   <option value="Java">Java</option>
+                                   <option value="Node js">Node js</option>
+                                   <option value="php">Php</option>
+                               </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="IDE" class="form-control-label" >IDE</label>
+                               <select class="custom-select" name="IDE" id="IDE">
+                                   <option disabled selected value="">Select IDE</option>
+                                   <option value="Dev++">Dev++</option>
+                                   <option value="NetBeans">NetBeans</option>
+                                   <option value="Visual Studio">Visual Studio</option>
+                                   <option value="Visual Studio Code">Visual Studio Code</option>
+                                   <option value="Android Studio">Android Studio</option>
+                               </select>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="type" class="form-control-label" >Type</label>
+                                 <select class="custom-select" name="type" id="type">
+                                   <option disabled selected value="">Select Type</option>
+                                   <option value="Desktop Application">Desktop Application</option>
+                                   <option value="Mobile Application">Mobile Application</option>
+                                   <option value="Web Application">Web Application</option>
+                               </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="department" class="form-control-label" >Department</label>
+                                 <select class="custom-select" name="department" id="department">
+                                   <option disabled selected value="">Select Department</option>
+                                   <option value="cs">Computer Science</option>
+                                   <option value="se">Software Engineering</option>
+                               </select>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="semester" class="form-control-label" >Semester</label>
+                                 <select class="custom-select" name="semester" id="semester">
+                                   <option disabled selected value="">Select Semester</option>
+                                   <option value="6">Sixth Semester</option>
+                                   <option value="7">Seventh Semester</option>
+                               </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="description" class="form-control-label" >Description</label>
+                                   <input placeholder="Enter Description About Project" type="text" name="description" id="description" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                   <input  type="hidden" name="_csrf" value="{{csrfToken}}" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                   </form>
+                </div>
+            </div>
+        </div>
+    </div>

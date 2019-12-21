@@ -1,0 +1,51 @@
+
+    <!-- Header -->
+    <div class="row align-items-center py-4">
+        <div class="col-12">
+            <h6 class="h2 text-white d-inline-block mb-0">Users</h6>
+            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                    <li class="breadcrumb-item"><a href="#"><i class="fas fa-user-graduate"></i></a></li>
+                    <li class="breadcrumb-item"><a href="#">Project</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Delete</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="mb-0"> Project </h3>
+                    <p class="text-sm mb-0">
+                        Deleting Project.
+                    </p>
+                </div>
+
+
+
+                <div class="container py-4">
+                    <form method="POST" action="/projects/delete">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                               <label for="name" class="form-control-label" >Project Name</label>
+                               <input type="text" placeholder="Enter Project Name" class="form-control" name="name" id="name">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                   <input  type="hidden" name="_csrf" value="{{csrfToken}}" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                   </form>
+                </div>
+            </div>
+        </div>
+    </div>

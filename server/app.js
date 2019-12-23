@@ -65,6 +65,23 @@ app.use(dashboardRouter)
 
   
 
- 
+app.get('/', function (req, res) {
+    res.render('dashboard/index',{
+        title:'Dashboard'
+    })
+  })
+
+  app.get('/students', function (req, res) {
+    res.render('students/index',{
+        title:'Students'
+    })
+  })
+
+  app.get('/students/create', function (req, res) {
+    res.render('students/create',{
+        title:'Students'
+    })
+  })
+   
   app.listen(port)
   console.log('Listening to port: '+ port);

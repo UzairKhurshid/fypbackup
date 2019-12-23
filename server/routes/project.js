@@ -8,12 +8,8 @@ router.get('/projects', async (req, res)=> {
         const projects=await Project.find()
         
         res.render('projects/index',{
-<<<<<<< HEAD
-            title:'Project',
-=======
             title:'Projects',
             Projects:true,
->>>>>>> 86c187c04ea3eba36c3f00a5e0f08016306b6bf3
             project:projects
         })
     }catch(e){
@@ -28,12 +24,8 @@ router.get('/projects', async (req, res)=> {
 
 router.get('/projects/create', async (req, res)=> {
     res.render('projects/create',{
-<<<<<<< HEAD
-        title:'projects'
-=======
         title:'projects',
         Projects:true,
->>>>>>> 86c187c04ea3eba36c3f00a5e0f08016306b6bf3
     })
     console.log(req.session.working)
   })
@@ -56,12 +48,8 @@ router.post('/projects/create',async(req,res)=>{
 
 router.get('/projects/update',(req,res)=>{
     res.render('projects/update',{
-<<<<<<< HEAD
-        title:'project'
-=======
         title:'project',
         Projects:true,
->>>>>>> 86c187c04ea3eba36c3f00a5e0f08016306b6bf3
     })
 })
 router.post('/projects/update',async(req,res)=>{
@@ -96,12 +84,8 @@ router.post('/projects/update',async(req,res)=>{
 
 router.get('/projects/delete',(req,res)=>{
     res.render('projects/delete',{
-<<<<<<< HEAD
-        title:'projects'
-=======
         title:'projects',
         Projects:true,
->>>>>>> 86c187c04ea3eba36c3f00a5e0f08016306b6bf3
     })
 })
 router.post('/projects/delete',async(req,res)=>{

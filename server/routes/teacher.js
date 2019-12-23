@@ -9,10 +9,7 @@ router.get('/teachers', async (req, res)=> {
         
         res.render('teachers/index',{
             title:'Teachers',
-<<<<<<< HEAD
-=======
             Teachers:true,
->>>>>>> 86c187c04ea3eba36c3f00a5e0f08016306b6bf3
             teacher:teachers
         })
     }catch(e){
@@ -27,10 +24,7 @@ router.get('/teachers', async (req, res)=> {
 
 router.get('/teachers/create', async (req, res)=> {
     res.render('teachers/create',{
-<<<<<<< HEAD
-=======
         Teachers:true,
->>>>>>> 86c187c04ea3eba36c3f00a5e0f08016306b6bf3
         title:'Teachers'
     })
     console.log(req.session.working)
@@ -55,10 +49,7 @@ router.post('/teachers/create',async(req,res)=>{
 
 router.get('/teachers/update',(req,res)=>{
     res.render('teachers/update',{
-<<<<<<< HEAD
-=======
         Teachers:true,
->>>>>>> 86c187c04ea3eba36c3f00a5e0f08016306b6bf3
         title:'Teachers'
     })
 })
@@ -97,10 +88,7 @@ router.post('/teachers/update',async(req,res)=>{
 
 router.get('/teachers/delete',(req,res)=>{
     res.render('teachers/delete',{
-<<<<<<< HEAD
-=======
         Teachers:true,
->>>>>>> 86c187c04ea3eba36c3f00a5e0f08016306b6bf3
         title:'Teachers'
     })
 })

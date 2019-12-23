@@ -9,10 +9,7 @@ router.get('/students', async (req, res)=> {
         
         res.render('students/index',{
             title:'Students',
-<<<<<<< HEAD
-=======
             Students:true,
->>>>>>> 86c187c04ea3eba36c3f00a5e0f08016306b6bf3
             student:students
         })
     }catch(e){
@@ -27,10 +24,7 @@ router.get('/students', async (req, res)=> {
 
 router.get('/students/create', async (req, res)=> {
     res.render('students/create',{
-<<<<<<< HEAD
-=======
         Students:true,
->>>>>>> 86c187c04ea3eba36c3f00a5e0f08016306b6bf3
         title:'Students'
     })
     console.log(req.session.working)
@@ -54,10 +48,7 @@ router.post('/students/create',async(req,res)=>{
 
 router.get('/students/update',(req,res)=>{
     res.render('students/update',{
-<<<<<<< HEAD
-=======
         Students:true,
->>>>>>> 86c187c04ea3eba36c3f00a5e0f08016306b6bf3
         title:'Students'
     })
 })
@@ -95,10 +86,7 @@ router.post('/students/update',async(req,res)=>{
 
 router.get('/students/delete',(req,res)=>{
     res.render('students/delete',{
-<<<<<<< HEAD
-=======
         Students:true,
->>>>>>> 86c187c04ea3eba36c3f00a5e0f08016306b6bf3
         title:'Students'
     })
 })

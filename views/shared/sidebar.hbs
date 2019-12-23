@@ -22,6 +22,7 @@
             <div class="collapse navbar-collapse" id="sidenav-collapse-main">
                 <!-- Nav items -->
                 <ul class="navbar-nav">
+<<<<<<< HEAD
                     <li class="nav-item">
                         <a class="nav-link"
                            href="/">
@@ -57,6 +58,36 @@
                     </li>
 =======
 >>>>>>> 05b5fc6c0535dde9e06bc88976e2791d647263fb
+=======
+                    <li class="nav-item {{#if  Dashboard }}  active    {{/if}}">
+                        <a class="nav-link {{#if  Dashboard }} text-primary {{else}} text-default   {{/if}}"
+                           href="/">
+                            <i class="fas fa-store"></i>
+                            <span class="nav-link-text">Dashboard</span>
+                        </a>
+                    </li>
+                     <li class="nav-item {{#if  Students }}  active    {{/if}}">
+                        <a class="nav-link {{#if  Students }} text-primary {{else}} text-default   {{/if}}"
+                           href="/students">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span class="nav-link-text">Students</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{#if  Teachers }} text-primary {{else}} text-default   {{/if}}">
+                        <a class="nav-link {{#if  Teachers }} text-primary {{else}} text-default   {{/if}}"
+                           href="/teachers">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <span class="nav-link-text">Teachers</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{#if  Projects }} text-primary {{else}} text-default   {{/if}}">
+                        <a class="nav-link {{#if  Projects }} text-primary {{else}} text-default   {{/if}}"
+                           href="/projects">
+                            <i class="fas fa-project-diagram"></i>
+                            <span class="nav-link-text">Projects</span>
+                        </a>
+                    </li>
+>>>>>>> 86c187c04ea3eba36c3f00a5e0f08016306b6bf3
                 </ul>
                 <!-- Divider -->
                 <hr class="my-3">

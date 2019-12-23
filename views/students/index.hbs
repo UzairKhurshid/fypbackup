@@ -25,17 +25,22 @@
                         </div>
                         <div class="col-md-6 text-right">
 <<<<<<< HEAD
+<<<<<<< HEAD
                             <a class="btn btn-primary" href="/students/create">Create New Student</a>
 =======
                             <a class="btn btn-primary" href="#">Create New Student</a>
 >>>>>>> 05b5fc6c0535dde9e06bc88976e2791d647263fb
+=======
+                            <a class="btn btn-primary" href="/students/create">Create New Student</a>
+>>>>>>> 86c187c04ea3eba36c3f00a5e0f08016306b6bf3
                         </div>
                     </div>
                 </div>
                 <div class="table-responsive py-4">
-                    <table class="table dataTable align-items-center table-hover" id="datatable">
+                    <table class="table dataTable align-items-center table-hover" id="datatable-basic">
                         <thead class="thead-light">
                         <tr>
+<<<<<<< HEAD
 <<<<<<< HEAD
                             <th>RegNo</th>
                             <th>Name</th>
@@ -63,16 +68,35 @@
                             {{/if}}
 =======
                             <th>id</th>
+=======
+                            <th>RegNo</th>
+>>>>>>> 86c187c04ea3eba36c3f00a5e0f08016306b6bf3
                             <th>Name</th>
                             <th>Email</th>
                             <th>Created At</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                            <th>Campus</th>
+                            <th>Departmemt</th>
                         </tr>
                         </thead>
                         <tbody>
+<<<<<<< HEAD
                             <th class="text-center" colspan="6">Show All Students Here.</th>
 >>>>>>> 05b5fc6c0535dde9e06bc88976e2791d647263fb
+=======
+                            {{#if student}} 
+                                {{#each student}}
+                                    <!-- <th class="text-center" colspan="6">Show All Students Here.</th> --> 
+                                    <tr>
+                                    <th>{{this.regNo}}</th>
+                                    <th>{{this.name}}</th>
+                                    <th>{{this.email}}</th>
+                                    <th>{{this.createdAt}}</th>
+                                    <th>{{this.campus}}</th>
+                                    <th>{{this.department}}</th>
+                                    </tr>
+                                {{/each}}
+                            {{/if}}
+>>>>>>> 86c187c04ea3eba36c3f00a5e0f08016306b6bf3
                         </tbody>
                     </table>
                 </div>

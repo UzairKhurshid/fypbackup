@@ -1,7 +1,7 @@
 {
   "name": "fyp",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is fyp of bahria university 2019-2020",
   "main": "index.js",
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -20,8 +20,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/app.js",
+<<<<<<< HEAD
     "dev": "nodemon server/app.js -e js,hbs"
+=======
+    "dev": "nodemon server/app.js -e js,hbs,css"
+>>>>>>> 86c187c04ea3eba36c3f00a5e0f08016306b6bf3
   },
-  "author": "",
+  "author": "Ali Raza , Uzair Khurshid & Sana Iqbla",
   "license": "ISC"
 }

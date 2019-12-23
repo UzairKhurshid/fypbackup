@@ -20,11 +20,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/app.js",
-<<<<<<< HEAD
-    "dev": "nodemon server/app.js -e js,hbs"
-=======
     "dev": "nodemon server/app.js -e js,hbs,css"
->>>>>>> 86c187c04ea3eba36c3f00a5e0f08016306b6bf3
   },
   "author": "Ali Raza , Uzair Khurshid & Sana Iqbla",
   "license": "ISC"

@@ -9,6 +9,7 @@ router.get('/students', async (req, res)=> {
         
         res.render('students/index',{
             title:'Students',
+            Students:true,
             student:students
         })
     }catch(e){
@@ -23,6 +24,7 @@ router.get('/students', async (req, res)=> {
 
 router.get('/students/create', async (req, res)=> {
     res.render('students/create',{
+        Students:true,
         title:'Students'
     })
     console.log(req.session.working)
@@ -46,6 +48,7 @@ router.post('/students/create',async(req,res)=>{
 
 router.get('/students/update',(req,res)=>{
     res.render('students/update',{
+        Students:true,
         title:'Students'
     })
 })
@@ -83,6 +86,7 @@ router.post('/students/update',async(req,res)=>{
 
 router.get('/students/delete',(req,res)=>{
     res.render('students/delete',{
+        Students:true,
         title:'Students'
     })
 })

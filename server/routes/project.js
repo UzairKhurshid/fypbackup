@@ -8,7 +8,8 @@ router.get('/projects', async (req, res)=> {
         const projects=await Project.find()
         
         res.render('projects/index',{
-            title:'Project',
+            title:'Projects',
+            Projects:true,
             project:projects
         })
     }catch(e){
@@ -23,7 +24,8 @@ router.get('/projects', async (req, res)=> {
 
 router.get('/projects/create', async (req, res)=> {
     res.render('projects/create',{
-        title:'projects'
+        title:'projects',
+        Projects:true,
     })
     console.log(req.session.working)
   })
@@ -46,7 +48,8 @@ router.post('/projects/create',async(req,res)=>{
 
 router.get('/projects/update',(req,res)=>{
     res.render('projects/update',{
-        title:'project'
+        title:'project',
+        Projects:true,
     })
 })
 router.post('/projects/update',async(req,res)=>{
@@ -81,7 +84,8 @@ router.post('/projects/update',async(req,res)=>{
 
 router.get('/projects/delete',(req,res)=>{
     res.render('projects/delete',{
-        title:'projects'
+        title:'projects',
+        Projects:true,
     })
 })
 router.post('/projects/delete',async(req,res)=>{

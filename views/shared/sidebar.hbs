@@ -22,31 +22,31 @@
             <div class="collapse navbar-collapse" id="sidenav-collapse-main">
                 <!-- Nav items -->
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link"
+                    <li class="nav-item {{#if  Dashboard }}  active    {{/if}}">
+                        <a class="nav-link {{#if  Dashboard }} text-primary {{else}} text-default   {{/if}}"
                            href="/">
-                            <i class="fas fa-store text-primary"></i>
+                            <i class="fas fa-store"></i>
                             <span class="nav-link-text">Dashboard</span>
                         </a>
                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link"
+                     <li class="nav-item {{#if  Students }}  active    {{/if}}">
+                        <a class="nav-link {{#if  Students }} text-primary {{else}} text-default   {{/if}}"
                            href="/students">
-                            <i class="fas fa-user-graduate  text-default"></i>
+                            <i class="fas fa-graduation-cap"></i>
                             <span class="nav-link-text">Students</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link"
+                    <li class="nav-item {{#if  Teachers }} text-primary {{else}} text-default   {{/if}}">
+                        <a class="nav-link {{#if  Teachers }} text-primary {{else}} text-default   {{/if}}"
                            href="/teachers">
-                            <i class="fas fa-user-graduate  text-default"></i>
+                            <i class="fas fa-chalkboard-teacher"></i>
                             <span class="nav-link-text">Teachers</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link"
+                    <li class="nav-item {{#if  Projects }} text-primary {{else}} text-default   {{/if}}">
+                        <a class="nav-link {{#if  Projects }} text-primary {{else}} text-default   {{/if}}"
                            href="/projects">
-                            <i class="fas fa-user-graduate  text-default"></i>
+                            <i class="fas fa-project-diagram"></i>
                             <span class="nav-link-text">Projects</span>
                         </a>
                     </li>

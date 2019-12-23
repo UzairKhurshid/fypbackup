@@ -9,6 +9,7 @@ router.get('/teachers', async (req, res)=> {
         
         res.render('teachers/index',{
             title:'Teachers',
+            Teachers:true,
             teacher:teachers
         })
     }catch(e){
@@ -23,6 +24,7 @@ router.get('/teachers', async (req, res)=> {
 
 router.get('/teachers/create', async (req, res)=> {
     res.render('teachers/create',{
+        Teachers:true,
         title:'Teachers'
     })
     console.log(req.session.working)
@@ -47,6 +49,7 @@ router.post('/teachers/create',async(req,res)=>{
 
 router.get('/teachers/update',(req,res)=>{
     res.render('teachers/update',{
+        Teachers:true,
         title:'Teachers'
     })
 })
@@ -85,6 +88,7 @@ router.post('/teachers/update',async(req,res)=>{
 
 router.get('/teachers/delete',(req,res)=>{
     res.render('teachers/delete',{
+        Teachers:true,
         title:'Teachers'
     })
 })

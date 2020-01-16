@@ -18,6 +18,7 @@ const studentRouter=require('./routes/student')
 const teacherRouter=require('./routes/teacher')
 const projectRouter=require('./routes/project')
 const dashboardRouter=require('./routes/dashboard')
+const authRouter=require('./routes/auth')
 
 
 const app = express()
@@ -61,6 +62,7 @@ app.use(studentRouter)
 app.use(teacherRouter)
 app.use(projectRouter)
 app.use(dashboardRouter)
+app.use(authRouter)
 
 
   

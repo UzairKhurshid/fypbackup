@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="table-responsive py-4">
-                    <table class="table dataTable align-items-center table-hover" id="datatable-basic">
+                    <table class="table dataTable align-items-center table-hover" id="datatable">
                         <thead class="thead-light">
                         <tr>
                             <th>Name</th>
@@ -51,6 +51,8 @@
                                     <th>{{this.department}}</th>
                                     </tr>
                                 {{/each}}
+                            {{else}}
+                                <h2>No Project Found</h2>
                             {{/if}}
                         </tbody>
                     </table>

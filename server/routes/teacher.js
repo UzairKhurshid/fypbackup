@@ -1,9 +1,10 @@
 const express=require('express')
+const auth=require('../middleware/auth')
 const router=new express.Router()
 const Teacher=require('../models/teacher')
 
 
-router.get('/teachers', async (req, res)=> {
+router.get('/teachers',auth, async (req, res)=> {
     try{
         const teachers=await Teacher.find()
         
@@ -22,7 +23,7 @@ router.get('/teachers', async (req, res)=> {
 
 
 
-router.get('/teachers/create', async (req, res)=> {
+router.get('/teachers/create',auth, async (req, res)=> {
     res.render('teachers/create',{
         Teachers:true,
         title:'Teachers'
@@ -30,7 +31,7 @@ router.get('/teachers/create', async (req, res)=> {
     console.log(req.session.working)
   })
 
-router.post('/teachers/create',async(req,res)=>{
+router.post('/teachers/create',auth,async(req,res)=>{
     const teachers=new Teacher(req.body)
     
     try{
@@ -47,13 +48,13 @@ router.post('/teachers/create',async(req,res)=>{
 
 
 
-router.get('/teachers/update',(req,res)=>{
+router.get('/teachers/update',auth,(req,res)=>{
     res.render('teachers/update',{
         Teachers:true,
         title:'Teachers'
     })
 })
-router.post('/teachers/update',async(req,res)=>{
+router.post('/teachers/update',auth,async(req,res)=>{
     
     const updates=Object.keys(req.body)
     const regNo=req.body.regNo
@@ -86,13 +87,13 @@ router.post('/teachers/update',async(req,res)=>{
 
 
 
-router.get('/teachers/delete',(req,res)=>{
+router.get('/teachers/delete',auth,(req,res)=>{
     res.render('teachers/delete',{
         Teachers:true,
         title:'Teachers'
     })
 })
-router.post('/teachers/delete',async(req,res)=>{
+router.post('/teachers/delete',auth,async(req,res)=>{
      
     const regNo=req.body.regNo
     

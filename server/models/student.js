@@ -53,6 +53,19 @@ const studentSchema=new mongoose.Schema({
    timestamps: true
 })
 
+ 
+studentSchema.statics.findByCredentionals =async (email,password)=>{
+    const student=await Student.findOne({email})
+    if(!student){
+        throw new Error('Invalid Email');
+    }
+    const chkPass=await bcrypt.compare(password,student.password)
+    if(!chkPass){
+        throw new Error('Invalid Password');
+    }
+    return student
+}
+
 studentSchema.pre('save',async function(next){
     const student=this
 
@@ -62,6 +75,7 @@ studentSchema.pre('save',async function(next){
 
     next()
 })
+
 
 const Student=mongoose.model('Student',studentSchema)
 module.exports=Student

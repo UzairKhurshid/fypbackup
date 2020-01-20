@@ -45,6 +45,19 @@ const teacherSchema=new mongoose.Schema({
    timestamps: true
 })
 
+teacherSchema.statics.findByCredentionals = async(email,password)=>{
+    const teacher=await Teacher.findOne({email})
+    if(!teacher){
+        throw new Error('Invalid Email')
+    }
+    const chkPass=await bcrypt.compare(password,teacher.password)
+    if(!chkPass){
+        throw new Error('Invalid Password')
+    }
+    return teacher
+}
+
+
 teacherSchema.pre('save',async function(next){
     const teacher=this
 

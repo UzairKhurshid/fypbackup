@@ -47,12 +47,13 @@ router.post('/students/create',auth,async(req,res)=>{
 
 
 
-router.get('/students/update',auth,(req,res)=>{
+router.get('/students/update',auth,async (req,res)=>{
     res.render('students/update',{
         Students:true,
         title:'Students'
     })
 })
+
 router.post('/students/update',auth,async(req,res)=>{
     
     const updates=Object.keys(req.body)

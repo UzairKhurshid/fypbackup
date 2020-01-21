@@ -80,9 +80,6 @@ router.post('/projects/update',auth,async(req,res)=>{
 })
 
 
-
-
-
 router.get('/projects/delete',auth,(req,res)=>{
     res.render('projects/delete',{
         title:'projects',

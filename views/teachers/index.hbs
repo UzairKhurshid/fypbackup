@@ -28,27 +28,36 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-6">
                             <h3 class="mb-0">Datatable</h3>
                             <p class="text-sm mb-0">
                                 Showing all the teachers of the application.
                             </p>
                         </div>
-                        <div class="col-md-6 text-right">
+                        <div class="col-6 text-md-right">
                             <a class="btn btn-primary" href="/teachers/create">Create New Teacher</a>
                         </div>
                     </div>
                 </div>
                 <div class="table-responsive py-4">
+                    {{#if success}}
+                     <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                <span class="alert-text"><strong>Success!</strong> {{success}}</span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              {{/if}}
                     <table class="table dataTable align-items-center table-hover" id="datatable-basic">
                         <thead class="thead-light">
                         <tr>
                             <th>RegNo</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Created At</th>
                             <th>Campus</th>
                             <th>Departmemt</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -58,10 +67,10 @@
                                     <tr>
                                     <th>{{this.regNo}}</th>
                                     <th>{{this.name}}</th>
-                                    <th>{{this.email}}</th>
-                                    <th>{{this.createdAt}}</th>
+                                    <th>{{this.email}}</th>                            
                                     <th>{{this.campus}}</th>
                                     <th>{{this.department}}</th>
+                                    <th><a class="btn btn-sm btn-primary" href="/teachers/update/{{this.id}}">Edit</a></th>
                                     </tr>
                                 {{/each}}
                             {{/if}}

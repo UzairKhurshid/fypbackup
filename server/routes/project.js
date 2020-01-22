@@ -11,16 +11,14 @@ router.get('/projects', auth, async (req, res)=> {
         res.render('projects/index',{
             title:'Projects',
             Projects:true,
-            project:projects
+            project:projects,
+            success:req.flash('success')
         })
     }catch(e){
         console.log(e)
         res.redirect('/')
     }
   })
-
-
-
 
 
 router.get('/projects/create',auth, async (req, res)=> {
@@ -37,7 +35,8 @@ router.post('/projects/create',auth,async(req,res)=>{
     try{
         await project.save()
         console.log("project saves successfully")
-        res.redirect('/projects/create')
+        req.flash('success','Projectd Created Successfully')
+        res.redirect('/projects')
     }catch(e){
         console.log(e)
         res.redirect('/')
@@ -47,32 +46,35 @@ router.post('/projects/create',auth,async(req,res)=>{
 
 
 
-router.get('/projects/update',auth,(req,res)=>{
-    res.render('projects/update',{
-        title:'project',
-        Projects:true,
-    })
+router.get('/projects/update/:id',auth,async(req,res)=>{
+    try{
+        const id = req.params.id 
+        const std=await Project.findOne({_id:id})
+        res.render('projects/update',{
+            title:'project',
+            Projects:true,
+            project:std,
+            success:req.flash('success')
+        })
+    }
+    catch(e){
+        console.log(e)
+        res.redirect('/')
+    }
 })
-router.post('/projects/update',auth,async(req,res)=>{
+router.post('/projects/update/:id',auth,async(req,res)=>{
     
     const updates=Object.keys(req.body)
-    const name=req.body.name
+    const id = req.params.id 
 
     try{
 
-        const project=await Project.findOne({name})
-        
-
+        const project=await Project.findOne({_id:id})
         updates.forEach((update) => project[update] = req.body[update] )
         await project.save()
-
         console.log("Updated SUccessfully")
-        const projects=await Project.find()
-        res.render('projects/index',{
-            title:'projects',
-            project:projects
-        })
-
+        req.flash('success','Projectd Updated Successfully')
+        res.redirect('/projects/update/'+id)
     } catch(e){
         console.log(e)
         res.redirect('/')

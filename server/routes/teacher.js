@@ -11,7 +11,8 @@ router.get('/teachers',auth, async (req, res)=> {
         res.render('teachers/index',{
             title:'Teachers',
             Teachers:true,
-            teacher:teachers
+            teacher:teachers,
+            success:req.flash('success')
         })
     }catch(e){
         console.log(e)
@@ -37,7 +38,8 @@ router.post('/teachers/create',auth,async(req,res)=>{
     try{
         await teachers.save()
         console.log("teacher saves successfully")
-        res.redirect('/Teachers/create')
+        req.flash('success','Teacher Updated Successfully')
+        res.redirect('/Teachers')
     }catch(e){
         console.log(e)
         res.redirect('/')
@@ -48,20 +50,30 @@ router.post('/teachers/create',auth,async(req,res)=>{
 
 
 
-router.get('/teachers/update',auth,(req,res)=>{
-    res.render('teachers/update',{
-        Teachers:true,
-        title:'Teachers'
-    })
+router.get('/teachers/update/:id',auth,async(req,res)=>{
+    try{
+        const id = req.params.id 
+        const std=await Teacher.findOne({_id:id})
+        res.render('teachers/update',{
+            Teachers:true,
+            teacher:std,
+            title:'Teachers',
+            success:req.flash('success')
+        })
+    }
+    catch(e){
+        console.log(e)
+        res.redirect('/')
+    }
 })
-router.post('/teachers/update',auth,async(req,res)=>{
+router.post('/teachers/update/:id',auth,async(req,res)=>{
     
     const updates=Object.keys(req.body)
-    const regNo=req.body.regNo
+    const id = req.params.id 
     
     try{
 
-        const teacher=await Teacher.findOne({regNo})
+        const teacher=await Teacher.findOne({_id:id})
         if(!req.body.password){
             req.body.password=teacher.password
         }
@@ -71,11 +83,9 @@ router.post('/teachers/update',auth,async(req,res)=>{
         await teacher.save()
 
         console.log("Updated SUccessfully")
-        const teachers=await Teacher.find()
-        res.render('teachers/index',{
-            title:'Teacger',
-            teacher:teachers
-        })
+        req.flash('success','Teacher Updated Successfully')
+
+       res.redirect('/teachers/update/'+id)
 
     } catch(e){
         console.log(e)

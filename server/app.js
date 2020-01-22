@@ -12,6 +12,7 @@ const bodyParser=require('body-parser')
 const session=require('express-session')
 const mongoDbStore=require('connect-mongodb-session')(session)
 const csrf=require('csurf')
+const flash = require('connect-flash')
 
 //required routes
 const studentRouter=require('./routes/student')
@@ -27,6 +28,7 @@ const store=new mongoDbStore({
   collection:'sessions'  
 })
 const csrfProtection=csrf()
+
 
 
 // Define path for express config
@@ -48,6 +50,7 @@ app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(session({secret : 'mySecretKeyToHashMySessionValue' , resave : false , saveUninitialized : false , store : store }))
 app.use(csrfProtection)
+app.use(flash())
 
 
 //using routes from external files

@@ -27,10 +27,18 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="mb-0">Create new Project</h3>
+                    <div class="row">
+                        <div class="col-6">
+                             <h3 class="mb-0">Create new Project</h3>
                     <p class="text-sm mb-0">
                         Create new Project for your application.
                     </p>
+                        </div>
+                        <div class="col-6 text-md-right">
+                            <a class="btn btn-primary" href="/projects">Show All Projects</a>
+                        </div>
+                    </div>
+                   
                 </div>
                 <div class="container py-4">
                     <form method="POST" action="/projects/create">
@@ -38,7 +46,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                <label for="regNo" class="form-control-label" >Name</label>
-                               <input type="text" placeholder="Enter Project Name " class="form-control" name="name" id="name">
+                               <input required type="text" placeholder="Enter Project Name " class="form-control" name="name" id="name">
                             </div>
                         </div>
                     </div>
@@ -46,7 +54,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="language" class="form-control-label" >Language</label>
-                               <select class="custom-select" name="language" id="language">
+                               <select required class="custom-select" name="language" id="language">
                                    <option disabled selected value="">Select Language</option>
                                    <option value="C">C</option>
                                    <option value="C#">C#</option>
@@ -60,7 +68,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="IDE" class="form-control-label" >IDE</label>
-                               <select class="custom-select" name="IDE" id="IDE">
+                               <select required class="custom-select" name="IDE" id="IDE">
                                    <option disabled selected value="">Select IDE</option>
                                    <option value="Dev++">Dev++</option>
                                    <option value="NetBeans">NetBeans</option>
@@ -75,7 +83,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="type" class="form-control-label" >Type</label>
-                                 <select class="custom-select" name="type" id="type">
+                                 <select required class="custom-select" name="type" id="type">
                                    <option disabled selected value="">Select Type</option>
                                    <option value="Desktop Application">Desktop Application</option>
                                    <option value="Mobile Application">Mobile Application</option>
@@ -86,7 +94,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="department" class="form-control-label" >Department</label>
-                                 <select class="custom-select" name="department" id="department">
+                                 <select required  class="custom-select" name="department" id="department">
                                    <option disabled selected value="">Select Department</option>
                                    <option value="cs">Computer Science</option>
                                    <option value="se">Software Engineering</option>
@@ -98,7 +106,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="semester" class="form-control-label" >Semester</label>
-                                 <select class="custom-select" name="semester" id="semester">
+                                 <select required class="custom-select" name="semester" id="semester">
                                    <option disabled selected value="">Select Semester</option>
                                    <option value="6">Sixth Semester</option>
                                    <option value="7">Seventh Semester</option>
@@ -108,7 +116,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="description" class="form-control-label" >Description</label>
-                                   <input placeholder="Enter Description About Project" type="text" name="description" id="description" class="form-control">
+                                   <input required placeholder="Enter Description About Project" type="text" name="description" id="description" class="form-control">
                             </div>
                         </div>
                     </div>

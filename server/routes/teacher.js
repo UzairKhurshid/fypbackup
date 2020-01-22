@@ -97,26 +97,24 @@ router.post('/teachers/update/:id',auth,async(req,res)=>{
 
 
 
-router.get('/teachers/delete',auth,(req,res)=>{
+router.get('/teachers/delete/:id',auth,(req,res)=>{
     res.render('teachers/delete',{
         Teachers:true,
         title:'Teachers'
     })
 })
-router.post('/teachers/delete',auth,async(req,res)=>{
+router.post('/teachers/delete/:id',auth,async(req,res)=>{
      
-    const regNo=req.body.regNo
+    const id=req.params.id
+    
     
     try{
 
-        await Teacher.findOneAndDelete({regNo})
+        await Teacher.findOneAndDelete({_id:id})
         console.log("deleted Successfully")
-        
-        const teachers=await Teacher.find()
-        res.render('teachers/index',{
-            title:'Teachers',
-            teacher:teachers
-        })
+        req.flash('success','Teacher Deleted Successfully')
+       res.redirect('/teachers')
+
 
     } catch(e){
         console.log(e)

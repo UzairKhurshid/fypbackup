@@ -88,21 +88,16 @@ router.get('/projects/delete',auth,(req,res)=>{
         Projects:true,
     })
 })
-router.post('/projects/delete',auth,async(req,res)=>{
 
-    const name=req.body.name
+router.post('/projects/delete/:id',auth,async(req,res)=>{
+
+    const id=req.params.id
     
     try{
-        await Project.findOneAndDelete({name})
+        await Project.findOneAndDelete({_id:id})
         console.log("deleted Successfully")
-
-        const projects=await Project.find()
-        res.render('projects/index',{
-            title:'projects',
-            project:projects
-        })
-
-
+        req.flash('success','Project deleted successfully')
+        res.redirect('/projects')
     } catch(e){
         console.log(e)
         res.redirect('/')

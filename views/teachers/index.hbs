@@ -70,7 +70,18 @@
                                     <th>{{this.email}}</th>                            
                                     <th>{{this.campus}}</th>
                                     <th>{{this.department}}</th>
-                                    <th><a class="btn btn-sm btn-primary" href="/teachers/update/{{this.id}}">Edit</a></th>
+                                    <th><a class="btn btn-sm btn-primary" href="/teachers/update/{{this.id}}">Edit</a>
+                                    <a onclick="deleteForm()" class="btn btn-sm btn-primary" href="#">Delete</a>
+                                     <form id="teacherForm" class="hide" method="POST" action="/projects/delete/{{this.id}}">
+                                        <input  type="hidden" name="_csrf" value="{{csrfToken}}" class="form-control">
+                                     </form>
+                                       <script>
+                                      function deleteForm(){
+                                        event.preventDefault();
+                                        document.getElementById("teacherForm").submit();
+                                      }
+                                    </script>
+                                    </th>
                                     </tr>
                                 {{/each}}
                             {{/if}}

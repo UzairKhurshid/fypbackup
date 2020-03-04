@@ -1,4 +1,4 @@
-  {{!-- Header --}}
+    {{!-- Header --}}
     <div class="header bg-primary pb-6">
       <div class="container-fluid">
         <div class="header-body">
@@ -8,8 +8,8 @@
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="#">{{project.name}}</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Update</li>
+                  <li class="breadcrumb-item"><a href="#">New</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Propose</li>
                 </ol>
               </nav>
             </div>
@@ -27,27 +27,48 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="mb-0"> Project</h3>
+                    <div class="row">
+                        <div class="col-6">
+                             <h3 class="mb-0">Propose new Project</h3>
                     <p class="text-sm mb-0">
-                        Updating {{project.name}}.
+                        
                     </p>
+                        </div>
+                        <div class="col-6 text-md-right">
+                            <a class="btn btn-primary" href="/proposed">Show All proposed Projects</a>
+                        </div>
+                    </div>
+                   
                 </div>
                 <div class="container py-4">
-                       {{#if success}}
-                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <span class="alert-icon"><i class="ni ni-like-2"></i></span>
-                <span class="alert-text"><strong>Success!</strong> {{success}}</span>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-              {{/if}}
-                    <form method="POST" action="/admin/projects/update/{{project.id}}">
+                    <form method="POST" action="/proposed/proposeNewProject">
+                    <div class="row">
+                        <div class="col-md-6">
+                                <div class="form-group">
+                                <label for="ownerName" class="form-control-label" >Your Name</label>
+                                <input required type="text"   value={{ownerName}} class="form-control" name="ownerName" id="ownerName" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                <label for="ownerEmail" class="form-control-label" >Your Email</label>
+                                <input required type="text"  value={{ownerEmail}} class="form-control" name="ownerEmail" id="ownerEmail" readonly>
+                                </div>
+                        </div>
+                    </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                <input required type="hidden"  value={{ownerRole}} class="form-control" name="ownerRole" id="ownerRole" readonly>
+                                </div>
+                            </div>   
+                    </div>
+
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                               <label for="name" class="form-control-label" >Name</label>
-                               <input value="{{project.name}}" required type="text" placeholder="Enter Project Name " class="form-control" name="name" id="name">
+                               <label for="Name" class="form-control-label" >Name</label>
+                               <input required type="text" placeholder="Enter Project Name " class="form-control" name="name" id="name">
                             </div>
                         </div>
                     </div>
@@ -95,7 +116,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="department" class="form-control-label" >Department</label>
-                                 <select required class="custom-select" name="department" id="department">
+                                 <select required  class="custom-select" name="department" id="department">
                                    <option disabled selected value="">Select Department</option>
                                    <option value="cs">Computer Science</option>
                                    <option value="se">Software Engineering</option>
@@ -117,15 +138,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="description" class="form-control-label" >Description</label>
-                                   <input  value="{{project.description}}" required placeholder="Enter Description About Project" type="text" name="description" id="description" class="form-control">
+                                   <input required placeholder="Enter Description About Project" type="text" name="description" id="description" class="form-control">
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-6">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label for="year" class="form-control-label" >Year</label>
-                                   <input  value="{{project.year}}" required placeholder="Enter year of Project" type="text" name="year" id="year" class="form-control">
+                                   <input  type="text" name="year" required class="form-control" placeholder="select year of project">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -134,15 +154,11 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-primary">Propose</button>
                    </form>
                 </div>
-
-
-
-
             </div>
         </div>
     </div>
-       {{> footer }}
+      {{> footer }}
     </div>

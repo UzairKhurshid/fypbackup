@@ -35,13 +35,13 @@
                     </p>
                         </div>
                         <div class="col-6 text-md-right">
-                            <a class="btn btn-primary" href="/projects">Show All Projects</a>
+                            <a class="btn btn-primary" href="/admin/projects">Show All Projects</a>
                         </div>
                     </div>
                    
                 </div>
                 <div class="container py-4">
-                    <form method="POST" action="/projects/create">
+                    <form method="POST" action="/admin/projects/create">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -121,6 +121,11 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                   <input  type="text" name="year" required class="form-control" placeholder="select year of project">
+                            </div>
+                        </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                    <input  type="hidden" name="_csrf" value="{{csrfToken}}" class="form-control">

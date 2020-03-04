@@ -8,7 +8,7 @@
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="#">Teacher</a></li>
+                  <li class="breadcrumb-item"><a href="#">Proposed Projecrs</a></li>
                   <li class="breadcrumb-item active" aria-current="page">Info</li>
                 </ol>
               </nav>
@@ -28,19 +28,15 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-6">
-                            <h3 class="mb-0">Datatable</h3>
+                        <div class="col-md-6">
                             <p class="text-sm mb-0">
-                                Showing all the teachers of the application.
+                                Showing all the Projects Proposed By Teaachers.
                             </p>
-                        </div>
-                        <div class="col-6 text-md-right">
-                            <a class="btn btn-primary" href="/admin/teachers/create">Create New Teacher</a>
                         </div>
                     </div>
                 </div>
                 <div class="table-responsive py-4">
-                    {{#if success}}
+                  {{#if success}}
                      <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <span class="alert-icon"><i class="ni ni-like-2"></i></span>
                 <span class="alert-text"><strong>Success!</strong> {{success}}</span>
@@ -52,46 +48,54 @@
                     <table class="table dataTable align-items-center table-hover" id="datatable-basic">
                         <thead class="thead-light">
                         <tr>
-                            <th>RegNo</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Campus</th>
-                            <th>Departmemt</th>
-                            <th>Status</th>
+                            <th>Name of Project</th>
+                            <th>year</th>
+                            <th>proposed By</th>
                             <th>Action</th>
                         </tr>
                         </thead>
-                        <tbody>
-                            {{#if teacher}} 
-                                {{#each teacher}}
-                                    <!-- <th class="text-center" colspan="6">Show All teachers Here.</th> --> 
+                        <tbody> 
+                          <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                          {{#if studentLogin}}
+                            {{#if project}} 
+                                {{#each project}}
+                                    <!-- <th class="text-center" colspan="6">Show All Proposed Projects Here.</th> --> 
                                     <tr>
-                                    <th>{{this.regNo}}</th>
                                     <th>{{this.name}}</th>
-                                    <th>{{this.email}}</th>                            
-                                    <th>{{this.campus}}</th>
-                                    <th>{{this.department}}</th>
-                                    <th>{{this.status}}</th>
-                                    <th><a class="btn btn-sm btn-primary" href="/admin/teachers/update/{{this.id}}">Edit</a>
-                                    <a onclick="deleteForm()" class="btn btn-sm btn-primary" href="#">Delete</a>
-                                     <form id="teacherForm" class="hide" method="POST" action="/admin/projects/delete/{{this.id}}">
-                                        <input  type="hidden" name="_csrf" value="{{csrfToken}}" class="form-control">
-                                     </form>
-                                       <script>
-                                      function deleteForm(){
-                                        event.preventDefault();
-                                        document.getElementById("teacherForm").submit();
-                                      }
-                                    </script>
-                                    </th>
+                                    <th>{{this.year}}</th>
+                                    <th>{{this.ownerName}}</th>
+                                    <th>
+                                      <a class="btn btn-sm btn-primary" href="/projects/viewproject/{{this.id}}">View Project</a>
+                                       <form method="POST" action="/projects/requestProject/{{this.id}}">
+
+                                          <input type="hidden" name="_csrf" value="{{../csrfToken}}">
+                                          <button class="btn btn-sm btn-primary" type="submit">Request Project</button>
+                                      </form>
+                                      
+                                      </th>
                                     </tr>
                                 {{/each}}
                             {{/if}}
+                          {{else}}
+                              {{#if project}} 
+                                {{#each project}}
+                                    <!-- <th class="text-center" colspan="6">Show All Proposed Projects Here.</th> --> 
+                                    <tr>
+                                    <th>{{this.name}}</th>
+                                    <th>{{this.year}}</th>
+                                    <th>{{this.ownerName}}</th>
+                                    <th>
+                                      <a class="btn btn-sm btn-primary" href="/projects/viewproject/{{this.id}}">View Project</a>
+                                      </th>
+                                    </tr>
+                                {{/each}}
+                            {{/if}}
+                          {{/if}}
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-        {{> footer }}
+      {{> footer }}
     </div>

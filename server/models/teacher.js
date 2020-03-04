@@ -6,18 +6,22 @@ const teacherSchema=new mongoose.Schema({
     regNo:{
         type:Number,
         required:true,
+        trim: true,
         unique:true
     },
     name:{
         type:String,
+        trim: true,
         required:true
     },
     gender:{
         type:String,
+        trim: true,
         required:true
     },
     email:{
         type:String,
+        trim: true,
         required:true,  
         trim:true,
         unique:true,
@@ -30,14 +34,22 @@ const teacherSchema=new mongoose.Schema({
     },
     campus:{
         type:String,
+        trim: true,
         required:true
     },
     department:{
         type:String,
+        trim: true,
         required:true
     },
     password:{
         type:String,
+        trim: true,
+        required:true
+    },
+    status:{
+        type:String,
+        trim: true,
         required:true
     }
 },
@@ -45,8 +57,17 @@ const teacherSchema=new mongoose.Schema({
    timestamps: true
 })
 
+
+teacherSchema.virtual('projects',{
+    ref:'Project',
+    localField:'email',
+    foreignField:'ownerEmail' 
+})
+
+
 teacherSchema.statics.findByCredentionals = async(email,password)=>{
     const teacher=await Teacher.findOne({email})
+    
     if(!teacher){
         throw new Error('Invalid Email')
     }
@@ -54,6 +75,11 @@ teacherSchema.statics.findByCredentionals = async(email,password)=>{
     if(!chkPass){
         throw new Error('Invalid Password')
     }
+
+    if(teacher.status == 'disable'){
+        throw new Error('Account is not Active Yet')
+    }
+ 
     return teacher
 }
 

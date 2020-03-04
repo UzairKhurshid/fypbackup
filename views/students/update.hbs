@@ -36,7 +36,7 @@
                     </p>
                         </div>
                         <div class="col-6 text-md-right">
-                            <a class="btn btn-primary" href="/students">Show All Students</a>
+                            <a class="btn btn-primary" href="/admin/students">Show All Students</a>
                         </div>
                     </div>
                    
@@ -51,7 +51,7 @@
                 </button>
               </div>
               {{/if}}
-                    <form method="POST" action="/students/update/{{student.id}}">
+                    <form method="POST" action="/admin/students/update/{{student.id}}">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -84,10 +84,14 @@
                                <input value="{{student.email}}" type="email" placeholder="Enter student email" class="form-control" name="email" id="email">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                          <div class="col-md-6">
                             <div class="form-group">
-                               <label for="phone" class="form-control-label" >Phone Number</label>
-                               <input value="{{student.phone}}" type="phone" placeholder="Enter student phone number" class="form-control" name="phone" id="phone">
+                                <label for="department" class="form-control-label" >Department</label>
+                                 <select class="custom-select" name="department" id="department">
+                                   <option disabled selected value="{{student.department}}" id="deptVal">Select Department</option>
+                                   <option value="cs">Computer Science</option>
+                                   <option value="se">Software Engineering</option>
+                               </select>
                             </div>
                         </div>
                     </div>
@@ -102,14 +106,10 @@
                                </select>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                       <div class="col-md-6">
                             <div class="form-group">
-                                <label for="department" class="form-control-label" >Department</label>
-                                 <select class="custom-select" name="department" id="department">
-                                   <option disabled selected value="">Select Department</option>
-                                   <option value="cs">Computer Science</option>
-                                   <option value="se">Software Engineering</option>
-                               </select>
+                                <label for="password" class="form-control-label" >Password</label>
+                                   <input value="{{student.password}}" placeholder="Enter student password" type="password" name="password" id="password" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -124,12 +124,21 @@
                                </select>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="password" class="form-control-label" >Password</label>
-                                   <input value="{{student.password}}" placeholder="Enter student password" type="password" name="password" id="password" class="form-control">
+                                <label for="semester" class="form-control-label" >Status</label>
+                                 <select class="custom-select" name="status" id="status">
+                                   {{#if status}}
+                                    <option selected value="enable">Enable</option>
+                                    <option value="disable">Disable</option>
+                                   {{else}}
+                                    <option  value="enable">Enable</option>
+                                    <option selected value="disable">Disable</option>
+                                   {{/if}}
+                               </select>
                             </div>
                         </div>
+                       
                     </div>
                     <div class="row">
                         <div class="col-md-6">

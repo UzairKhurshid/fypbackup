@@ -35,13 +35,13 @@
                     </p>
                         </div>
                         <div class="col-6 text-md-right">
-                                <a class="btn btn-primary" href="/teachers">Show All Teachers</a>
+                                <a class="btn btn-primary" href="/admin/teachers">Show All Teachers</a>
                         </div>
                     </div>
                   
                 </div>
                 <div class="container py-4">
-                    <form method="POST" action="/teachers/create">
+                    <form method="POST" action="/admin/teachers/create">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -77,8 +77,12 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                               <label for="phone" class="form-control-label" >Phone Number</label>
-                               <input type="phone" placeholder="Enter teacher phone number" class="form-control" name="phone" id="phone">
+                                <label for="department" class="form-control-label" >Department</label>
+                                 <select class="custom-select" name="department" id="department">
+                                   <option disabled selected value="">Select Department</option>
+                                   <option value="CS">Computer Science</option>
+                                   <option value="SE">Software Engineering</option>
+                               </select>
                             </div>
                         </div>
                     </div>
@@ -94,18 +98,6 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="department" class="form-control-label" >Department</label>
-                                 <select class="custom-select" name="department" id="department">
-                                   <option disabled selected value="">Select Department</option>
-                                   <option value="cs">Computer Science</option>
-                                   <option value="se">Software Engineering</option>
-                               </select>
-                            </div>
-                        </div>
-                    </div>
-                     <div class="row">
-                        <div class="col-md-12">
                             <div class="form-group">
                                 <label for="password" class="form-control-label" >Password</label>
                                    <input placeholder="Enter teacher password" type="password" name="password" id="password" class="form-control">

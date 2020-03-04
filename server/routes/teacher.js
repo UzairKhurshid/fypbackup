@@ -4,13 +4,14 @@ const router=new express.Router()
 const Teacher=require('../models/teacher')
 
 
-router.get('/teachers',auth, async (req, res)=> {
+router.get('/admin/teachers',auth, async (req, res)=> {
     try{
         const teachers=await Teacher.find()
         
         res.render('teachers/index',{
             title:'Teachers',
             Teachers:true,
+            adminLogin:'true',
             teacher:teachers,
             success:req.flash('success')
         })
@@ -24,22 +25,23 @@ router.get('/teachers',auth, async (req, res)=> {
 
 
 
-router.get('/teachers/create',auth, async (req, res)=> {
+router.get('/admin/teachers/create',auth, async (req, res)=> {
     res.render('teachers/create',{
         Teachers:true,
+        adminLogin:'true',
         title:'Teachers'
     })
     console.log(req.session.working)
   })
 
-router.post('/teachers/create',auth,async(req,res)=>{
+router.post('/admin/teachers/create',auth,async(req,res)=>{
     const teachers=new Teacher(req.body)
     
     try{
         await teachers.save()
         console.log("teacher saves successfully")
         req.flash('success','Teacher Updated Successfully')
-        res.redirect('/Teachers')
+        res.redirect('/admin/Teachers')
     }catch(e){
         console.log(e)
         res.redirect('/')
@@ -50,14 +52,20 @@ router.post('/teachers/create',auth,async(req,res)=>{
 
 
 
-router.get('/teachers/update/:id',auth,async(req,res)=>{
+router.get('/admin/teachers/update/:id',auth,async(req,res)=>{
     try{
         const id = req.params.id 
         const std=await Teacher.findOne({_id:id})
+        let status=false
+        if(std.status=='enable'){
+            status=true
+        }
         res.render('teachers/update',{
             Teachers:true,
             teacher:std,
+            adminLogin:'true',
             title:'Teachers',
+            status:status,
             success:req.flash('success')
         })
     }
@@ -66,7 +74,7 @@ router.get('/teachers/update/:id',auth,async(req,res)=>{
         res.redirect('/')
     }
 })
-router.post('/teachers/update/:id',auth,async(req,res)=>{
+router.post('/admin/teachers/update/:id',auth,async(req,res)=>{
     
     const updates=Object.keys(req.body)
     const id = req.params.id 
@@ -85,7 +93,7 @@ router.post('/teachers/update/:id',auth,async(req,res)=>{
         console.log("Updated SUccessfully")
         req.flash('success','Teacher Updated Successfully')
 
-       res.redirect('/teachers/update/'+id)
+       res.redirect('/admin/teachers/update/'+id)
 
     } catch(e){
         console.log(e)
@@ -97,13 +105,14 @@ router.post('/teachers/update/:id',auth,async(req,res)=>{
 
 
 
-router.get('/teachers/delete/:id',auth,(req,res)=>{
+router.get('/admin/teachers/delete/:id',auth,(req,res)=>{
     res.render('teachers/delete',{
         Teachers:true,
+        adminLogin:'true',
         title:'Teachers'
     })
 })
-router.post('/teachers/delete/:id',auth,async(req,res)=>{
+router.post('/admin/teachers/delete/:id',auth,async(req,res)=>{
      
     const id=req.params.id
     
@@ -113,7 +122,7 @@ router.post('/teachers/delete/:id',auth,async(req,res)=>{
         await Teacher.findOneAndDelete({_id:id})
         console.log("deleted Successfully")
         req.flash('success','Teacher Deleted Successfully')
-       res.redirect('/teachers')
+       res.redirect('/admin/teachers')
 
 
     } catch(e){

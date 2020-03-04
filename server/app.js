@@ -15,10 +15,12 @@ const csrf=require('csurf')
 const flash = require('connect-flash')
 
 //required routes
+const adminRouter=require('./routes/admin')
 const studentRouter=require('./routes/student')
 const teacherRouter=require('./routes/teacher')
 const projectRouter=require('./routes/project')
 const dashboardRouter=require('./routes/dashboard')
+const proposedRouter=require('./routes/proposed')
 const authRouter=require('./routes/auth')
 
 
@@ -53,17 +55,21 @@ app.use(csrfProtection)
 app.use(flash())
 
 
-//using routes from external files
+
+//middleware that runs for every post req
 
 app.use((req,res,next) => {
     res.locals.csrfToken=req.csrfToken(),
-    req.session.working="true"
     next()
 })
 
+//using routes from external files
+
+app.use(adminRouter)
 app.use(studentRouter)
 app.use(teacherRouter)
 app.use(projectRouter)
+app.use(proposedRouter)
 app.use(dashboardRouter)
 app.use(authRouter)
 

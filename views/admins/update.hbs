@@ -1,0 +1,104 @@
+   {{!-- Header --}}
+    <div class="header bg-primary pb-6">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+            <div class="col-lg-6 col-7">
+              <h6 class="h2 text-white d-inline-block mb-0">Admin</h6>
+              <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                  <li class="breadcrumb-item"><a href="#"><i class="fas fa-graduation-cap"></i></a></li>
+                  <li class="breadcrumb-item"><a href="#">{{admin.name}}</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Update</li>
+                </ol>
+              </nav>
+            </div>
+            <div class="col-lg-6 col-5 text-right">
+              <a href="#" class="btn btn-sm btn-neutral">New</a>
+              <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+       <!-- Page content -->
+    <div class="container-fluid mt--6">
+        
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-6">
+                             <h3 class="mb-0"> Admin</h3>
+                    <p class="text-sm mb-0">
+                        Updating {{admin.name}}.
+                    </p>
+                        </div>
+                        <div class="col-6 text-md-right">
+                            <a class="btn btn-primary" href="/admin/admins">Show All Admins</a>
+                        </div>
+                    </div>
+                   
+                </div>
+                <div class="container py-4">
+                      {{#if success}}
+                     <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                <span class="alert-text"><strong>Success!</strong> {{success}}</span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              {{/if}}
+                    <form method="POST" action="/admin/admins/update/{{admin.id}}">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                               <label for="regNo" class="form-control-label" >Register No</label>
+                               <input value="{{student.regNo}}" disabled type="text" placeholder="Enter Admin register number" class="form-control" name="regNo" id="regNo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                               <label for="name" class="form-control-label" >Name</label>
+                               <input value="{{student.name}}" type="text" placeholder="Enter Admin name" class="form-control" name="name" id="name">
+                            </div>
+                        </div>
+                    </div>
+                       <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                               <label for="email" class="form-control-label" >Email</label>
+                               <input value="{{student.email}}" type="email" placeholder="Enter Admin email" class="form-control" name="email" id="email">
+                            </div>
+                        </div>
+                          
+                    </div>
+                     <div class="row">
+                       
+                       <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="password" class="form-control-label" >Password</label>
+                                   <input value="{{student.password}}" placeholder="Enter Admin password" type="password" name="password" id="password" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                     
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                   <input type="hidden" name="_csrf" value="{{csrfToken}}" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                   </form>
+                </div>
+            </div>
+        </div>
+    </div>
+      {{> footer }}
+    </div>

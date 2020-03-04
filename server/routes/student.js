@@ -4,14 +4,15 @@ const router=new express.Router()
 const Student=require('../models/student')
 
 
-router.get('/students',auth, async (req, res)=> {
+router.get('/admin/students',auth, async (req, res)=> {
     try{
         const students=await Student.find()
         
         res.render('students/index',{
             title:'Students',
             Students:true,
-            student:students,
+            student:students, 
+            adminLogin:'true',
             success:req.flash('success')
         })
     }catch(e){
@@ -22,22 +23,22 @@ router.get('/students',auth, async (req, res)=> {
 
 
 
-router.get('/students/create',auth, async (req, res)=> {
+router.get('/admin/students/create',auth, async (req, res)=> {
     res.render('students/create',{
         Students:true,
+        adminLogin:'true',
         title:'Students'
     })
-    console.log(req.session.working)
   })
 
-router.post('/students/create',auth,async(req,res)=>{
+router.post('/admin/students/create',auth,async(req,res)=>{
     const student=new Student(req.body)
     
     try{
         await student.save()
         console.log("student saves successfully")
         req.flash('success','Student Created Successfully')
-        res.redirect('/students/create')
+        res.redirect('/admin/students')
     }catch(e){
         console.log(e)
         res.redirect('/')
@@ -45,13 +46,14 @@ router.post('/students/create',auth,async(req,res)=>{
 })
 
 
-router.get('/students/update/:id',auth,async (req,res)=>{
+router.get('/admin/students/update/:id',auth,async (req,res)=>{
     try{
         const id = req.params.id 
         const std=await Student.findOne({_id:id})
         res.render('students/update',{
             Students:true,
             student:std,
+            adminLogin:'true',
             title:'Students',
             success:req.flash('success')
 
@@ -64,7 +66,7 @@ router.get('/students/update/:id',auth,async (req,res)=>{
   
 })
 
-router.post('/students/update/:id',auth,async(req,res)=>{
+router.post('/admin/students/update/:id',auth,async(req,res)=>{
     
     const updates=Object.keys(req.body)
     const id = req.params.id
@@ -80,22 +82,23 @@ router.post('/students/update/:id',auth,async(req,res)=>{
 
         console.log("Updated SUccessfully")
         req.flash('success','Student Updated Successfully')
-        res.redirect('/students/update/'+id)
+        res.redirect('/admin/students/update/'+id)
 
     } catch(e){
         console.log(e)
         res.redirect('/')
     } 
-})
+}) 
 
 
-router.get('/students/delete',auth,(req,res)=>{
+router.get('/admin/students/delete',auth,(req,res)=>{
     res.render('students/delete',{
         Students:true,
+        adminLogin:'true',
         title:'Students'
     })
 })
-router.post('/students/delete/:id',auth,async(req,res)=>{
+router.post('/admin/students/delete/:id',auth,async(req,res)=>{
 
     const id=req.params.id
     
@@ -103,7 +106,7 @@ router.post('/students/delete/:id',auth,async(req,res)=>{
         await Student.findOneAndDelete({_id:id})
         console.log("deleted Successfully")
         req.flash('success','Student Deleted Successfully')
-       res.redirect('/students')
+       res.redirect('/admin/students')
 
 
     } catch(e){

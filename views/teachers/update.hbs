@@ -35,7 +35,7 @@
                     </p>
                         </div>
                         <div class="col-6 text-md-right">
-                                <a class="btn btn-primary" href="/teachers">Show All Teachers</a>
+                                <a class="btn btn-primary" href="/admin/teachers">Show All Teachers</a>
 
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                 </button>
               </div>
               {{/if}}
-                    <form method="POST" action="/teachers/update/{{teacher.id}}">
+                    <form method="POST" action="/admin/teachers/update/{{teacher.id}}">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -85,10 +85,14 @@
                                <input value="{{teacher.email}}" type="email" placeholder="Enter teacher email" class="form-control" name="email" id="email">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                       <div class="col-md-6">
                             <div class="form-group">
-                               <label for="phone" class="form-control-label" >Phone Number</label>
-                               <input value="{{teacher.phone}}" type="phone" placeholder="Enter teacher phone number" class="form-control" name="phone" id="phone">
+                                <label for="department" class="form-control-label" >Department</label>
+                                 <select class="custom-select" name="department" id="department">
+                                   <option disabled selected value="">Select Department</option>
+                                   <option value="CS">Computer Science</option>
+                                   <option value="SE">Software Engineering</option>
+                               </select>
                             </div>
                         </div>
                     </div>
@@ -102,33 +106,31 @@
                                    <option value="islamabad">Islamabad Campus</option>
                                </select>
                             </div>
-                        </div>
-                        <div class="col-md-6">
+                            <div class="col-md-6">
                             <div class="form-group">
-                                <label for="department" class="form-control-label" >Department</label>
-                                 <select class="custom-select" name="department" id="department">
-                                   <option disabled selected value="">Select Department</option>
-                                   <option value="cs">Computer Science</option>
-                                   <option value="se">Software Engineering</option>
+                                <label for="semester" class="form-control-label" >Status</label>
+                                 <select class="custom-select" name="status" id="status">
+                                   {{#if status}}
+                                    <option selected value="enable">Enable</option>
+                                    <option value="disable">Disable</option>
+                                   {{else}}
+                                    <option  value="enable">Enable</option>
+                                    <option selected value="disable">Disable</option>
+                                   {{/if}}
                                </select>
                             </div>
                         </div>
-                    </div>
-                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="password" class="form-control-label" >Password</label>
-                                   <input value="{{teacher.password}}" placeholder="Enter teacher password" type="password" name="password" id="password" class="form-control">
-                            </div>
                         </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="password" class="form-control-label" >Password</label>
+                                <input value="{{teacher.password}}" placeholder="Enter teacher password" type="password" name="password" id="password" class="form-control">
+                        <input  type="hidden" name="_csrf" value="{{csrfToken}}" class="form-control">
+                        <div>
+                    </div>   
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                   <input  type="hidden" name="_csrf" value="{{csrfToken}}" class="form-control">
-                            </div>
-                        </div>
-                    </div>
+                     
+                 
                     <button type="submit" class="btn btn-primary">Update</button>
                    </form>
                 </div>

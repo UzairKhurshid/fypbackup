@@ -35,7 +35,13 @@
                             </p>
                         </div>
                         <div class="col-md-6 text-right">
-                            <a class="btn btn-primary" href="/projects/create">Create New Project</a>
+                            <a class="btn btn-primary" href="/admin/projects/create">Create New Project</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-right">
+                            <a class="btn btn-primary" href="/admin/proposedProjects">Proposed</a>
+                            <a class="btn btn-primary" href="/admin/projects">projects</a>
                         </div>
                     </div>
                 </div>
@@ -56,6 +62,10 @@
                             <th>IDE</th>
                             <th>Semester</th>
                             <th>Departmemt</th>
+                            <th>year</th>
+                            {{#if adminLogin}}
+                              <th>proposed By</th>
+                            {{/if}}
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -68,8 +78,13 @@
                                     <th>{{this.IDE}}</th>                              
                                     <th>{{this.semester}}</th>
                                     <th>{{this.department}}</th>
-                                    <th><a class="btn btn-sm btn-primary" href="/projects/update/{{this.id}}">Edit</a><a onclick="deleteForm()" class="btn btn-sm btn-primary" href="#">Delete</a>
-                                     <form id="projectForm" class="hide" method="POST" action="/projects/delete/{{this.id}}">
+                                    <th>{{this.year}}</th>
+                                    <th>{{this.ownerName}}</th>
+                                    <th>
+                                      <a class="btn btn-sm btn-primary" href="/projects/viewproject/{{this.id}}">View Project</a>
+                                      <a class="btn btn-sm btn-primary" href="/admin/projects/update/{{this.id}}">Edit</a>
+                                    <a onclick="deleteForm()" class="btn btn-sm btn-primary" href="#">Delete</a>
+                                     <form id="projectForm" class="hide" method="POST" action="/admin/projects/delete/{{this.id}}">
                                         <input  type="hidden" name="_csrf" value="{{csrfToken}}" class="form-control">
                                      </form>
                                        <script>

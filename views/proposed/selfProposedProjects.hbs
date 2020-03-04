@@ -8,7 +8,7 @@
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="#">Student</a></li>
+                  <li class="breadcrumb-item"><a href="#">Projects</a></li>
                   <li class="breadcrumb-item active" aria-current="page">Info</li>
                 </ol>
               </nav>
@@ -21,7 +21,6 @@
         </div>
       </div>
     </div>
-
     <!-- Page content -->
     <div class="container-fluid mt--6">
     <div class="row">
@@ -29,23 +28,23 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-md-6">
                             <h3 class="mb-0">Datatable</h3>
                             <p class="text-sm mb-0">
-                                Showing all the students of the application.
+                                Showing all the Projects Proposed By You.
                             </p>
                         </div>
-                        <div class="col-6 text-md-right">
-                            <a class="btn btn-primary" href="/admin/students/create">Create New Student</a>
+                        <div class="col-md-6 text-right">
+                            <a class="btn btn-primary" href="/proposed/proposeNewProject">Propose New Project</a>
                         </div>
                     </div>
                 </div>
                 <div class="table-responsive py-4">
-                    {{#if success}}
+                  {{#if success}}
                      <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <span class="alert-icon"><i class="ni ni-like-2"></i></span>
                 <span class="alert-text"><strong>Success!</strong> {{success}}</span>
-                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
@@ -53,37 +52,31 @@
                     <table class="table dataTable align-items-center table-hover" id="datatable-basic">
                         <thead class="thead-light">
                         <tr>
-                            <th>RegNo</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Campus</th>
-                            <th>Departmemt</th>
-                            <th>Status</th>
+                            <th>Name of Project</th>
+                            <th>year</th>
+                            <th>proposed By</th>
                             <th>Action</th>
                         </tr>
                         </thead>
-                        <tbody>
-                            {{#if student}} 
-                                {{#each student}}
-                                    <!-- <th class="text-center" colspan="6">Show All Students Here.</th> --> 
+                        <tbody> 
+                            {{#if project}} 
+                                {{#each project}}
+                                    <!-- <th class="text-center" colspan="6">Show All Proposed Projects Here.</th> --> 
                                     <tr>
-                                    <th>{{this.regNo}}</th>
                                     <th>{{this.name}}</th>
-                                    <th>{{this.email}}</th>
-                                    <th>{{this.campus}}</th>
-                                    <th>{{this.department}}</th>
-                                    <th>{{this.status}}</th>
-                                    <th><a class="btn btn-primary btn-sm" href="/admin/students/update/{{this.id}}">Edit</a>
-                                    <a onclick="deleteForm({{this.department}})" class="btn btn-sm btn-primary" href="#">Delete</a>
-                                     {{!-- <form id="studentForm" class="hide" method="POST" action="/admin/students/delete/{{this.id}}">
+                                    <th>{{this.year}}</th>
+                                    <th>{{this.ownerName}}</th>
+                                    <th>
+                                      <a class="btn btn-sm btn-primary" href="/projects/viewproject/{{this.id}}">View Project</a>
+                                      <a class="btn btn-sm btn-primary" href="/admin/projects/update/{{this.id}}">Edit</a>
+                                    <a onclick="deleteForm()" class="btn btn-sm btn-primary" href="#">Delete</a>
+                                     <form id="projectForm" class="hide" method="POST" action="/admin/projects/delete/{{this.id}}">
                                         <input  type="hidden" name="_csrf" value="{{csrfToken}}" class="form-control">
-                                     </form> --}}
+                                     </form>
                                        <script>
-                                      function deleteForm(x){
-                                        
-                                        alert(x)
-                                        //event.preventDefault();
-                                        //document.getElementById("studentForm").submit();
+                                      function deleteForm(){
+                                        event.preventDefault();
+                                        document.getElementById("projectForm").submit();
                                       }
                                     </script>
                                     </th>
@@ -96,5 +89,5 @@
             </div>
         </div>
     </div>
-        {{> footer }}
+      {{> footer }}
     </div>

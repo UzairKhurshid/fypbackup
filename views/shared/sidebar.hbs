@@ -1,4 +1,5 @@
 <!-- Sidenav -->
+
 <nav class="sidenav navbar navbar-vertical fixed-left navbar-expand-xs navbar-light bg-white" id="sidenav-main">
     <div class="scrollbar-inner">
         <!-- Brand -->
@@ -22,6 +23,9 @@
             <div class="collapse navbar-collapse" id="sidenav-collapse-main">
                 <!-- Nav items -->
                 <ul class="navbar-nav">
+
+{{#if adminLogin}}
+
                     <li class="nav-item {{#if  Dashboard }}  active    {{/if}}">
                         <a class="nav-link {{#if  Dashboard }} text-primary {{else}} text-default   {{/if}}"
                            href="/">
@@ -29,27 +33,100 @@
                             <span class="nav-link-text">Dashboard</span>
                         </a>
                     </li>
+                    <li class="nav-item {{#if  Admins }}  active    {{/if}}">
+                        <a class="nav-link {{#if  Admins }} text-primary {{else}} text-default   {{/if}}"
+                           href="/admin/admins">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span class="nav-link-text">Admins</span>
+                        </a>
+                    </li>
                      <li class="nav-item {{#if  Students }}  active    {{/if}}">
                         <a class="nav-link {{#if  Students }} text-primary {{else}} text-default   {{/if}}"
-                           href="/students">
+                           href="/admin/students">
                             <i class="fas fa-graduation-cap"></i>
                             <span class="nav-link-text">Students</span>
                         </a>
                     </li>
                     <li class="nav-item {{#if  Teachers }} text-primary {{else}} text-default   {{/if}}">
                         <a class="nav-link {{#if  Teachers }} text-primary {{else}} text-default   {{/if}}"
-                           href="/teachers">
+                           href="/admin/teachers">
                             <i class="fas fa-chalkboard-teacher"></i>
                             <span class="nav-link-text">Teachers</span>
                         </a>
                     </li>
                     <li class="nav-item {{#if  Projects }} text-primary {{else}} text-default   {{/if}}">
                         <a class="nav-link {{#if  Projects }} text-primary {{else}} text-default   {{/if}}"
-                           href="/projects">
+                           href="/admin/projects">
                             <i class="fas fa-project-diagram"></i>
                             <span class="nav-link-text">Projects</span>
                         </a>
                     </li>
+
+{{else if studentLogin}}
+
+                    <li class="nav-item {{#if  Dashboard }}  active    {{/if}}">
+                        <a class="nav-link {{#if  Dashboard }} text-primary {{else}} text-default   {{/if}}"
+                           href="/">
+                            <i class="fas fa-store"></i>
+                            <span class="nav-link-text">Dashboard</span>
+                        </a>
+                    </li>
+                     <li class="nav-item {{#if  Teacher-Proposed-Project }}  active    {{/if}}">
+                        <a class="nav-link {{#if  Teacher-Proposed-Project }} text-primary {{else}} text-default   {{/if}}"
+                           href="/proposed/allProposedProjects">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span class="nav-link-text">Teacher Proposed Project</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{#if  Self-Proposed }} text-primary {{else}} text-default   {{/if}}">
+                        <a class="nav-link {{#if  Self-Proposed }} text-primary {{else}} text-default   {{/if}}"
+                           href="/proposed">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <span class="nav-link-text">Self Proposed</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{#if  My-Project }} text-primary {{else}} text-default   {{/if}}">
+                        <a class="nav-link {{#if  My-Project }} text-primary {{else}} text-default   {{/if}}"
+                           href="/myProject"></a>
+                            <i class="fas fa-project-diagram"></i>
+                            <span class="nav-link-text">My Project</span>
+                        </a>
+                    </li>
+
+{{else if teacherLogin}}
+
+                    <li class="nav-item {{#if  Dashboard }}  active    {{/if}}">
+                        <a class="nav-link {{#if  Dashboard }} text-primary {{else}} text-default   {{/if}}"
+                           href="/">
+                            <i class="fas fa-store"></i>
+                            <span class="nav-link-text">Dashboard</span>
+                        </a>
+                    </li>
+                     <li class="nav-item {{#if  Teacher-Proposed-Project }}  active    {{/if}}">
+                        <a class="nav-link {{#if  Teacher-Proposed-Project }} text-primary {{else}} text-default   {{/if}}"
+                           href="/proposed/allProposedProjects">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span class="nav-link-text">Teacher Proposed Project</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{#if  Self-Proposed }} text-primary {{else}} text-default   {{/if}}">
+                        <a class="nav-link {{#if  Self-Proposed }} text-primary {{else}} text-default   {{/if}}"
+                           href="/proposed">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <span class="nav-link-text">Self Proposed</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{#if  Supervising }} text-primary {{else}} text-default   {{/if}}">
+                        <a class="nav-link {{#if  Supervising }} text-primary {{else}} text-default   {{/if}}"
+                           href="/supervising">
+                            <i class="fas fa-project-diagram"></i>
+                            <span class="nav-link-text">Supervising</span>
+                        </a>
+                    </li>
+
+{{/if}}
+
+
                 </ul>
                 <!-- Divider -->
                 <hr class="my-3">

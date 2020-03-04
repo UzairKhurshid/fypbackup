@@ -32,12 +32,12 @@
                     <p class="text-sm mb-0">
                         Create new student for your application.
                     </p></div>
-                        <div class="col-sm-6 text-sm-right"> <a href="/students" class="btn btn-primary">Show All</a></div>
+                        <div class="col-sm-6 text-sm-right"> <a href="/admin/students" class="btn btn-primary">Show All</a></div>
                     </div>
                 </div>
                 <div class="container py-4">
 
-                    <form method="POST" action="/students/create">
+                    <form method="POST" action="admin/students/create">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -73,8 +73,12 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                               <label for="phone" class="form-control-label" >Phone Number</label>
-                               <input type="phone" placeholder="Enter student phone number" class="form-control" name="phone" id="phone">
+                                <label for="department" class="form-control-label" >Department</label>
+                                 <select class="custom-select" name="department" id="department">
+                                   <option disabled selected value="">Select Department</option>
+                                   <option value="CS">Computer Science</option>
+                                   <option value="SE">Software Engineering</option>
+                               </select>
                             </div>
                         </div>
                     </div>
@@ -91,12 +95,8 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="department" class="form-control-label" >Department</label>
-                                 <select class="custom-select" name="department" id="department">
-                                   <option disabled selected value="">Select Department</option>
-                                   <option value="cs">Computer Science</option>
-                                   <option value="se">Software Engineering</option>
-                               </select>
+                                <label for="password" class="form-control-label" >Password</label>
+                                   <input placeholder="Enter student password" type="password" name="password" id="password" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -111,12 +111,7 @@
                                </select>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="password" class="form-control-label" >Password</label>
-                                   <input placeholder="Enter student password" type="password" name="password" id="password" class="form-control">
-                            </div>
-                        </div>
+                        
                     </div>
                     <div class="row">
                         <div class="col-md-6">
@@ -131,5 +126,5 @@
             </div>
         </div>
     </div>
-     {{> footer }}
+     {{> footer }} 
     </div>

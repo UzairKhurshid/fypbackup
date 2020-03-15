@@ -10,7 +10,7 @@ router.get('/login',(req,res)=>{
   
   if(!req.session.email){
     res.render('auth/selectLogin',{
-      title:'SelectLogin',
+      title:'Login',
       layout:'layouts/auth'
     })  
   }
@@ -21,11 +21,13 @@ router.get('/login',(req,res)=>{
 router.get('/login/:role',(req, res) =>{
   const role = req.params.role
   
+  console.log(express.static('public'))
+
   if(role === 'student' || role === 'teacher' || role === 'admin'){
     if(!req.session.email){
      
      return res.render('auth/login',{
-          title:role, 
+          title:role+" login", 
           layout: 'layouts/auth',
           role:role,
           error:req.flash('error')
@@ -79,14 +81,24 @@ router.get('/login/:role',(req, res) =>{
     }
   })
 
- 
+  router.get('/signup',(req,res)=>{
+  
+    if(!req.session.email){
+      res.render('auth/selectSignup',{
+        title:'Signup',
+        layout:'layouts/auth'
+      })  
+    }
+  
+  })
+  
 
 
   router.get('/signup/:role',  (req, res) =>{
     const role=req.params.role
     console.log(role)
     res.render('auth/signup',{
-          title:'Signup', 
+          title:role+' signup', 
           layout: 'layouts/auth',
           role:role,
           error:req.flash('error')

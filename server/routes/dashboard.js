@@ -4,7 +4,7 @@ const Project=require('../models/project')
 const router=new express.Router()
 
 
-router.get('/',auth, async(req, res) => {
+router.get('/dashboard',auth, async(req, res) => {
 
   try{
     const role=req.session.role

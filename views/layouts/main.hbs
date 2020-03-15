@@ -1,63 +1,116 @@
-<!doctype html>
-<html lang="eng">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Car Rental Service.">
-    <meta name="author" content="Geek Warehouse">
+       <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>SPP | {{ title }} </title>
-    <!-- Favicon --> 
-    <link rel="icon" href="/assets/img/brand/favicon.png" type="image/png">
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
-    {{!-- Sweet Aler --}}
-    <link rel="stylesheet" href="/assets/vendor/sweetalert2/dist/sweetalert2.min.css">
-    <!-- Icons -->
-    <link rel="stylesheet" href="/assets/vendor/nucleo/css/nucleo.css" type="text/css">
-    <link rel="stylesheet" href="/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
-          type="text/css">
-    <!-- Datatable plugins -->
-    <link rel="stylesheet" href="/assets/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
-    <!-- Argon CSS -->
-    <link rel="stylesheet" href="/assets/css/argon.css?v=1.1.0" type="text/css">
-    <link rel="stylesheet" href="/assets/css/myCustom.css" type="text/css">
     
+
+  <!-- Favicon --> 
+    <link rel="icon" href="/assets/img/brand/favicon.png" type="image/png">  
+	
+	<!-- Morris Charts CSS -->
+    <link href="/vendors/morris.js/morris.css" rel="stylesheet" type="text/css" />
+	
+	<!-- Toastr CSS -->
+    <link href="/vendors/jquery-toast-plugin/dist/jquery.toast.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Toggles CSS -->
+    <link href="/vendors/jquery-toggles/css/toggles.css" rel="stylesheet" type="text/css">
+    <link href="/vendors/jquery-toggles/css/themes/toggles-light.css" rel="stylesheet" type="text/css">
+	
+    <!-- Custom CSS -->
+    <link href="/dist/css/style.css" rel="stylesheet" type="text/css">
 </head>
+
 <body>
-{{!-- Sidebar --}}
+    <!-- Preloader -->
+    <div class="preloader-it">
+        <div class="loader-pendulums"></div>
+    </div>
+    <!-- /Preloader -->
+	
+	<!-- HK Wrapper -->
+	<div class="hk-wrapper hk-alt-nav hk-icon-nav">
 
-  {{> sidebar }}
+        <!-- Top Navbar -->
+       {{>topnav}}
+        <!-- /Top Navbar -->
 
-<!-- Main content -->
-<div class="main-content" id="panel">
-    {{!-- Top Nav --}}
-    {{> topnav }}
-    {{{ body }}}
-</div>
-<!-- Argon Scripts -->
-<!-- Core -->
-<script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
-<script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/assets/vendor/js-cookie/js.cookie.js"></script>
-<script src="/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
-<script src="/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
-<!-- Datatable JS -->
-<script src="/assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="/assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-<!-- Sweet Alert JS -->
-<script src="/assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
-<!-- Optional JS -->
-  <script src="/assets/vendor/chart.js/dist/Chart.min.js"></script>
-  <script src="/assets/vendor/chart.js/dist/Chart.extension.js"></script>
-  <script src="/assets/vendor/jvectormap-next/jquery-jvectormap.min.js"></script>
-  <script src="/assets/js/vendor/jvectormap/jquery-jvectormap-world-mill.js"></script>
-  {{!-- Dropezone js --}}
-<script src="/assets/vendor/dropzone/dist/min/dropzone.min.js"></script>
-<!-- Argon JS -->
-<script src="/assets/js/argon.js?v=1.1.0"></script>
-  <!-- Demo JS - remove this in your project -->
-  <script src="../../assets/js/demo.min.js"></script>
-  
-  </script>
+        
+        <!-- Main Content -->
+        <div class="hk-pg-wrapper">
+			<!-- Container -->
+            <div class="container-fluid mt-xl-50 mt-sm-30 mt-15">
+               {{!-- Body --}}
+               {{{body}}}
+			</div>
+            <!-- /Container -->
+
+			<!-- Footer -->
+            <div class="hk-footer-wrap container-fluid">
+                <footer class="footer">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <p>Powered by<a href="#" class="text-dark">CS Department</a> © 2020</p>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+            <!-- /Footer -->
+        </div>
+        <!-- /Main Content -->
+
+    </div>
+    <!-- /HK Wrapper -->
+
+    <!-- jQuery -->
+    <script src="/vendors/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/vendors/popper.js/dist/umd/popper.min.js"></script>
+    <script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Slimscroll JavaScript -->
+    <script src="/dist/js/jquery.slimscroll.js"></script>
+
+    <!-- Fancy Dropdown JS -->
+    <script src="/dist/js/dropdown-bootstrap-extended.js"></script>
+
+    <!-- FeatherIcons JavaScript -->
+    <script src="/dist/js/feather.min.js"></script>
+
+    <!-- Toggles JavaScript -->
+    <script src="/vendors/jquery-toggles/toggles.min.js"></script>
+    <script src="/dist/js/toggle-data.js"></script>
+	
+	<!-- Counter Animation JavaScript -->
+	<script src="/vendors/waypoints/lib/jquery.waypoints.min.js"></script>
+	<script src="/vendors/jquery.counterup/jquery.counterup.min.js"></script>
+	
+	<!-- Easy pie chart JS -->
+    <script src="/vendors/easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
+	
+	<!-- Sparkline JavaScript -->
+    <script src="/vendors/jquery.sparkline/dist/jquery.sparkline.min.js"></script>
+	
+	<!-- Morris Charts JavaScript -->
+    <script src="/vendors/raphael/raphael.min.js"></script>
+    <script src="/vendors/morris.js/morris.min.js"></script>
+   
+	<!-- EChartJS JavaScript -->
+    <script src="/vendors/echarts/dist/echarts-en.min.js"></script>
+    
+	<!-- Peity JavaScript -->
+    <script src="/vendors/peity/jquery.peity.min.js"></script>
+   
+	<!-- Toastr JS -->
+    <script src="/vendors/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
+    
+    <!-- Init JavaScript -->
+    <script src="/dist/js/init.js"></script>
+	<script src="/dist/js/dashboard-data.js"></script>
+	
 </body>
+
 </html>

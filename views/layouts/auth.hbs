@@ -1,38 +1,71 @@
-<html lang="eng" !DOCTYPE="html">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <!-- CSRF Token -->
-    <meta name="csrf-token">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
-    <meta name="author" content="Creative Tim">
-    <title>SPP | {{title}}</title>
-    <!-- Favicon -->
-    <link rel="icon" href="/assets/img/brand/favicon.png" type="image/png">
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
-    <!-- Icons -->
-    <link rel="stylesheet" href="/assets/vendor/nucleo/css/nucleo.css" type="text/css">
-    <link rel="stylesheet" href="/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
-          type="text/css">
-    <!-- Page plugins -->
-    <!-- Argon CSS -->
-    <link rel="stylesheet" href="/assets/css/argon.css?v=1.1.0" type="text/css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>SPP | {{ title }} </title>
+    
+
+  <!-- Favicon --> 
+    <link rel="icon" href="/assets/img/brand/favicon.png" type="image/png">  
+
+    <!-- Custom CSS -->
+    <link href="/dist/css/style.css" rel="stylesheet" type="text/css">
 </head>
-<body class="bg-default">
-<!-- Main content -->
-<div class="main-content">
-    {{{ body }}}
-</div>
-<!-- Argon Scripts -->
-<!-- Core -->
-<script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
-<script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/assets/vendor/js-cookie/js.cookie.js"></script>
-<script src="/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
-<script src="/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
-<!-- Argon JS -->
-<script src="assets/js/argon.js?v=1.1.0"></script>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader-it">
+        <div class="loader-pendulums"></div>
+    </div>
+    <!-- /Preloader -->
+   
+	<!-- HK Wrapper -->
+	<div class="hk-wrapper">
+
+        <!-- Main Content -->
+        <div class="hk-pg-wrapper hk-auth-wrapper">
+            <header class="d-flex justify-content-between align-items-center">
+                <a class="d-flex auth-brand" href="#">
+                    <img class="brand-img" src="/dist/img/logo-dark.png" alt="brand" />
+                </a>
+                <div class="btn-group btn-group-sm">
+                    <a href="#" class="btn btn-outline-secondary">Help</a>
+                    <a href="#" class="btn btn-outline-secondary">About Us</a>
+                </div>
+            </header>
+            <div class="container-fluid">
+               {{{body}}}
+            </div>
+        </div>
+        <!-- /Main Content -->
+
+    </div>
+	<!-- /HK Wrapper -->
+
+    <!-- jQuery -->
+    <script src="/vendors/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/vendors/popper.js/dist/umd/popper.min.js"></script>
+    <script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Slimscroll JavaScript -->
+    <script src="/dist/js/jquery.slimscroll.js"></script>
+
+    <!-- Fancy Dropdown JS -->
+    <script src="/dist/js/dropdown-bootstrap-extended.js"></script>
+
+    <!-- Owl JavaScript -->
+    <script src="/vendors/owl.carousel/dist/owl.carousel.min.js"></script>
+
+    <!-- FeatherIcons JavaScript -->
+    <script src="/dist/js/feather.min.js"></script>
+
+    <!-- Init JavaScript -->
+    <script src="/dist/js/init.js"></script>
+    <script src="/dist/js/login-data.js"></script>
 </body>
 
 </html>

@@ -22,6 +22,7 @@ const projectRouter=require('./routes/project')
 const dashboardRouter=require('./routes/dashboard')
 const proposedRouter=require('./routes/proposed')
 const authRouter=require('./routes/auth')
+const pagesRouter=require('./routes/pages')
 
 
 const app = express()
@@ -72,6 +73,7 @@ app.use(projectRouter)
 app.use(proposedRouter)
 app.use(dashboardRouter)
 app.use(authRouter)
+app.use(pagesRouter)
 
 
   

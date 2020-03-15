@@ -1,88 +1,87 @@
- <!-- Header -->
-    <div class="header bg-gradient-primary py-7 py-lg-8">
-        <div class="container">
-            <div class="header-body text-center mb-7">
-                <div class="row justify-content-center">
-                    <div class="col-xl-5 col-lg-6 col-md-8 px-5">
-                       <span class="display-2 text-white"> FYP <i class="fas fa-heart"></i></span>
-                        <h1 class="text-white">Welcome Back!</h1>
-                        <p class="text-lead text-white">Fill these credentials to do something awesome.</p>
+<div class="row">
+    <div class="col-xl-5 pa-0">
+        <div id="owl_demo_1" class="owl-carousel dots-on-item owl-theme">
+            <div class="fadeOut item auth-cover-img overlay-wrap" style="background-image:url(/dist/img/bg2.jpg);">
+                <div class="auth-cover-info py-xl-0 pt-100 pb-50">
+                    <div class="auth-cover-content text-center w-xxl-75 w-sm-90 w-xs-100">
+                        <h1 class="display-3 text-white mb-20">Understand and look deep into nature.</h1>
+                        <p class="text-white">The purpose of lorem ipsum is to create a natural looking block of text (sentence, paragraph, page, etc.) that doesn't distract from the layout. Again during the 90s as desktop publishers bundled the text with their software.</p>
                     </div>
                 </div>
+                <div class="bg-overlay bg-trans-dark-50"></div>
+            </div>
+            <div class="fadeOut item auth-cover-img overlay-wrap" style="background-image:url(/dist/img/bg1.jpg);">
+                <div class="auth-cover-info py-xl-0 pt-100 pb-50">
+                    <div class="auth-cover-content text-center w-xxl-75 w-sm-90 w-xs-100">
+                        <h1 class="display-3 text-white mb-20">Experience matters for good applications.</h1>
+                        <p class="text-white">The passage experienced a surge in popularity during the 1960s when Letraset used it on their dry-transfer sheets, and again during the 90s as desktop publishers bundled the text with their software.</p>
+                    </div>
+                </div>
+                <div class="bg-overlay bg-trans-dark-50"></div>
             </div>
         </div>
-        <div class="separator separator-bottom separator-skew zindex-100">
-            <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1"
-                 xmlns="http://www.w3.org/2000/svg">
-                <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
-            </svg>
-        </div>
     </div>
-    <!-- Page content -->
-    <div class="container mt--8 pb-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-5 col-md-7">
-                <div class="card bg-secondary border-0 mb-0">
-                    <div class="card-body px-lg-5 py-lg-5">
-                        <div class="text-center text-muted mb-4">
-                            <small>sign {{role}} in with credentials</small>
-                        </div>
-                        <form method="POST" action="/login/{{role}}">
-                            <div class="form-group mb-3">
-                                <div class="input-group input-group-merge input-group-alternative">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="ni ni-email-83"></i></span>
-                                    </div>
-                                    <input id="email" class="form-control"
-                                           required autocomplete="email" autofocus name="email"
-                                           value="" placeholder="Email" type="email">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group input-group-merge input-group-alternative">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                                    </div>
-                                    <input id="password" type="password"
-                                           placeholder="Enter Password"
-                                           class="form-control" name="password"
-                                           required autocomplete="current-password">
 
-                                </div>
+    <div class="col-xl-7 pa-0">
+        <div class="auth-form-wrap py-xl-0 py-50">
+            <div class="auth-form w-xxl-55 w-xl-75 w-sm-90 w-xs-100">
+                
+                    {{#if error}}
+                    <p>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+               <span class="alert-text">{{error}}</span>
+               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                 <span aria-hidden="true">×</span>
+               </button>
+             </div>
+            </p>
+             {{/if}}
+                <form method="POST" action="/login/{{role}}">
+                    <input type="hidden"
+                    class="form-control" name="role" value="{{role}}" >
+             <input type="hidden"
+                    class="form-control" name="_csrf" value="{{csrfToken}}" >
+                    <h1 class="display-4 mb-10">Welcome Back :)</h1>
+                    <p class="mb-30">Sign in to your account and do something awesome.</p>
+                  
+
+                     <div class="form-group">
+                        <div class="input-group">
+                           <input id="email" class="form-control"
+                        required autocomplete="email" autofocus name="email"
+                        value="" placeholder="Email" type="email">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><span class="feather-icon"><i data-feather="mail"></i></span></span>
                             </div>
-                             <div class="form-group">
-                                <div class="input-group input-group-merge input-group-alternative">
-                                    
-                                    <input type="hidden"
-                                           class="form-control" name="role" value="{{role}}" >
-                                    <input type="hidden"
-                                           class="form-control" name="_csrf" value="{{csrfToken}}" >
-                                </div>
-                            </div>
-                            <div class="custom-control custom-control-alternative custom-checkbox">
-                                <input class="custom-control-input" type="checkbox" name="remember"
-                                       id="remember">
-                                <label class="custom-control-label" for="remember">
-                                    <span class="text-muted">Remember me</span>
-                                </label>
-                            </div>
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-primary my-4">Sign in</button>
-                            </div>
-                            <div class="text-center">
-                                <a href="/signup/{{role}}">Signup with a new Account ?</a>
-                            </div>
-                             {{#if error}}
-                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <span class="alert-text">{{error}}</span>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-              {{/if}}
-                        </form>
+                        </div>
                     </div>
-                </div>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input id="password" type="password"
+                            placeholder="Enter Password"
+                            class="form-control" name="password"
+                            required autocomplete="current-password">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><span class="feather-icon"><i data-feather="lock"></i></span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="custom-control custom-checkbox mb-25">
+                        <input class="custom-control-input" id="same-address" type="checkbox" checked>
+                        <label class="custom-control-label font-14" for="same-address">Keep me logged in</label>
+                    </div>
+
+                    <button class="btn btn-primary btn-block" type="submit">Login</button>
+
+                    <div class="option-sep">or</div>
+
+                    <p class="text-center">Do have an account yet? <a href="/signup/{{role}}">Sign Up</a></p>
+
+                </form>
             </div>
         </div>
     </div>
+
+</div>

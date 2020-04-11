@@ -8,7 +8,7 @@
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="#">{{project.name}}</a></li>
+                  <li class="breadcrumb-item"><a href="/pprojects">{{project.name}}</a></li>
                   <li class="breadcrumb-item active" aria-current="page">Update</li>
                 </ol>
               </nav>
@@ -42,7 +42,7 @@
                 </button>
               </div>
               {{/if}}
-                    <form method="POST" action="/admin/projects/update/{{project.id}}">
+                    <form method="POST" action="/projects/update/{{project.id}}">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -56,7 +56,7 @@
                             <div class="form-group">
                                 <label for="language" class="form-control-label" >Language</label>
                                <select required class="custom-select" name="language" id="language">
-                                   <option disabled selected value="">Select Language</option>
+                                   <option  selected value="{{chkHelper project.language}}">{{chkHelper project.language}}</option>
                                    <option value="C">C</option>
                                    <option value="C#">C#</option>
                                    <option value="C++">C++</option>
@@ -70,7 +70,7 @@
                             <div class="form-group">
                                 <label for="IDE" class="form-control-label" >IDE</label>
                                <select required class="custom-select" name="IDE" id="IDE">
-                                   <option disabled selected value="">Select IDE</option>
+                                   <option disabled selected value="{{chkHelper project.IDE}}">{{chkHelper project.IDE}}</option>
                                    <option value="Dev++">Dev++</option>
                                    <option value="NetBeans">NetBeans</option>
                                    <option value="Visual Studio">Visual Studio</option>
@@ -85,7 +85,7 @@
                             <div class="form-group">
                                 <label for="type" class="form-control-label" >Type</label>
                                  <select required class="custom-select" name="type" id="type">
-                                   <option disabled selected value="">Select Type</option>
+                                   <option disabled selected value="{{chkHelper project.type}}">{{chkHelper project.type}}</option>
                                    <option value="Desktop Application">Desktop Application</option>
                                    <option value="Mobile Application">Mobile Application</option>
                                    <option value="Web Application">Web Application</option>
@@ -96,7 +96,7 @@
                             <div class="form-group">
                                 <label for="department" class="form-control-label" >Department</label>
                                  <select required class="custom-select" name="department" id="department">
-                                   <option disabled selected value="">Select Department</option>
+                                   <option disabled selected value="{{chkHelper project.department}}">{{chkHelper project.department}}</option>
                                    <option value="cs">Computer Science</option>
                                    <option value="se">Software Engineering</option>
                                </select>
@@ -108,7 +108,7 @@
                             <div class="form-group">
                                 <label for="semester" class="form-control-label" >Semester</label>
                                  <select required class="custom-select" name="semester" id="semester">
-                                   <option disabled selected value="">Select Semester</option>
+                                   <option disabled selected value="{{chkHelper project.semester}}">{{chkHelper project.semester}}</option>
                                    <option value="6">Sixth Semester</option>
                                    <option value="7">Seventh Semester</option>
                                </select>
@@ -125,7 +125,7 @@
                       <div class="col-md-6">
                             <div class="form-group">
                                 <label for="year" class="form-control-label" >Year</label>
-                                   <input  value="{{project.year}}" required placeholder="Enter year of Project" type="text" name="year" id="year" class="form-control">
+                                   <input  value="{{project.year}}" required placeholder=" Enter year of Project" type="number" min="2010" max="2099" name="year" id="year" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-6">

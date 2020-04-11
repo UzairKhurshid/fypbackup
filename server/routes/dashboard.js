@@ -1,50 +1,84 @@
-const express=require('express')
-const auth=require('../middleware/auth')
-const Project=require('../models/project')
-const router=new express.Router()
+const express = require('express')
+const auth = require('../middleware/auth')
+const Project = require('../models/project')
+const Notification = require('../models/notification')
+const { getAllNotifications } = require('../helpers/notification')
+const getArr = require('../helpers/supervisingFun')
+const router = new express.Router()
 
 
-router.get('/dashboard',auth, async(req, res) => {
+router.get('/dashboard', auth, async(req, res) => {
+    const role = req.session.role
+    const email = req.session.email
+    try {
 
-  try{
-    const role=req.session.role
-    const projects=await Project.find({ status:'accepted' })
-  
-      if(role==="admin"){
-          console.log('admin')
-          res.render('dashboard/index',{
-            title:'Admin Dashboard',
-            adminLogin:'true',
-            Dashboard:true,
-            success:req.flash('success')
-          })
-      }
-      else if(role==="student"){
-          console.log('Student')
-          res.render('dashboard/index',{
-            title:'Student Dashboard',
-            studentLogin:'true',
-            Dashboard:true,
-            project:projects,
-            success:req.flash('success')
-          })
-      }
-      else if(role==="teacher"){
-          console.log('teacher')
-          res.render('dashboard/index',{
-            title:'Teacher Dashboard',
-            teacherLogin:'true',
-            Dashboard:true,
-            project:projects,
-            success:req.flash('success')
-          })
-      }
-  }catch(e){
-        console.log(e)
-  }
-  
-    
-  })
+        const projects = await Project.find({ status: 'accepted' })
+        const Arr = await getAllNotifications(email, role)
+        const supervisingArr = await getArr(email, role)
+        const notificationCount = Arr.length
+        const supervisingCount = supervisingArr.length
+
+        if (role === "admin") {
+            console.log('admin')
+            res.render('dashboard/index', {
+                title: 'Admin Dashboard',
+                adminLogin: 'true',
+                Dashboard: true,
+                notification: Arr,
+                notificationCount: notificationCount,
+                accountName: req.session.name,
+                success: req.flash('success')
+            })
+        } else if (role === "student") {
+            console.log('Student')
+            res.render('dashboard/index', {
+                title: 'Student Dashboard',
+                studentLogin: 'true',
+                Dashboard: true,
+                project: projects,
+                notification: Arr,
+                notificationCount: notificationCount,
+                accountName: req.session.name,
+                success: req.flash('success')
+            })
+        } else if (role === "teacher") {
+            console.log('teacher')
+            res.render('dashboard/index', {
+                title: 'Teacher Dashboard',
+                teacherLogin: 'true',
+                Dashboard: true,
+                project: projects,
+                notification: Arr,
+                notificationCount: notificationCount,
+                supervisingCount: supervisingCount,
+                accountName: req.session.name,
+                success: req.flash('success')
+            })
+        }
+    } catch (e) {
+        console.log(e.message)
+        req.flash('error', e.message)
+        res.redirect('/dashboard')
+    }
 
 
-module.exports=router
+})
+
+router.post('/clearAllNotifications', auth, async(req, res) => {
+    const role = req.session.role
+    const email = req.session.email
+    try {
+        await Notification.deleteMany({ ownerEmail: email })
+
+        req.flash('error', 'Notifications Cleared Succesfully')
+        res.redirect('/dashboard')
+
+    } catch (e) {
+        console.log(e.message)
+        req.flash('error', e.message)
+        res.redirect('/dashboard')
+    }
+})
+
+
+module.exports = router

@@ -1,0 +1,172 @@
+        {{!-- Header  --}}
+    <div class="header bg-primary pb-6">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+            <div class="col-lg-6 col-7">
+              <h6 class="h2 text-white d-inline-block mb-0">Default</h6>
+              <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                  <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                  <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Create</li>
+                </ol>
+              </nav>
+            </div>
+            <div class="col-lg-6 col-5 text-right">
+              <a href="#" class="btn btn-sm btn-neutral">New</a>
+              <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+       <!-- Page content -->
+    <div class="container-fluid mt--6">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-sm-6"> <h3 class="mb-0">Create new Account</h3>
+                    <p class="text-sm mb-0">
+                        Create new Account for your application.
+                    </p></div>
+                        <div class="col-sm-6 text-sm-right"> <a href="/adminAccounts" class="btn btn-primary">Show All</a></div>
+                    </div>
+                </div>
+                <div class="container py-4">
+
+                        <form method="POST" action="/adminAccount/create">
+                                
+                                    <input type="hidden"
+                                           class="form-control" name="_csrf" value="{{csrfToken}}" >
+                                           
+                                    <div class="form-row">
+                                        <div class="col-md-6 form-group">
+                                         <div class="input-group">
+                                           <input id="name" class="form-control"
+                                           required autocomplete="name" autofocus name="name"
+                                           value="" placeholder="Full Name" type="text">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><span class="feather-icon"><i data-feather="user"></i></span></span>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-6 form-group">
+                                          <select class="form-control custom-select" name="role" id="role" required>
+                                            <option disabled selected value="">Select Role</option>
+                                            <option  value="admin">Admin</option>
+                                            <option value="student">Student</option>
+                                            <option value="teacher">Teacher</option>                              
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                          <select class="form-control custom-select" name="gender" id="gender" >
+                                            <option disabled selected value="">Select gender</option>
+                                            <option value="female">Male</option>
+                                            <option value="male">Female</option>                              
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    
+                                    <div class="form-group">
+                                            <div class="input-group">
+                                            <input id="regNo" class="form-control"
+                                           required autocomplete="regNo" autofocus name="regNo"
+                                           value="" placeholder="Registration Number" type="text">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><span class="feather-icon"><i data-feather="credit-card"></i></span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                         <div class="input-group">
+                                         <input id="email" class="form-control"
+                                           required autocomplete="email" autofocus name="email"
+                                           value="" placeholder="Email" type="email">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><span class="feather-icon"><i data-feather="mail"></i></span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                            <select class="form-control custom-select" name="campus" id="campus" >
+                                            <option disabled selected value="">Select campus</option>
+                                            <option value="Karachi">Karachi Campus</option>
+                                            <option value="Islamabad">Islamabad Campus</option>
+                                            <option value="Lahore">Lahore Campus</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <select class="form-control custom-select" name="semester" id="semester" >
+                                            <option disabled selected value="">Select semester</option>
+                                            <option value="6">Sixth</option>
+                                            <option value="7">Seventh</option>
+                                            <option value="8">Eigth</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                   
+                                    
+                                    <div class="form-row">
+                                        <div class="col-md-6">
+                                            <select class="form-control  custom-select" name="department" id="department" >
+                                            <option disabled selected value="">Select Department</option>
+                                            <option value="CS">Computer Science</option>
+                                            <option value="SE">Software Engineering</option>
+                                            <option value="CE">Computer Engineering</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <select class="form-control  custom-select" name="status" id="status" >
+                                            <option disabled selected value="">Select Status</option>
+                                            <option value="enable">Enable</option>
+                                            <option value="disable">Disable</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input id="password" type="password"
+                                           placeholder="Password"
+                                           class="form-control" name="password"
+                                           required autocomplete="current-password">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><span class="feather-icon"><i data-feather="lock"></i></span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <button class="btn btn-primary btn-block" type="submit">Create Account</button>
+
+                                </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        document.getElementById('role').onchange = function () {
+            document.getElementById("semester").disabled = (this.value === 'admin');
+            document.getElementById("department").disabled = (this.value === 'admin');
+            document.getElementById("gender").disabled = (this.value === 'admin');
+            document.getElementById("campus").disabled = (this.value === 'admin');
+            
+        }
+
+    </script>
+     {{> footer }}
+    </div>

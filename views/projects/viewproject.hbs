@@ -8,7 +8,7 @@
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="#">{{project.name}}</a></li>
+                  <li class="breadcrumb-item"><a href="/projects">{{project.name}}</a></li>
                   <li class="breadcrumb-item active" aria-current="page">View</li>
                 </ol>
               </nav>
@@ -104,7 +104,15 @@
                                    <input  value="{{project.year}}" required placeholder="Enter year of Project" type="text" name="description" id="description" class="form-control" readonly>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6" id="ownerNameDiv">
+                            <div class="form-group">
+                              <label for="year" class="form-control-label" >Proposed By</label>
+                                   <input  type="text" name="_csrf" id="ownerName" value="{{project.ownerName}}" class="form-control" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
                             <div class="form-group">
                                    <input  type="hidden" name="_csrf" value="{{csrfToken}}" class="form-control">
                             </div>
@@ -113,11 +121,23 @@
                     
                 </div>
 
-
+            
 
 
             </div>
         </div>
-    </div>
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              if(document.getElementById('ownerName').value.length  ==  '0')
+              {
+                document.getElementById('ownerNameDiv').style.display="none";
+              }
+              else
+              {
+                //alert('ownerName isnt empty');
+              }
+            }, false);
+          </script>
+    </div>   
        {{> footer }}
     </div>

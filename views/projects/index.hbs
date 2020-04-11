@@ -8,7 +8,7 @@
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="#">Project</a></li>
+                  <li class="breadcrumb-item"><a href="/projects">Project</a></li>
                   <li class="breadcrumb-item active" aria-current="page">Info</li>
                 </ol>
               </nav>
@@ -33,15 +33,30 @@
                             <p class="text-sm mb-0">
                                 Showing all the Projects of the application.
                             </p>
+                            <form method="POST" action="#">
+                              <i class="fa fa-search icon"></i>
+                              <input type="hidden" name="csrf" value="{{../csrfToken}}" >
+                              {{#if Projects}}
+                                <input type="hidden" value="Projects" name="Projects">
+                              {{else}}
+                                <input type="hidden" value="proposeProjects" name="proposeProjects">
+                              {{/if}}
+                              <input style="width: 250px;height: 30px; margin-top: 5px;border: 0ch;" type="number" min="2010" max="2099" required placeholder="year">
+                              <button style="margin-top: 5px;" type="submit">Search</button>
+                            </form>
                         </div>
-                        <div class="col-md-6 text-right">
-                            <a class="btn btn-primary" href="/admin/projects/create">Create New Project</a>
-                        </div>
+                        {{#if adminLogin}}
+                          <div class="col-md-6 text-right">
+                              <a class="btn btn-primary" href="/projects/create">Create New Project</a>
+                          </div>
+                        {{/if}}
                     </div>
                     <div class="row">
                         <div class="col-md-12 text-right">
+                          {{#if adminLogin}}
                             <a class="btn btn-primary" href="/admin/proposedProjects">Proposed</a>
-                            <a class="btn btn-primary" href="/admin/projects">projects</a>
+                            <a class="btn btn-primary" href="/projects">projects</a>
+                          {{/if}}
                         </div>
                     </div>
                 </div>
@@ -71,8 +86,9 @@
                         </thead>
                         <tbody>
                             {{#if project}} 
+                              {{#if adminLogin}}
                                 {{#each project}}
-                                    <!-- <th class="text-center" colspan="6">Show All Students Here.</th> --> 
+                                    <!-- <th class="text-center" colspan="6">Show All Projects Here.</th> --> 
                                     <tr>
                                     <th>{{this.name}}</th>
                                     <th>{{this.IDE}}</th>                              
@@ -81,26 +97,57 @@
                                     <th>{{this.year}}</th>
                                     <th>{{this.ownerName}}</th>
                                     <th>
-                                      <a class="btn btn-sm btn-primary" href="/projects/viewproject/{{this.id}}">View Project</a>
-                                      <a class="btn btn-sm btn-primary" href="/admin/projects/update/{{this.id}}">Edit</a>
-                                    <a onclick="deleteForm()" class="btn btn-sm btn-primary" href="#">Delete</a>
-                                     <form id="projectForm" class="hide" method="POST" action="/admin/projects/delete/{{this.id}}">
-                                        <input  type="hidden" name="_csrf" value="{{csrfToken}}" class="form-control">
-                                     </form>
-                                       <script>
-                                      function deleteForm(){
-                                        event.preventDefault();
-                                        document.getElementById("projectForm").submit();
-                                      }
-                                    </script>
+                                      <a class="btn btn-sm btn-primary" href="/viewproject/{{this.id}}">View Project</a>
+                                        <a class="btn btn-sm btn-primary" href="/projects/update/{{this.id}}">Edit</a>
+                                        <form id="projectForm" class="hide" method="POST" action="/projects/delete/{{this.id}}">
+                                            <input  type="hidden" name="_csrf" value="{{../csrfToken}}" class="form-control">
+                                            <button style="margin-top: 2px;" class="btn btn-sm btn-primary" type="submit">Delete</button>
+                                        </form>
                                     </th>
                                     </tr>
                                 {{/each}}
+                                {{else}}
+                                  {{#each project}}
+                                    <!-- <th class="text-center" colspan="6">Show All Projects Here.</th> --> 
+                                    <tr>
+                                    <th>{{this.name}}</th>
+                                    <th>{{this.IDE}}</th>                              
+                                    <th>{{this.semester}}</th>
+                                    <th>{{this.department}}</th>
+                                    <th>{{this.year}}</th>
+                                    <th>
+                                      <a class="btn btn-sm btn-primary" href="/viewproject/{{this.id}}">View Project</a>
+                                    </th>
+                                    </tr>
+                                {{/each}}
+                              {{/if}}
                             {{/if}}
                         </tbody>
-                    </table>
+                    </table> 
+                    <input type="hidden" id="page" value="{{page}}">
+                    <input type="hidden" id="count" value="{{count}}">
+                    {{#if Projects}}
+                        <div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="datable_1_info" role="status" aria-live="polite">Showing 1 to 5 of {{count}} entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="datable_1_paginate"><ul class="pagination" id="pagination"><li class="paginate_button page-item previous " id="datable_1_previous"><a href="/projects?limit=5&skip=5&page={{prevPageHelper page}}" aria-controls="datable_1" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li id="1" class="paginate_button page-item active"><a href="/projects?limit=5&skip=0&page=1" aria-controls="datable_1" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li id="2" class="paginate_button page-item "><a href="/projects?limit=5&skip=5&page=2" aria-controls="datable_1" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li id="3" class="paginate_button page-item "><a href="/projects?limit=5&skip=5&page=3" aria-controls="datable_1" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li id="4" class="paginate_button page-item "><a href="/projects?limit=5&skip=5&page=4" aria-controls="datable_1" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li id="5" class="paginate_button page-item "><a href="/projects?limit=5&skip=5&page=5" aria-controls="datable_1" data-dt-idx="5" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item next" id="datable_1_next"><a href="/projects?limit=5&skip=5&page={{nextPageHelper page}}" aria-controls="datable_1" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li></ul></div></div></div></div>
+                    {{else if proposeProjects}}
+                        <div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="datable_1_info" role="status" aria-live="polite">Showing 1 to 5 of {{count}} entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="datable_1_paginate"><ul class="pagination" id="pagination"><li class="paginate_button page-item previous " id="datable_1_previous"><a href="/admin/proposedProjects?limit=5&skip=5&page={{prevPageHelper page}}" aria-controls="datable_1" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li id="1" class="paginate_button page-item active"><a href="/admin/proposedProjects?limit=5&skip=0&page=1" aria-controls="datable_1" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li id="2" class="paginate_button page-item "><a href="/admin/proposedProjects?limit=5&skip=5&page=2" aria-controls="datable_1" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li  id="3" class="paginate_button page-item "><a href="/admin/proposedProjects?limit=5&skip=5&page=3" aria-controls="datable_1" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li id="4" class="paginate_button page-item "><a href="/admin/proposedProjects?limit=5&skip=5&page=4" aria-controls="datable_1" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li id="5" class="paginate_button page-item "><a href="/admin/proposedProjects?limit=5&skip=5&page=5" aria-controls="datable_1" data-dt-idx="5" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item next" id="datable_1_next"><a href="/admin/proposedProjects?limit=5&skip=5&page={{nextPageHelper page}}" aria-controls="datable_1" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li></ul></div></div></div></div>
+                    {{/if}}
                 </div>
             </div>
+            <script>
+              document.addEventListener('DOMContentLoaded',function(){
+
+                if(parseInt(document.getElementById('page').value) >1){}
+                else{
+                  document.getElementById('pagination').children[0].style.display='none';
+                }
+                
+                  if((parseInt(document.getElementById('page').value)*5)<parseInt(document.getElementById('count').value)){}
+                else{
+                  document.getElementById('pagination').children[6].style.display='none';
+                }
+
+              })
+            </script>
         </div>
     </div>
       {{> footer }}

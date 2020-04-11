@@ -1,0 +1,134 @@
+<div  class="container h-100 d-flex flex-column">
+     {{#if success}}
+         <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                <span class="alert-text"><strong>Success!</strong> {{success}}</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+    {{/if}}
+    {{#if error}}
+         <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                <span class="alert-text"><strong>Error!</strong> {{error}}</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+    {{/if}} 
+    <div class="row">
+        <div class="col-md-6"  >
+            <div class="card text-center" >
+                <form method="POST" action="/profile/updateAvatar/{{account.id}}">
+                    <img id="img" src="https://mdbootstrap.com/img/Photos/Avatars/avatar-8.jpg" style="height: 60vh;">
+                    <input type="file" name="avatar">
+                    <input type="hidden" class="form-control" name="_csrf" value="{{csrfToken}}" >
+                    <button type="submit" class="btn btn-block btn-primary">Update Profile Picture</button>
+                </form>
+                <div class="card-body text-center" style="background-color: #272f63;">
+                    <h1 style="color: white;">{{account.name}}</h1>
+                </div>
+                <div id="btnForm" class="card-footer text-center" style="background-color: #272f63;">
+                    <button onclick="showForm()"  class="btn btn-block btn-primary ">Update Profile Details</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" >
+            <div id="cardForm" class="card "  style="border: none;">
+                
+                <div  class="card-body">
+                    {{!-- <form method="POST" action="/profile/update/{{account.id}}" > --}}
+                                
+                        <input type="hidden" class="form-control" name="_csrf" value="{{csrfToken}}" >
+                        <input type="hidden" class="form-control" name="role" value="{{account.role}}" >
+                        
+                        <h4>Name :</h4>
+                        <div class="input-group">
+                            <input id="name" class="form-control" required autocomplete="name" autofocus name="name" value="{{account.name}}" type="text">
+                        </div>
+
+                        <div class="input-group">
+                            <br> 
+                        </div>
+
+                         <h4>Email :</h4>
+                        <div class="input-group">
+                            <input id="email" class="form-control" required autocomplete="email" autofocus name="email" value="{{account.email}}" type="text">
+                        </div>
+                        
+                        <div class="input-group">
+                            <br>   
+                        </div>
+                        
+                        <h4>Campus :</h4>
+                        <div class="input-group">
+                                <select class="form-control custom-select" name="campus" id="campus" >
+                                    <option  selected value="{{chkHelper account.campus}}">{{chkHelper account.campus}}</option>
+                                    <option value="Karachi">Karachi Campus</option>
+                                    <option value="Islamabad">Islamabad Campus</option>
+                                    <option value="Lahore">Lahore Campus</option>
+                                </select>
+                        </div>
+
+                        <div class="input-group">
+                            <br>    
+                        </div>
+
+                        <h4>Department :</h4>
+                        <div class="input-group">
+                            <select class="form-control  custom-select" name="department" id="department" >
+                                <option  selected value="{{chkHelper account.department}}">{{chkHelper account.department}}</option>
+                                <option value="CS">Computer Science</option>
+                                <option value="SE">Software Engineering</option>
+                                <option value="CE">Computer Engineering</option>
+                            </select>   
+                        </div>
+
+                        <div class="input-group">
+                            <br>    
+                        </div>
+
+                        <h4>Semester :</h4>
+                        <div class="input-group">
+                            <select class="form-control custom-select" name="semester" id="semester" >
+                                <option  selected value="{{chkHelper account.semester}}">{{chkHelper account.semester}}</option>
+                                <option value="6">Sixth</option>
+                                <option value="7">Seventh</option>
+                                <option value="8">Eigth</option>
+                            </select>    
+                        </div>
+
+                        <div class="input-group">
+                            <br>    
+                        </div>
+
+                        <h4>Password :</h4>
+                        <div class="input-group">
+                            <input id="password" class="form-control"  autocomplete="password" autofocus name="password" placeholder="Enter new Password" type="text">
+                        </div>
+                        
+                        <div class="input-group">
+                            <br><br><br>
+                        </div>
+                        {{!-- <button id="submitBtn" class="btn btn-primary btn-block" type="submit">Update Profile</button>
+                         --}}
+                    {{!-- </form> --}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('cardForm').style.visibility ='hidden';
+        }, false);
+        function showForm(){
+            document.getElementById('cardForm').style.visibility ="visible";
+            document.getElementById('btnForm').style.visibility='hidden';
+            document.getElementById('img').style.height=83+"vh";
+        }
+        document.getElementById('submitBtn').addEventListener('onClick',function(){
+            alert('asad')
+        })
+    </script>
+</div>

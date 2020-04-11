@@ -1,85 +1,88 @@
-const mongoose=require('mongoose')
-const validator=require('validator')
-const bcrypt=require('bcryptjs')
+const mongoose = require('mongoose')
+const validator = require('validator')
+const bcrypt = require('bcryptjs')
 
-const projectSchema=new mongoose.Schema({
-    name:{
-        type:String,
+const projectSchema = new mongoose.Schema({
+    name: {
+        type: String,
         trim: true,
-        required:true
+        required: true
     },
-    language:{
-        type:String,
+    language: {
+        type: String,
         trim: true,
-        required:true
+        required: true
     },
-    IDE:{
-        type:String,
+    IDE: {
+        type: String,
         trim: true,
-        required:true
+        required: true
     },
-    type:{
-        type:String,
+    type: {
+        type: String,
         trim: true,
-        required:true
+        required: true
     },
-    department:{
-        type:String,
+    department: {
+        type: String,
         trim: true,
-        required:true
+        required: true
     },
-    semester:{
-        type:String,
+    semester: {
+        type: String,
         trim: true,
-        required:true
+        required: true
     },
-    year:{
-        type:Number,
+    year: {
+        type: String,
         trim: true,
-        required:true
+        required: true
     },
-    description:{
-        type:String,
+    description: {
+        type: String,
         trim: true,
-        required:true
+        required: true
     },
-    ownerName:{
-        type:String,
-        trim: true,
-        ref:'Student',
-        ref:'Teacher'
-    },
-    ownerEmail:{
-        type:String,
-        trim: true,
-        ref:'Student',
-        ref:'Teacher'
-    },
-    ownerRole:{
-        type:String,
-        required:true,
+    ownerName: {
+        type: String,
         trim: true
     },
-    status:{
-        type:String,
-        required:true,
-        trim: true
-    },
-    request:{
-        type:String,
-        trim: true
-    },
-    requestedByID:{
-        type:String,
+    ownerEmail: {
+        type: String,
         trim: true,
-        ref:'Student'
+        ref: 'Account'
+    },
+    ownerRole: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    status: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    request: {
+        type: String,
+        trim: true
+    },
+    assignedToID: {
+        type: String,
+        trim: true,
+        ref: 'Account'
     }
 
-},
-{ 
-   timestamps: true
+}, {
+    timestamps: true
 })
 
 
-const Project=mongoose.model('Project',projectSchema)
-module.exports=Project
+projectSchema.virtual('requestProject', {
+    ref: 'Request',
+    localField: 'id',
+    foreignField: 'projectID'
+})
+
+
+const Project = mongoose.model('Project', projectSchema)
+module.exports = Project

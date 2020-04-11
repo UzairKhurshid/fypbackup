@@ -8,7 +8,7 @@
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="#">New</a></li>
+                  <li class="breadcrumb-item"><a href="projects/create">New</a></li>
                   <li class="breadcrumb-item active" aria-current="page">Create</li>
                 </ol>
               </nav>
@@ -35,13 +35,13 @@
                     </p>
                         </div>
                         <div class="col-6 text-md-right">
-                            <a class="btn btn-primary" href="/admin/projects">Show All Projects</a>
+                            <a class="btn btn-primary" href="/projects">Show All Projects</a>
                         </div>
                     </div>
                    
                 </div>
                 <div class="container py-4">
-                    <form method="POST" action="/admin/projects/create">
+                    <form method="POST" action="/projects/create">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -123,7 +123,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                   <input  type="text" name="year" required class="form-control" placeholder="select year of project">
+                                   <input  type="number" min="2010" max="2099"  name="year" required class="form-control" placeholder="select year of project">
                             </div>
                         </div>
                         <div class="col-md-6">

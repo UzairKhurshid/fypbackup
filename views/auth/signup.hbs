@@ -17,7 +17,9 @@
                     <div class="col-xl-7 pa-0">
                         <div class="auth-form-wrap py-xl-0 py-50">
                             <div class="auth-form w-xxl-55 w-xl-75 w-sm-90 w-100">
-                                     {{#if error}}
+                                <h1 class="display-4 mb-10">Sign up as {{role}}</h1>
+                                    <p class="mb-30">Create your account and start your free trial today</p>
+                {{#if error}}
                      <p>
                      <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <span class="alert-text">{{error}}</span>
@@ -34,9 +36,7 @@
                                     <input type="hidden"
                                            class="form-control" name="role" value="{{role}}" >
 
-                                    <h1 class="display-4 mb-10">Sign up as {{role}}</h1>
-                                    <p class="mb-30">Create your account and start your free trial today</p>
-                                   
+                                    
                                    
                                     <div class="form-row">
                                         <div class="col-md-6 form-group">
@@ -52,8 +52,8 @@
                                         <div class="col-md-6 form-group">
                                           <select class="form-control custom-select" name="gender" id="campus" required>
                                             <option disabled selected value="">Select gender</option>
-                                            <option value="female">Male</option>
-                                            <option value="male">Female</option>                              
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>                              
                                             </select>
                                         </div>
                                     </div>
@@ -131,7 +131,7 @@
                                     
                                     <button class="btn btn-primary btn-block" type="submit">Register</button>
                                     <div class="option-sep">or</div>
-                                    <p class="text-center">Already have an account? <a href="/login/student">Sign In</a></p>
+                                    <p class="text-center">Already have an account? <a href="/login/{{role}}">Sign In</a></p>
 
                                 </form>
                             </div>

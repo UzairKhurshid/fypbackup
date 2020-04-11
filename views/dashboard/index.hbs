@@ -1,4 +1,22 @@
-{{#if adminLogin}}
+  {{#if error}}
+                     <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                <span class="alert-text"><strong>Success!</strong> {{error}}</span>
+                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+{{/if}}
+  {{#if success}}
+                     <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                <span class="alert-text"><strong>Success!</strong> {{success}}</span>
+                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+{{/if}}
+{{!-- 
     <!-- Page content -->
            <section class="hk-sec-wrapper">
                             <h5 class="hk-sec-title">Data Table</h5>
@@ -35,5 +53,5 @@
                                 </div>
                             </div>
                     </section>
-      {{/if}}
-
+      
+ --}}

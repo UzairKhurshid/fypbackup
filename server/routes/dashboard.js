@@ -11,12 +11,12 @@ router.get('/dashboard', auth, async(req, res) => {
     const role = req.session.role
     const email = req.session.email
     try {
-
         const projects = await Project.find({ status: 'accepted' })
         const Arr = await getAllNotifications(email, role)
-        const supervisingArr = await getArr(email, role)
         const notificationCount = Arr.length
+        const supervisingArr = await getArr(email, role)
         const supervisingCount = supervisingArr.length
+        console.log('2')
 
         if (role === "admin") {
             console.log('admin')
@@ -42,7 +42,7 @@ router.get('/dashboard', auth, async(req, res) => {
                 success: req.flash('success')
             })
         } else if (role === "teacher") {
-            console.log('teacher')
+            console.log('teacher dashboard')
             res.render('dashboard/index', {
                 title: 'Teacher Dashboard',
                 teacherLogin: 'true',

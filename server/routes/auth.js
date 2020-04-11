@@ -55,7 +55,7 @@ router.post('/login/:role', async(req, res) => {
         req.session.role = role
         req.session.email = req.body.email
 
-        res.redirect('/')
+        res.redirect('/dashboard')
 
     } catch (e) {
         console.log(e.message)

@@ -264,7 +264,6 @@ router.post('/projects/deleteRequest/:id', async(req, res) => {
     const id = req.params.id
     try {
 
-        const notification = new Notification()
 
         await Request.findByIdAndDelete(id)
         await createNotification('Your request to project is deleted . please review Your requests .', req.body.requestedByEmail, 'student')
@@ -342,7 +341,7 @@ router.post('/projects/requestProject/:id', auth, async(req, res) => {
     try {
         const prevReq = await Request.find({ projectID: req.params.id })
 
-        if (prevReq.length) {
+        if (!prevReq.length <= 0) {
             throw new Error('Already requested for this project')
         }
         await request.save()
@@ -350,7 +349,7 @@ router.post('/projects/requestProject/:id', auth, async(req, res) => {
         await createNotification('Your have a new request by ' + req.session.name + '  . please review Your requests .', req.body.ownerEmail, 'teacher')
 
         req.flash('success', 'Request for this Project is sent Successfully')
-        res.redirect('/proposed/allProposedProjects')
+        res.redirect('/projects/requests')
 
     } catch (e) {
         console.log(e.message)

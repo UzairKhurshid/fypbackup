@@ -341,7 +341,8 @@ router.post('/projects/requestProject/:id', auth, async(req, res) => {
 
     try {
         const prevReq = await Request.find({ projectID: req.params.id })
-        if (prevReq) {
+
+        if (prevReq.length) {
             throw new Error('Already requested for this project')
         }
         await request.save()

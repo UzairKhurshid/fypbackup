@@ -35,7 +35,6 @@ const getAllNotifications = async(email, role) => {
         const noti = await Notification.find({ ownerEmail: email })
         const noti2 = await Notification.find({ role: "" })
         if (!noti.length <= 0) {
-            console.log('noti')
             for (i = 0; i < noti.length; i++) {
                 let obj = Object.create(newObj)
                 obj.txt = noti[i].text
@@ -43,7 +42,6 @@ const getAllNotifications = async(email, role) => {
             }
         }
         if (!noti2.length <= 0) {
-            console.log('noti2')
             let j = Arr.length;
             for (i = 0; i < noti2.length; i++) {
                 let obj = Object.create(newObj)
@@ -53,7 +51,6 @@ const getAllNotifications = async(email, role) => {
             }
         }
     }
-    console.log(Arr)
     return Arr
 }
 

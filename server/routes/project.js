@@ -153,7 +153,7 @@ router.post('/projects/create', auth, async(req, res) => {
 
     try {
         //Creating Notification
-        await createNotification('A new Project is added . please review Projects .', proj.requestedByEmail, '')
+        await createNotification('A new Project is added . please review Projects .', '', '')
 
         await project.save()
 

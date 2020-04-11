@@ -340,7 +340,10 @@ router.post('/projects/requestProject/:id', auth, async(req, res) => {
     request.status = 'requested'
 
     try {
-
+        const prevReq = await Request.find({ projectID: req.params.id })
+        if (prevReq) {
+            throw new Error('Already requested for this project')
+        }
         await request.save()
         sendProjectRequestMail(req.session.email)
         await createNotification('Your have a new request by ' + req.session.name + '  . please review Your requests .', req.body.ownerEmail, 'teacher')

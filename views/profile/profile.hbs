@@ -1,134 +1,184 @@
-<div  class="container h-100 d-flex flex-column">
-     {{#if success}}
-         <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <span class="alert-icon"><i class="ni ni-like-2"></i></span>
-                <span class="alert-text"><strong>Success!</strong> {{success}}</span>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
-        </div>
-    {{/if}}
-    {{#if error}}
-         <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <span class="alert-icon"><i class="ni ni-like-2"></i></span>
-                <span class="alert-text"><strong>Error!</strong> {{error}}</span>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
-        </div>
-    {{/if}} 
+<!-- Container -->
+<div class="container-fluid">
+    <!-- Row -->
     <div class="row">
-        <div class="col-md-6"  >
-            <div class="card text-center" >
-                <form method="POST" action="/profile/updateAvatar/{{account.id}}">
-                    <img id="img" src="https://mdbootstrap.com/img/Photos/Avatars/avatar-8.jpg" style="height: 60vh;">
-                    <input type="file" name="avatar">
-                    <input type="hidden" class="form-control" name="_csrf" value="{{csrfToken}}" >
-                    <button type="submit" class="btn btn-block btn-primary">Update Profile Picture</button>
-                </form>
-                <div class="card-body text-center" style="background-color: #272f63;">
-                    <h1 style="color: white;">{{account.name}}</h1>
-                </div>
-                <div id="btnForm" class="card-footer text-center" style="background-color: #272f63;">
-                    <button onclick="showForm()"  class="btn btn-block btn-primary ">Update Profile Details</button>
+        <div class="col-xl-12 pa-0">
+            <div class="profile-cover-wrap overlay-wrap">
+                <div class="profile-cover-img" style="background-image:url('/dist/img/profile_background.jpg');"></div>
+                <div class="bg-overlay bg-trans-dark-60"></div>
+                <div class="container-fluid profile-cover-content py-50">
+                    <div class="hk-row">
+                        <div class="col-lg-6">
+                            <div class="media align-items-center">
+                                <div class="media-img-wrap  d-flex">
+                                    <div class="avatar">
+                                        <img src="/dist/img/avatar5.jpg" alt="user" class="avatar-img rounded-circle">
+                                    </div>
+                                </div>
+                                <div class="media-body">
+                                    <div class="text-white text-capitalize display-6 mb-5 font-weight-400">{{account.name}}
+                                    </div>
+                                    <div class="font-14 text-white">
+                                        <span class="mr-5">
+                                          <span class="font-weight-500 pr-5">Account -></span><span class="mr-5">{{account.role}}</span>
+                                         </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="button-list">
+                                <a href="/" class="btn btn-dark btn-wth-icon icon-wthot-bg btn-rounded"><span
+                                        class="btn-text">Dashboard</span><span class="icon-label"><i
+                                        class="icon ion-md-home"></i> </span></a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6" >
-            <div id="cardForm" class="card "  style="border: none;">
-                
-                <div  class="card-body">
-                    {{!-- <form method="POST" action="/profile/update/{{account.id}}" > --}}
-                                
-                        <input type="hidden" class="form-control" name="_csrf" value="{{csrfToken}}" >
-                        <input type="hidden" class="form-control" name="role" value="{{account.role}}" >
-                        
-                        <h4>Name :</h4>
-                        <div class="input-group">
-                            <input id="name" class="form-control" required autocomplete="name" autofocus name="name" value="{{account.name}}" type="text">
-                        </div>
+            <div class="tab-content mt-sm-60 mt-30">
+                <div class="tab-pane fade show active" role="tabpanel">
+                    <div class="container-fluid">
+                        {{#if success}}
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                                <span class="alert-text"><strong>Success!</strong> {{success}}</span>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                        {{/if}}
+                        {{#if error}}
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                                <span class="alert-text"><strong>Error!</strong> {{error}}</span>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                        {{/if}}
+                        <div class="hk-row">
+                            <div class="col-lg-8">
+                                <div class="card card-profile-feed">
+                                    <div class="card-header text-capitalize font-weight-500 text-dark card-header-action">
+                                        Update your profile information from here.
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text mb-30">Lorem ipsum dolor sit amet, consectetur adipisicing
+                                            elit. At distinctio, eligendi illo iste odit qui. Illum officiis recusandae
+                                            soluta sunt voluptas. Debitis eius fuga illum odio. Architecto et laboriosam
+                                            praesentium?</p>
+                                        <form method="POST" action="/profile/update/{{account.id}}">
+                                            <input type="hidden" class="form-control" name="_csrf"
+                                                   value="{{csrfToken}}">
+                                            <input type="hidden" class="form-control" name="role"
+                                                   value="{{account.role}}">
+                                            <div class="row">
+                                                <div class="col-md-6 form-group">
+                                                    <label for="firstName">Name</label>
+                                                    <input id="name" class="form-control" required autocomplete="name"
+                                                           autofocus name="name" value="{{account.name}}" type="text">
+                                                </div>
+                                                <div class="col-md-6 form-group">
+                                                    <label for="firstName">Email</label>
+                                                    <input id="email" class="form-control" required autocomplete="email"
+                                                           autofocus name="email" value="{{account.email}}" type="text">
+                                                </div>
+                                            </div>
 
-                        <div class="input-group">
-                            <br> 
-                        </div>
+                                            <div class="row">
+                                                <div class="col-md-6 form-group">
+                                                    <label for="firstName">Email</label>
+                                                    <input id="password" class="form-control" autocomplete="password"
+                                                           autofocus name="password" placeholder="Enter new Password"
+                                                           type="text">
+                                                </div>
+                                                <div class="col-md-6 form-group">
+                                                    <label for="firstName">Campus</label>
+                                                    <select class="form-control custom-select" name="campus"
+                                                            id="campus">
+                                                        <option selected
+                                                                value="{{chkHelper account.campus}}">{{chkHelper
+                                                                account.campus}}</option>
+                                                        <option value="Karachi">Karachi Campus</option>
+                                                        <option value="Islamabad">Islamabad Campus</option>
+                                                        <option value="Lahore">Lahore Campus</option>
+                                                    </select>
+                                                </div>
+                                            </div>
 
-                         <h4>Email :</h4>
-                        <div class="input-group">
-                            <input id="email" class="form-control" required autocomplete="email" autofocus name="email" value="{{account.email}}" type="text">
+                                            <div class="row">
+                                                <div class="col-md-6 form-group">
+                                                    <label for="firstName">Semester</label>
+                                                    <select class="form-control custom-select" name="semester"
+                                                            id="semester">
+                                                        <option selected
+                                                                value="{{chkHelper account.semester}}">{{chkHelper
+                                                                account.semester}}</option>
+                                                        <option value="6">Sixth</option>
+                                                        <option value="7">Seventh</option>
+                                                        <option value="8">Eigth</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6 form-group">
+                                                    <label for="firstName">Departments</label>
+                                                    <select class="form-control  custom-select" name="department"
+                                                            id="department">
+                                                        <option selected
+                                                                value="{{chkHelper account.department}}">{{chkHelper
+                                                                account.department}}</option>
+                                                        <option value="CS">Computer Science</option>
+                                                        <option value="SE">Software Engineering</option>
+                                                        <option value="CE">Computer Engineering</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 form-group">
+                                                    <button type="submit" class="btn btn-gradient-primary">Update
+                                                        Information
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="card-footer justify-content-between">
+                                        <div>
+                                            Your Account Information
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="card card-profile-feed">
+                                    <div class="card-header text-capitalize font-weight-500 text-dark card-header-action">
+                                        Change your display picture from here.
+                                    </div>
+                                    <form method="POST" action="/profile/updateAvatar/{{account.id}}">
+                                        <div class="row text-center">
+                                            <div class="col-sm p-4">
+                                                <input type="hidden" class="form-control" name="_csrf"
+                                                       value="{{csrfToken}}">
+                                                <input type="file" name="avatar" class="dropify"/>
+                                            </div>
+                                        </div>
+                                        <div class="row text-center">
+                                            <div class="col-sm p-4">
+                                                <button type="submit" class="btn btn-block btn-outline-primary">Update
+                                                    Profile
+                                                    Picture
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                        
-                        <div class="input-group">
-                            <br>   
-                        </div>
-                        
-                        <h4>Campus :</h4>
-                        <div class="input-group">
-                                <select class="form-control custom-select" name="campus" id="campus" >
-                                    <option  selected value="{{chkHelper account.campus}}">{{chkHelper account.campus}}</option>
-                                    <option value="Karachi">Karachi Campus</option>
-                                    <option value="Islamabad">Islamabad Campus</option>
-                                    <option value="Lahore">Lahore Campus</option>
-                                </select>
-                        </div>
-
-                        <div class="input-group">
-                            <br>    
-                        </div>
-
-                        <h4>Department :</h4>
-                        <div class="input-group">
-                            <select class="form-control  custom-select" name="department" id="department" >
-                                <option  selected value="{{chkHelper account.department}}">{{chkHelper account.department}}</option>
-                                <option value="CS">Computer Science</option>
-                                <option value="SE">Software Engineering</option>
-                                <option value="CE">Computer Engineering</option>
-                            </select>   
-                        </div>
-
-                        <div class="input-group">
-                            <br>    
-                        </div>
-
-                        <h4>Semester :</h4>
-                        <div class="input-group">
-                            <select class="form-control custom-select" name="semester" id="semester" >
-                                <option  selected value="{{chkHelper account.semester}}">{{chkHelper account.semester}}</option>
-                                <option value="6">Sixth</option>
-                                <option value="7">Seventh</option>
-                                <option value="8">Eigth</option>
-                            </select>    
-                        </div>
-
-                        <div class="input-group">
-                            <br>    
-                        </div>
-
-                        <h4>Password :</h4>
-                        <div class="input-group">
-                            <input id="password" class="form-control"  autocomplete="password" autofocus name="password" placeholder="Enter new Password" type="text">
-                        </div>
-                        
-                        <div class="input-group">
-                            <br><br><br>
-                        </div>
-                        {{!-- <button id="submitBtn" class="btn btn-primary btn-block" type="submit">Update Profile</button>
-                         --}}
-                    {{!-- </form> --}}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('cardForm').style.visibility ='hidden';
-        }, false);
-        function showForm(){
-            document.getElementById('cardForm').style.visibility ="visible";
-            document.getElementById('btnForm').style.visibility='hidden';
-            document.getElementById('img').style.height=83+"vh";
-        }
-        document.getElementById('submitBtn').addEventListener('onClick',function(){
-            alert('asad')
-        })
-    </script>
+    <!-- /Row -->
 </div>
+<!-- /Container -->

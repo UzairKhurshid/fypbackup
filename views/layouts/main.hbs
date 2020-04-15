@@ -1,119 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-       <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>SPP | {{ title }} </title>
-    
 
-  <!-- Favicon --> 
-    <link rel="icon" href="/assets/img/brand/favicon.png" type="image/png">  
-	
-	<!-- Morris Charts CSS -->
-    <link href="/vendors/morris.js/morris.css" rel="stylesheet" type="text/css" />
-	
-	<!-- Toastr CSS -->
+
+    <!-- Favicon -->
+    <link rel="icon" href="/assets/img/brand/favicon.png" type="image/png">
+
+    <!-- Data Table CSS -->
+    <link href="/vendors/datatables.net-dt/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/vendors/datatables.net-responsive-dt/css/responsive.dataTables.min.css" rel="stylesheet"
+          type="text/css"/>
+
+    <!-- Morris Charts CSS -->
+    <link href="/vendors/morris.js/morris.css" rel="stylesheet" type="text/css"/>
+
+    <!-- Toastr CSS -->
     <link href="/vendors/jquery-toast-plugin/dist/jquery.toast.min.css" rel="stylesheet" type="text/css">
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 
     <!-- Toggles CSS -->
     <link href="/vendors/jquery-toggles/css/toggles.css" rel="stylesheet" type="text/css">
     <link href="/vendors/jquery-toggles/css/themes/toggles-light.css" rel="stylesheet" type="text/css">
-	
+
+    <!-- Bootstrap Dropzone CSS -->
+    <link href="/vendors/dropzone/dist/dropzone.css" rel="stylesheet" type="text/css"/>
+
+    <!-- Bootstrap Dropzone CSS -->
+    <link href="/vendors/dropify/dist/css/dropify.min.css" rel="stylesheet" type="text/css"/>
+
     <!-- Custom CSS -->
     <link href="/dist/css/style.css" rel="stylesheet" type="text/css">
-
-
 </head>
-
 <body>
-    <!-- Preloader -->
-    <div class="preloader-it">
-        <div class="loader-pendulums"></div>
-    </div>
-    <!-- /Preloader -->
-	
-	<!-- HK Wrapper -->
-	<div class="hk-wrapper hk-alt-nav hk-icon-nav">
+<!-- Preloader -->
+<div class="preloader-it">
+    <div class="loader-pendulums"></div>
+</div>
+<!-- /Preloader -->
+<!-- HK Wrapper -->
+<div class="hk-wrapper hk-alt-nav">
 
-        <!-- Top Navbar -->
-       {{>topnav}}
-        <!-- /Top Navbar -->
+    <!-- Top Navbar -->
+    {{>topnav}}
+    <!-- /Top Navbar -->
 
-        
-        <!-- Main Content -->
-        <div class="hk-pg-wrapper">
-			<!-- Container -->
-            <div class="container-fluid mt-xl-50 mt-sm-30 mt-15">
-               {{!-- Body --}}
-               {{{body}}}
-			</div>
-            <!-- /Container -->
 
-			<!-- Footer -->
-            <div class="hk-footer-wrap container-fluid">
-                <footer class="footer">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                            <p>Powered by<a href="#" class="text-dark">CS Department</a> © 2020</p>
-                        </div>
-                    </div>
-                </footer>
-            </div>
-            <!-- /Footer -->
-        </div>
-        <!-- /Main Content -->
+    <!-- Main Content -->
+    <div class="hk-pg-wrapper  pt-80" style="min-height:100vh">
+
+        {{{body}}}
+
+        <!-- Footer -->
+        {{>footer}}
+        <!-- /Footer -->
 
     </div>
-    <!-- /HK Wrapper -->
+    <!-- /Main Content -->
 
-    <!-- jQuery -->
-    <script src="/vendors/jquery/dist/jquery.min.js"></script>
+</div>
+<!-- /HK Wrapper -->
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/vendors/popper.js/dist/umd/popper.min.js"></script>
-    <script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- jQuery -->
+<script src="/vendors/jquery/dist/jquery.min.js"></script>
 
-    <!-- Slimscroll JavaScript -->
-    <script src="/dist/js/jquery.slimscroll.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="/vendors/popper.js/dist/umd/popper.min.js"></script>
+<script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 
-    <!-- Fancy Dropdown JS -->
-    <script src="/dist/js/dropdown-bootstrap-extended.js"></script>
+<!-- Slimscroll JavaScript -->
+<script src="/dist/js/jquery.slimscroll.js"></script>
 
-    <!-- FeatherIcons JavaScript -->
-    <script src="/dist/js/feather.min.js"></script>
+<!-- Data Table JavaScript -->
+<script src="/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/vendors/datatables.net-dt/js/dataTables.dataTables.min.js"></script>
+<script src="/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="/vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+<script src="/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+<script src="/vendors/jszip/dist/jszip.min.js"></script>
+<script src="/vendors/pdfmake/build/pdfmake.min.js"></script>
+<script src="/vendors/pdfmake/build/vfs_fonts.js"></script>
+<script src="/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/dist/js/dataTables-data.js"></script>
 
-    <!-- Toggles JavaScript -->
-    <script src="/vendors/jquery-toggles/toggles.min.js"></script>
-    <script src="/dist/js/toggle-data.js"></script>
-	
-	<!-- Counter Animation JavaScript -->
-	<script src="/vendors/waypoints/lib/jquery.waypoints.min.js"></script>
-	<script src="/vendors/jquery.counterup/jquery.counterup.min.js"></script>
-	
-	<!-- Easy pie chart JS -->
-    <script src="/vendors/easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
-	
-	<!-- Sparkline JavaScript -->
-    <script src="/vendors/jquery.sparkline/dist/jquery.sparkline.min.js"></script>
-	
-	<!-- Morris Charts JavaScript -->
-    <script src="/vendors/raphael/raphael.min.js"></script>
-    <script src="/vendors/morris.js/morris.min.js"></script>
-   
-	<!-- EChartJS JavaScript -->
-    <script src="/vendors/echarts/dist/echarts-en.min.js"></script>
-    
-	<!-- Peity JavaScript -->
-    <script src="/vendors/peity/jquery.peity.min.js"></script>
-   
-	<!-- Toastr JS -->
-    <script src="/vendors/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
-    
-    <!-- Init JavaScript -->
-    <script src="/dist/js/init.js"></script>
-	<script src="/dist/js/dashboard-data.js"></script>
-	
+<!-- Fancy Dropdown JS -->
+<script src="/dist/js/dropdown-bootstrap-extended.js"></script>
+
+<!-- FeatherIcons JavaScript -->
+<script src="/dist/js/feather.min.js"></script>
+
+<!-- Toggles JavaScript -->
+<script src="/vendors/jquery-toggles/toggles.min.js"></script>
+<script src="/dist/js/toggle-data.js"></script>
+
+<!-- Counter Animation JavaScript -->
+<script src="/vendors/waypoints/lib/jquery.waypoints.min.js"></script>
+<script src="/vendors/jquery.counterup/jquery.counterup.min.js"></script>
+
+<!-- Easy pie chart JS -->
+<script src="/vendors/easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
+
+<!-- Sparkline JavaScript -->
+<script src="/vendors/jquery.sparkline/dist/jquery.sparkline.min.js"></script>
+
+<!-- Morris Charts JavaScript -->
+<script src="/vendors/raphael/raphael.min.js"></script>
+<script src="/vendors/morris.js/morris.min.js"></script>
+
+<!-- EChartJS JavaScript -->
+<script src="/vendors/echarts/dist/echarts-en.min.js"></script>
+
+<!-- Peity JavaScript -->
+<script src="/vendors/peity/jquery.peity.min.js"></script>
+
+<!-- Toastr JS -->
+<script src="/vendors/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
+
+<!-- Dropzone JavaScript -->
+<script src="/vendors/dropzone/dist/dropzone.js"></script>
+
+<!-- Dropify JavaScript -->
+<script src="/vendors/dropify/dist/js/dropify.min.js"></script>
+
+<!-- Form Flie Upload Data JavaScript -->
+<script src="/dist/js/form-file-upload-data.js"></script>
+
+<!-- Init JavaScript -->
+<script src="/dist/js/init.js"></script>
+<script src="/dist/js/dashboard-data.js"></script>
+
 </body>
 
 </html>

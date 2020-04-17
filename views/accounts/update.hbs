@@ -1,173 +1,148 @@
-   {{!-- Header --}}
-    <div class="header bg-primary pb-6">
-      <div class="container-fluid">
-        <div class="header-body">
-          <div class="row align-items-center py-4">
-            <div class="col-lg-6 col-7">
-              <h6 class="h2 text-white d-inline-block mb-0">Admin</h6>
-              <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                  <li class="breadcrumb-item"><a href="#"><i class="fas fa-graduation-cap"></i></a></li>
-                  <li class="breadcrumb-item"><a href="#">{{admin.name}}</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Update</li>
-                </ol>
-              </nav>
-            </div>
-            <div class="col-lg-6 col-5 text-right">
-              <a href="#" class="btn btn-sm btn-neutral">New</a>
-              <a href="#" class="btn btn-sm btn-neutral">Filters</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-       <!-- Page content -->
-    <div class="container-fluid mt--6">
-        
-    <div class="row">
-        <div class="col">
-            <div class="card">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-6">
-                             <h3 class="mb-0"> Admin</h3>
-                    <p class="text-sm mb-0">
-                        Updating {{account.name}}.
-                    </p>
-                        </div>
-                        <div class="col-6 text-md-right">
-                            <a class="btn btn-primary" href="/adminAccounts">Show All Accounts</a>
-                        </div>
-                    </div>
-                   
-                </div>
-                <div class="container py-4">
-                      {{#if success}}
-                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <span class="alert-icon"><i class="ni ni-like-2"></i></span>
-                <span class="alert-text"><strong>Success!</strong> {{success}}</span>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-              {{/if}}
-                    <form method="POST" action="/adminAccount/update/{{account.id}}">
-                                                    
-                                    <input type="hidden"
-                                           class="form-control" name="_csrf" value="{{csrfToken}}" >
-                                           
-                                    <div class="form-row">
-                                        <div class="col-md-6 form-group">
-                                         <div class="input-group">
-                                           <input id="name" class="form-control"
-                                           required autocomplete="name" autofocus name="name"
-                                           value="{{account.name}}" placeholder="Full Name" type="text">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text"><span class="feather-icon"><i data-feather="user"></i></span></span>
-                                            </div>
-                                        </div>
-                                        </div>
-                                        
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="col-md-6 form-group">
-                                          <select class="form-control custom-select" name="role" id="role" required>
-                                            <option  selected value="{{chkHelper account.role}}">{{chkHelper account.role}}</option>
-                                            <option  value="admin">Admin</option>
-                                            <option  value="student">Student</option>
-                                            <option  value="teacher">Teacher</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-6 form-group">
-                                          <select class="form-control custom-select" name="gender" id="gender" >
-                                            <option  selected value="{{chkHelper account.gender}}">{{chkHelper account.gender}}</option>
-                                            <option value="female">Male</option>
-                                            <option value="male">Female</option>                              
-                                            </select>
-                                        </div>
-                                    </div>
+<!-- Breadcrumb -->
+<nav class="hk-breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb breadcrumb-light bg-transparent">
+        <li class="breadcrumb-item"><a href="#">Accounts</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{account.name}}</li>
+    </ol>
+</nav>
+<!-- /Breadcrumb -->
 
-                                    
-                                    <div class="form-group">
-                                            <div class="input-group">
-                                            <input id="regNo" class="form-control"
+<!-- Container -->
+<div class="container-fluid">
+
+    <!-- Title -->
+    <div class="hk-pg-header">
+        <div class="row w-100">
+            <div class="col-md-6">
+                <h4 class="text-capitalize hk-pg-title"><span class="pg-title-icon"><span class="text-primary feather-icon"><i
+                        data-feather="user"></i></span></span>{{account.name}} Account</h4>
+            </div>
+            <div class="col-md-6 text-right">
+                <a class="btn btn-primary" href="/adminAccounts">Show All Accounts</a>
+            </div>
+        </div>
+    </div>
+    <!-- /Title -->
+
+    <!-- Row -->
+    <div class="row">
+        <div class="col-xl-12">
+            <section class="hk-sec-wrapper">
+                <h5 class="hk-sec-title text-capitalize">Edit {{account.name}} Account Information</h5>
+                <p class="mb-40">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dignissimos
+                    perspiciatis sapiente sunt veniam. Dolorem dolorum ipsam praesentium, quis ratione velit. Asperiores
+                    eaque eos laudantium modi! Nisi odio quasi totam.
+                </p>
+                <div class="row">
+                    <div class="col-sm">
+                        <form method="POST" action="/adminAccount/update/{{account.id}}">
+                            <input type="hidden"
+                                   class="form-control" name="_csrf" value="{{csrfToken}}">
+
+                            <div class="form-row">
+                                <div class="col-md-6 form-group">
+                                    <label for="regNo">Registration Number</label>
+                                    <input id="regNo" class="form-control"
                                            required autocomplete="regNo" autofocus name="regNo"
                                            value="{{account.regNo}}" placeholder="Registration Number" type="text">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text"><span class="feather-icon"><i data-feather="credit-card"></i></span></span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                </div>
+                            </div>
 
-                                    <div class="form-group">
-                                         <div class="input-group">
-                                         <input id="email" class="form-control"
+                            <div class="form-row">
+                                <div class="col-md-6 form-group">
+                                    <label for="name">Name</label>
+                                    <input id="name" class="form-control"
+                                           required autocomplete="name" autofocus name="name"
+                                           value="{{account.name}}" placeholder="Full Name" type="text">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="role">Role</label>
+                                    <select class="form-control custom-select" name="role" id="role" required>
+                                        <option selected value="{{chkHelper account.role}}">{{chkHelper account.role}}
+                                        </option>
+                                        <option value="admin">Admin</option>
+                                        <option value="student">Student</option>
+                                        <option value="teacher">Teacher</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-6 form-group">
+                                    <label for="email">Email Address</label>
+                                    <input id="email" class="form-control"
                                            required autocomplete="email" autofocus name="email"
                                            value="{{account.email}}" placeholder="Email" type="email">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text"><span class="feather-icon"><i data-feather="mail"></i></span></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="form-row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                            <select class="form-control custom-select" name="campus" id="campus" >
-                                            <option  selected value="{{chkHelper account.campus}}">{{chkHelper account.campus}}</option>
-                                            <option value="Karachi">Karachi Campus</option>
-                                            <option value="Islamabad">Islamabad Campus</option>
-                                            <option value="Lahore">Lahore Campus</option>
-                                            </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <select class="form-control custom-select" name="semester" id="semester" >
-                                            <option  selected value="{{chkHelper account.semester}}">{{chkHelper account.semester}}</option>
-                                            <option value="6">Sixth</option>
-                                            <option value="7">Seventh</option>
-                                            <option value="8">Eigth</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                   
-                                    
-                                    <div class="form-row">
-                                        <div class="col-md-6">
-                                            <select class="form-control  custom-select" name="department" id="department" >
-                                            <option  selected value="{{chkHelper account.department}}">{{chkHelper account.department}}</option>
-                                            <option value="CS">Computer Science</option>
-                                            <option value="SE">Software Engineering</option>
-                                            <option value="CE">Computer Engineering</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <select class="form-control  custom-select" name="status" id="status" >
-                                            <option  selected value="{{chkHelper account.status}}">{{chkHelper account.status}}</option>
-                                            <option value="enable">Enable</option>
-                                            <option value="disable">Disable</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <input id="password" type="password"
-                                           placeholder="Password"
-                                           class="form-control" name="password" value="{{account.password}}"
-                                           required autocomplete="current-password">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text"><span class="feather-icon"><i data-feather="lock"></i></span></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <button class="btn btn-primary btn-block" type="submit">Update Account</button>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="gender">Gender</label>
+                                    <select class="form-control custom-select" name="gender" id="gender">
+                                        <option selected value="{{chkHelper account.gender}}">{{chkHelper
+                                                account.gender}}
+                                        </option>
+                                        <option value="female">Male</option>
+                                        <option value="male">Female</option>
+                                    </select>
+                                </div>
+                            </div>
 
-                   </form>
+                            <div class="form-row">
+                                <div class="col-md-6 form-group">
+                                    <label for="campus">Campus</label>
+                                    <select class="form-control custom-select" name="campus" id="campus">
+                                        <option selected value="{{chkHelper account.campus}}">{{chkHelper
+                                                account.campus}}
+                                        </option>
+                                        <option value="Karachi">Karachi Campus</option>
+                                        <option value="Islamabad">Islamabad Campus</option>
+                                        <option value="Lahore">Lahore Campus</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="semester">Semester</label>
+                                    <select class="form-control custom-select" name="semester" id="semester">
+                                        <option selected value="{{chkHelper account.semester}}">{{chkHelper
+                                                account.semester}}
+                                        </option>
+                                        <option value="6">Sixth</option>
+                                        <option value="7">Seventh</option>
+                                        <option value="8">Eigth</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 form-group">
+                                    <label for="department">Department</label>
+                                    <select class="form-control  custom-select" name="department" id="department">
+                                        <option selected value="{{chkHelper account.department}}">{{chkHelper
+                                                account.department}}</option>
+                                        <option value="CS">Computer Science</option>
+                                        <option value="SE">Software Engineering</option>
+                                        <option value="CE">Computer Engineering</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="status">Status</label>
+                                    <select class="form-control  custom-select" name="status" id="status">
+                                        <option selected value="{{chkHelper account.status}}">{{chkHelper
+                                                account.status}}</option>
+                                        <option value="enable">Enable</option>
+                                        <option value="disable">Disable</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <button class="btn btn-outline-orange" type="submit">Update Information</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            </section>
         </div>
     </div>
-      {{> footer }}
-    </div>
+    <!-- /Row -->
+
+</div>
+<!-- /Container -->

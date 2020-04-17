@@ -28005,5 +28005,10 @@ table.dataTable>tbody>tr.child span.dtr-data {
     /* IE11 */
 }
 
+.swal2-confirm{
+    border-color:#603bab !important;
+    background: linear-gradient(45deg, #3650ab, #603bab) !important;
+}
+
 
 /*# sourceMappingURL=style.css.map */

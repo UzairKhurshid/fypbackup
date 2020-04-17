@@ -12,8 +12,17 @@
 
     <!-- Title -->
     <div class="hk-pg-header">
-        <h4 class="hk-pg-title"><span class="pg-title-icon"><span class="feather-icon"><i
-                data-feather="database"></i></span></span>Accounts</h4>
+        <div class="row w-100">
+            <div class="col-md-6">
+                <h4 class="hk-pg-title"><span class="pg-title-icon"><span class="text-primary feather-icon"><i
+                        data-feather="users"></i></span></span>Accounts</h4>
+            </div>
+            <div class="col-md-6 text-right">
+                {{#if adminLogin}}
+                    <a class="btn btn-primary" href="/adminAccount/create">Create New Account</a>
+                {{/if}}
+            </div>
+        </div>
     </div>
     <!-- /Title -->
 
@@ -58,20 +67,19 @@
                                             <td>{{this.name}}</td>
                                             <td>{{this.email}}</td>
                                             <td>{{this.role}}</td>
-                                            <td>{{this.status}}</td>
+                                            <td><span class="badge badge-status-{{this.status}}">{{this.status}}</span></td>
                                             <td>
                                                 <div class="btn-group" role="group"
                                                      aria-label="Basic example">
-                                                    <a style="margin-right: 10px;"
-                                                       class="btn btn-gradient-warning btn-sm"
+                                                    <a style="margin-right:3px;"
+                                                       class="btn-gradient-warning btn-sm"
                                                        href="/adminAccount/update/{{this.id}}">Edit</a>
-                                                    <form method="POST"
+                                                    <form onsubmit="return form_confirm(this);" method="POST"
                                                           action="/adminAccount/delete/{{this.id}}">
                                                         <input type="hidden" name="_csrf"
                                                                value="{{../csrfToken}}"
                                                                class="form-control">
-                                                        <button style="margin-top: 2px;"
-                                                                class="btn btn-gradient-danger btn-xs"
+                                                        <button class="btn btn-gradient-danger btn-sm"
                                                                 type="submit">Delete
                                                         </button>
                                                     </form>
@@ -79,8 +87,33 @@
                                             </td>
                                         </tr>
                                     {{/each}}
+                                    <script>
+                                        function form_confirm(form) {
+                                            Swal.fire({
+                                                title: 'Are you sure?',
+                                                text: "You won't be able to revert this!",
+                                                icon: 'warning',
+                                                showCancelButton: true,
+                                                confirmButtonText: 'Yes, delete it!'
+                                            }).then((result) => {
+                                                if (result.value) {
+                                                    Swal.fire(
+                                                            'Deleted!',
+                                                            'Your file has been deleted.',
+                                                            'success'
+                                                    )
+                                                    return form.submit();
+                                                }
+                                            });
+                                            return false;
+                                        }
+                                    </script>
                                 {{/if}}
                                 </tbody>
+                                <script type="text/javascript">
+                                    $('.badge-status-enable').addClass('badge-success');
+                                    $('.badge-status-disable').addClass('badge-danger');
+                                </script>
                             </table>
                         </div>
                     </div>

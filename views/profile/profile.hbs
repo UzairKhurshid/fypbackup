@@ -88,22 +88,23 @@
 
                                             <div class="row">
                                                 <div class="col-md-6 form-group">
-                                                    <label for="firstName">Email</label>
+                                                    <label for="firstName">New Password</label>
                                                     <input id="password" class="form-control" autocomplete="password"
                                                            autofocus name="password" placeholder="Enter new Password"
                                                            type="text">
+                                                    <small class="form-text badge badge-soft-warning text-muted">Enter your new password if you want to change it otherwise leave this field blank.</small>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label for="firstName">Campus</label>
                                                     <select class="form-control custom-select" name="campus"
                                                             id="campus">
-                                                        <option selected
-                                                                value="{{chkHelper account.campus}}">{{chkHelper
-                                                                account.campus}}</option>
                                                         <option value="Karachi">Karachi Campus</option>
                                                         <option value="Islamabad">Islamabad Campus</option>
                                                         <option value="Lahore">Lahore Campus</option>
                                                     </select>
+                                                    <script type="text/javascript">
+                                                        $('#campus option[value="{{account.campus}}"]').prop('selected', true)
+                                                    </script>
                                                 </div>
                                             </div>
 
@@ -112,30 +113,30 @@
                                                     <label for="firstName">Semester</label>
                                                     <select class="form-control custom-select" name="semester"
                                                             id="semester">
-                                                        <option selected
-                                                                value="{{chkHelper account.semester}}">{{chkHelper
-                                                                account.semester}}</option>
                                                         <option value="6">Sixth</option>
                                                         <option value="7">Seventh</option>
                                                         <option value="8">Eigth</option>
                                                     </select>
+                                                    <script type="text/javascript">
+                                                        $('#semester option[value="{{account.semester}}"]').prop('selected', true)
+                                                    </script>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label for="firstName">Departments</label>
                                                     <select class="form-control  custom-select" name="department"
                                                             id="department">
-                                                        <option selected
-                                                                value="{{chkHelper account.department}}">{{chkHelper
-                                                                account.department}}</option>
                                                         <option value="CS">Computer Science</option>
                                                         <option value="SE">Software Engineering</option>
                                                         <option value="CE">Computer Engineering</option>
                                                     </select>
+                                                    <script type="text/javascript">
+                                                        $('#department option[value="{{account.department}}"]').prop('selected', true)
+                                                    </script>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6 form-group">
-                                                    <button type="submit" class="btn btn-gradient-primary">Update
+                                                    <button type="submit" class="btn btn-outline-orange">Update
                                                         Information
                                                     </button>
                                                 </div>

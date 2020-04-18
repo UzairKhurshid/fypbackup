@@ -7,12 +7,12 @@
     </a>
     <div class="collapse navbar-collapse" id="navbarCollapseAlt">
         <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="/dashboard">
+                    Dashboard
+                </a>
+            </li>
             {{#if adminLogin}}
-                <li class="nav-item active">
-                    <a class="nav-link" href="/dashboard">
-                        Dashboard
-                    </a>
-                </li>
                 <li class="nav-item dropdown show-on-hover active">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
@@ -35,21 +35,20 @@
                     </div>
                 </li>
             {{else if studentLogin}}
-                <li class="nav-item dropdown show-on-hover active">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        Dashboard
-                    </a>
-                    <div class="dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                        <a class="dropdown-item" href="/projects">Projects</a>
-                        <a class="dropdown-item" href="/proposed/allProposedProjects">Proposed</a>
-                        <a class="dropdown-item" href="/selfProposed">Self Proposed</a>
-                        <a class="dropdown-item" href="/projects/requests">Requests</a>
-                    </div>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/projects">Projects</a>
                 </li>
-                <li class="nav-item">
-                    <a class="dropdown-item" href="/myProject">My Project <span
-                            class="badge badge-success badge-sm badge-pill ml-10"> 1 </span> </a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/proposed/allProposedProjects">Proposed</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/selfProposed">Self Proposed</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/projects/requests">Requests</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/myProject">My Project</a>
                 </li>
             {{else if teacherLogin}}
                 <li class="nav-item dropdown show-on-hover active">

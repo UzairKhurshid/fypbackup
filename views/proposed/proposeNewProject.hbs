@@ -1,164 +1,147 @@
-    {{!-- Header --}}
-    <div class="header bg-primary pb-6">
-      <div class="container-fluid">
-        <div class="header-body">
-          <div class="row align-items-center py-4">
-            <div class="col-lg-6 col-7">
-              <h6 class="h2 text-white d-inline-block mb-0">Project</h6>
-              <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                  <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="#">New</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Propose</li>
-                </ol>
-              </nav>
-            </div>
-            <div class="col-lg-6 col-5 text-right">
-              <a href="#" class="btn btn-sm btn-neutral">New</a>
-              <a href="#" class="btn btn-sm btn-neutral">Filters</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-           <!-- Page content -->
-    <div class="container-fluid mt--6">
-    <div class="row">
-        <div class="col">
-            <div class="card">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-6">
-                             <h3 class="mb-0">Propose new Project</h3>
-                    <p class="text-sm mb-0">
-                        
-                    </p>
-                        </div>
-                        <div class="col-6 text-md-right">
-                            <a class="btn btn-primary" href="/selfProposed">Show All proposed Projects</a>
-                        </div>
-                    </div>
-                   
-                </div>
-                <div class="container py-4">
-                    <form method="POST" action="/proposed/proposeNewProject">
-                    <div class="row">
-                        <div class="col-md-6">
-                                <div class="form-group">
-                                <label for="ownerName" class="form-control-label" >Your Name</label>
-                                <input required type="text"   value={{ownerName}} class="form-control" name="ownerName" id="ownerName" readonly>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                <label for="ownerEmail" class="form-control-label" >Your Email</label>
-                                <input required type="text"  value={{ownerEmail}} class="form-control" name="ownerEmail" id="ownerEmail" readonly>
-                                </div>
-                        </div>
-                    </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                <input required type="hidden"  value={{ownerRole}} class="form-control" name="ownerRole" id="ownerRole" readonly>
-                                </div>
-                            </div>   
-                    </div>
+<!-- Breadcrumb -->
+<nav class="hk-breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb breadcrumb-light bg-transparent">
+        <li class="breadcrumb-item"><a href="#">Projects</a></li>
+        <li class="breadcrumb-item active" aria-current="page">All</li>
+    </ol>
+</nav>
+<!-- /Breadcrumb -->
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                               <label for="Name" class="form-control-label" >Name</label>
-                               <input required type="text" placeholder="Enter Project Name " class="form-control" name="name" id="name">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="language" class="form-control-label" >Language</label>
-                               <select required class="custom-select" name="language" id="language">
-                                   <option disabled selected value="">Select Language</option>
-                                   <option value="C">C</option>
-                                   <option value="C#">C#</option>
-                                   <option value="C++">C++</option>
-                                   <option value="Java">Java</option>
-                                   <option value="Node js">Node js</option>
-                                   <option value="php">Php</option>
-                               </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="IDE" class="form-control-label" >IDE</label>
-                               <select required class="custom-select" name="IDE" id="IDE">
-                                   <option disabled selected value="">Select IDE</option>
-                                   <option value="Dev++">Dev++</option>
-                                   <option value="NetBeans">NetBeans</option>
-                                   <option value="Visual Studio">Visual Studio</option>
-                                   <option value="Visual Studio Code">Visual Studio Code</option>
-                                   <option value="Android Studio">Android Studio</option>
-                               </select>
-                            </div>
-                        </div>
-                    </div>
-                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="type" class="form-control-label" >Type</label>
-                                 <select required class="custom-select" name="type" id="type">
-                                   <option disabled selected value="">Select Type</option>
-                                   <option value="Desktop Application">Desktop Application</option>
-                                   <option value="Mobile Application">Mobile Application</option>
-                                   <option value="Web Application">Web Application</option>
-                               </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="department" class="form-control-label" >Department</label>
-                                 <select required  class="custom-select" name="department" id="department">
-                                   <option disabled selected value="">Select Department</option>
-                                   <option value="cs">Computer Science</option>
-                                   <option value="se">Software Engineering</option>
-                               </select>
-                            </div>
-                        </div>
-                    </div>
-                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="semester" class="form-control-label" >Semester</label>
-                                 <select required class="custom-select" name="semester" id="semester">
-                                   <option disabled selected value="">Select Semester</option>
-                                   <option value="6">Sixth Semester</option>
-                                   <option value="7">Seventh Semester</option>
-                               </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="description" class="form-control-label" >Description</label>
-                                   <input required placeholder="Enter Description About Project" type="text" name="description" id="description" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                   <input  type="number" min="2010" max="2099" name="year" required class="form-control" placeholder="select year of project">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                   <input  type="hidden" name="_csrf" value="{{csrfToken}}" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Propose</button>
-                   </form>
-                </div>
+<!-- Container -->
+<div class="container-fluid">
+
+    <!-- Title -->
+    <div class="hk-pg-header">
+        <div class="row w-100">
+            <div class="col-md-6">
+                <h4 class="hk-pg-title"><span class="pg-title-icon"><span class="feather-icon text-primary"><i
+                        data-feather="file"></i></span></span>Proposed Projects</h4>
+            </div>
+            <div class="col-md-6 pr-0 text-md-right">
+                <a class="btn btn btn-info text-capitalize" href="/selfProposed">{{accountName}} Proposed Projects</a>
             </div>
         </div>
     </div>
-      {{> footer }}
+    <!-- /Title -->
+
+    <!-- Row -->
+    <div class="row">
+        <div class="col-xl-12">
+            <section class="hk-sec-wrapper">
+                <h5 class="hk-sec-title">Proposed New Projects</h5>
+                <p class="mb-40">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dignissimos
+                    perspiciatis sapiente sunt veniam. Dolorem dolorum ipsam praesentium, quis ratione velit. Asperiores
+                    eaque eos laudantium modi! Nisi odio quasi totam.
+                </p>
+                <div class="row">
+                    <div class="col-sm">
+                        <form method="POST" action="/proposed/proposeNewProject">
+                            <input required type="hidden" value={{ownerRole}} class="form-control" name="ownerRole"
+                                   id="ownerRole" readonly>
+                            <input required type="hidden" value={{ownerName}} class="form-control" name="ownerName"
+                                   id="ownerName" readonly>
+                            <input required type="hidden" value={{ownerEmail}} class="form-control" name="ownerEmail"
+                                   id="ownerEmail" readonly>
+                            <input required type="hidden" value={{ownerRole}} class="form-control" name="ownerRole"
+                                   id="ownerRole" readonly>
+                            <input type="hidden" name="_csrf" value="{{csrfToken}}" class="form-control">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Name" class="form-control-label">Name</label>
+                                        <input required type="text" placeholder="Enter Project Name "
+                                               class="form-control" name="name" id="name">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="language" class="form-control-label">Language</label>
+                                        <select required class="custom-select" name="language" id="language">
+                                            <option disabled selected value="">Select Language</option>
+                                            <option value="C">C</option>
+                                            <option value="C#">C#</option>
+                                            <option value="C++">C++</option>
+                                            <option value="Java">Java</option>
+                                            <option value="Node js">Node js</option>
+                                            <option value="php">Php</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="IDE" class="form-control-label">IDE</label>
+                                        <select required class="custom-select" name="IDE" id="IDE">
+                                            <option disabled selected value="">Select IDE</option>
+                                            <option value="Dev++">Dev++</option>
+                                            <option value="NetBeans">NetBeans</option>
+                                            <option value="Visual Studio">Visual Studio</option>
+                                            <option value="Visual Studio Code">Visual Studio Code</option>
+                                            <option value="Android Studio">Android Studio</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="type" class="form-control-label">Type</label>
+                                        <select required class="custom-select" name="type" id="type">
+                                            <option disabled selected value="">Select Type</option>
+                                            <option value="Desktop Application">Desktop Application</option>
+                                            <option value="Mobile Application">Mobile Application</option>
+                                            <option value="Web Application">Web Application</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="department" class="form-control-label">Department</label>
+                                        <select required class="custom-select" name="department" id="department">
+                                            <option disabled selected value="">Select Department</option>
+                                            <option value="cs">Computer Science</option>
+                                            <option value="se">Software Engineering</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="semester" class="form-control-label">Semester</label>
+                                        <select required class="custom-select" name="semester" id="semester">
+                                            <option disabled selected value="">Select Semester</option>
+                                            <option value="6">Sixth Semester</option>
+                                            <option value="7">Seventh Semester</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="year" class="form-control-label">Year Of Project</label>
+                                        <input type="number" min="2010" max="2099" name="year" required
+                                               class="form-control" placeholder="select year of project">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="description" class="form-control-label">Description</label>
+                                        <textarea required placeholder="Enter Description About Project"
+                                                 rows="5" name="description" id="description" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-outline-success">Propose Project</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
     </div>
+    <!-- /Row -->
+</div>
+<!-- /Container -->

@@ -1,131 +1,127 @@
-   {{!-- Header --}}
-    <div class="header bg-primary pb-6">
-      <div class="container-fluid">
-        <div class="header-body">
-          <div class="row align-items-center py-4">
-            <div class="col-lg-6 col-7">
-              <h6 class="h2 text-white d-inline-block mb-0">Default</h6>
-              <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                  <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="#">Proposed Projecrs</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Info</li>
-                </ol>
-              </nav>
+<!-- Breadcrumb -->
+<nav class="hk-breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb breadcrumb-light bg-transparent">
+        <li class="breadcrumb-item"><a href="#">Projects</a></li>
+        <li class="breadcrumb-item active" aria-current="page">All</li>
+    </ol>
+</nav>
+<!-- /Breadcrumb -->
+
+<!-- Container -->
+<div class="container-fluid">
+
+    <!-- Title -->
+    <div class="hk-pg-header">
+        <div class="row w-100">
+            <div class="col-md-6">
+                <h4 class="hk-pg-title"><span class="pg-title-icon"><span class="feather-icon text-primary"><i
+                        data-feather="file"></i></span></span>Proposed Projects</h4>
             </div>
-            <div class="col-lg-6 col-5 text-right">
-              <a href="#" class="btn btn-sm btn-neutral">New</a>
-              <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+            <div class="col-md-6 pr-0 text-md-right">
+                {{#if adminLogin}}
+                    <a class="btn btn-sm btn-primary" href="/projects">All Projects</a>
+                    <a class="btn btn-sm btn-info" href="/admin/proposedProjects">Proposed</a>
+                    <a class="btn btn-sm btn-success" href="/projects/create">Create New Project</a>
+                {{/if}}
             </div>
-          </div>
         </div>
-      </div>
     </div>
-    <!-- Page content -->
-    <div class="container-fluid mt--6">
+    <!-- /Title -->
+
+    <!-- Row -->
     <div class="row">
-        <div class="col">
-            <div class="card">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p class="text-sm mb-0">
-                                Showing all the Projects Proposed By Teaachers.
-                            </p>
-                        </div>
-                        <div class="col-md-6 text-right">
-                            <a class="btn btn-primary" href="/proposed/proposeNewProject">Propose New Project</a>
+        <div class="col-xl-12">
+            <section class="hk-sec-wrapper">
+                <h5 class="hk-sec-title">Proposed Projects</h5>
+                <p class="mb-40">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dignissimos
+                    perspiciatis sapiente sunt veniam. Dolorem dolorum ipsam praesentium, quis ratione velit. Asperiores
+                    eaque eos laudantium modi! Nisi odio quasi totam.
+                </p>
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="table-wrap">
+                            {{#if success}}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                                    <span class="alert-text"><strong>Success!</strong> {{success}}</span>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                            {{/if}}
+                            <table id="datable_1" class="table table-hover w-100 display pb-30">
+                                <thead>
+                                <tr>
+                                    <th>Name of Project</th>
+                                    <th>year</th>
+                                    <th>proposed By</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {{#if studentLogin}}
+                                    {{#if project}}
+                                        {{#each project}}
+                                            <!-- <th class="text-center" colspan="6">Show All Proposed Projects Here.</th> -->
+                                            <tr>
+                                                <td class="text-capitalize">{{this.name}}</td>
+                                                <td>{{this.year}}</td>
+                                                <td class="text-capitalize">{{this.ownerName}}</td>
+                                                <td class="d-flex">
+                                                    <a class="btn btn-sm btn-gradient-info mr-5" href="/viewproject/{{this.id}}">View Project</a>
+                                                    <form  onsubmit="return form_confirm(this);" method="POST" action="/projects/requestProject/{{this.id}}">
+                                                        <input type="hidden" name="ownerEmail" value="{{this.ownerEmail}}">
+                                                        <input type="hidden" name="_csrf" value="{{../csrfToken}}">
+                                                        <button class="btn btn-sm btn-gradient-success" type="submit">Request Project</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        {{/each}}
+                                        <script>
+                                            function form_confirm(form) {
+                                                Swal.fire({
+                                                    title: 'Are you sure?',
+                                                    text: "You won't be able to revert this!",
+                                                    icon: 'warning',
+                                                    showCancelButton: true,
+                                                    confirmButtonText: 'Yes, Request it!'
+                                                }).then((result) => {
+                                                    if (result.value) {
+                                                        Swal.fire(
+                                                                'Requested!',
+                                                                'Project has been requested.',
+                                                                'success'
+                                                        )
+                                                        return form.submit();
+                                                    }
+                                                });
+                                                return false;
+                                            }
+                                        </script>
+                                    {{/if}}
+                                {{else}}
+                                    {{#if project}}
+                                        {{#each project}}
+                                            <!-- <th class="text-center" colspan="6">Show All Proposed Projects Here.</th> -->
+                                            <tr>
+                                                <td class="text-capitalize">{{this.name}}</td>
+                                                <td>{{this.year}}</td>
+                                                <td class="text-capitalize">{{this.ownerName}}</td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-gradient-info" href="/viewproject/{{this.id}}">View Project</a>
+                                                </td>
+                                            </tr>
+                                        {{/each}}
+                                    {{/if}}
+                                {{/if}}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-                <div class="table-responsive py-4">
-                  {{#if success}}
-                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <span class="alert-icon"><i class="ni ni-like-2"></i></span>
-                <span class="alert-text"><strong>Success!</strong> {{success}}</span>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-              {{/if}}
-                    <table class="table dataTable align-items-center table-hover" id="datatable-basic">
-                        <thead class="thead-light">
-                        <tr>
-                            <th>Name of Project</th>
-                            <th>year</th>
-                            <th>proposed By</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                        <tbody> 
-                          <input type="hidden" name="_csrf" value="{{csrfToken}}">
-                          {{#if studentLogin}}
-                            {{#if project}} 
-                                {{#each project}}
-                                    <!-- <th class="text-center" colspan="6">Show All Proposed Projects Here.</th> --> 
-                                    <tr>
-                                    <th>{{this.name}}</th>
-                                    <th>{{this.year}}</th>
-                                    <th>{{this.ownerName}}</th>
-                                    <th>
-                                      <a class="btn btn-sm btn-primary" href="/viewproject/{{this.id}}">View Project</a>
-                                       <form method="POST" action="/projects/requestProject/{{this.id}}">
-                                          <input type="hidden" name="ownerEmail" value="{{this.ownerEmail}}">
-                                          <input type="hidden" name="_csrf" value="{{../csrfToken}}">
-                                          <button class="btn btn-sm btn-primary" type="submit">Request Project</button>
-                                      </form>
-                                      
-                                      </th>
-                                    </tr>
-                                {{/each}}
-                            {{/if}}
-                          {{else}}
-                              {{#if project}} 
-                                {{#each project}}
-                                    <!-- <th class="text-center" colspan="6">Show All Proposed Projects Here.</th> --> 
-                                    <tr>
-                                    <th>{{this.name}}</th>
-                                    <th>{{this.year}}</th>
-                                    <th>{{this.ownerName}}</th>
-                                    <th>
-                                      <a class="btn btn-sm btn-primary" href="/viewproject/{{this.id}}">View Project</a>
-                                      </th>
-                                    </tr>
-                                {{/each}}
-                            {{/if}}
-                          {{/if}}
-                        </tbody>
-                    </table>
-                    <input type="hidden" id="page" value="{{page}}">
-                    <input type="hidden" id="count" value="{{count}}">
-                    <div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="datable_1_info" role="status" aria-live="polite">Showing 1 to 5 of {{count}} entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="datable_1_paginate"><ul class="pagination" id="pagination"><li class="paginate_button page-item previous " id="datable_1_previous"><a href="/proposed/allProposedProjects?limit=5&skip=5&page={{prevPageHelper page}}" aria-controls="datable_1" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li id="1" class="paginate_button page-item active"><a href="/proposed/allProposedProjects?limit=5&skip=0&page=1" aria-controls="datable_1" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li id="2" class="paginate_button page-item "><a href="/proposed/allProposedProjects?limit=5&skip=5&page=2" aria-controls="datable_1" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li id="3" class="paginate_button page-item "><a href="/proposed/allProposedProjects?limit=5&skip=5&page=3" aria-controls="datable_1" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li id="4" class="paginate_button page-item "><a href="/proposed/allProposedProjects?limit=5&skip=5&page=4" aria-controls="datable_1" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li id="5" class="paginate_button page-item "><a href="/proposed/allProposedProjects?limit=5&skip=5&page=5" aria-controls="datable_1" data-dt-idx="5" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item next" id="datable_1_next"><a href="/proposed/allProposedProjects?limit=5&skip=5&page={{nextPageHelper page}}" aria-controls="datable_1" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li></ul></div></div></div></div>
-                    </div>
-            </div>
+            </section>
         </div>
-        <script>
-              document.addEventListener('DOMContentLoaded',function(){
-                
-                if(parseInt(document.getElementById('page').value) >1){}
-                else{
-                  document.getElementById('pagination').children[0].style.display='none';
-                }
-                
-                  if((parseInt(document.getElementById('page').value)*5)<parseInt(document.getElementById('count').value)){}
-                else{
-                  document.getElementById('pagination').children[6].style.display='none';
-                }
-
-              if(parseInt(document.getElementById('page'))==1){document.getElementById('1').className="active"}
-              else if(parseInt(document.getElementById('page'))==2){document.getElementById('2').className="active"}
-              else if(parseInt(document.getElementById('page'))==3){document.getElementById('3').className="active"}
-              else if(parseInt(document.getElementById('page'))==4){document.getElementById('4').className="active"}
-              else if(parseInt(document.getElementById('page'))==5){document.getElementById('5').className="active"}
-                
-
-                
-                
-              })
-            </script>
     </div>
-      {{> footer }}
-    </div>
+    <!-- /Row -->
+</div>
+<!-- /Container -->

@@ -68,7 +68,12 @@ router.post('/clearAllNotifications', auth, async(req, res) => {
     const role = req.session.role
     const email = req.session.email
     try {
-        await Notification.deleteMany({ ownerEmail: email })
+        if (role == 'admin') {
+            await Notification.deleteMany({ role: "admin" })
+        } else {
+            await Notification.deleteMany({ ownerEmail: email })
+        }
+
 
         req.flash('error', 'Notifications Cleared Succesfully')
         res.redirect('/dashboard')

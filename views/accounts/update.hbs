@@ -47,7 +47,7 @@
                                            value="{{account.regNo}}" placeholder="Registration Number" type="text">
                                 </div>
                             </div>
-
+ 
                             <div class="form-row">
                                 <div class="col-md-6 form-group">
                                     <label for="name">Name</label>
@@ -56,14 +56,13 @@
                                            value="{{account.name}}" placeholder="Full Name" type="text">
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <label for="role">Role</label>
-                                    <select class="form-control custom-select" name="role" id="role" required>
-                                        <option value="admin">Admin</option>
-                                        <option value="student">Student</option>
-                                        <option value="teacher">Teacher</option>
+                                    <label for="gender">Gender</label>
+                                    <select class="form-control custom-select" name="gender" id="gender">
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
                                     </select>
                                     <script type="text/javascript">
-                                        $('#role option[value="{{account.role}}"]').prop('selected', true)
+                                        $('#gender option[value="{{account.gender}}"]').prop('selected', true)
                                     </script>
                                 </div>
                             </div>
@@ -76,13 +75,14 @@
                                            value="{{account.email}}" placeholder="Email" type="email">
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <label for="gender">Gender</label>
-                                    <select class="form-control custom-select" name="gender" id="gender">
-                                        <option value="female">Male</option>
-                                        <option value="male">Female</option>
+                                    <label for="semester">Semester</label>
+                                    <select class="form-control custom-select" name="semester" id="semester">
+                                        <option value="6">Sixth</option>
+                                        <option value="7">Seventh</option>
+                                        <option value="8">Eigth</option>
                                     </select>
                                     <script type="text/javascript">
-                                        $('#gender option[value="{{account.gender}}"]').prop('selected', true)
+                                        $('#semester option[value="{{account.semester}}"]').prop('selected', true)
                                     </script>
                                 </div>
                             </div>
@@ -100,14 +100,15 @@
                                     </script>
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <label for="semester">Semester</label>
-                                    <select class="form-control custom-select" name="semester" id="semester">
-                                        <option value="6">Sixth</option>
-                                        <option value="7">Seventh</option>
-                                        <option value="8">Eigth</option>
+                                    <label for="status">Status</label>
+                                    <select class="form-control  custom-select" name="status" id="status">
+                                        <option selected value="{{chkHelper account.status}}">{{chkHelper
+                                                account.status}}</option>
+                                        <option value="enable">Enable</option>
+                                        <option value="disable">Disable</option>
                                     </select>
                                     <script type="text/javascript">
-                                        $('#semester option[value="{{account.semester}}"]').prop('selected', true)
+                                        $('#status option[value="{{account.status}}"]').prop('selected', true)
                                     </script>
                                 </div>
                             </div>
@@ -125,18 +126,7 @@
                                         $('#department option[value="{{account.department}}"]').prop('selected', true)
                                     </script>
                                 </div>
-                                <div class="col-md-6 form-group">
-                                    <label for="status">Status</label>
-                                    <select class="form-control  custom-select" name="status" id="status">
-                                        <option selected value="{{chkHelper account.status}}">{{chkHelper
-                                                account.status}}</option>
-                                        <option value="enable">Enable</option>
-                                        <option value="disable">Disable</option>
-                                    </select>
-                                    <script type="text/javascript">
-                                        $('#status option[value="{{account.status}}"]').prop('selected', true)
-                                    </script>
-                                </div>
+                                
                             </div>
                             <div class="form-row">
                                 <div class="form-group">

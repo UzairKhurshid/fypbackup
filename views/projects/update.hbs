@@ -7,7 +7,7 @@
     </ol>
 </nav>
 <!-- /Breadcrumb -->
-
+ 
 <!-- Container -->
 <div class="container-fluid">
 
@@ -62,17 +62,34 @@
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="language" class="form-control-label">Language</label>
-                                        <input value="{{project.language}}" required type="text"
-                                              name="language" id="language" class="form-control"  >
-                                    </div>
+                                    <label for="gender">Language</label>
+                                        <select required class="form-control custom-select" name="language" id="language">
+                                            <option disabled selected value="">Select Language</option>
+                                            <option value="C">C</option>
+                                            <option value="C#">C#</option>
+                                            <option value="C++">C++</option>
+                                            <option value="Java">Java</option>
+                                            <option value="Node js">Node js</option>
+                                            <option value="php">Php</option>
+                                        </select>
+                                        <script type="text/javascript">
+                                        $('#language option[value="{{project.language}}"]').prop('selected', true)
+                                        </script>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="IDE" class="form-control-label">Integrated Development Environment </label>
-                                        <input name="IDE" value="{{project.IDE}}" required type="text" id="IDE"
-                                               class="form-control"  >
+                                        <select required class="form-control custom-select" name="IDE" id="IDE">
+                                            <option disabled selected value="">Select IDE</option>
+                                            <option value="Dev++">Dev++</option>
+                                            <option value="NetBeans">NetBeans</option>
+                                            <option value="Visual Studio">Visual Studio</option>
+                                            <option value="Visual Studio Code">Visual Studio Code</option>
+                                            <option value="Android Studio">Android Studio</option>
+                                        </select>
+                                        <script type="text/javascript">
+                                        $('#IDE option[value="{{project.IDE}}"]').prop('selected', true)
+                                        </script>
                                     </div>
                                 </div>
                             </div>
@@ -81,15 +98,28 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="type" class="form-control-label">Type</label>
-                                        <input name="type" value="{{project.type}}" required type="text"  id="type"
-                                               class="form-control"  >
+                                        <select required class="form-control custom-select" name="type" id="type">
+                                            <option disabled selected value="">Select Type</option>
+                                            <option value="Desktop Application">Desktop Application</option>
+                                            <option value="Mobile Application">Mobile Application</option>
+                                            <option value="Web Application">Web Application</option>
+                                        </select>
+                                        <script type="text/javascript">
+                                        $('#type option[value="{{project.type}}"]').prop('selected', true)
+                                        </script>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="department" class="form-control-label">Department</label>
-                                        <input name="department" value="{{project.department}}" required type="text"
-                                               id="department" class="form-control"  >
+                                        <select required  class="form-control custom-select" name="department" id="department">
+                                            <option disabled selected value="">Select Department</option>
+                                            <option value="cs">Computer Science</option>
+                                            <option value="se">Software Engineering</option>
+                                        </select>
+                                        <script type="text/javascript">
+                                        $('#department option[value="{{project.department}}"]').prop('selected', true)
+                                        </script>
                                     </div>
                                 </div>
                             </div>
@@ -98,15 +128,21 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="semester" class="form-control-label">Semester</label>
-                                        <input name="semester" value="{{project.semester}}" required type="text"
-                                               id="semester" class="form-control"  >
+                                        <select required class="form-control custom-select" name="semester" id="semester">
+                                            <option disabled selected value="">Select Semester</option>
+                                            <option value="6">Sixth Semester</option>
+                                            <option value="7">Seventh Semester</option>
+                                        </select>
+                                        <script type="text/javascript">
+                                        $('#semester option[value="{{project.semester}}"]').prop('selected', true)
+                                        </script>
                                     </div>
 
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="year" class="form-control-label" >Year</label>
-                                        <input name="year"  value="{{project.year}}" required placeholder="Enter year of Project" type="text"  id="year" class="form-control"  >
+                                        <input name="year"  value="{{project.year}}" required placeholder="Enter year of Project" type="number"  id="year" class="form-control"  >
                                     </div>
                                 </div>
                             </div>

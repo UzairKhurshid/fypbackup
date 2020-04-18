@@ -1,126 +1,142 @@
- <nav class="navbar navbar-expand-xl navbar-light fixed-top hk-navbar hk-navbar-alt">
-            <a class="navbar-toggle-btn nav-link-hover navbar-toggler" href="javascript:void(0);" data-toggle="collapse" data-target="#navbarCollapseAlt" aria-controls="navbarCollapseAlt" aria-expanded="false" aria-label="Toggle navigation"><span class="feather-icon"><i data-feather="menu"></i></span></a>
-            <a class="navbar-brand" href="/dashboard">
-                <img class="brand-img d-inline-block align-top" src="/dist/img/logo-light.png" alt="brand" />
+<nav class="navbar navbar-expand-xl navbar-light fixed-top hk-navbar hk-navbar-alt">
+    <a class="navbar-toggle-btn nav-link-hover navbar-toggler" href="javascript:void(0);" data-toggle="collapse"
+       data-target="#navbarCollapseAlt" aria-controls="navbarCollapseAlt" aria-expanded="false"
+       aria-label="Toggle navigation"><span class="feather-icon"><i data-feather="menu"></i></span></a>
+    <a class="navbar-brand" href="/dashboard">
+        <img class="brand-img d-inline-block align-top" src="/dist/img/logo-light.png" alt="brand"/>
+    </a>
+    <div class="collapse navbar-collapse" id="navbarCollapseAlt">
+        <ul class="navbar-nav">
+            {{#if adminLogin}}
+                <li class="nav-item active">
+                    <a class="nav-link" href="/dashboard">
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item dropdown show-on-hover active">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Projects
+                    </a>
+                    <div class="dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                        <a class="dropdown-item" href="/projects">Show All Project</a>
+                        <a class="dropdown-item" href="/admin/proposedProjects">Show All Proposed Project</a>
+                        <a class="dropdown-item" href="/projects/create">Create New Project</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown show-on-hover active">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Accounts
+                    </a>
+                    <div class="dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                        <a class="dropdown-item" href="/adminAccounts">Show All Accounts</a>
+                        <a class="dropdown-item" href="/adminAccount/create">Create New Account</a>
+                    </div>
+                </li>
+            {{else if studentLogin}}
+                <li class="nav-item dropdown show-on-hover active">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Dashboard
+                    </a>
+                    <div class="dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                        <a class="dropdown-item" href="/projects">Projects</a>
+                        <a class="dropdown-item" href="/proposed/allProposedProjects">Proposed</a>
+                        <a class="dropdown-item" href="/selfProposed">Self Proposed</a>
+                        <a class="dropdown-item" href="/projects/requests">Requests</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="dropdown-item" href="/myProject">My Project <span
+                            class="badge badge-success badge-sm badge-pill ml-10"> 1 </span> </a>
+                </li>
+            {{else if teacherLogin}}
+                <li class="nav-item dropdown show-on-hover active">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Dashboard
+                    </a>
+                    <div class="dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                        <a class="dropdown-item" href="/projects">Projects</a>
+                        <a class="dropdown-item" href="/proposed/allProposedProjects">Proposed Projects</a>
+                        <a class="dropdown-item" href="/selfProposed">Self Proposed</a>
+                        <a class="dropdown-item" href="/projects/requests">Requests</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="dropdown-item" href="/supervising">Supervising <span style="font-size: 13 px;"
+                                                                                   class="badge badge-success badge-sm badge-pill ml-10">{{supervisingCount}}</span></a>
+                </li>
+            {{/if}}
+        </ul>
+    </div>
+    <ul class="navbar-nav hk-navbar-content">
+        <li class="nav-item dropdown dropdown-authentication">
+            <a class="nav-link dropdown-toggle no-caret" href="#" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+                <div class="media">
+                    <div class="media-img-wrap">
+                        <div class="avatar">
+                            <img src="/dist/img/notification.png" alt="user" class="avatar-img rounded-circle">
+                            <span style="top: -24px !important;" class="badge">{{notificationCount}}</span>
+                        </div>
+                    </div>
+                </div>
+
             </a>
-            <div class="collapse navbar-collapse" id="navbarCollapseAlt">
-                <ul class="navbar-nav">
-                    
-                    {{#if adminLogin}}
-                    <li class="nav-item dropdown show-on-hover active">
-                        <a class="nav-link dropdown-toggle" href="/dashboard" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Dashboard
-							</a>
-                        <div class="dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-							<a class="dropdown-item" href="/projects">Projects</a>
-							<a class="dropdown-item" href="/adminAccounts">Accounts</a>
-							<a class="dropdown-item" href="dashboard4.html">classic</a>
-							<a class="dropdown-item" href="dashboard5.html">Analytics</a>
-                        </div>
-                    </li>
-                    {{else if studentLogin}}
-                         <li class="nav-item dropdown show-on-hover active">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Dashboard
-							</a>
-                        <div class="dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-							<a class="dropdown-item" href="/projects">Projects</a>
-							<a class="dropdown-item" href="/proposed/allProposedProjects">Proposed</a>
-							<a class="dropdown-item" href="/selfProposed">Self Proposed</a>
-                            <a class="dropdown-item" href="/projects/requests">Requests</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="dropdown-item" href="/myProject">My Project <span class="badge badge-success badge-sm badge-pill ml-10"> 1 </span> </a>
-                        </li>
-                    {{else if teacherLogin}}
-                        <li class="nav-item dropdown show-on-hover active">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Dashboard
-							</a>
-                        <div class="dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-							<a class="dropdown-item" href="/projects">Projects</a>
-							<a class="dropdown-item" href="/proposed/allProposedProjects">Proposed Projects</a>
-							<a class="dropdown-item" href="/selfProposed">Self Proposed</a>
-                            <a class="dropdown-item" href="/projects/requests">Requests</a>
-                            </div>
-                        </li>
-                    <li class="nav-item">
-                        <a class="dropdown-item" href="/supervising">Supervising <span style="font-size: 13 px;" class="badge badge-success badge-sm badge-pill ml-10">{{supervisingCount}}</span></a>
-                    </li>
-                    {{/if}}
-                    <li class="nav-item">
-                        <a class="nav-link" href="documentation.html" >Documentation</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Log<span class="badge badge-success badge-sm badge-pill ml-10">v 1.0</span></a>
-                    </li>
-                </ul>
+            <div class="dropdown-menu dropdown-menu-right" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
+                {{#if notification}}
+                    {{#each notification}}
+                        <a style="pointer-events: none; cursor: default;" class="dropdown-item" href="/dashboard"><i
+                                class="dropdown-icon zmdi zmdi-notifications-active"></i><span>{{this.txt}}</span></a>
+                    {{/each}}
+                {{else}}
+                    <label>No New Notification</label>
+                {{/if}}
+                <div class="dropdown-divider"></div>
+                <form method="POST" action="/clearAllNotifications">
+                    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                    <button style="margin-top: 20px;" id="btnBell" class="btn-block btn-primary">Clear All</button>
+                </form>
             </div>
-            <ul class="navbar-nav hk-navbar-content">  
-                <li class="nav-item dropdown dropdown-authentication">
-                    <a class="nav-link dropdown-toggle no-caret" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <div class="media">
-                            <div class="media-img-wrap">
-                                <div class="avatar">
-                                    <img src="/dist/img/notification.png" alt="user" class="avatar-img rounded-circle">
-                                    <span style="top: -24px !important;" class="badge">{{notificationCount}}</span>
-                                </div>
-                            </div>
+        </li>
+
+
+        <li class="nav-item dropdown dropdown-authentication">
+            <a class="nav-link dropdown-toggle no-caret" href="#" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+                <div class="media">
+                    <div class="media-img-wrap">
+                        <div class="avatar">
+                            <img src="/dist/img/avatar5.jpg" alt="user" class="avatar-img rounded-circle">
                         </div>
-                        
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
-                        {{#if notification}}
-                            {{#each notification}}
-                                <a style="pointer-events: none; cursor: default;" class="dropdown-item" href="/dashboard"><i class="dropdown-icon zmdi zmdi-notifications-active"></i><span>{{this.txt}}</span></a>
-                            {{/each}}
-                            {{else}}
-                                <label>No New Notification</label>
-                        {{/if}}   
-                        <div class="dropdown-divider"></div>
-                                <form method="POST" action="/clearAllNotifications">
-                                    <input type="hidden" name="_csrf" value="{{csrfToken}}">
-                                    <button style="margin-top: 20px;" id="btnBell" class="btn-block btn-primary">Clear All</button>
-                                </form>
+                        <span class="badge badge-success badge-indicator"></span>
                     </div>
-                </li>
-
-
-
-                                    
-                
-                <li class="nav-item dropdown dropdown-authentication">
-                    <a class="nav-link dropdown-toggle no-caret" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <div class="media">
-                            <div class="media-img-wrap">
-                                <div class="avatar">
-                                    <img src="/dist/img/avatar5.jpg" alt="user" class="avatar-img rounded-circle">
-                                </div>
-                                <span class="badge badge-success badge-indicator"></span>
-                            </div>
-                            <div class="media-body">
-                                <span>{{accountName}}<i class="zmdi zmdi-chevron-down"></i></span>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
-                        {{!-- <a class="dropdown-item" href="#"><i class="dropdown-icon zmdi zmdi-card"></i><span>Notification</span></a> --}}
-                        <a class="dropdown-item" href="/profile"><i class="dropdown-icon zmdi zmdi-account"></i><span>Profile</span></a>
-                        {{!-- <a class="dropdown-item" href="inbox.html"><i class="dropdown-icon zmdi zmdi-email"></i><span>Inbox</span></a>
-                        <a class="dropdown-item" href="#"><i class="dropdown-icon zmdi zmdi-settings"></i><span>Settings</span></a> --}}
-                        {{!-- <div class="dropdown-divider"></div>
-                        <div class="sub-dropdown-menu show-on-hover">
-                            <a href="#" class="dropdown-toggle dropdown-item no-caret"><i class="zmdi zmdi-check text-success"></i>Online</a>
-                            <div class="dropdown-menu open-left-side">
-                                <a class="dropdown-item" href="#"><i class="dropdown-icon zmdi zmdi-check text-success"></i><span>Online</span></a>
-                                <a class="dropdown-item" href="#"><i class="dropdown-icon zmdi zmdi-circle-o text-warning"></i><span>Busy</span></a>
-                                <a class="dropdown-item" href="#"><i class="dropdown-icon zmdi zmdi-minus-circle-outline text-danger"></i><span>Offline</span></a>
-                            </div>
-                        </div> --}}
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/logout"><i class="dropdown-icon zmdi zmdi-power"></i><span>Log out</span></a>
+                    <div class="media-body">
+                        <span>{{accountName}}<i class="zmdi zmdi-chevron-down"></i></span>
                     </div>
-                </li>
-            </ul>
-        </nav>                                      
+                </div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
+                {{!-- <a class="dropdown-item" href="#"><i class="dropdown-icon zmdi zmdi-card"></i><span>Notification</span></a> --}}
+                <a class="dropdown-item" href="/profile"><i
+                        class="dropdown-icon zmdi zmdi-account"></i><span>Profile</span></a>
+                {{!-- <a class="dropdown-item" href="inbox.html"><i class="dropdown-icon zmdi zmdi-email"></i><span>Inbox</span></a>
+                <a class="dropdown-item" href="#"><i class="dropdown-icon zmdi zmdi-settings"></i><span>Settings</span></a> --}}
+                {{!-- <div class="dropdown-divider"></div>
+                <div class="sub-dropdown-menu show-on-hover">
+                    <a href="#" class="dropdown-toggle dropdown-item no-caret"><i class="zmdi zmdi-check text-success"></i>Online</a>
+                    <div class="dropdown-menu open-left-side">
+                        <a class="dropdown-item" href="#"><i class="dropdown-icon zmdi zmdi-check text-success"></i><span>Online</span></a>
+                        <a class="dropdown-item" href="#"><i class="dropdown-icon zmdi zmdi-circle-o text-warning"></i><span>Busy</span></a>
+                        <a class="dropdown-item" href="#"><i class="dropdown-icon zmdi zmdi-minus-circle-outline text-danger"></i><span>Offline</span></a>
+                    </div>
+                </div> --}}
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/logout"><i
+                        class="dropdown-icon zmdi zmdi-power"></i><span>Log out</span></a>
+            </div>
+        </li>
+    </ul>
+</nav>

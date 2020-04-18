@@ -17,7 +17,7 @@
                 <h4 class="text-capitalize hk-pg-title"><span class="pg-title-icon"><span class="text-primary feather-icon"><i
                         data-feather="user"></i></span></span>{{account.name}} Account</h4>
             </div>
-            <div class="col-md-6 text-right">
+            <div class="col-md-6 pr-0 text-right">
                 <a class="btn btn-primary" href="/adminAccounts">Show All Accounts</a>
             </div>
         </div>
@@ -58,12 +58,13 @@
                                 <div class="col-md-6 form-group">
                                     <label for="role">Role</label>
                                     <select class="form-control custom-select" name="role" id="role" required>
-                                        <option selected value="{{chkHelper account.role}}">{{chkHelper account.role}}
-                                        </option>
                                         <option value="admin">Admin</option>
                                         <option value="student">Student</option>
                                         <option value="teacher">Teacher</option>
                                     </select>
+                                    <script type="text/javascript">
+                                        $('#role option[value="{{account.role}}"]').prop('selected', true)
+                                    </script>
                                 </div>
                             </div>
 
@@ -77,12 +78,12 @@
                                 <div class="col-md-6 form-group">
                                     <label for="gender">Gender</label>
                                     <select class="form-control custom-select" name="gender" id="gender">
-                                        <option selected value="{{chkHelper account.gender}}">{{chkHelper
-                                                account.gender}}
-                                        </option>
                                         <option value="female">Male</option>
                                         <option value="male">Female</option>
                                     </select>
+                                    <script type="text/javascript">
+                                        $('#gender option[value="{{account.gender}}"]').prop('selected', true)
+                                    </script>
                                 </div>
                             </div>
 
@@ -90,24 +91,24 @@
                                 <div class="col-md-6 form-group">
                                     <label for="campus">Campus</label>
                                     <select class="form-control custom-select" name="campus" id="campus">
-                                        <option selected value="{{chkHelper account.campus}}">{{chkHelper
-                                                account.campus}}
-                                        </option>
                                         <option value="Karachi">Karachi Campus</option>
                                         <option value="Islamabad">Islamabad Campus</option>
                                         <option value="Lahore">Lahore Campus</option>
                                     </select>
+                                    <script type="text/javascript">
+                                        $('#campus option[value="{{account.campus}}"]').prop('selected', true)
+                                    </script>
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label for="semester">Semester</label>
                                     <select class="form-control custom-select" name="semester" id="semester">
-                                        <option selected value="{{chkHelper account.semester}}">{{chkHelper
-                                                account.semester}}
-                                        </option>
                                         <option value="6">Sixth</option>
                                         <option value="7">Seventh</option>
                                         <option value="8">Eigth</option>
                                     </select>
+                                    <script type="text/javascript">
+                                        $('#semester option[value="{{account.semester}}"]').prop('selected', true)
+                                    </script>
                                 </div>
                             </div>
                             <div class="form-row">
@@ -120,6 +121,9 @@
                                         <option value="SE">Software Engineering</option>
                                         <option value="CE">Computer Engineering</option>
                                     </select>
+                                    <script type="text/javascript">
+                                        $('#department option[value="{{account.department}}"]').prop('selected', true)
+                                    </script>
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label for="status">Status</label>
@@ -129,6 +133,9 @@
                                         <option value="enable">Enable</option>
                                         <option value="disable">Disable</option>
                                     </select>
+                                    <script type="text/javascript">
+                                        $('#status option[value="{{account.status}}"]').prop('selected', true)
+                                    </script>
                                 </div>
                             </div>
                             <div class="form-row">

@@ -1,143 +1,130 @@
-  {{!-- Header --}}
-    <div class="header bg-primary pb-6">
-      <div class="container-fluid">
-        <div class="header-body">
-          <div class="row align-items-center py-4">
-            <div class="col-lg-6 col-7">
-              <h6 class="h2 text-white d-inline-block mb-0">Project</h6>
-              <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                  <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="/projects">{{project.name}}</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">View</li>
-                </ol>
-              </nav>
+<!-- Breadcrumb -->
+<nav class="hk-breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb breadcrumb-light bg-transparent">
+        <li class="breadcrumb-item"><a href="#">Projects</a></li>
+        <li class="breadcrumb-item"><a href="#">{{project.year}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{project.name}}</li>
+    </ol>
+</nav>
+<!-- /Breadcrumb -->
+
+<!-- Container -->
+<div class="container-fluid">
+
+    <!-- Title -->
+    <div class="hk-pg-header">
+        <div class="row w-100">
+            <div class="col-md-6">
+                <h4 class="text-capitalize hk-pg-title"><span class="pg-title-icon"><span class="feather-icon text-primary"><i
+                        data-feather="file-text"></i></span></span>{{project.name}} Project</h4>
             </div>
-            <div class="col-lg-6 col-5 text-right">
-              <a href="#" class="btn btn-sm btn-neutral">New</a>
-              <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+            <div class="col-md-6 pr-0 text-md-right">
+                {{#if adminLogin}}
+                    <a class="btn btn-sm btn-primary" href="/projects">All Projects</a>
+                    <a class="btn btn-sm btn-info" href="/admin/proposedProjects">Proposed</a>
+                {{/if}}
             </div>
-          </div>
         </div>
-      </div>
     </div>
-           <!-- Page content -->
-    <div class="container-fluid mt--6">
+    <!-- /Title -->
+
+    <!-- Row -->
     <div class="row">
-        <div class="col">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="mb-0"> Project</h3>
-                    <p class="text-sm mb-0">
-                        Showing {{project.name}}.
-                    </p>
+        <div class="col-xl-12">
+            <section class="hk-sec-wrapper">
+                <h5 class="hk-sec-title text-capitalize">{{project.name}} {{project.year}} Project Information</h5>
+                <p class="mb-40">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dignissimos
+                    perspiciatis sapiente sunt veniam. Dolorem dolorum ipsam praesentium, quis ratione velit. Asperiores
+                    eaque eos laudantium modi! Nisi odio quasi totam.
+                </p>
+                <div class="row">
+                    <div class="col-sm">
+                        <form>
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name" class="form-control-label">Name</label>
+                                        <input value="{{project.name}}" required type="text"
+                                               placeholder="Enter Project Name" class="form-control" id="name" readonly>
+                                    </div>
+                                </div>
+                                {{#if project.ownerName}}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="ownerName" class="form-control-label">Proposed By</label>
+                                            <input type="text" id="ownerName" value="{{project.ownerName}}"
+                                                   class="form-control" readonly>
+                                        </div>
+                                    </div>
+                                {{/if}}
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="language" class="form-control-label">Language</label>
+                                        <input value="{{project.language}}" required type="text"
+                                               id="language" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="IDE" class="form-control-label">Integrated Development Environment </label>
+                                        <input value="{{project.IDE}}" required type="text" id="IDE"
+                                               class="form-control" readonly>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="type" class="form-control-label">Type</label>
+                                        <input value="{{project.type}}" required type="text"  id="type"
+                                               class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="department" class="form-control-label">Department</label>
+                                        <input value="{{project.department}}" required type="text"
+                                               id="department" class="form-control" readonly>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="semester" class="form-control-label">Semester</label>
+                                        <input value="{{project.semester}}" required type="text"
+                                               id="semester" class="form-control" readonly>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="year" class="form-control-label" >Year</label>
+                                        <input  value="{{project.year}}" required placeholder="Enter year of Project" type="text"  id="year" class="form-control" readonly>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="description" class="form-control-label">Description</label>
+                                        <textarea required placeholder="Enter Description About Project"
+                                               rows="5"   id="description" class="form-control" readonly>{{project.description}}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
                 </div>
-                <div class="container py-4">
-                       {{#if success}}
-                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <span class="alert-icon"><i class="ni ni-like-2"></i></span>
-                <span class="alert-text"><strong>Success!</strong> {{success}}</span>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-              {{/if}}
-                    
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                               <label for="name" class="form-control-label" >Name</label>
-                               <input value="{{project.name}}" required type="text" placeholder="Enter Project Name " class="form-control" name="name" id="name" readonly>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                             <div class="form-group">
-                                <label for="language" class="form-control-label" >language</label>
-                                   <input  value="{{project.language}}" required type="text" name="language" id="language" class="form-control" readonly>
-                            </div>
-                           
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="IDE" class="form-control-label" >IDE</label>
-                                   <input  value="{{project.IDE}}" required type="text" name="IDE" id="IDE" class="form-control" readonly>
-                            </div>
-                        </div>
-                    </div>
-                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="type" class="form-control-label" >type</label>
-                                   <input  value="{{project.type}}" required type="text" name="type" id="type" class="form-control" readonly>
-                            </div>
-                        
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="department" class="form-control-label" >Department</label>
-                                   <input  value="{{project.department}}" required type="text" name="department" id="department" class="form-control" readonly>
-                            </div>
-                            
-                        </div>
-                    </div>
-                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="semester" class="form-control-label" >Semester</label>
-                                   <input  value="{{project.semester}}" required type="text" name="semester" id="semester" class="form-control" readonly>
-                            </div>
-                            
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="description" class="form-control-label" >Description</label>
-                                   <input  value="{{project.description}}" required placeholder="Enter Description About Project" type="text" name="description" id="description" class="form-control" readonly>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="year" class="form-control-label" >Year</label>
-                                   <input  value="{{project.year}}" required placeholder="Enter year of Project" type="text" name="description" id="description" class="form-control" readonly>
-                            </div>
-                        </div>
-                        <div class="col-md-6" id="ownerNameDiv">
-                            <div class="form-group">
-                              <label for="year" class="form-control-label" >Proposed By</label>
-                                   <input  type="text" name="_csrf" id="ownerName" value="{{project.ownerName}}" class="form-control" readonly>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-12">
-                            <div class="form-group">
-                                   <input  type="hidden" name="_csrf" value="{{csrfToken}}" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-
-            
-
-
-            </div>
+            </section>
         </div>
-          <script>
-            document.addEventListener('DOMContentLoaded', function() {
-              if(document.getElementById('ownerName').value.length  ==  '0')
-              {
-                document.getElementById('ownerNameDiv').style.display="none";
-              }
-              else
-              {
-                //alert('ownerName isnt empty');
-              }
-            }, false);
-          </script>
-    </div>   
-       {{> footer }}
     </div>
+    <!-- /Row -->
+</div>
+<!-- /Container -->

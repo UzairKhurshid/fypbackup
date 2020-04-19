@@ -71,8 +71,8 @@ router.get('/adminAccounts', auth, async(req, res) => {
                 success: req.flash('success')
             })
         } else {
-            const acc = await Account.find()
-            const accounts = await Account.find().sort({ name: 'asc' })
+            const acc = await Account.find({ email: { $ne: email } })
+            const accounts = await Account.find({ email: { $ne: email } }).sort({ name: 'asc' })
             const count = Object.keys(acc).length
             const Arr = await getAllNotifications(email, accRole)
             const notificationCount = Arr.length

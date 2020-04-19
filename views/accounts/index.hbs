@@ -72,14 +72,14 @@
                                                 <div class="btn-group" role="group"
                                                      aria-label="Basic example">
                                                     <a style="margin-right:3px;"
-                                                       class="btn-gradient-warning btn-sm"
+                                                       class="btn btn-outline-orange btn-sm"
                                                        href="/adminAccount/update/{{this.id}}">Edit</a>
                                                     <form onsubmit="return form_confirm(this);" method="POST"
                                                           action="/adminAccount/delete/{{this.id}}">
                                                         <input type="hidden" name="_csrf"
                                                                value="{{../csrfToken}}"
                                                                class="form-control">
-                                                        <button class="btn btn-gradient-danger btn-sm"
+                                                        <button class="btn btn-outline-danger btn-sm"
                                                                 type="submit">Delete
                                                         </button>
                                                     </form>

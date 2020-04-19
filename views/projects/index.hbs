@@ -66,8 +66,8 @@
                                 <tbody>
                                 {{#if project}}
                                     {{#if adminLogin}}
+                                        <!-- <th class="text-center" colspan="6">Show All Projects Here.</th> -->
                                         {{#each project}}
-                                            <!-- <th class="text-center" colspan="6">Show All Projects Here.</th> -->
                                             <tr>
                                                 <td>{{this.name}}</td>
                                                 <td>{{this.IDE}}</td>
@@ -75,18 +75,23 @@
                                                 <td>{{this.department}}</td>
                                                 <td>{{this.year}}</td>
                                                 <td>{{this.ownerName}}</td>
-                                                <td class="d-flex">
-                                                    <a class="btn btn-sm btn-gradient-info" href="/viewproject/{{this.id}}">View</a>  |
-                                                    <a class="btn btn-sm btn-gradient-warning"
-                                                       href="/projects/update/{{this.id}}">Edit</a>  |
-                                                    <form onsubmit="return form_confirm(this);" id="projectForm" method="POST"
-                                                          action="/projects/delete/{{this.id}}">
-                                                        <input type="hidden" name="_csrf" value="{{../csrfToken}}"
-                                                               class="form-control">
-                                                        <button  class="btn btn-sm btn-gradient-danger"
-                                                                type="submit">Delete
-                                                        </button>
-                                                    </form>
+                                                <td>
+                                                    <div class="btn-group" role="group"
+                                                         aria-label="Basic example">
+                                                        <a class="btn btn-sm btn-outline-info mr-5"
+                                                           href="/viewproject/{{this.id}}">View</a>
+                                                        <a class="btn btn-sm btn-outline-orange mr-5"
+                                                           href="/projects/update/{{this.id}}">Edit</a>
+                                                        <form onsubmit="return form_confirm(this);" id="projectForm"
+                                                              method="POST"
+                                                              action="/projects/delete/{{this.id}}">
+                                                            <input type="hidden" name="_csrf" value="{{../csrfToken}}"
+                                                                   class="form-control">
+                                                            <button class="btn btn-sm btn-outline-danger"
+                                                                    type="submit">Delete
+                                                            </button>
+                                                        </form>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         {{/each}}
@@ -121,7 +126,8 @@
                                                 <td>{{this.department}}</td>
                                                 <td>{{this.year}}</td>
                                                 <td>
-                                                    <a class="btn btn-sm btn-gradient-info" href="/viewproject/{{this.id}}">View
+                                                    <a class="btn btn-sm btn-gradient-info"
+                                                       href="/viewproject/{{this.id}}">View
                                                         Project</a>
                                                 </td>
                                             </tr>

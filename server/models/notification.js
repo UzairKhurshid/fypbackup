@@ -19,8 +19,6 @@ const notificationSchema = new mongoose.Schema({
     status: {
         type: String
     }
-
-
 })
 
 const Notification = mongoose.model('Notification', notificationSchema)

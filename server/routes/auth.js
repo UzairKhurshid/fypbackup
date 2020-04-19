@@ -9,20 +9,17 @@ const { sendWelcomeMail, sendActivationMail, sendDeActivationMail, sendProjectAc
 
 
 router.get('/login', (req, res) => {
-
     if (!req.session.email) {
         res.render('auth/selectLogin', {
             title: 'Login',
             layout: 'layouts/auth'
         })
     }
-
 })
 
 
 router.get('/login/:role', (req, res) => {
     const role = req.params.role
-
 
     if (role === 'student' || role === 'teacher' || role === 'admin') {
         if (!req.session.email) {
@@ -33,7 +30,6 @@ router.get('/login/:role', (req, res) => {
                 role: role,
                 error: req.flash('error')
             })
-
         } else {
             return res.redirect('/')
         }
@@ -42,11 +38,9 @@ router.get('/login/:role', (req, res) => {
             title: '404 Page'
         })
     }
-
 })
 
 router.post('/login/:role', async(req, res) => {
-
     const role = req.params.role
 
     try {
@@ -56,39 +50,51 @@ router.post('/login/:role', async(req, res) => {
         req.session.email = req.body.email
 
         res.redirect('/dashboard')
-
     } catch (e) {
         console.log(e.message)
         req.flash('error', e.message)
         return res.redirect('/login/'.concat(role))
-
-
     }
 })
 
 router.get('/signup', (req, res) => {
-
     if (!req.session.email) {
         res.render('auth/selectSignup', {
             title: 'Signup',
             layout: 'layouts/auth'
         })
     }
-
 })
 
 
 
 router.get('/signup/:role', (req, res) => {
     const role = req.params.role
-    console.log(role)
-    res.render('auth/signup', {
-        title: role + ' signup',
-        layout: 'layouts/auth',
-        role: role,
-        error: req.flash('error')
-    })
-
+    if (role == 'teacher') {
+        res.render('auth/signup', {
+            title: role + ' signup',
+            layout: 'layouts/auth',
+            role: role,
+            teacherAcc: 'true',
+            error: req.flash('error')
+        })
+    } else if (role == 'student') {
+        res.render('auth/signup', {
+            title: role + ' signup',
+            layout: 'layouts/auth',
+            role: role,
+            studentAcc: 'true',
+            error: req.flash('error')
+        })
+    } else {
+        res.render('auth/signup', {
+            title: role + ' signup',
+            layout: 'layouts/auth',
+            role: role,
+            adminAcc: 'true',
+            error: req.flash('error')
+        })
+    }
 })
 
 router.post('/signup/:role', async(req, res) => {
@@ -98,18 +104,14 @@ router.post('/signup/:role', async(req, res) => {
 
     try {
         const account = new Account(req.body)
-
         account.status = "disable"
         account.role = role
-        await createNotification('A new Account is created Please take a look.', '', 'admin')
-
-
         await account.save()
+        await createNotification('A new Account is created Please take a look.', '', 'admin')
         sendWelcomeMail(req.body.email, req.body.name)
 
         req.flash('success', 'Account Created Successfully')
         return res.redirect('/login/'.concat(role))
-
     } catch (e) {
         req.flash('error', e.message)
         return res.redirect('/signup/'.concat(role))

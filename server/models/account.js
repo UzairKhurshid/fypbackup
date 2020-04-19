@@ -12,7 +12,6 @@ const accountSchema = new mongoose.Schema({
     regNo: {
         type: Number,
         trim: true,
-        required: true,
         unique: true
     },
     role: {

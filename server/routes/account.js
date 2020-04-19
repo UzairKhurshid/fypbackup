@@ -9,31 +9,69 @@ const router = new express.Router()
 
 router.get('/adminAccounts', auth, async(req, res) => {
 
-    const role = req.session.role
+    const accRole = req.session.role
     const email = req.session.email
-    let limit = 0,
-        page = 0
-    if (!req.query.limit) { limit = 5 } else { limit = req.query.limit }
-    if (!req.query.page) { page = 1 } else { page = req.query.page }
-    try {
-        const acc = await Account.find()
-        const accounts = await Account.find({ email: { $ne: email } }).sort({ name: 'asc' }).limit(limit * 1).skip((page - 1) * limit)
-        const count = Object.keys(acc).length
-        const Arr = await getAllNotifications(email, role)
-        const notificationCount = Arr.length
 
-        res.render('accounts/index', {
-            title: 'Accounts',
-            Admins: true,
-            account: accounts,
-            adminLogin: 'true',
-            count: count,
-            page: page,
-            notification: Arr,
-            notificationCount: notificationCount,
-            accountName: req.session.name,
-            success: req.flash('success')
-        })
+    try {
+        console.log(req.query.role)
+        if (req.query.role == 'teacher') {
+            const acc = await Account.find({ role: 'teacher' })
+            const accounts = await Account.find({ role: 'teacher' }).sort({ name: 'asc' })
+            const count = Object.keys(acc).length
+            const Arr = await getAllNotifications(email, accRole)
+            const notificationCount = Arr.length
+
+            res.render('accounts/index', {
+                title: 'Accounts',
+                Admins: true,
+                adminLogin: 'true',
+                teacherAcc: 'true',
+                account: accounts,
+                count: count,
+                notification: Arr,
+                notificationCount: notificationCount,
+                accountName: req.session.name,
+                success: req.flash('success')
+            })
+        } else if (req.query.role == 'student') {
+            const acc = await Account.find({ role: 'student' })
+            const accounts = await Account.find({ role: 'student' }).sort({ name: 'asc' })
+            const count = Object.keys(acc).length
+            const Arr = await getAllNotifications(email, accRole)
+            const notificationCount = Arr.length
+
+            res.render('accounts/index', {
+                title: 'Accounts',
+                Admins: true,
+                adminLogin: 'true',
+                account: accounts,
+                studentAcc: 'true',
+                count: count,
+                notification: Arr,
+                notificationCount: notificationCount,
+                accountName: req.session.name,
+                success: req.flash('success')
+            })
+        } else {
+            const acc = await Account.find({ role: 'admin' })
+            const accounts = await Account.find({ role: 'admin', email: { $ne: email } }).sort({ name: 'asc' })
+            const count = Object.keys(acc).length
+            const Arr = await getAllNotifications(email, accRole)
+            const notificationCount = Arr.length
+
+            res.render('accounts/index', {
+                title: 'Accounts',
+                Admins: true,
+                adminLogin: 'true',
+                account: accounts,
+                adminAcc: 'true',
+                count: count,
+                notification: Arr,
+                notificationCount: notificationCount,
+                accountName: req.session.name,
+                success: req.flash('success')
+            })
+        }
     } catch (e) {
         console.log(e.message)
         req.flash('error', e.message)

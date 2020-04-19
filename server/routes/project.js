@@ -9,19 +9,13 @@ router.get('/projects', auth, async(req, res) => {
 
     const email = req.session.email
     const role = req.session.role
-    let limit = 0,
-        page = 0
-    if (!req.query.limit) { limit = 5 } else { limit = req.query.limit }
-    if (!req.query.page) { page = 1 } else { page = req.query.page }
 
     try {
         const proj = await Project.find({ status: 'accepted' })
-        const projects = await Project.find({ status: 'accepted' }).sort({ year: -1, name: 'asc' }).limit(limit * 1).skip((page - 1) * limit)
+        const projects = await Project.find({ status: 'accepted' }).sort({ year: -1, name: 'asc' })
         const count = Object.keys(proj).length
         const Arr = await getAllNotifications(email, role)
         const notificationCount = Arr.length
-
-
 
         if (role == 'admin') {
             res.render('projects/index', {
@@ -30,7 +24,6 @@ router.get('/projects', auth, async(req, res) => {
                 adminLogin: 'true',
                 project: projects,
                 count: count,
-                page: page,
                 notification: Arr,
                 notificationCount: notificationCount,
                 accountName: req.session.name,
@@ -43,7 +36,6 @@ router.get('/projects', auth, async(req, res) => {
                 studentLogin: 'true',
                 project: projects,
                 count: count,
-                page: page,
                 notification: Arr,
                 notificationCount: notificationCount,
                 accountName: req.session.name,
@@ -56,7 +48,6 @@ router.get('/projects', auth, async(req, res) => {
                 teacherLogin: 'true',
                 project: projects,
                 count: count,
-                page: page,
                 notification: Arr,
                 notificationCount: notificationCount,
                 accountName: req.session.name,
@@ -74,13 +65,10 @@ router.get('/admin/proposedProjects', auth, async(req, res) => {
 
     const role = req.session.role
     const email = req.session.email
-    let limit = 0,
-        page = 0
-    if (!req.query.limit) { limit = 5 } else { limit = req.query.limit }
-    if (!req.query.page) { page = 1 } else { page = req.query.page }
+
     try {
         const proj = await Project.find({ status: 'proposed' })
-        const projects = await Project.find({ status: 'proposed' }).sort({ year: -1, name: 'asc' }).limit(limit * 1).skip((page - 1) * limit)
+        const projects = await Project.find({ status: 'proposed' }).sort({ year: -1, name: 'asc' })
         const count = Object.keys(proj).length
         const Arr = await getAllNotifications(email, role)
         const notificationCount = Arr.length
@@ -91,7 +79,6 @@ router.get('/admin/proposedProjects', auth, async(req, res) => {
             adminLogin: 'true',
             project: projects,
             count: count,
-            page: page,
             notification: Arr,
             notificationCount: notificationCount,
             accountName: req.session.name,

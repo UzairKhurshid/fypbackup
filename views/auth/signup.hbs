@@ -36,10 +36,8 @@
                                     <input type="hidden"
                                            class="form-control" name="role" value="{{role}}" >
 
-                                    
-                                   
-                                    <div class="form-row">
-                                        <div class="col-md-6 form-group">
+                                    {{#if adminAcc}}
+                                        <div class="form-row">
                                          <div class="input-group">
                                            <input id="name" class="form-control"
                                            required autocomplete="name" autofocus name="name"
@@ -48,28 +46,8 @@
                                                 <span class="input-group-text"><span class="feather-icon"><i data-feather="user"></i></span></span>
                                             </div>
                                         </div>
-                                        </div>
-                                        <div class="col-md-6 form-group">
-                                          <select class="form-control custom-select" name="gender" id="campus" required>
-                                            <option disabled selected value="">Select gender</option>
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>                              
-                                            </select>
-                                        </div>
                                     </div>
-
-                                    
-                                    <div class="form-group">
-                                            <div class="input-group">
-                                            <input id="regNo" class="form-control"
-                                           required autocomplete="regNo" autofocus name="regNo"
-                                           value="" placeholder="Registration Number" type="text">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text"><span class="feather-icon"><i data-feather="credit-card"></i></span></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                    <br>
                                     <div class="form-group">
                                          <div class="input-group">
                                          <input id="email" class="form-control"
@@ -80,38 +58,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                    <div class="form-row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                            <select class="form-control custom-select" name="campus" id="campus" required>
-                                            <option disabled selected value="">Select campus</option>
-                                            <option value="Karachi">Karachi Campus</option>
-                                            <option value="Islamabad">Islamabad Campus</option>
-                                            <option value="Lahore">Lahore Campus</option>
-                                            </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <select class="form-control custom-select" name="semester" id="semester" required>
-                                            <option disabled selected value="">Select semester</option>
-                                            <option value="6">Sixth</option>
-                                            <option value="7">Seventh</option>
-                                            <option value="8">Eigth</option>
-                                            </select>
-                                        </div>
-                                    </div>
                                    
-                                    
-                                    <div class="form-group">
-                                        <select class="form-control  custom-select" name="department" id="department" required>
-                                        <option disabled selected value="">Select Department</option>
-                                        <option value="CS">Computer Science</option>
-                                        <option value="SE">Software Engineering</option>
-                                        <option value="CE">Computer Engineering</option>
-                                        </select>
-                                    </div>
-                                    
                                     <div class="form-group">
                                         <div class="input-group">
                                             <input id="password" type="password"
@@ -123,7 +70,173 @@
                                             </div>
                                         </div>
                                     </div>
+                                    {{/if}}
+
+                                    {{#if teacherAcc}}
+                                        <div class="form-row">
+                                            <div class="col-md-6 form-group">
+                                            <div class="input-group">
+                                            <input id="name" class="form-control"
+                                            required autocomplete="name" autofocus name="name"
+                                            value="" placeholder="Full Name" type="text">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><span class="feather-icon"><i data-feather="user"></i></span></span>
+                                                </div>
+                                            </div>
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                            <select class="form-control custom-select" name="gender" id="campus" required>
+                                                <option disabled selected value="">Select gender</option>
+                                                <option value="male">Male</option>
+                                                <option value="female">Female</option>                              
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        
+                                        <div class="form-group">
+                                                <div class="input-group">
+                                                <input id="regNo" class="form-control"
+                                            required autocomplete="regNo" autofocus name="regNo"
+                                            value="" placeholder="Registration Number" type="text">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><span class="feather-icon"><i data-feather="credit-card"></i></span></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                            <input id="email" class="form-control"
+                                            required autocomplete="email" autofocus name="email"
+                                            value="" placeholder="Email" type="email">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><span class="feather-icon"><i data-feather="mail"></i></span></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                <select class="form-control custom-select" name="campus" id="campus" required>
+                                                <option disabled selected value="">Select campus</option>
+                                                <option value="Karachi">Karachi Campus</option>
+                                                <option value="Islamabad">Islamabad Campus</option>
+                                                <option value="Lahore">Lahore Campus</option>
+                                                </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <select class="form-control  custom-select" name="department" id="department" required>
+                                                <option disabled selected value="">Select Department</option>
+                                                <option value="CS">Computer Science</option>
+                                                <option value="SE">Software Engineering</option>
+                                                <option value="CE">Computer Engineering</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                     
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <input id="password" type="password"
+                                            placeholder="Password"
+                                            class="form-control" name="password"
+                                            required autocomplete="current-password">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><span class="feather-icon"><i data-feather="lock"></i></span></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {{/if}}
+                                    {{#if studentAcc}}
+                                        <div class="form-row">
+                                            <div class="col-md-6 form-group">
+                                            <div class="input-group">
+                                            <input id="name" class="form-control"
+                                            required autocomplete="name" autofocus name="name"
+                                            value="" placeholder="Full Name" type="text">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><span class="feather-icon"><i data-feather="user"></i></span></span>
+                                                </div>
+                                            </div>
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                            <select class="form-control custom-select" name="gender" id="campus" required>
+                                                <option disabled selected value="">Select gender</option>
+                                                <option value="male">Male</option>
+                                                <option value="female">Female</option>                              
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        
+                                        <div class="form-group">
+                                                <div class="input-group">
+                                                <input id="regNo" class="form-control"
+                                            required autocomplete="regNo" autofocus name="regNo"
+                                            value="" placeholder="Registration Number" type="text">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><span class="feather-icon"><i data-feather="credit-card"></i></span></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                            <input id="email" class="form-control"
+                                            required autocomplete="email" autofocus name="email"
+                                            value="" placeholder="Email" type="email">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><span class="feather-icon"><i data-feather="mail"></i></span></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                <select class="form-control custom-select" name="campus" id="campus" required>
+                                                <option disabled selected value="">Select campus</option>
+                                                <option value="Karachi">Karachi Campus</option>
+                                                <option value="Islamabad">Islamabad Campus</option>
+                                                <option value="Lahore">Lahore Campus</option>
+                                                </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <select class="form-control custom-select" name="semester" id="semester" required>
+                                                <option disabled selected value="">Select semester</option>
+                                                <option value="6">Sixth</option>
+                                                <option value="7">Seventh</option>
+                                                <option value="8">Eigth</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    
+                                        
+                                        <div class="form-group">
+                                            <select class="form-control  custom-select" name="department" id="department" required>
+                                            <option disabled selected value="">Select Department</option>
+                                            <option value="CS">Computer Science</option>
+                                            <option value="SE">Software Engineering</option>
+                                            <option value="CE">Computer Engineering</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <input id="password" type="password"
+                                            placeholder="Password"
+                                            class="form-control" name="password"
+                                            required autocomplete="current-password">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><span class="feather-icon"><i data-feather="lock"></i></span></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {{/if}}
+
                                     <div class="custom-control custom-checkbox mb-25">
                                         <input class="custom-control-input" id="same-address" type="checkbox" checked>
                                         <label class="custom-control-label font-14" for="same-address">I have read and agree to the <a href="#"><u>term and conditions</u></a></label>
@@ -132,7 +245,7 @@
                                     <button class="btn btn-primary btn-block" type="submit">Register</button>
                                     <div class="option-sep">or</div>
                                     <p class="text-center">Already have an account? <a href="/login/{{role}}">Sign In</a></p>
-
+ 
                                 </form>
                             </div>
                         </div>

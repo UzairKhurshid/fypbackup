@@ -16,10 +16,8 @@ router.get('/dashboard', auth, async(req, res) => {
         const notificationCount = Arr.length
         const supervisingArr = await getArr(email, role)
         const supervisingCount = supervisingArr.length
-        console.log('2')
 
         if (role === "admin") {
-            console.log('admin')
             res.render('dashboard/index', {
                 title: 'Admin Dashboard',
                 adminLogin: 'true',
@@ -30,7 +28,6 @@ router.get('/dashboard', auth, async(req, res) => {
                 success: req.flash('success')
             })
         } else if (role === "student") {
-            console.log('Student')
             res.render('dashboard/index', {
                 title: 'Student Dashboard',
                 studentLogin: 'true',
@@ -42,7 +39,6 @@ router.get('/dashboard', auth, async(req, res) => {
                 success: req.flash('success')
             })
         } else if (role === "teacher") {
-            console.log('teacher dashboard')
             res.render('dashboard/index', {
                 title: 'Teacher Dashboard',
                 teacherLogin: 'true',

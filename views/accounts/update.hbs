@@ -75,14 +75,14 @@
                                            value="{{account.email}}" placeholder="Email" type="email">
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <label for="semester">Semester</label>
-                                    <select class="form-control custom-select" name="semester" id="semester">
-                                        <option value="6">Sixth</option>
-                                        <option value="7">Seventh</option>
-                                        <option value="8">Eigth</option>
+                                    <label for="department">Department</label>
+                                    <select class="form-control  custom-select" name="department" id="department">
+                                        <option value="CS">Computer Science</option>
+                                        <option value="SE">Software Engineering</option>
+                                        <option value="CE">Computer Engineering</option>
                                     </select>
                                     <script type="text/javascript">
-                                        $('#semester option[value="{{account.semester}}"]').prop('selected', true)
+                                        $('#department option[value="{{account.department}}"]').prop('selected', true)
                                     </script>
                                 </div>
                             </div>
@@ -109,20 +109,6 @@
                                         $('#status option[value="{{account.status}}"]').prop('selected', true)
                                     </script>
                                 </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-md-6 form-group">
-                                    <label for="department">Department</label>
-                                    <select class="form-control  custom-select" name="department" id="department">
-                                        <option value="CS">Computer Science</option>
-                                        <option value="SE">Software Engineering</option>
-                                        <option value="CE">Computer Engineering</option>
-                                    </select>
-                                    <script type="text/javascript">
-                                        $('#department option[value="{{account.department}}"]').prop('selected', true)
-                                    </script>
-                                </div>
-                                
                             </div>
                             <div class="form-row">
                                 <div class="form-group">

@@ -13,7 +13,6 @@ router.get('/adminAccounts', auth, async(req, res) => {
     const email = req.session.email
 
     try {
-        console.log(req.query.role)
         if (req.query.role == 'teacher') {
             const acc = await Account.find({ role: 'teacher' })
             const accounts = await Account.find({ role: 'teacher' }).sort({ name: 'asc' })
@@ -52,9 +51,28 @@ router.get('/adminAccounts', auth, async(req, res) => {
                 accountName: req.session.name,
                 success: req.flash('success')
             })
-        } else {
+        } else if (req.query.role == 'admin') {
             const acc = await Account.find({ role: 'admin' })
             const accounts = await Account.find({ role: 'admin', email: { $ne: email } }).sort({ name: 'asc' })
+            const count = Object.keys(acc).length
+            const Arr = await getAllNotifications(email, accRole)
+            const notificationCount = Arr.length
+
+            res.render('accounts/index', {
+                title: 'Accounts',
+                Admins: true,
+                adminLogin: 'true',
+                account: accounts,
+                adminAcc: 'true',
+                count: count,
+                notification: Arr,
+                notificationCount: notificationCount,
+                accountName: req.session.name,
+                success: req.flash('success')
+            })
+        } else {
+            const acc = await Account.find()
+            const accounts = await Account.find().sort({ name: 'asc' })
             const count = Object.keys(acc).length
             const Arr = await getAllNotifications(email, accRole)
             const notificationCount = Arr.length

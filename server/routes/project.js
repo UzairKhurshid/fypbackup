@@ -203,7 +203,6 @@ router.get('/projects/update/:id', auth, async(req, res) => {
         }
 
     } catch (e) {
-        console.log(e.message)
         req.flash('error', e.message)
         res.redirect('/dashboard')
     }
@@ -223,7 +222,7 @@ router.post('/projects/update/:id', auth, async(req, res) => {
 
         console.log("Updated SUccessfully")
         req.flash('success', 'Project Updated Successfully')
-        res.redirect('/projects/update/' + id)
+        res.redirect('/projects')
     } catch (e) {
         console.log(e.message)
         req.flash('error', e.message)

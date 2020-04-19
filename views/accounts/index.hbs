@@ -19,7 +19,7 @@
             </div>
             <div class="col-md-6 pr-0 text-right">
                 {{#if adminLogin}}
-                    <a class="btn btn-primary btn-sm" href="/adminAccounts">Show Admin Accounts</a>
+                    <a class="btn btn-primary btn-sm" href="/adminAccounts?role=admin">Show Admin Accounts</a>
                     <a class="btn btn-info btn-sm" href="/adminAccounts?role=teacher">Show Teachers Accounts</a>
                     <a class="btn btn-green btn-sm" href="/adminAccounts?role=student">Show Students Accounts</a>
 
@@ -37,19 +37,19 @@
         </div>
     </div>
     <!-- /Title -->
-
+ 
     <!-- Row -->
     <div class="row">
         <div class="col-xl-12">
             <section class="hk-sec-wrapper">
                 {{#if adminAcc}}
                     <h5 class="hk-sec-title">Admin Accounts</h5>                   
-                {{/if}}
-                {{#if teacherAcc}}
+                {{else if teacherAcc}}
                     <h5 class="hk-sec-title">Teacher Accounts</h5>
-                {{/if}}
-                {{#if studentAcc}}
+                {{else if studentAcc}}
                     <h5 class="hk-sec-title">Student Accounts</h5>
+                {{else}}
+                    <h5 class="hk-sec-title">All Accounts</h5>
                 {{/if}}
 
                 <p class="mb-40">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dignissimos

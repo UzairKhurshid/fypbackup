@@ -13,6 +13,7 @@ const session = require('express-session')
 const mongoDbStore = require('connect-mongodb-session')(session)
 const csrf = require('csurf')
 const flash = require('connect-flash')
+const multer = require('multer')
 
 //required routes
 const projectRouter = require('./routes/project')
@@ -32,6 +33,13 @@ const store = new mongoDbStore({
     uri: process.env.MONGODB_URL,
     collection: 'sessions'
 })
+const fileFilter = (req, file, cb) => {
+    if (file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg') {
+        cb(null, true)
+    } else {
+        cb(null, false)
+    }
+}
 const csrfProtection = csrf()
 
 
@@ -81,6 +89,7 @@ hbs.registerPartials(partialsDirectory)
 app.use(express.static(publicDirectory))
 app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(multer({ fileFilter: fileFilter }).single('avatar'))
 app.use(session({ secret: 'mySecretKeyToHashMySessionValue', resave: false, saveUninitialized: false, store: store }))
 app.use(csrfProtection)
 app.use(flash())

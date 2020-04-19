@@ -155,14 +155,14 @@
                                     <div class="card-header text-capitalize font-weight-500 text-dark card-header-action">
                                         Change your display picture from here.
                                     </div>
-                                    <form method="POST" action="/profile/updateAvatar/{{account.id}}">
+                                    <form method="POST" action="/profile/updateAvatar/{{account.id}}" enctype="multipart/form-data">
                                         <div class="row text-center">
                                             <div class="col-sm p-4">
                                                 <input type="hidden" class="form-control" name="_csrf"
                                                        value="{{csrfToken}}">
                                                 <input type="file" name="avatar" class="dropify"/>
                                             </div>
-                                        </div>
+                                        </div> 
                                         <div class="row text-center">
                                             <div class="col-sm p-4">
                                                 <button type="submit" class="btn btn-block btn-outline-primary">Update

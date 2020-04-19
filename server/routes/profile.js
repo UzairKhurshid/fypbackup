@@ -1,6 +1,6 @@
 const express = require('express')
 const auth = require('../middleware/auth')
-const multer = require('multer')
+const sharp = require('sharp')
 const Account = require('../models/account')
 const { getAllNotifications } = require('../helpers/notification')
 const router = new express.Router()
@@ -74,27 +74,17 @@ router.post('/profile/update/:id', auth, async(req, res) => {
     }
 })
 
-const upload = multer({
-    limits: {
-        fileSize: 1000000
-    },
-    fileFilter(req, file, cb) {
-        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-            return cb(new Error('please upload an image'))
-        }
-        cb(undefined, true)
-    }
-})
 
-router.post('/profile/updateAvatar/:id', auth, upload.single('avatar'), async(req, res) => {
+
+router.post('/profile/updateAvatar/:id', auth, async(req, res) => {
     const id = req.params.id
     try {
-        console.log('asdad')
         const account = await Account.findOne({ _id: id })
-        console.log(req.file.buffer)
-        console.log('asasas')
-        account.avatar = req.file.buffer
+        const buffer = await sharp(req.file.buffer).resize({ width: 250, height: 250 }).jpeg().toBuffer()
+
+        account.avatar = buffer
         await account.save()
+
         req.flash('success', 'Successfully Uploaded Profile Picture')
         res.redirect('/profile')
     } catch (e) {

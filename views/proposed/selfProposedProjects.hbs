@@ -64,12 +64,12 @@
                                             <td>{{this.year}}</td>
                                             <td>{{this.ownerName}}</td>
                                             <td>{{this.status}}</td>
-                                            <td>
-                                                <a class="btn btn-sm btn-primary" href="/viewproject/{{this.id}}">View Project</a>
-                                                <a class="btn btn-sm btn-primary" href="/projects/update/{{this.id}}">Edit</a>
+                                            <td class="d-flex">
+                                                <a class="btn btn-sm btn-outline-info" href="/viewproject/{{this.id}}">View Project</a>
+                                                <a class="btn btn-sm btn-outline-orange" href="/projects/update/{{this.id}}">Edit</a>
                                                 <form  method="POST" action="/projects/delete/{{this.id}}">
                                                     <input  type="hidden" name="_csrf" value="{{../csrfToken}}" class="form-control">
-                                                    <button style="margin-top: 2px;" class="btn btn-sm btn-primary" type="submit">Delete</button>
+                                                    <button style="margin-top: 2px;" class="btn btn-sm btn-outline-red" type="submit">Delete</button>
                                                 </form>
                                             </td>
                                         </tr>

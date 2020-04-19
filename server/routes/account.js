@@ -143,18 +143,45 @@ router.get('/adminAccount/update/:id', auth, async(req, res) => {
         const acc = await Account.findOne({ _id: id })
         const Arr = await getAllNotifications(email, role)
         const notificationCount = Arr.length
+        if (acc.role == 'admin') {
+            res.render('accounts/update', {
+                Admins: true,
+                account: acc,
+                adminAcc: true,
+                adminLogin: 'true',
+                title: 'Update Account',
+                notification: Arr,
+                notificationCount: notificationCount,
+                accountName: req.session.name,
+                success: req.flash('success')
+            })
+        }
+        if (acc.role == 'teacher') {
+            res.render('accounts/update', {
+                Admins: true,
+                account: acc,
+                teacherAcc: true,
+                adminLogin: 'true',
+                title: 'Update Account',
+                notification: Arr,
+                notificationCount: notificationCount,
+                accountName: req.session.name,
+                success: req.flash('success')
+            })
+        } else if (acc.role == 'student') {
+            res.render('accounts/update', {
+                Admins: true,
+                account: acc,
+                studentAcc: true,
+                adminLogin: 'true',
+                title: 'Update Account',
+                notification: Arr,
+                notificationCount: notificationCount,
+                accountName: req.session.name,
+                success: req.flash('success')
+            })
+        }
 
-        res.render('accounts/update', {
-            Admins: true,
-            account: acc,
-            adminLogin: 'true',
-            title: 'Update Account',
-            notification: Arr,
-            notificationCount: notificationCount,
-            accountName: req.session.name,
-            success: req.flash('success')
-
-        })
     } catch (e) {
         console.log(e.message)
         req.flash('error', e.message)

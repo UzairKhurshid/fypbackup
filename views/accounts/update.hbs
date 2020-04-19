@@ -38,78 +38,113 @@
                         <form method="POST" action="/adminAccount/update/{{account.id}}">
                             <input type="hidden"
                                    class="form-control" name="_csrf" value="{{csrfToken}}">
+                            {{#if adminAcc}}
+                                <div class="form-row">
+                                    <div class="col-md-6 form-group">
+                                        <label for="name">Name</label>
+                                        <input id="name" class="form-control"
+                                            required autocomplete="name" autofocus name="name"
+                                            value="{{account.name}}" placeholder="Full Name" type="text">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-6 form-group">
+                                        <label for="email">Email Address</label>
+                                        <input id="email" class="form-control"
+                                            required autocomplete="email" autofocus name="email"
+                                            value="{{account.email}}" placeholder="Email" type="email">
+                                    </div>
+                                </div>
+                            {{else}}
+                                <div class="form-row">
+                                    <div class="col-md-6 form-group">
+                                        <label for="regNo">Registration Number</label>
+                                        <input id="regNo" class="form-control"
+                                            required autocomplete="regNo" autofocus name="regNo"
+                                            value="{{account.regNo}}" placeholder="Registration Number" type="text">
+                                    </div>
+                                </div>
+    
+                                <div class="form-row">
+                                    <div class="col-md-6 form-group">
+                                        <label for="name">Name</label>
+                                        <input id="name" class="form-control"
+                                            required autocomplete="name" autofocus name="name"
+                                            value="{{account.name}}" placeholder="Full Name" type="text">
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label for="gender">Gender</label>
+                                        <select class="form-control custom-select" name="gender" id="gender">
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
+                                        <script type="text/javascript">
+                                            $('#gender option[value="{{account.gender}}"]').prop('selected', true)
+                                        </script>
+                                    </div>
+                                </div>
 
-                            <div class="form-row">
-                                <div class="col-md-6 form-group">
-                                    <label for="regNo">Registration Number</label>
-                                    <input id="regNo" class="form-control"
-                                           required autocomplete="regNo" autofocus name="regNo"
-                                           value="{{account.regNo}}" placeholder="Registration Number" type="text">
+                                <div class="form-row">
+                                    <div class="col-md-6 form-group">
+                                        <label for="email">Email Address</label>
+                                        <input id="email" class="form-control"
+                                            required autocomplete="email" autofocus name="email"
+                                            value="{{account.email}}" placeholder="Email" type="email">
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label for="department">Department</label>
+                                        <select class="form-control  custom-select" name="department" id="department">
+                                            <option value="Computer Science">Computer Science</option>
+                                            <option value="Software Engineering">Software Engineering</option>
+                                            <option value="Computer Engineering">Computer Engineering</option>
+                                        </select>
+                                        <script type="text/javascript">
+                                            $('#department option[value="{{account.department}}"]').prop('selected', true)
+                                        </script>
+                                    </div>
                                 </div>
-                            </div>
- 
-                            <div class="form-row">
-                                <div class="col-md-6 form-group">
-                                    <label for="name">Name</label>
-                                    <input id="name" class="form-control"
-                                           required autocomplete="name" autofocus name="name"
-                                           value="{{account.name}}" placeholder="Full Name" type="text">
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <label for="gender">Gender</label>
-                                    <select class="form-control custom-select" name="gender" id="gender">
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
-                                    </select>
-                                    <script type="text/javascript">
-                                        $('#gender option[value="{{account.gender}}"]').prop('selected', true)
-                                    </script>
-                                </div>
-                            </div>
 
-                            <div class="form-row">
-                                <div class="col-md-6 form-group">
-                                    <label for="email">Email Address</label>
-                                    <input id="email" class="form-control"
-                                           required autocomplete="email" autofocus name="email"
-                                           value="{{account.email}}" placeholder="Email" type="email">
+                                <div class="form-row">
+                                    <div class="col-md-6 form-group">
+                                        <label for="campus">Campus</label>
+                                        <select class="form-control custom-select" name="campus" id="campus">
+                                            <option value="Karachi">Karachi Campus</option>
+                                            <option value="Islamabad">Islamabad Campus</option>
+                                            <option value="Lahore">Lahore Campus</option>
+                                        </select>
+                                        <script type="text/javascript">
+                                            $('#campus option[value="{{account.campus}}"]').prop('selected', true)
+                                        </script>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label for="status">Status</label>
+                                        <select class="form-control  custom-select" name="status" id="status">
+                                            <option value="enable">Enable</option>
+                                            <option value="disable">Disable</option>
+                                        </select>
+                                        <script type="text/javascript">
+                                            $('#status option[value="{{account.status}}"]').prop('selected', true)
+                                        </script>
+                                    </div>
                                 </div>
-                                <div class="col-md-6 form-group">
-                                    <label for="department">Department</label>
-                                    <select class="form-control  custom-select" name="department" id="department">
-                                        <option value="Computer Science">Computer Science</option>
-                                        <option value="Software Engineering">Software Engineering</option>
-                                        <option value="Computer Engineering">Computer Engineering</option>
-                                    </select>
-                                    <script type="text/javascript">
-                                        $('#department option[value="{{account.department}}"]').prop('selected', true)
-                                    </script>
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="col-md-6 form-group">
-                                    <label for="campus">Campus</label>
-                                    <select class="form-control custom-select" name="campus" id="campus">
-                                        <option value="Karachi">Karachi Campus</option>
-                                        <option value="Islamabad">Islamabad Campus</option>
-                                        <option value="Lahore">Lahore Campus</option>
-                                    </select>
-                                    <script type="text/javascript">
-                                        $('#campus option[value="{{account.campus}}"]').prop('selected', true)
-                                    </script>
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <label for="status">Status</label>
-                                    <select class="form-control  custom-select" name="status" id="status">
-                                        <option value="enable">Enable</option>
-                                        <option value="disable">Disable</option>
-                                    </select>
-                                    <script type="text/javascript">
-                                        $('#status option[value="{{account.status}}"]').prop('selected', true)
-                                    </script>
-                                </div>
-                            </div>
+                                {{#if studentAcc}}
+                                    <div class="form-row">
+                                        <div class="col-md-6 form-group">
+                                            <label for="firstName">Semester</label>
+                                                    <select class="form-control custom-select" name="semester"
+                                                        id="semester">
+                                                            <option value="6">Sixth</option>
+                                                            <option value="7">Seventh</option>
+                                                            <option value="8">Eigth</option>
+                                                        </select>
+                                            <script type="text/javascript">
+                                                $('#campus option[value="{{account.campus}}"]').prop('selected', true)
+                                            </script>
+                                        </div>
+                                    </div>
+                                {{/if}}
+                            {{/if}}
+                            
                             <div class="form-row">
                                 <div class="form-group">
                                     <button class="btn btn-outline-orange" type="submit">Update Information</button>

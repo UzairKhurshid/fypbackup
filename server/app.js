@@ -14,6 +14,9 @@ const mongoDbStore = require('connect-mongodb-session')(session)
 const csrf = require('csurf')
 const flash = require('connect-flash')
 const multer = require('multer')
+const http = require('http')
+const socketio = require('socket.io')
+
 
 //required routes
 const projectRouter = require('./routes/project')
@@ -26,9 +29,14 @@ const profileRouter = require('./routes/profile')
 const myProjectRouter = require('./routes/myProject')
 const chatRouter = require('./routes/chat')
 
+const { generateMessage, saveMessage } = require('./helpers/chat')
+
+
 
 
 const app = express()
+const server = http.createServer(app)
+const io = socketio(server)
 const store = new mongoDbStore({
     uri: process.env.MONGODB_URL,
     collection: 'sessions'
@@ -117,5 +125,21 @@ app.use(chatRouter)
 
 
 
-app.listen(port)
+io.on('connection', (socket) => {
+    console.log('new websocket connection ')
+
+    socket.emit('message', generateMessage('', '', '', 'welcome ', ''))
+    socket.broadcast.emit('message', generateMessage('', '', '', 'A User has joined', ''))
+    socket.on('sendMessage', (FYPID, ownerEmail, name, msg, createdAt, callback) => {
+        io.emit('message', generateMessage(msg, name))
+        saveMessage(FYPID, ownerEmail, name, msg, createdAt)
+        callback()
+    })
+    socket.on('disconnect', () => {
+        io.emit('message', generateMessage('A user has left!'))
+    })
+})
+
+
+server.listen(port)
 console.log('Listening to port: ' + port);

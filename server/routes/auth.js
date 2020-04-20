@@ -87,13 +87,7 @@ router.get('/signup/:role', (req, res) => {
             error: req.flash('error')
         })
     } else {
-        res.render('auth/signup', {
-            title: role + ' signup',
-            layout: 'layouts/auth',
-            role: role,
-            adminAcc: 'true',
-            error: req.flash('error')
-        })
+        res.redirect('/signup')
     }
 })
 

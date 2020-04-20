@@ -12,6 +12,7 @@ const getArr = async(email, role) => {
         FYPID: '123',
         projectID: '123',
         projectName: 'abc',
+        projectYear: '2010',
         requestedByName: 'abc',
         requestedByEmail: 'abc@gmail.com',
     }
@@ -35,6 +36,7 @@ const getArr = async(email, role) => {
         obj.FYPID = account.myProjectOwnerEmail[i]._id
         obj.projectID = account.myProjectOwnerEmail[i].projectID
         obj.projectName = project[i].name
+        obj.projectYear = project[i].year
         obj.requestedByName = student[i].name
         obj.requestedByEmail = student[i].email
 

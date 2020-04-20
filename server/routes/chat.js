@@ -1,6 +1,9 @@
 const express = require('express')
 const auth = require('../middleware/auth')
 const myProject = require('../models/myProject')
+const Project = require('../models/project')
+const getArr = require('../helpers/supervisingFun')
+const mongoose = require('mongoose')
 const { getAllNotifications } = require('../helpers/notification')
 
 
@@ -8,12 +11,39 @@ const router = new express.Router()
 
 
 router.get('/chat', auth, async(req, res) => {
+    const role = req.session.role
+    const email = req.session.email
+
     try {
-        res.render('chatroom/ali_chat', {
-            title: 'Chat Room',
-            teacherLogin: 'true',
-            accountName: req.session.name,
-        })
+        const notificationArr = await getAllNotifications(email, role)
+        const notificationCount = notificationArr.length
+
+        if (role == 'teacher') {
+            const Arr = await getArr(email, role)
+
+            res.render('chatroom/ali_chat', {
+                title: 'Chat Room',
+                teacherLogin: 'true',
+                projectList: Arr,
+                notification: notificationArr,
+                notificationCount: notificationCount,
+                accountName: req.session.name,
+            })
+        } else if (role == 'student') {
+            const myprojects = await myProject.findOne({ requestedByEmail: email })
+            const id = myprojects.projectID
+            const project = await Project.findOne({ _id: id })
+
+            res.render('chatroom/ali_chat', {
+                title: 'Chat Room',
+                studentLogin: 'true',
+                projectList: project,
+                FYPID: id,
+                notification: notificationArr,
+                notificationCount: notificationCount,
+                accountName: req.session.name,
+            })
+        }
     } catch (e) {
         console.log(e.message)
         req.flash('error', e.message)
@@ -26,34 +56,45 @@ router.get('/chat/:id', auth, async(req, res) => {
     const role = req.session.role
     const FYPID = req.params.id
     const projectName = req.query.projectName || ''
+
+    // chat/5e9d7ec21a652412ec4f7ec0?projectName=School Managment System
+    //ObjectId
     try {
-        const proj = await myProject.findOne({ _id: FYPID })
-        const Arr = await getAllNotifications(email, role)
-        const notificationCount = Arr.length
+        const notificationArr = await getAllNotifications(email, role)
+        const notificationCount = notificationArr.length
 
         if (role == 'teacher') {
-            res.render('chatroom/chat', {
+            const Arr = await getArr(email, role)
+            const proj = await myProject.findOne({ _id: mongoose.Types.ObjectId(FYPID) })
+
+            res.render('chatroom/ali_chat', {
                 title: 'Chat Room',
                 teacherLogin: 'true',
+                projectList: Arr,
                 chats: proj.chats,
                 FYPID: FYPID,
                 projectName: projectName,
-                notification: Arr,
-                notificationCount: notificationCount,
                 email: email,
+                notification: notificationArr,
+                notificationCount: notificationCount,
                 accountName: req.session.name,
                 success: req.flash('success')
             })
         } else if (role == 'student') {
-            res.render('chatroom/chat', {
+            const myprojects = await myProject.findOne({ requestedByEmail: email })
+            const id = myprojects.projectID
+            const project = await Project.findOne({ _id: id })
+
+            res.render('chatroom/ali_chat', {
                 title: 'Chat Room',
                 studentLogin: 'true',
-                chats: proj.chats,
+                projectList: project,
+                chats: myprojects.chats,
                 FYPID: FYPID,
                 projectName: projectName,
-                notification: Arr,
-                notificationCount: notificationCount,
                 email: email,
+                notification: notificationArr,
+                notificationCount: notificationCount,
                 accountName: req.session.name,
                 success: req.flash('success')
             })
@@ -65,28 +106,6 @@ router.get('/chat/:id', auth, async(req, res) => {
     }
 })
 
-router.post('/chat', auth, async(req, res) => {
-    const FYPID = req.body.FYPID
-    const projectName = req.body.projectName
-
-    try {
-
-        const proj = await myProject.findOne({ _id: FYPID })
-
-        const name = req.session.name
-        const msg = req.body.txtMsg
-        const ownerEmail = req.session.email
-
-        proj.chats = proj.chats.concat({ ownerEmail, name, msg })
-        await proj.save()
-
-        res.redirect('/chat/' + FYPID + '?projectName=' + projectName)
-    } catch (e) {
-        console.log(e.message)
-        req.flash('error', e.message)
-        res.redirect('/dashboard')
-    }
-})
 
 
 

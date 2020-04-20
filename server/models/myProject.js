@@ -47,6 +47,9 @@ const myProjectSchema = new mongoose.Schema({
         },
         msg: {
             type: String
+        },
+        createdAt: {
+            type: String
         }
     }]
 

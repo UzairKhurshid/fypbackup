@@ -7,6 +7,20 @@ const { getAllNotifications } = require('../helpers/notification')
 const router = new express.Router()
 
 
+router.get('/chat', auth, async(req, res) => {
+    try {
+        res.render('chatroom/ali_chat', {
+            title: 'Chat Room',
+            teacherLogin: 'true',
+            accountName: req.session.name,
+        })
+    } catch (e) {
+        console.log(e.message)
+        req.flash('error', e.message)
+        res.redirect('/dashboard')
+    }
+})
+
 router.get('/chat/:id', auth, async(req, res) => {
     const email = req.session.email
     const role = req.session.role

@@ -82,7 +82,6 @@ router.get('/adminAccounts', auth, async(req, res) => {
                 Admins: true,
                 adminLogin: 'true',
                 account: accounts,
-                adminAcc: 'true',
                 count: count,
                 notification: Arr,
                 notificationCount: notificationCount,

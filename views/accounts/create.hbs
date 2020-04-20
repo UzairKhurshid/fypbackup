@@ -47,10 +47,13 @@
                                             <option value="student">Student</option>
                                             <option value="teacher">Teacher</option>
                                         </select>
-                                    <small class="form-text badge badge-soft-warning text-dark">Please select role to continue.</small>
+                                    <small class="form-text role-warning badge badge-soft-warning text-dark">Please select role to continue.</small>
                                 </div>
                                 <script type="text/javascript">
                                   function  role_fields(select){
+                                      if(select.value != undefined){
+                                          $('.role-warning').hide();
+                                      }
                                       $('.role-div').addClass('d-none');
                                       $('#role-'+select.value).removeClass('d-none');
                                   }
@@ -69,21 +72,13 @@
                                                required autocomplete="regNo" autofocus name="regNo"
                                                value="" placeholder="Registration Number" type="text">
                                     </div>
-                                    <div class="col-md-6 form-group">
+                                    <div class="col-md-4 form-group">
                                         <label for="name">Name</label>
                                         <input id="name" class="form-control"
                                                required autocomplete="name" autofocus name="name"
                                                value="" placeholder="Full Name" type="text">
                                     </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="col-md-6 form-group">
-                                        <label for="email">Email</label>
-                                        <input id="email" class="form-control"
-                                               required autofocus name="email"
-                                               value="" placeholder="Email" type="email">
-                                    </div>
-                                    <div class="col-md-6 form-group">
+                                    <div class="col-md-2 form-group">
                                         <label for="gender">Gender</label>
                                         <select class="form-control custom-select" name="gender" id="gender">
                                             <option disabled selected value="">Select gender</option>
@@ -94,14 +89,20 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-6 form-group">
-                                        <label for="semester">Semester</label>
-                                        <select class="form-control custom-select" name="semester" id="semester">
-                                            <option disabled selected value="">Select semester</option>
-                                            <option value="6">Sixth</option>
-                                            <option value="7">Seventh</option>
-                                            <option value="8">Eigth</option>
-                                        </select>
+                                        <label for="email">Email</label>
+                                        <input id="email" class="form-control"
+                                               required autofocus name="email"
+                                               value="" placeholder="Email" type="email">
                                     </div>
+                                    <div class="col-md-6 form-group">
+                                        <label for="password">Password</label>
+                                        <input id="password" type="password"
+                                               placeholder="Password"
+                                               class="form-control" name="password"
+                                               required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
                                     <div class="col-md-6 form-group">
                                         <label for="campus">Campus</label>
                                         <select class="form-control custom-select" name="campus" id="campus">
@@ -109,16 +110,6 @@
                                             <option value="Karachi">Karachi Campus</option>
                                             <option value="Islamabad">Islamabad Campus</option>
                                             <option value="Lahore">Lahore Campus</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="col-md-6 form-group">
-                                        <label for="status">Status</label>
-                                        <select class="form-control  custom-select" name="status" id="status">
-                                            <option disabled selected value="">Select Status</option>
-                                            <option value="enable">Enable</option>
-                                            <option value="disable">Disable</option>
                                         </select>
                                     </div>
                                     <div class="col-md-6 form-group">
@@ -131,15 +122,25 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-row">
-                                    <div class="col-md-6 form-group">
-                                        <label for="password">Password</label>
-                                        <input id="password" type="password"
-                                               placeholder="Password"
-                                               class="form-control" name="password"
-                                               required>
+                                    <div class="form-row">
+                                        <div class="col-md-6 form-group">
+                                            <label for="semester">Semester</label>
+                                            <select class="form-control custom-select" name="semester" id="semester">
+                                                <option disabled selected value="">Select semester</option>
+                                                <option value="6">Sixth</option>
+                                                <option value="7">Seventh</option>
+                                                <option value="8">Eigth</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label for="status">Status</label>
+                                            <select class="form-control  custom-select" name="status" id="status">
+                                                <option disabled selected value="">Select Status</option>
+                                                <option value="enable">Enable</option>
+                                                <option value="disable">Disable</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
                                 <div class="form-row">
                                     <div class="form-group">
                                         <button class="btn btn-outline-green btn-block" onclick="studentFunction()" type="submit">Create Account
@@ -250,8 +251,6 @@
                                                required autocomplete="name" autofocus name="name"
                                                value="" placeholder="Full Name" type="text">
                                     </div>
-                                </div>
-                                <div class="form-row">
                                     <div class="col-md-6 form-group">
                                         <label for="email">Email</label>
                                         <input id="email" class="form-control"
@@ -268,8 +267,6 @@
                                             <option value="disable">Disable</option>
                                         </select>
                                     </div>
-                                </div>
-                                <div class="form-row">
                                     <div class="col-md-6 form-group">
                                         <label for="password">Password</label>
                                         <input id="password" type="password"

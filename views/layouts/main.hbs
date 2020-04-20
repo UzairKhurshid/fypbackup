@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <title>SPP | {{ title }} </title>
+    <title class="text-capitalize">SPP | {{ title }} </title>
 
 
     <!-- Favicon -->
@@ -36,13 +36,22 @@
     <!--  Sweet Alert  -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet"/>
+
     <!-- Custom CSS -->
     <link href="/dist/css/style.css" rel="stylesheet" type="text/css">
 
    <!-- My Custom Css   -->
     <style type="text/css">
-        .dropdown-menu {
+        .navbar-nav .dropdown-menu {
             top: 97% !important;
+        }
+        .table-condensed .active{
+            background-image:none !important;
+            background-color: #3a55b1 !important;
+            border-color: #3a55b1 !important;
         }
     </style>
 
@@ -115,9 +124,6 @@
 <!-- Easy pie chart JS -->
 <script src="/vendors/easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
 
-<!-- Sparkline JavaScript -->
-<script src="/vendors/jquery.sparkline/dist/jquery.sparkline.min.js"></script>
-
 <!-- Morris Charts JavaScript -->
 <script src="/vendors/raphael/raphael.min.js"></script>
 <script src="/vendors/morris.js/morris.min.js"></script>
@@ -140,9 +146,20 @@
 <!-- Form Flie Upload Data JavaScript -->
 <script src="/dist/js/form-file-upload-data.js"></script>
 
+<!-- Jasny-bootstrap  JavaScript -->
+<script src="/vendors/jasny-bootstrap/dist/js/jasny-bootstrap.min.js"></script>
+
 <!-- Init JavaScript -->
 <script src="/dist/js/init.js"></script>
 <script src="/dist/js/dashboard-data.js"></script>
+<script type="text/javascript">
+   let year =  $('#year');
+   year.attr('readonly','true');
+    year.datepicker({
+        minViewMode: 2,
+        format: 'yyyy'
+    });
+</script>
 
 </body>
 

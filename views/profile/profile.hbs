@@ -73,7 +73,7 @@
                                                    value="{{csrfToken}}">
                                             <input type="hidden" class="form-control" name="role"
                                                    value="{{account.role}}">
-                                            
+
                                             {{#if adminLogin}}
                                             <div class="row">
                                                 <div class="col-md-6 form-group">
@@ -81,8 +81,6 @@
                                                     <input id="name" class="form-control" required autocomplete="name"
                                                            autofocus name="name" value="{{account.name}}" type="text">
                                                 </div>
-                                            </div>
-                                            <div class="row">
                                                 <div class="col-md-6 form-group">
                                                     <label for="firstName">Email</label>
                                                     <input id="email" class="form-control" required autocomplete="email"
@@ -93,22 +91,18 @@
                                                 <div class="col-md-6 form-group">
                                                     <label for="firstName">New Password</label>
                                                     <input id="password" class="form-control" autocomplete="password"
-                                                           autofocus name="password" placeholder="Enter new Password" 
+                                                           autofocus name="password" placeholder="Enter new Password"
                                                            type="password" >
                                                     <small class="form-text badge badge-soft-warning text-muted">Enter your new password if you want to change it otherwise leave this field blank.</small>
                                                 </div>
-                                            </div>
-                                            <div class="row">
                                                 <div class="col-md-6 form-group">
                                                     <label for="firstName">Confirm Password</label>
                                                     <input id="confirmPassword" class="form-control" autocomplete="password"
                                                            autofocus name="confirmPassword" placeholder="Confirm Password"
                                                            type="password" onfocusout="confFunction()">
-                                                    </div><br>
-                                                    <span id="errSmall" class="form-text badge badge-soft-warning text-muted"></span>
+                                                    <small id="errSmall" class="form-text badge badge-soft-warning text-muted"></small>
+                                                </div>
                                             </div>
-                                            
-
                                             {{else}}
                                                 <div class="row">
                                                     <div class="col-md-6 form-group">
@@ -157,29 +151,14 @@
                                                             type="password">
                                                         <small class="form-text badge badge-soft-warning text-muted">Enter your new password if you want to change it otherwise leave this field blank.</small>
                                                     </div>
-                                                    {{#if studentLogin}}
                                                         <div class="col-md-6 form-group">
-                                                            <label for="firstName">Semester</label>
-                                                            <select class="form-control custom-select" name="semester"
-                                                                    id="semester">
-                                                                <option value="6">Sixth</option>
-                                                                <option value="7">Seventh</option>
-                                                                <option value="8">Eigth</option>
-                                                            </select>
-                                                            <script type="text/javascript">
-                                                                $('#semester option[value="{{account.semester}}"]').prop('selected', true)
-                                                            </script>
-                                                        </div>
-                                                    {{/if}}
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6 form-group">
-                                                        <label for="firstName">Confirm Password</label>
-                                                        <input id="confirmPassword" class="form-control" autocomplete="password"
-                                                            autofocus name="confirmPassword" placeholder="Confirm Password"
-                                                            type="password" onfocusout="confFunction()">
+                                                            <label for="firstName">Confirm Password</label>
+                                                            <input id="confirmPassword" class="form-control" autocomplete="password"
+                                                                   autofocus name="confirmPassword" placeholder="Confirm Password"
+                                                                   type="password" onfocusout="confFunction()">
                                                         </div><br>
                                                         <span id="errSmall" class="form-text badge badge-soft-warning text-muted"></span>
+
                                                 </div>
                                             {{/if}}
                                             <div class="row">
@@ -198,7 +177,7 @@
                                                                 return false;
                                                             }
                                                             document.getElementById("errSmall").textContent="";
-                                                            return true; 
+                                                            return true;
                                                         }
                                                 </script>
                                             </div>
@@ -223,7 +202,7 @@
                                                        value="{{csrfToken}}">
                                                 <input type="file" name="avatar" class="dropify"/>
                                             </div>
-                                        </div> 
+                                        </div>
                                         <div class="row text-center">
                                             <div class="col-sm p-4">
                                                 <button type="submit" class="btn btn-block btn-outline-primary">Update

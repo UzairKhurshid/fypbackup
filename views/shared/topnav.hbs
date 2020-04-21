@@ -81,23 +81,22 @@
                 <div class="notifications-nicescroll-bar">
                     {{#if notification}}
                         {{#each notification}}
-                            <a href="javascript:void(0);" class="dropdown-item">
+                            <a href="{{this.refRoute}}" class="dropdown-item">
                                 <div class="media">
                                     <div class="media-img-wrap">
                                         <div class="avatar avatar-sm">
                                             <span class="avatar-text avatar-text-info rounded-circle">
-													<span class="initial-wrap"><span>A</span></span>
+													<span class="initial-wrap"><span>{{chkNotification this.refTable}}</span></span>
                                             </span>
                                         </div>
                                     </div>
                                     <div class="media-body">
                                         <div>
                                             <div class="notifications-text">
-                                                <span class="text-dark text-capitalize">Evie Ono</span>
-                                                {{this.txt}}
+                                                <span class="text-dark text-capitalize">{{this.txt}}</span>
                                             </div>
                                             <div class="notifications-time">
-                                                <span class="badge badge-sm badge-blue" >12m</span>
+                                                <span class="badge badge-sm badge-blue" >{{this.createdAt}}</span>
                                             </div>
                                         </div>
                                     </div>

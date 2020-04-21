@@ -102,7 +102,7 @@ router.post('/signup/:role', async(req, res) => {
         account.status = "disable"
         account.role = role
         await account.save()
-        await createNotification('A new Account is created Please take a look.', '', 'admin')
+        await createNotification('A new Account has been created . Please review accounts.', 'Account', '/adminAccounts', '', 'admin')
         sendWelcomeMail(req.body.email, req.body.name)
 
         req.flash('success', 'Account Created Successfully')

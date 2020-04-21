@@ -5,6 +5,14 @@ const notificationSchema = new mongoose.Schema({
     text: {
         type: String
     },
+    refTable: {
+        type: String,
+        required: true
+    },
+    refRoute: {
+        type: String,
+        required: true
+    },
     ownerEmail: {
         type: String,
         ref: 'Account'
@@ -12,7 +20,7 @@ const notificationSchema = new mongoose.Schema({
     role: {
         type: String
     },
-    date: {
+    createdAt: {
         type: String,
         required: true
     },

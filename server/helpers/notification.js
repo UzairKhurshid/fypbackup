@@ -2,15 +2,24 @@ const Account = require('../models/account')
 const Notification = require('../models/notification')
 
 
-const createNotification = async(text, ownerEmail, role) => {
-    var today = new Date();
-    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+const createNotification = async(text, refTable, refRoute, ownerEmail, role) => {
+    const date = new Date()
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+
 
     const notification = new Notification()
     notification.text = text
+    notification.refTable = refTable
+    notification.refRoute = refRoute
     notification.ownerEmail = ownerEmail
     notification.role = role
-    notification.date = date
+    notification.createdAt = strTime
     notification.status = 'unread'
 
     await notification.save()
@@ -21,7 +30,10 @@ const getAllNotifications = async(email, role) => {
     let i = 0
     let Arr = []
     let newObj = {
-        txt: 'abc'
+        txt: 'abc',
+        refTable: 'abc',
+        refRoute: 'abc',
+        createdAt: 'abc'
     }
 
     if (role == 'admin') {
@@ -29,6 +41,9 @@ const getAllNotifications = async(email, role) => {
         for (i = 0; i < noti.length; i++) {
             let obj = Object.create(newObj)
             obj.txt = noti[i].text
+            obj.refTable = noti[i].refTable
+            obj.refRoute = noti[i].refRoute
+            obj.createdAt = noti[i].createdAt
             Arr[i] = obj
         }
     } else {
@@ -38,6 +53,9 @@ const getAllNotifications = async(email, role) => {
             for (i = 0; i < noti.length; i++) {
                 let obj = Object.create(newObj)
                 obj.txt = noti[i].text
+                obj.refTable = noti[i].refTable
+                obj.refRoute = noti[i].refRoute
+                obj.createdAt = noti[i].createdAt
                 Arr[i] = obj
             }
         }

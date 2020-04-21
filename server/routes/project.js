@@ -140,11 +140,9 @@ router.post('/projects/create', auth, async(req, res) => {
 
     try {
         //Creating Notification
-        await createNotification('A new Project is added . please review Projects .', '', '')
-
         await project.save()
+        await createNotification('A new Project is added . please review Projects .', 'Project', '/projects', '', '')
 
-        console.log("project saved successfully")
         req.flash('success', 'Projectd Created Successfully')
         res.redirect('/projects')
     } catch (e) {

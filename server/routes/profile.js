@@ -54,26 +54,41 @@ router.get('/profile', auth, async(req, res) => {
 
 
 router.post('/profile/update/:id', auth, async(req, res) => {
-    const id = req.params.id
-    const updates = Object.keys(req.body)
-    try {
-        const account = await Account.findOne({ _id: id })
-        if (!req.body.password) {
-            req.body.password = account.password
+        const id = req.params.id
+        const updates = Object.keys(req.body)
+        try {
+            const account = await Account.findOne({ _id: id })
+            if (!req.body.password) {
+                req.body.password = account.password
+            }
+            updates.forEach((update) => account[update] = req.body[update])
+            await account.save()
+
+            req.flash('success', 'Account Updated Successfully')
+            res.redirect('/profile')
+
+        } catch (e) {
+            console.log(e.message)
+            req.flash('success', e.message)
+            res.redirect('/profile')
         }
-        updates.forEach((update) => account[update] = req.body[update])
-        await account.save()
-
-        req.flash('success', 'Account Updated Successfully')
-        res.redirect('/profile')
-
-    } catch (e) {
-        console.log(e.message)
-        req.flash('success', e.message)
-        res.redirect('/profile')
-    }
-})
-
+    })
+    // router.post('/profile/updateAvatar/:id', auth, async(req, res) => {
+    //     const id = req.params.id
+    //     try {
+    //         // const account = await Account.findOne({ _id: id })
+    //         const buffer = await sharp(req.file.buffer).resize({ width: 250, height: 250 }).jpeg().toBuffer()
+    //         console.log(buffer.toString('base64'));
+    //         // account.avatar = buffer
+    //         // await account.save()
+    //         // req.flash('success', 'Successfully Uploaded Profile Picture')
+    //         // res.redirect('/profile')
+    //     } catch (e) {
+    //         console.log(e.message)
+    //         req.flash('error', 'Error uploading profile picture')
+    //         res.redirect('/profile')
+    //     }
+    // })
 
 
 router.post('/profile/updateAvatar/:id', auth, async(req, res) => {
@@ -81,8 +96,7 @@ router.post('/profile/updateAvatar/:id', auth, async(req, res) => {
     try {
         const account = await Account.findOne({ _id: id })
         const buffer = await sharp(req.file.buffer).resize({ width: 250, height: 250 }).jpeg().toBuffer()
-
-        account.avatar = buffer
+        account.avatar = buffer.toString('base64')
         await account.save()
 
         req.flash('success', 'Successfully Uploaded Profile Picture')

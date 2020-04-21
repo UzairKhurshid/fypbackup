@@ -175,12 +175,10 @@ router.post('/FYP/newTask/:id', async(req, res) => {
 
         proj.tasks = proj.tasks.concat({ taskName, taskDescription, taskStartDate, taskEndDate, status })
         await proj.save()
-        await createNotification('Your have a new Task . please review Your FYP tasks .', proj.requestedByEmail, 'student')
-
+        await createNotification('Your have a new Task . please review Your FYP tasks .', 'Task', '/FYPTasks/' + id, proj.requestedByEmail, 'student')
 
         req.flash('success', 'Successfully Created New Task For FYP')
         res.redirect('/FYPTasks/' + id)
-
     } catch (e) {
         console.log(e.message)
         req.flash('error', e.message)
@@ -197,18 +195,15 @@ router.post('/FYP/markTaskCompleted/:id', auth, async(req, res) => {
     let i = 0
 
     try {
-
         const proj = await myProject.findOne({ _id: id })
-
         for (i = 0; i < proj.tasks.length; i++) {
             if (proj.tasks[i]._id == taskID) {
                 proj.tasks[i].status = 'complete'
                 await proj.save()
             }
         }
-
         //Creating Notification
-        await createNotification('Your Task is marked Completed . please review Your FYP Progress .', proj.requestedByEmail, 'student')
+        await createNotification('Your Task is marked Completed . please review Your FYP Progress .', 'Task', '/FYPTasks/' + id, proj.requestedByEmail, 'student')
 
         req.flash('success', 'Status Changed Successfully')
         res.redirect('/FYPTasks/' + id)

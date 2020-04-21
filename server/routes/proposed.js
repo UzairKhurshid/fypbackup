@@ -187,11 +187,11 @@ router.post('/proposed/proposeNewProject', auth, async(req, res) => {
     try {
 
         await project.save()
-        await createNotification('A new Project is Proposed by ' + req.session.name + ' ( ' + role + '). Have a look in proposed Projects.', '', '')
+        await createNotification('A new Project is Proposed by ' + req.session.name + ' ( ' + role + '). please review proposed Projects.', 'Project', '/proposed/allProposedProjects', '', '')
 
         console.log("project saves successfully")
         req.flash('success', 'Projectd Created Successfully')
-        res.redirect('/proposed/allProposedProjects')
+        res.redirect('/selfProposed')
     } catch (e) {
         console.log(e.message)
         req.flash('error', e.message)
@@ -258,7 +258,7 @@ router.post('/projects/deleteRequest/:id', async(req, res) => {
 
 
         await Request.findByIdAndDelete(id)
-        await createNotification('Your request to project is deleted . please review Your requests .', req.body.requestedByEmail, 'student')
+        await createNotification('Your request to project is deleted . please review Your requests .', 'Request', '/projects/requests', req.body.requestedByEmail, 'student')
 
         req.flash('success', 'Request Cancelled')
         res.redirect('/projects/requests')
@@ -303,8 +303,7 @@ router.post('/projects/acceptRequest/:id', async(req, res) => {
             var query = { _id: projectID }
             await Project.findOneAndUpdate(query, { status: 'accepted' })
             sendProjectAcceptanceMail(req.session.email)
-            await createNotification('Your request to project is Accepted by ' + req.session.name + '  . please review Your FYP Now .', req.body.requestedByEmail, 'student')
-
+            await createNotification('Your request to project is Accepted by ' + req.session.name + '  . please review Your FYP Now .', 'Request', '/myProject', req.body.requestedByEmail, 'student')
 
             req.flash('success', 'Successfull , You are supervising this project from now on ...')
             res.redirect('/supervising')
@@ -338,7 +337,7 @@ router.post('/projects/requestProject/:id', auth, async(req, res) => {
         }
         await request.save()
         sendProjectRequestMail(req.session.email)
-        await createNotification('Your have a new request by ' + req.session.name + '  . please review Your requests .', req.body.ownerEmail, 'teacher')
+        await createNotification('You have a new request by ' + req.session.name + '  . please review Your requests .', 'Request', '/projects/requests', req.body.ownerEmail, 'teacher')
 
         req.flash('success', 'Request for this Project is sent Successfully')
         res.redirect('/projects/requests')

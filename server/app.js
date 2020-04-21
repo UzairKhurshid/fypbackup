@@ -81,6 +81,21 @@ hbs.registerHelper('chkChat', (val, email) => {
     }
     return 'false'
 })
+hbs.registerHelper('chkNotification', (val) => {
+    let res = 'X'
+    if (val == 'Account') {
+        res = "A"
+    } else if (val == 'Project') {
+        res = "P"
+    } else if (val == 'Task') {
+        res = "T"
+    } else if (val == 'Request') {
+        res = "R"
+    } else {
+        res = 'X'
+    }
+    return res
+})
 
 
 //**************************************************************************************** */

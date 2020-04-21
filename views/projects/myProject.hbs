@@ -14,8 +14,8 @@
     <!-- Title -->
     <div class="hk-pg-header">
         <div class="row">
-                <h4 class="hk-pg-title"><span class="pg-title-icon"><span class="feather-icon text-primary"><i
-                        data-feather="file"></i></span></span>Projects</h4>
+            <h4 class="hk-pg-title"><span class="pg-title-icon"><span class="feather-icon text-primary"><i
+                    data-feather="file"></i></span></span>Projects</h4>
         </div>
     </div>
     <!-- /Title -->
@@ -55,14 +55,21 @@
                                     {{#each project}}
                                         <!-- <th class="text-center" colspan="6">Show All Proposed Projects Here.</th> -->
                                         <tr>
-                                            <th>{{../projName}}</th>
-                                            <th>{{../supName}}</th>
-                                            <th>{{this.ownerEmail}}</th>
-                                            <th class="d-flex">
-                                                <a class="btn btn-sm btn-outline-info" href="/viewproject/{{this.projectID}}">View Project</a>
-                                                <a class="btn btn-sm btn-outline-primary" href="/FYPTasks/{{this.id}}">View Tasks</a>
-                                                <a  href="/chat/{{this.id}}?projectName={{../projName}}"><img style="margin-left: 20px;margin-top: 20px;" height="25px" width="25px" src="/dist/img/chat.png"></a>
-                                            </th>
+                                            <td class="text-capitalize">{{../projName}}</td>
+                                            <td class="text-capitalize">{{../supName}}</td>
+                                            <td>{{this.ownerEmail}}</td>
+                                            <td class="d-flex">
+                                                <a class="btn btn-sm btn-outline-info mr-5"
+                                                   href="/viewproject/{{this.projectID}}">View Project</a>
+                                                <a class="btn btn-sm btn-outline-blue mr-5"
+                                                   href="/FYPTasks/{{this.id}}">View Tasks</a>
+                                                <a class="btn btn-xs btn-info"
+                                                   href="/chat/{{this.id}}?projectName={{../projName}}">
+                                                <span class="feather-icon text-white">
+                                                    <i data-feather="message-square"></i>
+                                                </span>
+                                                </a>
+                                            </td>
                                         </tr>
                                     {{/each}}
                                 {{/if}}

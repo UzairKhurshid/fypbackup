@@ -1,100 +1,100 @@
-    {{!-- Header --}}
-    <div class="header bg-primary pb-6">
-      <div class="container-fluid">
-        <div class="header-body">
-          <div class="row align-items-center py-4">
-            <div class="col-lg-6 col-7">
-              <h6 class="h2 text-white d-inline-block mb-0">FYP</h6>
-              <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                  <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="#">New Task</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Create</li>
-                </ol>
-              </nav>
+<!-- Breadcrumb -->
+<nav class="hk-breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb breadcrumb-light bg-transparent">
+        <li class="breadcrumb-item"><a href="#">Projects</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Task</li>
+        <li class="breadcrumb-item active" aria-current="page">Create</li>
+    </ol>
+</nav>
+<!-- /Breadcrumb -->
+
+<!-- Container -->
+<div class="container-fluid">
+
+    <!-- Title -->
+    <div class="hk-pg-header">
+        <div class="row w-100">
+            <div class="col-md-6">
+                <h4 class="hk-pg-title"><span class="pg-title-icon"><span class="feather-icon text-primary"><i
+                        data-feather="file"></i></span></span>Create Project Task</h4>
             </div>
-            <div class="col-lg-6 col-5 text-right">
-              <a href="#" class="btn btn-sm btn-neutral">New</a>
-              <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+            <div class="col-md-6 pr-0 text-md-right">
+                <a class="btn btn-sm btn-primary" href="/projects">All Projects</a>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-           <!-- Page content -->
-    <div class="container-fluid mt--6">
+    <!-- /Title -->
+
+    <!-- Row -->
     <div class="row">
-        <div class="col">
-            <div class="card">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-6">
-                             <h3 class="mb-0">Create new Task</h3>
-                    
-                        </div>
-                        <div class="col-6 text-md-right">
-                            <a class="btn btn-primary" href="/FYPTasks/{{projID}}">Show All Tasks</a>
-                        </div>
+        <div class="col-xl-12">
+            <section class="hk-sec-wrapper">
+                <h5 class="hk-sec-title">New Projects Task</h5>
+                <p class="mb-40">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dignissimos
+                    perspiciatis sapiente sunt veniam. Dolorem dolorum ipsam praesentium, quis ratione velit. Asperiores
+                    eaque eos laudantium modi! Nisi odio quasi totam.
+                </p>
+                <div class="row">
+                    <div class="col-sm">
+                        <form method="POST" action="/FYP/newTask/{{projID}}">
+                            <input type="hidden" name="_csrf" value="{{csrfToken}}" class="form-control">
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="taskName" class="form-control-label">Task Name</label>
+                                        <input required type="text" placeholder="Enter Task Name " class="form-control"
+                                               name="taskName" id="taskName">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="status" class="form-control-label">Task Status</label>
+                                        <input required type="text" class="form-control" name="status" id="status"
+                                               value="incomplete" readonly>
+                                        <small class="form-text badge badge-soft-warning text-muted">You can not change this field.</small>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="taskStartDate" class="form-control-label">Task Start Date</label>
+                                        <input required type="text" placeholder="Enter Task Starting Date "
+                                               class="form-control datepicker" id="taskStartDate" name="taskStartDate"
+                                               value="2016-01-01" min="2018-01-01" max="2021-12-31">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="taskEndDate" class="form-control-label">Task End Date</label>
+                                        <input required type="text" placeholder="Enter Task Ending Date "
+                                               class="form-control datepicker" id="taskEndDate" name="taskEndDate"
+                                               value="2016-01-01" min="2018-01-01" max="2021-12-31">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="taskDescription" class="form-control-label">Task Description</label>
+                                        <textarea class="form-control" name="taskDescription"
+                                                  placeholder="Enter Task Description " id="taskDescription" rows="5"
+                                                  required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <button type="submit" class="btn  btn-outline-green">Create Task</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                   
                 </div>
-                <div class="container py-4">
-                    <form method="POST" action="/FYP/newTask/{{projID}}">
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                               <label for="taskName" class="form-control-label" >Task Name</label>
-                               <input required type="text" placeholder="Enter Task Name " class="form-control" name="taskName" id="taskName">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                               <label for="taskDescription" class="form-control-label" >Task Description</label>
-                               <input required type="text" placeholder="Enter Task Description " class="form-control" name="taskDescription" id="taskDescription">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                               <label for="taskDescription" class="form-control-label" >Task Start Date</label>
-                                    <input required type="date" placeholder="Enter Task Starting Date " class="form-control" id="taskStartDate" name="taskStartDate" value="2016-01-01" min="2018-01-01" max="2021-12-31">
-                               </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                               <label for="taskDescription" class="form-control-label" >Task End Date</label>
-                                  <input required type="date" placeholder="Enter Task Ending Date " class="form-control" id="taskEndDate" name="taskEndDate" value="2016-01-01" min="2018-01-01" max="2021-12-31">
-                              </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                               <label for="taskStatus" class="form-control-label" >Task Status</label>
-                               <input required type="text"  class="form-control" name="status" id="status" value="incomplete" readonly>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="row">
-                            <div class="form-group">
-                                   <input  type="hidden" name="_csrf" value="{{csrfToken}}" class="form-control">
-                            </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Create Task</button>
-                   </form>
-                </div>
-            </div>
+            </section>
         </div>
     </div>
-      {{> footer }}
-    </div>
+    <!-- /Row -->
+</div>
+<!-- /Container -->

@@ -2,7 +2,7 @@
 <nav class="hk-breadcrumb" aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-light bg-transparent">
         <li class="breadcrumb-item"><a href="#">Projects</a></li>
-        <li class="breadcrumb-item active" aria-current="page">All</li>
+        <li class="breadcrumb-item active" aria-current="page">Supervising</li>
     </ol>
 </nav>
 <!-- /Breadcrumb -->
@@ -14,8 +14,8 @@
     <div class="hk-pg-header">
         <div class="row w-100">
             <div class="col-md-6">
-                <h4 class="hk-pg-title"><span class="pg-title-icon"><span class="feather-icon text-primary"><i
-                        data-feather="file"></i></span></span>Projects</h4>
+                <h4 class="hk-pg-title text-capitalize"><span class="pg-title-icon"><span class="feather-icon text-primary"><i
+                        data-feather="bookmark"></i></span></span>Under {{accountName}} Supervising</h4>
             </div>
             <div class="col-md-6 pr-0 text-md-right">
                 {{#if adminLogin}}
@@ -32,7 +32,7 @@
     <div class="row">
         <div class="col-xl-12">
             <section class="hk-sec-wrapper">
-                <h5 class="hk-sec-title">Projects</h5>
+                <h5 class="hk-sec-title text-capitalize">Projects under {{accountName}} supervising</h5>
                 <p class="mb-40">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dignissimos
                     perspiciatis sapiente sunt veniam. Dolorem dolorum ipsam praesentium, quis ratione velit. Asperiores
                     eaque eos laudantium modi! Nisi odio quasi totam.
@@ -69,7 +69,12 @@
                                             <td>
                                                 <a class="btn btn-sm btn-outline-info" href="/viewproject/{{this.projectID}}">View Project</a>
                                                 <a class="btn btn-sm btn-outline-blue" href="/FYPTasks/{{this.FYPID}}">View Progress</a>
-                                                <a  href="/chat/{{this.FYPID}}?projectName={{this.projectName}}"><img style="margin-left: 20px;margin-top: 20px;" height="25px" width="25px" src="/dist/img/chat.png"></a>
+                                                <a class="btn btn-xs btn-info"
+                                                   href="/chat/{{this.id}}?projectName={{../projName}}">
+                                                <span class="feather-icon text-white">
+                                                    <i data-feather="message-square"></i>
+                                                </span>
+                                                </a>
                                             </td>
                                         </tr>
                                     {{/each}}

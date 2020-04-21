@@ -1,108 +1,129 @@
-   {{!-- Header --}}
-    <div class="header bg-primary pb-6">
-      <div class="container-fluid">
-        <div class="header-body">
-          <div class="row align-items-center py-4">
-            <div class="col-lg-6 col-7">
-              <h6 class="h2 text-white d-inline-block mb-0">Default</h6>
-              <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                  <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="#"> FYP </a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Tasks</li>
-                </ol>
-              </nav>
+<!-- Breadcrumb -->
+<nav class="hk-breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb breadcrumb-light bg-transparent">
+        <li class="breadcrumb-item"><a href="#">Projects</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Tasks</li>
+    </ol>
+</nav>
+<!-- /Breadcrumb -->
+
+<!-- Container -->
+<div class="container-fluid">
+
+    <!-- Title -->
+    <div class="hk-pg-header">
+        <div class="row w-100">
+            <div class="col-md-6">
+                <h4 class="hk-pg-title text-capitalize"><span class="pg-title-icon"><span class="feather-icon text-primary"><i
+                        data-feather="file"></i></span></span>{{accountName}} Project Tasks</h4>
             </div>
-            <div class="col-lg-6 col-5 text-right">
-              <a href="#" class="btn btn-sm btn-neutral">New</a>
-              <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+            <div class="col-md-6 pr-0 text-md-right">
+                {{#if teacherLogin}}
+                    <a class="btn btn-sm btn-blue" href="/FYP/newTask/{{projID}}">Create New Task</a>
+                {{/if}}
             </div>
-          </div>
         </div>
-      </div>
     </div>
-    <!-- Page content -->
-    <div class="container-fluid mt--6">
+    <!-- /Title -->
+
+    <!-- Row -->
     <div class="row">
-        <div class="col">
-            <div class="card">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p class="text-sm mb-0">
-                                Showing Final Year Project Tasks.
-                            </p>
+        <div class="col-xl-12">
+            <section class="hk-sec-wrapper">
+                <h5 class="hk-sec-title">{{accountName}} Project Tasks Details</h5>
+                <p class="mb-40">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dignissimos
+                    perspiciatis sapiente sunt veniam. Dolorem dolorum ipsam praesentium, quis ratione velit. Asperiores
+                    eaque eos laudantium modi! Nisi odio quasi totam.
+                </p>
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="table-wrap">
+                            {{#if success}}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                                    <span class="alert-text"><strong>Success!</strong> {{success}}</span>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                            {{/if}}
+                            <table id="datable_1" class="table table-hover w-100 display pb-30">
+                                <thead>
+                                <tr>
+                                    <th>Task Name</th>
+                                    <th>Task Description</th>
+                                    <th>Task Start Date</th>
+                                    <th>Task End Date</th>
+                                    <th>Status</th>
+                                    {{#if teacherLogin}}
+                                        <th>Action</th>
+                                    {{/if}}
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {{#if tasks}}
+                                    {{#if teacherLogin}}
+                                        {{#each tasks}}
+                                            <tr>
+                                                <td>{{this.taskName}}</td>
+                                                <td>{{this.taskDescription}}</td>
+                                                <td>{{this.taskStartDate}}</td>
+                                                <td>{{this.taskEndDate}}</td>
+                                                <td><span class="badge badge-status-{{this.status}}">{{this.status}}</span></td>
+                                                <td class="d-flex justify-content-start">
+                                                    <form onsubmit="return form_confirm(this);" method="POST" action="/FYP/markTaskCompleted/{{../projID}}">
+                                                        <input type="hidden" name="taskID" value="{{this.id}}">
+                                                        <input type="hidden" name="_csrf" value="{{../csrfToken}}">
+                                                        <button class="btn btn-sm btn-outline-blue" >Mark Task As Completed</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        {{/each}}
+                                        <script>
+                                            function form_confirm(form) {
+                                                Swal.fire({
+                                                    title: 'Are you sure?',
+                                                    text: "You won't be able to revert this!",
+                                                    icon: 'warning',
+                                                    showCancelButton: true,
+                                                    confirmButtonText: 'Yes, Mark it complete!'
+                                                }).then((result) => {
+                                                    if (result.value) {
+                                                        Swal.fire(
+                                                                'Completed!',
+                                                                'Your task has been marked completed.',
+                                                                'success'
+                                                        )
+                                                        return form.submit();
+                                                    }
+                                                });
+                                                return false;
+                                            }
+                                        </script>
+                                    {{else}}
+                                        {{#each tasks}}
+                                            <tr>
+                                                <td class="text-capitalize">{{this.taskName}}</td>
+                                                <td>{{this.taskDescription}}</td>
+                                                <td>{{this.taskStartDate}}</td>
+                                                <td>{{this.taskEndDate}}</td>
+                                                <td><span class="badge badge-status-{{this.status}}">{{this.status}}</span></td>
+                                            </tr>
+                                        {{/each}}
+                                    {{/if}}
+                                {{/if}}
+                                </tbody>
+                                <script type="text/javascript">
+                                    $('.badge-status-complete').addClass('badge-success');
+                                    $('.badge-status-incomplete').addClass('badge-orange');
+                                </script>
+                            </table>
                         </div>
-                        {{#if teacherLogin}}
-                          <div class="col-md-6 text-right">
-                              <a class="btn btn-primary" href="/FYP/newTask/{{projID}}">Assign New Task</a>
-                          </div>
-                        {{/if}}
                     </div>
                 </div>
-                <div class="table-responsive py-4">
-                  {{#if success}}
-                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <span class="alert-icon"><i class="ni ni-like-2"></i></span>
-                <span class="alert-text"><strong>Success!</strong> {{success}}</span>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-              {{/if}}
-                    <table class="table dataTable align-items-center table-hover" id="datatable-basic">
-                        <thead class="thead-light">
-                        <tr>
-                            <th>Task Name</th>
-                            <th>Task Description</th>
-                            <th>Task Start Date</th>
-                            <th>Task End Date</th>
-                            <th>Status</th>
-                            {{#if teacherLogin}}
-                              <th>Action</th>
-                            {{/if}}
-                        </tr>
-                        </thead>
-                        <tbody> 
-                          {{#if tasks}} 
-                            {{#if teacherLogin}}
-                                {{#each tasks}}
-                                     
-                                    <tr>
-                                      <th>{{this.taskName}}</th>
-                                      <th>{{this.taskDescription}}</th>
-                                      <th>{{this.taskStartDate}}</th>
-                                      <th>{{this.taskEndDate}}</th>
-                                      <th>{{this.status}}</th>
-                                    
-                                      <th>
-                                        <form method="POST" action="/FYP/markTaskCompleted/{{../projID}}">
-                                          <input type="hidden" name="taskID" value="{{this.id}}">
-                                          <input type="hidden" name="_csrf" value="{{../csrfToken}}">
-                                          <button class="btn btn-sm btn-primary" >Mark Task As Completed</button>
-                                        </form>
-                                      </th>
-                                      
-                                    </tr>
-                                {{/each}}
-                                {{else}}
-                                    {{#each tasks}}
-                                      <tr>
-                                        <th>{{this.taskName}}</th>
-                                        <th>{{this.taskDescription}}</th>
-                                        <th>{{this.taskStartDate}}</th>
-                                        <th>{{this.taskEndDate}}</th>
-                                        <th>{{this.status}}</th> 
-                                      </tr>
-                                  {{/each}}
-                              {{/if}}
-                            {{/if}}
-                            
-                        </tbody>
-                    </table>
-                  </div>
-            </div>
+            </section>
         </div>
     </div>
-      {{> footer }}
-    </div>
+    <!-- /Row -->
+</div>
+<!-- /Container -->

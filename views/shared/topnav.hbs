@@ -64,43 +64,73 @@
                     <a class="nav-link" href="/projects/requests">Requests</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/supervising">Supervising <span style="font-size: 13px;" class="badge badge-success badge-sm badge-pill ml-10">{{supervisingCount}}</span></a>
+                    <a class="nav-link" href="/supervising">Supervising <span style="font-size: 13px;"
+                                                                              class="badge badge-success badge-sm badge-pill ml-10">{{supervisingCount}}</span></a>
                 </li>
             {{/if}}
         </ul>
     </div>
     <ul class="navbar-nav hk-navbar-content">
-        <li class="nav-item dropdown dropdown-authentication">
-            <a class="nav-link dropdown-toggle no-caret" href="#" role="button" data-toggle="dropdown"
-               aria-haspopup="true" aria-expanded="false">
-                <div class="media">
-                    <div class="media-img-wrap">
-                        <div class="avatar">
-                            <img src="/dist/img/notification.png" alt="user" class="avatar-img rounded-circle">
-                            <span style="top: -24px !important;" class="badge">{{notificationCount}}</span>
-                        </div>
-                    </div>
-                </div>
- 
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
-                {{#if notification}}
-                    {{#each notification}}
-                        <a style="pointer-events: none; cursor: default;" class="dropdown-item" href="/dashboard"><i
-                                class="dropdown-icon zmdi zmdi-notifications-active"></i><span>{{this.txt}}</span></a>
-                    {{/each}}
-                {{else}}
-                    <label>No New Notification</label>
-                {{/if}}
-                <div class="dropdown-divider"></div>
-                <form method="POST" action="/clearAllNotifications">
+        <li class="nav-item dropdown dropdown-notifications">
+            <a class="nav-link dropdown-toggle no-caret" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="feather-icon"><i data-feather="bell"></i></span><span class="badge-wrap"><span class="badge badge-success badge-indicator badge-indicator-sm badge-pill pulse"></span></span></a>
+            <div class="dropdown-menu dropdown-menu-right" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                <h6 class="dropdown-header">Notifications <a onclick="$('#clearForm').submit();" href="javascript:void(0);" class="">clear all</a></h6>
+                <form id="clearForm" method="POST" action="/clearAllNotifications">
                     <input type="hidden" name="_csrf" value="{{csrfToken}}">
-                    <button style="margin-top: 20px;" id="btnBell" class="btn-block btn-primary">Clear All</button>
                 </form>
+                <div class="notifications-nicescroll-bar">
+                    {{#if notification}}
+                        {{#each notification}}
+                            <a href="javascript:void(0);" class="dropdown-item">
+                                <div class="media">
+                                    <div class="media-img-wrap">
+                                        <div class="avatar avatar-sm">
+                                            <span class="avatar-text avatar-text-info rounded-circle">
+													<span class="initial-wrap"><span>A</span></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <div>
+                                            <div class="notifications-text">
+                                                <span class="text-dark text-capitalize">Evie Ono</span>
+                                                {{this.txt}}
+                                            </div>
+                                            <div class="notifications-time">
+                                                <span class="badge badge-sm badge-blue" >12m</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                        {{/each}}
+                    {{else}}
+                        <a href="javascript:void(0);" class="dropdown-item">
+                            <div class="media">
+                                <div class="media-img-wrap">
+                                    <div class="avatar avatar-sm">
+                                            <span class="avatar-text avatar-text-green rounded-circle">
+													<span class="initial-wrap"><span class="feather-icon text-green"><i
+                                                            data-feather="thumbs-up"></i></span></span>
+                                            </span>
+                                    </div>
+                                </div>
+                                <div class="media-body">
+                                    <div>
+                                        <div class="w-100">
+                                            <span class="text-green text-capitalize">All Done</span>
+                                            You have no notification at this moment
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                    {{/if}}
+                </div>
             </div>
         </li>
-
-
         <li class="nav-item dropdown dropdown-authentication">
             <a class="nav-link dropdown-toggle no-caret" href="#" role="button" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false">

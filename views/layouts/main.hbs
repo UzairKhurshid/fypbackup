@@ -152,6 +152,7 @@
 <!-- Init JavaScript -->
 <script src="/dist/js/init.js"></script>
 <script src="/dist/js/dashboard-data.js"></script>
+
 <script type="text/javascript">
    let year =  $('#year');
    year.attr('readonly','true');
@@ -159,6 +160,12 @@
         minViewMode: 2,
         format: 'yyyy'
     });
+
+   let datepicker =  $('.datepicker');
+   datepicker.attr('readonly','true');
+   datepicker.datepicker({
+       format: 'mm/dd/yyyy'
+   });
 </script>
 
 </body>

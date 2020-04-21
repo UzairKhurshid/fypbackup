@@ -120,15 +120,16 @@ router.get('/adminAccount/create', auth, async(req, res) => {
 })
 
 router.post('/adminAccount/create', auth, async(req, res) => {
-    const account = new Account(req.body)
+
     try {
+        const account = new Account(req.body)
         await account.save()
         req.flash('success', 'Account Created Successfully')
         res.redirect('/adminAccounts')
     } catch (e) {
         console.log(e.message)
-        req.flash('error', e.message)
-        res.redirect('/dashboard')
+        req.flash('error', '' + e.message)
+        res.redirect('/adminAccount/create')
     }
 })
 
@@ -211,12 +212,12 @@ router.post('/adminAccount/update/:id', auth, async(req, res) => {
 
         console.log("Updated Successfully")
         req.flash('success', 'Account Updated Successfully')
-        res.redirect('/adminAccounts')
+        return res.redirect('/adminAccounts')
 
     } catch (e) {
         console.log(e.message)
-        req.flash('error', e.message)
-        res.redirect('/dashboard')
+        req.flash('error', '' + e.message)
+        res.redirect('/adminAccount/update/' + id)
     }
 })
 
@@ -225,18 +226,16 @@ router.post('/adminAccount/update/:id', auth, async(req, res) => {
 router.post('/adminAccount/delete/:id', auth, async(req, res) => {
 
     const id = req.params.id
-
     try {
         await Account.findOneAndDelete({ _id: id })
         console.log("deleted Successfully")
+
         req.flash('success', 'Account Deleted Successfully')
-        res.redirect('/adminAccounts')
-
-
+        return res.redirect('/adminAccounts')
     } catch (e) {
         console.log(e.message)
-        req.flash('error', e.message)
-        res.redirect('/dashboard')
+        req.flash('error', '' + e.message)
+        res.redirect('/adminAccounts')
     }
 })
 

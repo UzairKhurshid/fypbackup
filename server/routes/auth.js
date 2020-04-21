@@ -45,6 +45,7 @@ router.post('/login/:role', async(req, res) => {
 
     try {
         const account = await Account.findByCredentionals(req.body.email, req.body.password, role)
+
         req.session.name = account.name
         req.session.role = role
         req.session.email = req.body.email

@@ -122,7 +122,12 @@ app.use(accountRouter)
 app.use(profileRouter)
 app.use(myProjectRouter)
 app.use(chatRouter)
-
+app.get('*', function(req, res) {
+    res.render('404', {
+        title: '404',
+        pageError: 'Page Not Found'
+    });
+})
 
 
 io.on('connection', (socket) => {
@@ -139,6 +144,8 @@ io.on('connection', (socket) => {
         io.emit('message', generateMessage('A user has left!'))
     })
 })
+
+
 
 
 server.listen(port)

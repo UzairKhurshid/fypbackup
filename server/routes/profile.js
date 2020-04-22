@@ -85,7 +85,7 @@ router.post('/profile/updateAvatar/:id', auth, async(req, res) => {
         const buffer = await sharp(req.file.buffer).resize({ width: 250, height: 250 }).jpeg().toBuffer()
         account.avatar = buffer.toString('base64')
         await account.save()
-
+        req.session.avatar = buffer.toString('base64')
         req.flash('success', 'Successfully Uploaded Profile Picture')
         res.redirect('/profile')
     } catch (e) {

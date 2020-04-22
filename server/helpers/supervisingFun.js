@@ -18,23 +18,17 @@ const getArr = async(email, role) => {
     }
 
     const account = await Account.findOne({ email, role })
-    if (!account) {
-        return res.redirect('/dashboard')
+    await account.populate('myProjectOwnerID').execPopulate()
+
+    for (i = 0; i < account.myProjectOwnerID.length; i++) {
+        project[i] = await Project.findOne({ _id: account.myProjectOwnerID[i].projectID })
+        student[i] = await Account.findOne({ _id: account.myProjectOwnerID[i].requestedByID })
     }
-
-    await account.populate('myProjectOwnerEmail').execPopulate()
-
-    for (i = 0; i < account.myProjectOwnerEmail.length; i++) {
-        project[i] = await Project.findOne({ _id: account.myProjectOwnerEmail[i].projectID })
-        student[i] = await Account.findOne({ email: account.myProjectOwnerEmail[i].requestedByEmail })
-    }
-
 
     for (i = 0; i < project.length; i++) {
         let obj = Object.create(newObj)
-
-        obj.FYPID = account.myProjectOwnerEmail[i]._id
-        obj.projectID = account.myProjectOwnerEmail[i].projectID
+        obj.FYPID = account.myProjectOwnerID[i]._id
+        obj.projectID = account.myProjectOwnerID[i].projectID
         obj.projectName = project[i].name
         obj.projectYear = project[i].year
         obj.requestedByName = student[i].name

@@ -10,15 +10,13 @@ const requestSchema = new mongoose.Schema({
         required: true,
         ref: 'Project'
     },
-    ownerEmail: {
+    ownerID: {
         type: String,
-        trim: true,
         required: true,
         ref: 'Account'
     },
-    requestedByEmail: {
+    requestedByID: {
         type: String,
-        trim: true,
         required: true,
         ref: 'Account'
     },

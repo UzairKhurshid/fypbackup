@@ -4,9 +4,8 @@ const bcrypt = require('bcryptjs')
 
 const myProjectSchema = new mongoose.Schema({
 
-    ownerEmail: {
+    ownerID: {
         type: String,
-        trim: true,
         required: true,
         ref: 'Account'
     },
@@ -15,9 +14,8 @@ const myProjectSchema = new mongoose.Schema({
         trim: true,
         required: true
     },
-    requestedByEmail: {
+    requestedByID: {
         type: String,
-        trim: true,
         required: true,
         ref: 'Account'
     },

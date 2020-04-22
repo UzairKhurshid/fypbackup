@@ -1,8 +1,9 @@
 const Account = require('../models/account')
 const Notification = require('../models/notification')
+const mongoose = require('mongoose')
 
 
-const createNotification = async(text, refTable, refRoute, ownerEmail, role) => {
+const createNotification = async(text, refTable, refRoute, ownerID, role) => {
     const date = new Date()
     var hours = date.getHours();
     var minutes = date.getMinutes();
@@ -17,7 +18,7 @@ const createNotification = async(text, refTable, refRoute, ownerEmail, role) => 
     notification.text = text
     notification.refTable = refTable
     notification.refRoute = refRoute
-    notification.ownerEmail = ownerEmail
+    notification.ownerID = ownerID
     notification.role = role
     notification.createdAt = strTime
     notification.status = 'unread'
@@ -47,8 +48,11 @@ const getAllNotifications = async(email, role) => {
             Arr[i] = obj
         }
     } else {
-        const noti = await Notification.find({ ownerEmail: email })
+        const account = await Account.findOne({ email, role })
+        const id = account.id
+        const noti = await Notification.find({ ownerID: id })
         const noti2 = await Notification.find({ role: "" })
+
         if (!noti.length <= 0) {
             for (i = 0; i < noti.length; i++) {
                 let obj = Object.create(newObj)
@@ -64,6 +68,9 @@ const getAllNotifications = async(email, role) => {
             for (i = 0; i < noti2.length; i++) {
                 let obj = Object.create(newObj)
                 obj.txt = noti2[i].text
+                obj.refTable = noti2[i].refTable
+                obj.refRoute = noti2[i].refRoute
+                obj.createdAt = noti2[i].createdAt
                 Arr[j] = obj
                 j++
             }

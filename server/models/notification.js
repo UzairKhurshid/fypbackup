@@ -13,7 +13,7 @@ const notificationSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    ownerEmail: {
+    ownerID: {
         type: String,
         ref: 'Account'
     },

@@ -137,9 +137,6 @@ router.get('/projects/create', auth, async(req, res) => {
 })
 
 router.post('/projects/create', auth, async(req, res) => {
-
-    var today = new Date();
-    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     const role = req.session.role
     const project = new Project(req.body)
     project.ownerRole = role
@@ -217,9 +214,8 @@ router.get('/projects/update/:id', auth, async(req, res) => {
 })
 
 router.post('/projects/update/:id', auth, async(req, res) => {
-
+    const role = req.session.role
     const updates = Object.keys(req.body)
-
     const id = req.params.id
 
     try {
@@ -230,7 +226,11 @@ router.post('/projects/update/:id', auth, async(req, res) => {
 
         console.log("Updated SUccessfully")
         req.flash('success', 'Project Updated Successfully')
-        res.redirect('/projects')
+        if (role == 'admin') {
+            return res.redirect('/projects')
+        }
+        return res.redirect('/selfProposed')
+
     } catch (e) {
         console.log(e.message)
         req.flash('error', e.message)
@@ -240,14 +240,17 @@ router.post('/projects/update/:id', auth, async(req, res) => {
 
 
 router.post('/projects/delete/:id', auth, async(req, res) => {
-
+    const role = req.session.role
     const id = req.params.id
 
     try {
         await Project.findOneAndDelete({ _id: id })
         console.log("deleted Successfully")
         req.flash('success', 'Project deleted successfully')
-        res.redirect('/projects')
+        if (role == 'admin') {
+            return res.redirect('/projects')
+        }
+        return res.redirect('/selfProposed')
     } catch (e) {
         console.log(e.message)
         req.flash('error', e.message)

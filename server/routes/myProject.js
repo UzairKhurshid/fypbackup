@@ -19,13 +19,9 @@ router.get('/myProject', async(req, res) => {
 
         if (role == 'student') {
             const account = await Account.findOne({ email, role })
-            if (!account) {
-                return res.redirect('/dashboard')
-            }
-
-            await account.populate('myProjectRequestedByEmail').execPopulate()
-            const project = await Project.findOne({ _id: account.myProjectRequestedByEmail[0].projectID })
-            const supervisor = await Account.findOne({ email: account.myProjectRequestedByEmail[0].ownerEmail })
+            await account.populate('myProjectRequestedByID').execPopulate()
+            const project = await Project.findOne({ _id: account.myProjectRequestedByID[0].projectID })
+            const supervisor = await Account.findOne({ _id: account.myProjectRequestedByID[0].ownerID })
             const Arr = await getAllNotifications(email, role)
             const notificationCount = Arr.length
 
@@ -33,9 +29,10 @@ router.get('/myProject', async(req, res) => {
                 title: 'FYP',
                 Projects: true,
                 studentLogin: 'true',
-                project: account.myProjectRequestedByEmail,
+                project: account.myProjectRequestedByID,
                 projName: project.name,
                 supName: supervisor.name,
+                supEmail: supervisor.email,
                 notification: Arr,
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
@@ -180,7 +177,7 @@ router.post('/FYP/newTask/:id', async(req, res) => {
 
         proj.tasks = proj.tasks.concat({ taskName, taskDescription, taskStartDate, taskEndDate, status })
         await proj.save()
-        await createNotification('Your have a new Task . please review Your FYP tasks .', 'Task', '/FYPTasks/' + id, proj.requestedByEmail, 'student')
+        await createNotification('Your have a new Task . please review Your FYP tasks .', 'Task', '/FYPTasks/' + id, proj.requestedByID, 'student')
 
         req.flash('success', 'Successfully Created New Task For FYP')
         res.redirect('/FYPTasks/' + id)
@@ -208,7 +205,7 @@ router.post('/FYP/markTaskCompleted/:id', auth, async(req, res) => {
             }
         }
         //Creating Notification
-        await createNotification('Your Task is marked Completed . please review Your FYP Progress .', 'Task', '/FYPTasks/' + id, proj.requestedByEmail, 'student')
+        await createNotification('Your Task is marked Completed . please review Your FYP Progress .', 'Task', '/FYPTasks/' + id, proj.requestedByID, 'student')
 
         req.flash('success', 'Status Changed Successfully')
         res.redirect('/FYPTasks/' + id)

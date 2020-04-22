@@ -47,9 +47,8 @@ const projectSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
-    ownerEmail: {
+    ownerID: {
         type: String,
-        trim: true,
         ref: 'Account'
     },
     ownerRole: {
@@ -61,15 +60,6 @@ const projectSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
-    },
-    request: {
-        type: String,
-        trim: true
-    },
-    assignedToID: {
-        type: String,
-        trim: true,
-        ref: 'Account'
     }
 
 }, {
@@ -79,7 +69,7 @@ const projectSchema = new mongoose.Schema({
 
 projectSchema.virtual('requestProject', {
     ref: 'Request',
-    localField: 'id',
+    localField: '_id',
     foreignField: 'projectID'
 })
 

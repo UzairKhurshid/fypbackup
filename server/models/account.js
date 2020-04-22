@@ -67,46 +67,46 @@ const accountSchema = new mongoose.Schema({
 
 
 //*********Virtuals For My Project *********** */
-accountSchema.virtual('myProjectOwnerEmail', {
+accountSchema.virtual('myProjectOwnerID', {
     ref: 'myProject',
-    localField: 'email',
-    foreignField: 'ownerEmail'
+    localField: '_id',
+    foreignField: 'ownerID'
 })
 
-accountSchema.virtual('myProjectRequestedByEmail', {
+accountSchema.virtual('myProjectRequestedByID', {
     ref: 'myProject',
-    localField: 'email',
-    foreignField: 'requestedByEmail'
+    localField: '_id',
+    foreignField: 'requestedByID'
 })
 
 //*********Virtuals For  Project *********** */
 
 accountSchema.virtual('projects', {
     ref: 'Project',
-    localField: 'email',
-    foreignField: 'ownerEmail'
+    localField: '_id',
+    foreignField: 'ownerID'
 })
 
 //*********Virtuals For Request *********** */
 
 accountSchema.virtual('requestToProject', {
     ref: 'Request',
-    localField: 'email',
-    foreignField: 'ownerEmail'
+    localField: '_id',
+    foreignField: 'ownerID'
 })
 
 accountSchema.virtual('requestedByProject', {
     ref: 'Request',
-    localField: 'email',
-    foreignField: 'requestedByEmail'
+    localField: '_id',
+    foreignField: 'requestedByID'
 })
 
 //*********Virtuals For Notification *********** */
 
 accountSchema.virtual('notificationOwner', {
     ref: 'Notification',
-    localField: 'email',
-    foreignField: 'ownerEmail'
+    localField: '_id',
+    foreignField: 'ownerID'
 })
 
 

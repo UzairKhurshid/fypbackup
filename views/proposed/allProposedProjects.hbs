@@ -70,7 +70,7 @@
                                                 <td class="d-flex">
                                                     <a class="btn btn-sm btn-outline-info mr-5" href="/viewproject/{{this.id}}">View Project</a>
                                                     <form  onsubmit="return form_confirm(this);" method="POST" action="/projects/requestProject/{{this.id}}">
-                                                        <input type="hidden" name="ownerEmail" value="{{this.ownerEmail}}">
+                                                        <input type="hidden" name="ownerID" value="{{this.ownerID}}">
                                                         <input type="hidden" name="_csrf" value="{{../csrfToken}}">
                                                         <button class="btn btn-sm btn-outline-green" type="submit">Request Project</button>
                                                     </form>

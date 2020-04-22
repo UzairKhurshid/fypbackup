@@ -38,6 +38,7 @@ router.get('/myProject', async(req, res) => {
                 supName: supervisor.name,
                 notification: Arr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })
@@ -72,6 +73,7 @@ router.get('/supervising', async(req, res) => {
                 obj: Arr,
                 notification: notificationArr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })
@@ -107,6 +109,7 @@ router.get('/FYPTasks/:id', auth, async(req, res) => {
                 tasks: proj.tasks,
                 notification: Arr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })
@@ -119,6 +122,7 @@ router.get('/FYPTasks/:id', auth, async(req, res) => {
                 tasks: proj.tasks,
                 notification: Arr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })
@@ -147,6 +151,7 @@ router.get('/FYP/newTask/:id', auth, async(req, res) => {
                 projID: id,
                 notification: Arr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })

@@ -27,6 +27,7 @@ router.get('/chat', auth, async(req, res) => {
                 projectList: Arr,
                 notification: notificationArr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
             })
         } else if (role == 'student') {
@@ -41,6 +42,7 @@ router.get('/chat', auth, async(req, res) => {
                 FYPID: id,
                 notification: notificationArr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
             })
         }
@@ -77,6 +79,7 @@ router.get('/chat/:id', auth, async(req, res) => {
                 email: email,
                 notification: notificationArr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })
@@ -95,6 +98,7 @@ router.get('/chat/:id', auth, async(req, res) => {
                 email: email,
                 notification: notificationArr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })

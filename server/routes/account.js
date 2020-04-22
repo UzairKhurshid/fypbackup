@@ -13,12 +13,12 @@ router.get('/adminAccounts', auth, async(req, res) => {
     const email = req.session.email
 
     try {
+        const Arr = await getAllNotifications(email, accRole)
+        const notificationCount = Arr.length
         if (req.query.role == 'teacher') {
             const acc = await Account.find({ role: 'teacher' })
             const accounts = await Account.find({ role: 'teacher' }).sort({ name: 'asc' })
             const count = Object.keys(acc).length
-            const Arr = await getAllNotifications(email, accRole)
-            const notificationCount = Arr.length
 
             res.render('accounts/index', {
                 title: 'Accounts',
@@ -29,6 +29,7 @@ router.get('/adminAccounts', auth, async(req, res) => {
                 count: count,
                 notification: Arr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })
@@ -36,8 +37,7 @@ router.get('/adminAccounts', auth, async(req, res) => {
             const acc = await Account.find({ role: 'student' })
             const accounts = await Account.find({ role: 'student' }).sort({ name: 'asc' })
             const count = Object.keys(acc).length
-            const Arr = await getAllNotifications(email, accRole)
-            const notificationCount = Arr.length
+
 
             res.render('accounts/index', {
                 title: 'Accounts',
@@ -48,6 +48,7 @@ router.get('/adminAccounts', auth, async(req, res) => {
                 count: count,
                 notification: Arr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })
@@ -55,8 +56,6 @@ router.get('/adminAccounts', auth, async(req, res) => {
             const acc = await Account.find({ role: 'admin' })
             const accounts = await Account.find({ role: 'admin', email: { $ne: email } }).sort({ name: 'asc' })
             const count = Object.keys(acc).length
-            const Arr = await getAllNotifications(email, accRole)
-            const notificationCount = Arr.length
 
             res.render('accounts/index', {
                 title: 'Accounts',
@@ -67,6 +66,7 @@ router.get('/adminAccounts', auth, async(req, res) => {
                 count: count,
                 notification: Arr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })
@@ -74,8 +74,6 @@ router.get('/adminAccounts', auth, async(req, res) => {
             const acc = await Account.find({ email: { $ne: email } })
             const accounts = await Account.find({ email: { $ne: email } }).sort({ name: 'asc' })
             const count = Object.keys(acc).length
-            const Arr = await getAllNotifications(email, accRole)
-            const notificationCount = Arr.length
 
             res.render('accounts/index', {
                 title: 'Accounts',
@@ -85,6 +83,7 @@ router.get('/adminAccounts', auth, async(req, res) => {
                 count: count,
                 notification: Arr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })
@@ -111,6 +110,7 @@ router.get('/adminAccount/create', auth, async(req, res) => {
             title: 'Create Account',
             notification: Arr,
             notificationCount: notificationCount,
+            accAvatar: req.session.avatar,
             accountName: req.session.name
         })
     } catch (e) {
@@ -152,6 +152,7 @@ router.get('/adminAccount/update/:id', auth, async(req, res) => {
                 title: 'Update Account',
                 notification: Arr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })
@@ -165,6 +166,7 @@ router.get('/adminAccount/update/:id', auth, async(req, res) => {
                 title: 'Update Account',
                 notification: Arr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })
@@ -177,6 +179,7 @@ router.get('/adminAccount/update/:id', auth, async(req, res) => {
                 title: 'Update Account',
                 notification: Arr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })

@@ -24,6 +24,7 @@ router.get('/dashboard', auth, async(req, res) => {
                 Dashboard: true,
                 notification: Arr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })
@@ -35,6 +36,7 @@ router.get('/dashboard', auth, async(req, res) => {
                 project: projects,
                 notification: Arr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })
@@ -47,6 +49,7 @@ router.get('/dashboard', auth, async(req, res) => {
                 notification: Arr,
                 notificationCount: notificationCount,
                 supervisingCount: supervisingCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })

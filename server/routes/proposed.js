@@ -34,6 +34,7 @@ router.get('/proposed/allProposedProjects', auth, async(req, res) => {
                 count: count,
                 notification: Arr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })
@@ -48,6 +49,7 @@ router.get('/proposed/allProposedProjects', auth, async(req, res) => {
                 count: count,
                 notification: Arr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })
@@ -88,6 +90,7 @@ router.get('/selfProposed', auth, async(req, res) => {
                 project: account.projects,
                 notification: Arr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })
@@ -107,6 +110,7 @@ router.get('/selfProposed', auth, async(req, res) => {
                 project: account.projects,
                 notification: Arr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })
@@ -142,6 +146,7 @@ router.get('/proposed/proposeNewProject', auth, async(req, res) => {
                 ownerEmail: account.email,
                 notification: Arr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 ownerRole: role
             })
@@ -161,6 +166,7 @@ router.get('/proposed/proposeNewProject', auth, async(req, res) => {
                 ownerEmail: account.email,
                 notification: Arr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 ownerRole: role
             })
@@ -221,6 +227,7 @@ router.get('/projects/requests', async(req, res) => {
                 obj: Arr,
                 notification: notificationArr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })
@@ -233,6 +240,7 @@ router.get('/projects/requests', async(req, res) => {
                 obj: Arr,
                 notification: notificationArr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })

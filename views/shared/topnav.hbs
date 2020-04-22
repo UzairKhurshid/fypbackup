@@ -135,9 +135,15 @@
                aria-haspopup="true" aria-expanded="false">
                 <div class="media">
                     <div class="media-img-wrap">
-                        <div class="avatar">
-                            <img src="/dist/img/avatar5.jpg" alt="user" class="avatar-img rounded-circle">
-                        </div>
+                        {{#if accAvatar}}
+                            <div class="avatar">
+                                <img src="data:image/jpeg;base64, {{accAvatar}}" alt="user" class="avatar-img rounded-circle">
+                            </div>
+                        {{else}}
+                            <div class="avatar">
+                                <img src="/dist/img/avatar5.jpg" alt="user" class="avatar-img rounded-circle">
+                            </div>
+                        {{/if}}
                         <span class="badge badge-success badge-indicator"></span>
                     </div>
                     <div class="media-body">

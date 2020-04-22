@@ -26,6 +26,7 @@ router.get('/projects', auth, async(req, res) => {
                 count: count,
                 notification: Arr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })
@@ -38,6 +39,7 @@ router.get('/projects', auth, async(req, res) => {
                 count: count,
                 notification: Arr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })
@@ -50,6 +52,7 @@ router.get('/projects', auth, async(req, res) => {
                 count: count,
                 notification: Arr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })
@@ -81,6 +84,7 @@ router.get('/admin/proposedProjects', auth, async(req, res) => {
             count: count,
             notification: Arr,
             notificationCount: notificationCount,
+            accAvatar: req.session.avatar,
             accountName: req.session.name,
             success: req.flash('success')
         })
@@ -106,6 +110,7 @@ router.get('/projects/create', auth, async(req, res) => {
             Projects: true,
             notification: Arr,
             notificationCount: notificationCount,
+            accAvatar: req.session.avatar,
             accountName: req.session.name
         })
     } else if (role == 'student') {
@@ -115,6 +120,7 @@ router.get('/projects/create', auth, async(req, res) => {
             Projects: true,
             notification: Arr,
             notificationCount: notificationCount,
+            accAvatar: req.session.avatar,
             accountName: req.session.name
         })
     } else if (role == 'teacher') {
@@ -124,6 +130,7 @@ router.get('/projects/create', auth, async(req, res) => {
             Projects: true,
             notification: Arr,
             notificationCount: notificationCount,
+            accAvatar: req.session.avatar,
             accountName: req.session.name
         })
     }
@@ -173,6 +180,7 @@ router.get('/projects/update/:id', auth, async(req, res) => {
                 project: prj,
                 notification: Arr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })
@@ -184,6 +192,7 @@ router.get('/projects/update/:id', auth, async(req, res) => {
                 project: prj,
                 notification: Arr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })
@@ -195,6 +204,7 @@ router.get('/projects/update/:id', auth, async(req, res) => {
                 project: prj,
                 notification: Arr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })
@@ -266,6 +276,7 @@ router.get('/viewproject/:id', auth, async(req, res) => {
                 project: proj,
                 notification: Arr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })
@@ -277,6 +288,7 @@ router.get('/viewproject/:id', auth, async(req, res) => {
                 project: proj,
                 notification: Arr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })
@@ -288,6 +300,7 @@ router.get('/viewproject/:id', auth, async(req, res) => {
                 project: proj,
                 notification: Arr,
                 notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })

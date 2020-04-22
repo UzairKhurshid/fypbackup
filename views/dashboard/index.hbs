@@ -1,57 +1,345 @@
-  {{#if error}}
-                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <span class="alert-icon"><i class="ni ni-like-2"></i></span>
-                <span class="alert-text"><strong>Success!</strong> {{error}}</span>
-                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-{{/if}}
-  {{#if success}}
-                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <span class="alert-icon"><i class="ni ni-like-2"></i></span>
-                <span class="alert-text"><strong>Success!</strong> {{success}}</span>
-                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-{{/if}}
-{{!-- 
-    <!-- Page content -->
-           <section class="hk-sec-wrapper">
-                            <h5 class="hk-sec-title">Data Table</h5>
-                            <p class="mb-40">Add advanced interaction controls to HTML tables like <code>search, pagination &amp; selectors</code>. For responsive table just add the <code>responsive: true</code> to your DataTables function. <a href="https://datatables.net/reference/option/" target="_blank">View all options</a>.</p>
-                            <div class="row">
-                                <div class="col-sm">
-                                    <div class="table-wrap">
-                                        <div id="datable_1_wrapper" class="dataTables_wrapper dt-bootstrap4"><div class="row"><div class="col-sm-12 col-md-6"><div class="dataTables_length" id="datable_1_length"><label><select name="datable_1_length" aria-controls="datable_1" class="custom-select custom-select-sm form-control form-control-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select>items</label></div></div><div class="col-sm-12 col-md-6"><div id="datable_1_filter" class="dataTables_filter"><label><input type="search" class="form-control form-control-sm" placeholder="Search" aria-controls="datable_1"></label></div></div></div><div class="row"><div class="col-sm-12"><table id="datable_1" class="table table-hover w-100 display pb-30 dataTable dtr-inline" role="grid" aria-describedby="datable_1_info">
-                                            <thead>
-                                                <tr role="row">
-                                                  <th class="sorting_asc" tabindex="0" aria-controls="datable_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">Name</th>
-                                                  <th class="sorting" tabindex="0" aria-controls="datable_1" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending">Year</th>
-                                                  <th class="sorting" tabindex="0" aria-controls="datable_1" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending">Action</th>
-  
-                                            </thead>
-                                              <tbody>
-                                    {{#if project}} 
-                                        {{#each project}}
-                                            <!-- <th class="text-center" colspan="6">Show All Projects Here.</th> --> 
-                                            <tr>
-                                            <th>{{this.name}}</th>
-                                            <th>{{this.year}}</th>
-                                            <th><a class="btn btn-sm btn-primary" href="/projects/viewproject/{{this.id}}">View Project</a></th>
-                                            </tr>
-                                        {{/each}}
-                                    {{/if}}
-                                    <tr><th colspan="3">No data found</th></tr>
-                                </tbody>
-                                            <tfoot>
-                                                <tr><th rowspan="1" colspan="1">Name</th><th rowspan="1" colspan="1">Position</th><th rowspan="1" colspan="1">Office</th><th rowspan="1" colspan="1">Age</th><th rowspan="1" colspan="1">Start date</th><th rowspan="1" colspan="1">Salary</th></tr>
-                                            </tfoot>
-                                        </table></div></div><div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="datable_1_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="datable_1_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="datable_1_previous"><a href="#" aria-controls="datable_1" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="datable_1" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="datable_1" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="datable_1" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="datable_1" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="datable_1" data-dt-idx="5" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item "><a href="#" aria-controls="datable_1" data-dt-idx="6" tabindex="0" class="page-link">6</a></li><li class="paginate_button page-item next" id="datable_1_next"><a href="#" aria-controls="datable_1" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li></ul></div></div></div></div>
+<!-- Container -->
+<div class="container-fluid mt-xl-50 mt-sm-30 mt-15">
+    {{#if error}}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+            <span class="alert-text"><strong>Success!</strong> {{error}}</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+    {{/if}}
+    {{#if success}}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+            <span class="alert-text"><strong>Success!</strong> {{success}}</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+    {{/if}}
+    <!-- Row -->
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="hk-row">
+                <div class="col-lg-4">
+
+                    <div style="min-height:265px" class="card border-0">
+                        <div class="card-body w-100 d-flex justify-content-start pa-0">
+                            <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_M4H0kx.json"  background="transparent"  speed="1.5"  style="width: auto; height:265px"  loop  autoplay></lottie-player>
+                        </div>
+                    </div>
+                    <div style="min-height:561px" class="card">
+                        <div class="card-header card-header-action">
+                            <h6>Supervising Projects</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="user-activity user-activity-sm dash-super">
+                                <div class="media">
+                                    <div class="media-img-wrap">
+                                        <div class="avatar avatar-xs">
+														<span class="avatar-text avatar-text-info rounded-circle">
+																<span class="initial-wrap"><span>B</span></span>
+														</span>
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <div>
+                                            <span class="d-block mb-5"><span
+                                                    class="font-weight-500 text-dark text-capitalize">Billy Flowers</span><span
+                                                    class="pl-5">Until recently, the prevailing view assumed lorem ipsum was born as a nonsense text.</span></span>
+                                            <span class="d-block font-13">3 days ago</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="media">
+                                    <div class="media-img-wrap">
+                                        <div class="avatar avatar-xs">
+                                            <img src="dist/img/avatar2.jpg" alt="user"
+                                                 class="avatar-img rounded-circle">
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <div>
+                                            <span class="d-block mb-5"><span
+                                                    class="font-weight-500 text-dark text-capitalize">Laura Thompson</span><span
+                                                    class="pl-5">joined josh groben team.</span></span>
+                                            <span class="d-block font-13">3 hours ago</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="media">
+                                    <div class="media-img-wrap">
+                                        <div class="avatar avatar-xs">
+                                            <img src="dist/img/avatar4.jpg" alt="user"
+                                                 class="avatar-img rounded-circle">
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <div>
+                                            <span class="d-block mb-5"><span
+                                                    class="font-weight-500 text-dark text-capitalize">Morgan Freeman</span><span
+                                                    class="pl-5">joined josh groben team.</span></span>
+                                            <span class="d-block font-13">3 hours ago</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                    </section>
-      
- --}}
+
+                            <div class="dropdown-divider pb-20"></div>
+
+                            <div class="user-activity user-activity-sm dash-super">
+                                <div class="media">
+                                    <div class="media-img-wrap">
+                                        <div class="avatar avatar-xs">
+														<span class="avatar-text avatar-text-info rounded-circle">
+																<span class="initial-wrap"><span>B</span></span>
+														</span>
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <div>
+                                            <span class="d-block mb-5"><span
+                                                    class="font-weight-500 text-dark text-capitalize">Billy Flowers</span><span
+                                                    class="pl-5">Until recently, the prevailing view assumed lorem ipsum was born as a nonsense text.</span></span>
+                                            <span class="d-block font-13">3 days ago</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="media">
+                                    <div class="media-img-wrap">
+                                        <div class="avatar avatar-xs">
+                                            <img src="dist/img/avatar2.jpg" alt="user"
+                                                 class="avatar-img rounded-circle">
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <div>
+                                            <span class="d-block mb-5"><span
+                                                    class="font-weight-500 text-dark text-capitalize">Laura Thompson</span><span
+                                                    class="pl-5">joined josh groben team.</span></span>
+                                            <span class="d-block font-13">3 hours ago</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="media">
+                                    <div class="media-img-wrap">
+                                        <div class="avatar avatar-xs">
+                                            <img src="dist/img/avatar4.jpg" alt="user"
+                                                 class="avatar-img rounded-circle">
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <div>
+                                            <span class="d-block mb-5"><span
+                                                    class="font-weight-500 text-dark text-capitalize">Morgan Freeman</span><span
+                                                    class="pl-5">joined josh groben team.</span></span>
+                                            <span class="d-block font-13">3 hours ago</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+                    <div style="min-height:561px" class="card">
+                        <div class="card-body pa-0">
+                            <div class="table-wrap">
+                                <div class="table-responsive">
+                                    <table class="table table-sm table-hover mb-0">
+                                        <thead>
+                                        <tr>
+                                            <th>Logo</th>
+                                            <th>Project</th>
+                                            <th>Company</th>
+                                            <th>Update</th>
+                                            <th>Budget</th>
+                                            <th>Tasks</th>
+                                            <th class="w-20">Status</th>
+                                            <th>Deadline</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td><img class="img-fluid rounded" src="dist/img/logo1.jpg" alt="icon"></td>
+                                            <td>Branding</td>
+                                            <td>Pineapple Inc</td>
+                                            <td>13 Nov 2018</td>
+                                            <td><span class="badge badge-success">Completed</span></td>
+                                            <td><span class="d-flex align-items-center"><i
+                                                    class="zmdi zmdi-time-restore font-25 mr-10 text-light-40"></i><span>0</span></span>
+                                            </td>
+                                            <td>
+                                                <div class="progress-wrap lb-side-left mnw-125p">
+                                                    <div class="progress-lb-wrap">
+                                                        <label class="progress-label mnw-25p">95%</label>
+                                                        <div class="progress progress-bar-xs">
+                                                            <div class="progress-bar bg-success w-95" role="progressbar"
+                                                                 aria-valuenow="70" aria-valuemin="0"
+                                                                 aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>10 Nov 2018</td>
+                                        </tr>
+                                        <tr>
+                                            <td><img class="img-fluid rounded" src="dist/img/logo2.jpg" alt="icon"></td>
+                                            <td>Website</td>
+                                            <td>Gooole co.</td>
+                                            <td>30 Nov 2018</td>
+                                            <td><span class="badge badge-primary">In Process</span></td>
+                                            <td><span class="d-flex align-items-center"><i
+                                                    class="zmdi zmdi-time-restore font-25 mr-10 text-light-40"></i><span>3</span></span>
+                                            </td>
+                                            <td>
+                                                <div class="progress-wrap lb-side-left mnw-125p">
+                                                    <div class="progress-lb-wrap">
+                                                        <label class="progress-label mnw-25p">70%</label>
+                                                        <div class="progress progress-bar-xs">
+                                                            <div class="progress-bar bg-primary w-70" role="progressbar"
+                                                                 aria-valuenow="70" aria-valuemin="0"
+                                                                 aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>13 Dec 2018</td>
+                                        </tr>
+                                        <tr>
+                                            <td><img class="img-fluid rounded" src="dist/img/logo3.jpg" alt="icon"></td>
+                                            <td>Collaterals</td>
+                                            <td>Big Energy</td>
+                                            <td>12 Nov 2018</td>
+                                            <td><span class="badge badge-danger">Behind</span></td>
+                                            <td><span class="d-flex align-items-center"><i
+                                                    class="zmdi zmdi-time-restore font-25 mr-10 text-light-40"></i><span>14</span></span>
+                                            </td>
+                                            <td>
+                                                <div class="progress-wrap lb-side-left mnw-125p">
+                                                    <div class="progress-lb-wrap">
+                                                        <label class="progress-label mnw-25p">35%</label>
+                                                        <div class="progress progress-bar-xs">
+                                                            <div class="progress-bar bg-danger w-35" role="progressbar"
+                                                                 aria-valuenow="70" aria-valuemin="0"
+                                                                 aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>21 Oct 2018</td>
+                                        </tr>
+                                        <tr>
+                                            <td><img class="img-fluid rounded" src="dist/img/logo4.jpg" alt="icon"></td>
+                                            <td>Branding, Print</td>
+                                            <td>Novotel</td>
+                                            <td>10 Nov 2018</td>
+                                            <td><span class="badge badge-primary">In process</span></td>
+                                            <td><span class="d-flex align-items-center"><i
+                                                    class="zmdi zmdi-time-restore font-25 mr-10 text-light-40"></i><span>6</span></span>
+                                            </td>
+                                            <td>
+                                                <div class="progress-wrap lb-side-left mnw-125p">
+                                                    <div class="progress-lb-wrap">
+                                                        <label class="progress-label mnw-25p">85%</label>
+                                                        <div class="progress progress-bar-xs">
+                                                            <div class="progress-bar bg-primary w-85" role="progressbar"
+                                                                 aria-valuenow="70" aria-valuemin="0"
+                                                                 aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>14 Nov 2018</td>
+                                        </tr>
+                                        <tr>
+                                            <td><img class="img-fluid rounded" src="dist/img/logo5.jpg" alt="icon"></td>
+                                            <td>Web Application</td>
+                                            <td>Folkswagan</td>
+                                            <td>12 Nov 2018</td>
+                                            <td><span class="badge badge-danger">Behind</span></td>
+                                            <td><span class="d-flex align-items-center"><i
+                                                    class="zmdi zmdi-time-restore font-25 mr-10 text-light-40"></i><span>9</span></span>
+                                            </td>
+                                            <td>
+                                                <div class="progress-wrap lb-side-left">
+                                                    <div class="progress-lb-wrap">
+                                                        <label class="progress-label mnw-25p">30%</label>
+                                                        <div class="progress progress-bar-xs">
+                                                            <div class="progress-bar bg-danger w-30" role="progressbar"
+                                                                 aria-valuenow="70" aria-valuemin="0"
+                                                                 aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>15 Oct 2018</td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="min-height:265px" class="card overflow-hide border-0">
+                        <div class="card-body pa-0">
+                            <div id="owl_demo_1" class="owl-carousel dots-on-item owl-theme">
+                                <div class="fadeOut item img-background overlay-wrap"
+                                     style="background-image:url(/dist/img/slide1.jpg);">
+                                    <div class="position-relative z-index-2 pa-20">
+                                        <div class="position-relative text-dark mnh-225p">
+                                            <p>Very easy to use. Thanks to design, we've just launched our 5th website!
+                                                Thank you for making it painless, pleasant and most of all hassle free!
+                                                Just what I was looking for.</p>
+                                            <div class="media position-absolute b-0 l-0 align-items-center">
+                                                <div class="media-img-wrap d-flex mr-15">
+                                                    <div class="avatar avatar-sm">
+                                                        <span class="avatar-text avatar-text-inv-pink rounded-circle"><span
+                                                                class="initial-wrap"><span>ZC</span></span></span>
+                                                    </div>
+                                                </div>
+                                                <div class="media-body">
+                                                    <span class="d-block font-14 font-weight-500">Zuck Chan</span>
+                                                    <span class="d-block font-12">Design Lead, Hencework</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-overlay bg-trans-light-80"></div>
+                                </div>
+                                <div class="fadeOut item img-background overlay-wrap"
+                                     style="background-image:url(/dist/img/slide2.jpg);">
+                                    <div class="position-relative z-index-2 pa-20">
+                                        <div class="position-relative text-dark mnh-225p">
+                                            <p>Nice work on your design. Design is worth much more than I paid. We've
+                                                used design for the last five years. I just can't get enough of
+                                                design.</p>
+                                            <div class="media position-absolute b-0 l-0 align-items-center">
+                                                <div class="media-img-wrap d-flex mr-15">
+                                                    <div class="avatar avatar-sm">
+                                                        <span class="avatar-text avatar-text-inv-primary rounded-circle"><span
+                                                                class="initial-wrap"><span>NT</span></span></span>
+                                                    </div>
+                                                </div>
+                                                <div class="media-body">
+                                                    <span class="d-block font-14 font-weight-500">Normand T.</span>
+                                                    <span class="d-block font-12">Sales Executive, Media</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-overlay bg-trans-light-80"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Row -->
+</div>
+<!-- /Container -->

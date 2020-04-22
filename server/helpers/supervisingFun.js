@@ -1,6 +1,5 @@
 const Account = require('../models/account')
 const Project = require('../models/project')
-const Notification = require('../models/notification')
 
 
 const getArr = async(email, role) => {

@@ -66,10 +66,10 @@
                                                 <th>{{this.ownerName}}</th>
                                                 <th>{{this.ownerEmail}}</th>
                                                 <th>
-                                                    <a class="btn btn-sm btn-gradient-info" href="/viewproject/{{this.projectID}}">View Project</a>
+                                                    <a class="btn btn-sm btn-outline-info" href="/viewproject/{{this.projectID}}">View Project</a>
                                                     <form onsubmit="return form_confirm(this);" method="POST" action="/projects/deleteRequest/{{this.requestID}}">
                                                         <input type="hidden" name="_csrf" value="{{../csrfToken}}">
-                                                        <button class="btn btn-sm btn-gradient-danger" type="submit">Cancel Request</button>
+                                                        <button class="btn btn-sm btn-outline-danger" type="submit">Cancel Request</button>
                                                     </form>
                                                 </th>
                                             </tr>
@@ -105,18 +105,18 @@
                                                 <th>{{this.requestedByName}}</th>
                                                 <th>{{this.requestedByEmail}}</th>
                                                 <th>
-                                                    <a class="btn btn-sm btn-primary" href="/viewproject/{{this.projectID}}">View Project</a>
+                                                    <a class="btn btn-sm btn-outline-info" href="/viewproject/{{this.projectID}}">View Project</a>
                                                     <form method="POST" action="/projects/deleteRequest/{{this.requestID}}">
                                                         <input type="hidden" name="requestedByEmail" value="{{this.requestedByEmail}}">
                                                         <input type="hidden" name="_csrf" value="{{../csrfToken}}">
-                                                        <button class="btn btn-sm btn-primary" type="submit">Cancel Request</button>
+                                                        <button class="btn btn-sm btn-outline-orange" type="submit">Cancel Request</button>
                                                     </form>
                                                     <form method="POST" action="/projects/acceptRequest/{{this.requestID}}">
                                                         <input type="hidden" name="_csrf" value="{{../csrfToken}}">
                                                         <input type="hidden" name="projectID" value="{{this.projectID}}">
                                                         <input type="hidden" name="ownerEmail" value="{{this.ownerEmail}}">
                                                         <input type="hidden" name="requestedByEmail" value="{{this.requestedByEmail}}">
-                                                        <button class="btn btn-sm btn-primary" type="submit">Accept Request</button>
+                                                        <button class="btn btn-sm btn-outline-success" type="submit">Accept Request</button>
                                                     </form>
                                                 </th>
                                             </tr>

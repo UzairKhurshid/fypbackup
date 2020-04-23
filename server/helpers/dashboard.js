@@ -26,6 +26,7 @@ const getTeacherData = async(email, role) => {
         FYPID: 'abc',
         projectID: 'abc',
         projectName: 'abc',
+        projectLetter: 'abc',
         projectLanguage: 'abc',
         projectIDE: 'abc',
         projectType: 'abc',
@@ -34,13 +35,16 @@ const getTeacherData = async(email, role) => {
         projectYear: 'abc',
         projectDescription: 'abc',
         projectTasks: [],
+        projectTasksCount:'abc',
         studentID: 'abc',
         studentregNo: 'abc',
         studentName: 'abc',
+        studentLetter: 'abc',
         studentEmail: 'abc',
         studentCampus: 'abc',
         studentDepartment: 'abc',
         studentSemester: 'abc',
+        studentAvatar:'abc'
     }
     const account = await Account.findOne({ email, role })
     await account.populate('myProjectOwnerID').execPopulate()
@@ -53,6 +57,7 @@ const getTeacherData = async(email, role) => {
         obj.FYPID = account.myProjectOwnerID[i]._id
         obj.projectID = account.myProjectOwnerID[i].projectID
         obj.projectName = project[i].name
+        obj.projectLetter = project[i].name[0]
         obj.projectLanguage = project[i].language
         obj.projectIDE = project[i].IDE
         obj.projectType = project[i].type
@@ -61,13 +66,16 @@ const getTeacherData = async(email, role) => {
         obj.projectYear = project[i].year
         obj.projectDescription = project[i].description
         obj.projectTasks = account.myProjectOwnerID[i].tasks
+        obj.projectTasksCount = account.myProjectOwnerID[i].tasks.length
         obj.studentID = student[i].id
         obj.studentregNo = student[i].regNo
         obj.studentName = student[i].name
+        obj.studentLetter = student[i].name[0]
         obj.studentEmail = student[i].email
         obj.studentCampus = student[i].campus
         obj.studentDepartment = student[i].department
         obj.studentSemester = student[i].semester
+        obj.studentAvatar = student[i].avatar
         Arr[i] = obj
     }
     return Arr

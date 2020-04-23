@@ -44,6 +44,7 @@ router.get('/dashboard', auth, async(req, res) => {
                 success: req.flash('success')
             })
         } else if (role === "teacher") {
+            console.log(teacherData[0].projectTasks);
             res.render('dashboard/index', {
                 title: 'Teacher Dashboard',
                 teacherLogin: 'true',

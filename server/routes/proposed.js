@@ -13,7 +13,7 @@ const { sendWelcomeMail, sendActivationMail, sendDeActivationMail, sendProjectAc
 
 
 
-router.get('/proposed/allProposedProjects', auth, async(req, res) => {
+router.get('/proposed/allproposedprojects', auth, async(req, res) => {
 
     const email = req.session.email
     const role = req.session.role
@@ -26,7 +26,7 @@ router.get('/proposed/allProposedProjects', auth, async(req, res) => {
 
         if (role == "student") {
 
-            return res.render('proposed/allProposedProjects', {
+            return res.render('proposed/all_proposed_projects', {
                 title: 'Proposed Projects',
                 Projects: true,
                 studentLogin: true,

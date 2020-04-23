@@ -41,7 +41,7 @@ router.get('/proposed/allproposedprojects', auth, async(req, res) => {
 
         } else if (role == "teacher") {
 
-            return res.render('proposed/allProposedProjects', {
+            return res.render('proposed/all_proposed_projects', {
                 title: 'Proposed Projects',
                 Projects: true,
                 teacherLogin: true,

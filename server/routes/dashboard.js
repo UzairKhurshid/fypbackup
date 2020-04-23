@@ -3,6 +3,7 @@ const auth = require('../middleware/auth')
 const Project = require('../models/project')
 const Notification = require('../models/notification')
 const { getAllNotifications } = require('../helpers/notification')
+const { getAdminData, getTeacherData, getStudentData } = require('../helpers/dashboard')
 const getArr = require('../helpers/supervisingFun')
 const router = new express.Router()
 
@@ -11,7 +12,9 @@ router.get('/dashboard', auth, async(req, res) => {
     const role = req.session.role
     const email = req.session.email
     try {
-        const projects = await Project.find({ status: 'accepted' })
+        //const studentData = await getStudentData(email, role)
+        const teacherData = await getTeacherData(email, role)
+
         const Arr = await getAllNotifications(email, role)
         const notificationCount = Arr.length
         const supervisingArr = await getArr(email, role)
@@ -33,7 +36,7 @@ router.get('/dashboard', auth, async(req, res) => {
                 title: 'Student Dashboard',
                 studentLogin: 'true',
                 Dashboard: true,
-                project: projects,
+                //studentData: studentData,
                 notification: Arr,
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
@@ -45,7 +48,7 @@ router.get('/dashboard', auth, async(req, res) => {
                 title: 'Teacher Dashboard',
                 teacherLogin: 'true',
                 Dashboard: true,
-                project: projects,
+                teacherData: teacherData,
                 notification: Arr,
                 notificationCount: notificationCount,
                 supervisingCount: supervisingCount,

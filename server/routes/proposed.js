@@ -67,7 +67,7 @@ router.get('/proposed/allproposedprojects', auth, async(req, res) => {
 
 
 
-router.get('/selfProposed', auth, async(req, res) => {
+router.get('/selfproposed', auth, async(req, res) => {
     const role = req.session.role
     const email = req.session.email
     try {
@@ -78,7 +78,7 @@ router.get('/selfProposed', auth, async(req, res) => {
             const account = await Account.findOne({ email, role })
             await account.populate('projects').execPopulate()
 
-            return res.render('proposed/selfproposedProjects', {
+            return res.render('proposed/self_proposed_projects', {
                 title: 'Self Proposed',
                 Projects: true,
                 studentLogin: 'true',
@@ -93,7 +93,7 @@ router.get('/selfProposed', auth, async(req, res) => {
             const account = await Account.findOne({ email, role })
             await account.populate('projects').execPopulate()
 
-            return res.render('proposed/selfproposedProjects', {
+            return res.render('proposed/self_proposed_projects', {
                 title: 'self Proposed',
                 Projects: true,
                 teacherLogin: 'true',

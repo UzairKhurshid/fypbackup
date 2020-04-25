@@ -13,7 +13,7 @@ const { sendWelcomeMail, sendActivationMail, sendDeActivationMail, sendProjectAc
 
 
 
-router.get('/proposed/allproposedprojects', auth, async(req, res) => {
+router.get('/proposed/allProposedProjects', auth, async(req, res) => {
 
     const email = req.session.email
     const role = req.session.role
@@ -67,7 +67,7 @@ router.get('/proposed/allproposedprojects', auth, async(req, res) => {
 
 
 
-router.get('/selfproposed', auth, async(req, res) => {
+router.get('/selfProposed', auth, async(req, res) => {
     const role = req.session.role
     const email = req.session.email
     try {

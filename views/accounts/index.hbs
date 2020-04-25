@@ -2,7 +2,7 @@
 <nav class="hk-breadcrumb" aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-light bg-transparent">
         <li class="breadcrumb-item"><a href="#">Accounts</a></li>
-        <li class="breadcrumb-item active" aria-current="page">All</li>
+        <li class="breadcrumb-item active" aria-current="page">Display</li>
     </ol>
 </nav>
 <!-- /Breadcrumb -->
@@ -19,35 +19,48 @@
             </div>
             <div class="col-md-8 pr-0 text-right">
                 {{#if adminLogin}}
-                    <a class="btn btn-primary btn-sm" href="/adminAccounts">Show All Accounts</a>
-                    <a class="btn btn-purple  btn-sm" href="/adminAccounts?role=admin">Show Admin Accounts</a>
-                    <a class="btn btn-blue btn-sm" href="/adminAccounts?role=teacher">Show Teachers Accounts</a>
-                    <a class="btn btn-info btn-sm" href="/adminAccounts?role=student">Show Students Accounts</a>
-                    <a class="btn btn-success btn-sm" href="/adminAccount/create">Create New Account</a>
+                    <a class="btn btn-gradient-success btn-sm" href="/adminAccount/create">Create New Account</a>
                 {{/if}}
             </div>
         </div>
     </div>
     <!-- /Title -->
- 
+
     <!-- Row -->
     <div class="row">
         <div class="col-xl-12">
             <section class="hk-sec-wrapper">
-                {{#if adminAcc}}
-                    <h5 class="hk-sec-title">Admin Accounts</h5>                   
-                {{else if teacherAcc}}
-                    <h5 class="hk-sec-title">Teacher Accounts</h5>
-                {{else if studentAcc}}
-                    <h5 class="hk-sec-title">Student Accounts</h5>
-                {{else}}
-                    <h5 class="hk-sec-title">All Accounts</h5>
-                {{/if}}
-
-                <p class="mb-40">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dignissimos
-                    perspiciatis sapiente sunt veniam. Dolorem dolorum ipsam praesentium, quis ratione velit. Asperiores
-                    eaque eos laudantium modi! Nisi odio quasi totam.
-                </p>
+                <div class="row">
+                    <div class="col-md-8">
+                        {{#if adminAcc}}
+                            <h5 class="hk-sec-title">Admin Accounts</h5>
+                        {{else if teacherAcc}}
+                            <h5 class="hk-sec-title">Teacher Accounts</h5>
+                        {{else if studentAcc}}
+                            <h5 class="hk-sec-title">Student Accounts</h5>
+                        {{else}}
+                            <h5 class="hk-sec-title">All Accounts</h5>
+                        {{/if}}
+                        <p class="mb-40">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dignissimos
+                            perspiciatis sapiente sunt veniam. Dolorem dolorum ipsam praesentium, quis ratione velit. Asperiores
+                            eaque eos laudantium modi! Nisi odio quasi totam.
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <form method="get" role="search" action="/adminAccounts" class="form-inline pull-right">
+                            <div class="form-group mb-2">
+                                <select required name="role" class="custom-select">
+                                    <option value="">Select to filter</option>
+                                    <option value="all">All Accounts</option>
+                                    <option value="admin">Admin Accounts</option>
+                                    <option value="teacher">Teacher Accounts</option>
+                                    <option value="student">Student Accounts</option>
+                                </select>
+                                <button type="submit" class="btn btn-gradient-primary ml-2" >Account Filter</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-sm">
                         <div class="table-wrap">
@@ -78,7 +91,7 @@
                                         <tr>
                                             <td>
                                                 {{#if this.regNo}}
-                                                {{this.regNo}}
+                                                    {{this.regNo}}
                                                 {{else}}
                                                     -
                                                 {{/if}}
@@ -86,7 +99,8 @@
                                             <td>{{this.name}}</td>
                                             <td>{{this.email}}</td>
                                             <td>{{this.role}}</td>
-                                            <td><span class="badge badge-status-{{this.status}}">{{this.status}}</span></td>
+                                            <td><span class="badge badge-status-{{this.status}}">{{this.status}}</span>
+                                            </td>
                                             <td>
                                                 <div class="btn-group" role="group"
                                                      aria-label="Basic example">

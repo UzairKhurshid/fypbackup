@@ -5,15 +5,18 @@ const mongoose = require('mongoose')
 
 
 const getAdminData = async(email, role) => {
+    const accounts = await Account.find({ status: 'disable' }).sort({ name: 'asc' });
+    const teachers = await Account.find({ role: 'admin' });
+    const students = await Account.find({ role: 'student' });
+    const projects = await Project.find({});
 
-    let newObj = {
-        txt: 'abc',
-        refTable: 'abc',
-        refRoute: 'abc',
-        createdAt: 'abc'
-    }
-
-    return []
+    data = {
+        accounts:accounts,
+        studentsCount:students.length,
+        teachersCount:teachers.length,
+        projectsCount:projects.length
+    };
+     return data;
 }
 
 const getTeacherData = async(email, role) => {
@@ -82,16 +85,12 @@ const getTeacherData = async(email, role) => {
 }
 
 const getStudentData = async(email, role) => {
-
-    let newObj = {
-        txt: 'abc',
-        refTable: 'abc',
-        refRoute: 'abc',
-        createdAt: 'abc'
-    }
-
-
-    return []
+    const account = await Account.findOne({ email, role })
+    const myproject = await myProject.findOne({ requestedByID : account._id })
+    const project = await  Project.findOne({ _id : myproject.projectID})
+    const teacher = await Account.findOne({ _id:myproject.ownerID })
+    obj = {project_data:myproject,project:project,teacher:teacher}
+    return obj;
 }
 
-module.exports = { getAdminData, getTeacherData }
+module.exports = { getAdminData, getTeacherData,getStudentData}

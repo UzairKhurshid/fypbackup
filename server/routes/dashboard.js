@@ -12,31 +12,31 @@ router.get('/dashboard', auth, async(req, res) => {
     const role = req.session.role
     const email = req.session.email
     try {
-        //const studentData = await getStudentData(email, role)
-        const teacherData = await getTeacherData(email, role)
 
         const Arr = await getAllNotifications(email, role)
         const notificationCount = Arr.length
         const supervisingArr = await getArr(email, role)
         const supervisingCount = supervisingArr.length
-
         if (role === "admin") {
+            const adminData = await getAdminData(email, role)
             res.render('dashboard/index', {
                 title: 'Admin Dashboard',
                 adminLogin: 'true',
                 Dashboard: true,
                 notification: Arr,
+                adminData:adminData,
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
                 success: req.flash('success')
             })
         } else if (role === "student") {
+            const studentData = await getStudentData(email, role)
             res.render('dashboard/index', {
                 title: 'Student Dashboard',
                 studentLogin: 'true',
                 Dashboard: true,
-                //studentData: studentData,
+                studentData: studentData,
                 notification: Arr,
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
@@ -44,7 +44,7 @@ router.get('/dashboard', auth, async(req, res) => {
                 success: req.flash('success')
             })
         } else if (role === "teacher") {
-            console.log(teacherData[0].projectTasks);
+            const teacherData = await getTeacherData(email, role)
             res.render('dashboard/index', {
                 title: 'Teacher Dashboard',
                 teacherLogin: 'true',

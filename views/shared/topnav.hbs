@@ -1,9 +1,9 @@
-<nav class="navbar navbar-expand-xl navbar-light fixed-top hk-navbar hk-navbar-alt">
+<nav class="navbar navbar-expand-xl navbar-dark fixed-top hk-navbar hk-navbar-alt">
     <a class="navbar-toggle-btn nav-link-hover navbar-toggler" href="javascript:void(0);" data-toggle="collapse"
        data-target="#navbarCollapseAlt" aria-controls="navbarCollapseAlt" aria-expanded="false"
        aria-label="Toggle navigation"><span class="feather-icon"><i data-feather="menu"></i></span></a>
     <a class="navbar-brand" href="/dashboard">
-        <img class="brand-img d-inline-block align-top" src="/dist/img/logo-light.png" alt="brand"/>
+        <img class="brand-img d-inline-block align-top" height="40px" src="/dist/img/logo_light.png" alt="brand"/>
     </a>
     <div class="collapse navbar-collapse" id="navbarCollapseAlt">
         <ul class="navbar-nav">
@@ -72,7 +72,7 @@
     </div>
     <ul class="navbar-nav hk-navbar-content">
         <li class="nav-item dropdown dropdown-notifications">
-            <a class="nav-link dropdown-toggle no-caret" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="feather-icon"><i data-feather="bell"></i></span><span class="badge-wrap"><span class="badge badge-success badge-indicator badge-indicator-sm badge-pill pulse"></span></span></a>
+            <a class="nav-link dropdown-toggle no-caret" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="feather-icon text-white"><i data-feather="bell"></i></span><span class="badge-wrap"><span class="badge badge-success badge-indicator badge-indicator-sm badge-pill pulse"></span></span></a>
             <div class="dropdown-menu dropdown-menu-right" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                 <h6 class="dropdown-header">Notifications <a onclick="$('#clearForm').submit();" href="javascript:void(0);" class="">clear all</a></h6>
                 <form id="clearForm" method="POST" action="/clearAllNotifications">
@@ -137,17 +137,17 @@
                     <div class="media-img-wrap">
                         {{#if accAvatar}}
                             <div class="avatar">
-                                <img src="data:image/jpeg;base64, {{accAvatar}}" alt="user" class="avatar-img rounded-circle">
+                                <img style="border: 1px solid white;" src="data:image/jpeg;base64, {{accAvatar}}" alt="user" class="avatar-img rounded-circle">
                             </div>
                         {{else}}
                             <div class="avatar">
-                                <img src="/dist/img/avatar5.jpg" alt="user" class="avatar-img rounded-circle">
+                                <img style="border: 1px solid white;" src="/dist/img/avatar5.jpg" alt="user" class="avatar-img rounded-circle">
                             </div>
                         {{/if}}
                         <span class="badge badge-success badge-indicator"></span>
                     </div>
                     <div class="media-body">
-                        <span>{{accountName}}<i class="zmdi zmdi-chevron-down"></i></span>
+                        <span class="text-white">{{accountName}}<i class="text-white zmdi zmdi-chevron-down"></i></span>
                     </div>
                 </div>
             </a>

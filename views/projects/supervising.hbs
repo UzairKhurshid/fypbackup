@@ -66,10 +66,10 @@
                                             <td>{{this.projectName}}</td>
                                             <td>{{this.requestedByName}}</td>
                                             <td>{{this.requestedByEmail}}</td>
-                                            <td>
-                                                <a class="btn btn-sm btn-outline-info" href="/viewproject/{{this.projectID}}">View Project</a>
-                                                <a class="btn btn-sm btn-outline-blue" href="/FYPTasks/{{this.FYPID}}">View Progress</a>
-                                                <a class="btn btn-xs btn-info"
+                                            <td class="d-flex">
+                                                <a class="btn mr-5 btn-sm btn-outline-info" href="/viewproject/{{this.projectID}}">View Project</a>
+                                                <a class="btn mr-5 btn-sm btn-outline-blue" href="/FYPTasks/{{this.FYPID}}">View Progress</a>
+                                                <a class="btn d-none btn-xs btn-info"
                                                    href="/chat/{{this.id}}?projectName={{../projName}}">
                                                 <span class="feather-icon text-white">
                                                     <i data-feather="message-square"></i>

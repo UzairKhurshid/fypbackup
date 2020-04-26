@@ -149,11 +149,6 @@
                                                     confirmButtonText: 'Yes, Accept Request!'
                                                 }).then((result) => {
                                                     if (result.value) {
-                                                        Swal.fire(
-                                                                'Canceled!',
-                                                                'Project request has been accepted.',
-                                                                'success'
-                                                        )
                                                         return form.submit();
                                                     }
                                                 });

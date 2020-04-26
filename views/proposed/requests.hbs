@@ -15,7 +15,8 @@
     <div class="hk-pg-header">
         <div class="row w-100">
             <div class="col-12">
-                <h4 class="hk-pg-title text-capitalize"><span class="pg-title-icon"><span class="feather-icon text-primary"><i
+                <h4 class="hk-pg-title text-capitalize"><span class="pg-title-icon"><span
+                        class="feather-icon text-primary"><i
                         data-feather="file"></i></span></span>Proposed Project</h4>
             </div>
         </div>
@@ -48,8 +49,8 @@
                                 <tr>
                                     <th>Project Name</th>
                                     {{#if teacherLogin}}
-                                        <th>Student  Name</th>
-                                        <th>Student  Email</th>
+                                        <th>Student Name</th>
+                                        <th>Student Email</th>
                                     {{/if}}
                                     {{#if studentLogin}}
                                         <th>Supervisor Name</th>
@@ -59,22 +60,25 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tbody>
                                 {{#if studentLogin}}
                                     {{#if obj}}
                                         {{#each obj}}
                                             <!-- <th class="text-center" colspan="6">Show All Proposed Projects Here.</th> -->
                                             <tr>
-                                                <th>{{this.projectName}}</th>
-                                                <th>{{this.ownerName}}</th>
-                                                <th>{{this.ownerEmail}}</th>
-                                                <th>
-                                                    <a class="btn btn-sm btn-outline-info" href="/viewproject/{{this.projectID}}">View Project</a>
-                                                    <form onsubmit="return form_confirm(this);" method="POST" action="/projects/deleteRequest/{{this.requestID}}">
-                                                        <input type="hidden" name="_csrf" value="{{../csrfToken}}">
-                                                        <button class="btn btn-sm btn-outline-danger" type="submit">Cancel Request</button>
+                                                <td class="text-capitalize">{{this.projectName}}</td>
+                                                <td class="text-capitalize">{{this.ownerName}}</td>
+                                                <td>{{this.ownerEmail}}</td>
+                                                <td class="d-flex">
+                                                    <a class="btn btn-sm btn-outline-info mr-5"
+                                                       href="/viewproject/{{this.projectID}}">View Project</a>
+                                                    <form onsubmit="return form_confirm(this);" method="POST"
+                                                          action="/projects/deleteRequest/{{this.requestID}}">
+                                                        <input  type="hidden" name="_csrf" value="{{../csrfToken}}">
+                                                        <button class="btn btn-sm btn-outline-danger" type="submit">
+                                                            Cancel Request
+                                                        </button>
                                                     </form>
-                                                </th>
+                                                </td>
                                             </tr>
                                         {{/each}}
                                         <script>
@@ -104,26 +108,79 @@
                                         {{#each obj}}
                                             <!-- <th class="text-center" colspan="6">Show All Proposed Projects Here.</th> -->
                                             <tr>
-                                                <th>{{this.projectName}}</th>
-                                                <th>{{this.requestedByName}}</th>
-                                                <th>{{this.requestedByEmail}}</th>
-                                                <th>
-                                                    <a class="btn btn-sm btn-outline-info" href="/viewproject/{{this.projectID}}">View Project</a>
-                                                    <form method="POST" action="/projects/deleteRequest/{{this.requestID}}">
-                                                        <input type="hidden" name="requestedByEmail" value="{{this.requestedByEmail}}">
+                                                <td class="text-capitalize">{{this.projectName}}</td>
+                                                <td class="text-capitalize">{{this.requestedByName}}</td>
+                                                <td>{{this.requestedByEmail}}</td>
+                                                <td class="d-flex">
+                                                    <a class="btn mr-5 btn-sm btn-outline-info"
+                                                       href="/viewproject/{{this.projectID}}">View Project</a>
+                                                    <form onsubmit="return request_cancel(this);" method="POST"
+                                                          action="/projects/deleteRequest/{{this.requestID}}">
+                                                        <input type="hidden" name="requestedByEmail"
+                                                               value="{{this.requestedByEmail}}">
                                                         <input type="hidden" name="_csrf" value="{{../csrfToken}}">
-                                                        <button class="btn btn-sm btn-outline-orange" type="submit">Cancel Request</button>
+                                                        <button class="btn mr-5 btn-sm btn-outline-orange" type="submit">
+                                                            Cancel Request
+                                                        </button>
                                                     </form>
-                                                    <form method="POST" action="/projects/acceptRequest/{{this.requestID}}">
+                                                    <form onsubmit="return request_confirm(this);" method="POST"
+                                                          action="/projects/acceptRequest/{{this.requestID}}">
                                                         <input type="hidden" name="_csrf" value="{{../csrfToken}}">
-                                                        <input type="hidden" name="projectID" value="{{this.projectID}}">
-                                                        <input type="hidden" name="ownerEmail" value="{{this.ownerEmail}}">
-                                                        <input type="hidden" name="requestedByEmail" value="{{this.requestedByEmail}}">
-                                                        <button class="btn btn-sm btn-outline-success" type="submit">Accept Request</button>
+                                                        <input type="hidden" name="projectID"
+                                                               value="{{this.projectID}}">
+                                                        <input type="hidden" name="ownerEmail"
+                                                               value="{{this.ownerEmail}}">
+                                                        <input type="hidden" name="requestedByEmail"
+                                                               value="{{this.requestedByEmail}}">
+                                                        <button class="btn btn-sm btn-outline-success" type="submit">
+                                                            Accept Request
+                                                        </button>
                                                     </form>
-                                                </th>
+                                                </td>
                                             </tr>
                                         {{/each}}
+                                        <script>
+                                            function request_confirm(form) {
+                                                Swal.fire({
+                                                    title: 'Are you sure?',
+                                                    text: "You won't be able to revert this!",
+                                                    icon: 'warning',
+                                                    showCancelButton: true,
+                                                    confirmButtonText: 'Yes, Accept Request!'
+                                                }).then((result) => {
+                                                    if (result.value) {
+                                                        Swal.fire(
+                                                                'Canceled!',
+                                                                'Project request has been accepted.',
+                                                                'success'
+                                                        )
+                                                        return form.submit();
+                                                    }
+                                                });
+                                                return false;
+                                            }
+                                        </script>
+                                        <script>
+                                            function request_cancel(form) {
+                                                Swal.fire({
+                                                    title: 'Are you sure?',
+                                                    text: "You won't be able to revert this!",
+                                                    icon: 'warning',
+                                                    showCancelButton: true,
+                                                    confirmButtonText: 'Yes, Cancel Request!'
+                                                }).then((result) => {
+                                                    if (result.value) {
+                                                        Swal.fire(
+                                                                'Canceled!',
+                                                                'Project request has been canceled.',
+                                                                'success'
+                                                        )
+                                                        return form.submit();
+                                                    }
+                                                });
+                                                return false;
+                                            }
+                                        </script>
                                     {{/if}}
                                 {{/if}}
                                 </tbody>

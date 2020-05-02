@@ -2,9 +2,10 @@ const socket = io()
 
 const $messages = document.querySelector('#messages')
 socket.on('message', (message) => {
-    console.log('New Message :' + message.msg)
-    console.log('createdAt :' + moment(message.createdAt).format('h:mm a'))
-    $("#messages").append(' <div> <h5>' + message.name + '</h5><br> <p>' + message.msg + '</p><span>' + moment(message.createdAt).format('h:mm a') + '</span></div>');
+    console.log(message);
+    // console.log('New Message :' + message.msg)
+    // console.log('createdAt :' + moment(message.createdAt).format('h:mm a'))
+
 })
 
 document.querySelector('#message-form').addEventListener('submit', (e) => {
@@ -25,4 +26,19 @@ document.querySelector('#message-form').addEventListener('submit', (e) => {
         document.getElementById('txtMsg').focus()
         console.log('sent')
     })
+
+    let sent ='  <li class="media sent">\n' +
+        '                                    <div class="media-body">\n' +
+        '                                        <div class="msg-box">\n' +
+        '                                            <div>\n' +
+        '                                                <p>'+message+'</p>\n' +
+        '                                                <span class="chat-time">'+createdAt+'</span>\n' +
+        '                                                <div class="arrow-triangle-wrap">\n' +
+        '                                                    <div class="arrow-triangle left"></div>\n' +
+        '                                                </div>\n' +
+        '                                            </div>\n' +
+        '                                        </div>\n' +
+        '                                    </div>\n' +
+        '                                </li>';
+    $("#messages").append(sent);
 })

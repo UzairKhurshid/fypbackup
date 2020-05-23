@@ -2,7 +2,7 @@ const Account = require('../models/account')
 const Project = require('../models/project')
 
 
-const getArr = async(email, role) => {
+const getArr = async(id, role) => {
     let i = 0
     let student = []
     let project = []
@@ -16,7 +16,7 @@ const getArr = async(email, role) => {
         requestedByEmail: 'abc@gmail.com',
     }
 
-    const account = await Account.findOne({ email, role })
+    const account = await Account.findOne({ _id: id })
     await account.populate('myProjectOwnerID').execPopulate()
 
     for (i = 0; i < account.myProjectOwnerID.length; i++) {

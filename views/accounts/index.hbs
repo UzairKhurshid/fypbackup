@@ -73,6 +73,15 @@
                                     </button>
                                 </div>
                             {{/if}}
+                            {{#if error}}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                                    <span class="alert-text"><strong>Error!</strong> {{error}}</span>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                            {{/if}}
                             <table id="datable_1" class="table table-hover w-100 display pb-30">
                                 <thead>
                                 <tr>
@@ -119,7 +128,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                    {{/each}}
+                                    {{/each}} 
                                     <script>
                                         function form_confirm(form) {
                                             Swal.fire({

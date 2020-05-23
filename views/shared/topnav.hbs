@@ -81,7 +81,7 @@
                 <div class="notifications-nicescroll-bar">
                     {{#if notification}}
                         {{#each notification}}
-                            <a href="{{this.refRoute}}" class="dropdown-item">
+                            <a href="{{this.refRoute}}" class="dropdown-item" onsubmit="return notification_confirm({{chkNotification this.refTable}});">
                                 <div class="media">
                                     <div class="media-img-wrap">
                                         <div class="avatar avatar-sm">
@@ -104,6 +104,17 @@
                             </a>
                             <div class="dropdown-divider"></div>
                         {{/each}}
+                        <script>
+                            function notification_confirm(refTable {
+                               if(refTable=='G'){
+                                   alert('G')
+                               }
+                               else{
+                                   alert('else')
+                               }
+                                return false;
+                               }
+                        </script>
                     {{else}}
                         <a href="javascript:void(0);" class="dropdown-item">
                             <div class="media">

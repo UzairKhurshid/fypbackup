@@ -3,19 +3,30 @@ const auth = require('../middleware/auth')
 const router = new express.Router()
 const Project = require('../models/project')
 const Account = require('../models/account')
+const Request = require('../models/request')
+const myProject = require('../models/myProject')
 const { createNotification, getAllNotifications } = require('../helpers/notification')
 
 router.get('/projects', auth, async(req, res) => {
 
     const email = req.session.email
     const role = req.session.role
-
+    let projects = []
+    let count = 2
     try {
-        const proj = await Project.find({ status: 'accepted' })
-        const projects = await Project.find({ status: 'accepted' }).sort({ year: -1, name: 'asc' })
-        const count = Object.keys(proj).length
         const Arr = await getAllNotifications(email, role)
         const notificationCount = Arr.length
+        if (req.query.season) {
+            const season = req.query.season
+            const proj = await Project.find({ status: 'accepted' })
+            projects = await Project.find({ status: 'accepted', season }).sort({ year: -1, name: 'asc' })
+            count = Object.keys(proj).length
+        } else {
+            const proj = await Project.find({ status: 'accepted' })
+            projects = await Project.find({ status: 'accepted' }).sort({ year: -1, name: 'asc' })
+            count = Object.keys(proj).length
+        }
+
 
         if (role == 'admin') {
             res.render('projects/index', {
@@ -28,7 +39,8 @@ router.get('/projects', auth, async(req, res) => {
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
-                success: req.flash('success')
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         } else if (role == 'student') {
             res.render('projects/index', {
@@ -41,7 +53,8 @@ router.get('/projects', auth, async(req, res) => {
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
-                success: req.flash('success')
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         } else if (role == 'teacher') {
             res.render('projects/index', {
@@ -54,7 +67,8 @@ router.get('/projects', auth, async(req, res) => {
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
-                success: req.flash('success')
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         }
 
@@ -86,7 +100,8 @@ router.get('/admin/proposedProjects', auth, async(req, res) => {
             notificationCount: notificationCount,
             accAvatar: req.session.avatar,
             accountName: req.session.name,
-            success: req.flash('success')
+            success: req.flash('success'),
+            error: req.flash('error')
         })
     } catch (e) {
         console.log(e.message)
@@ -111,7 +126,9 @@ router.get('/projects/create', auth, async(req, res) => {
             notification: Arr,
             notificationCount: notificationCount,
             accAvatar: req.session.avatar,
-            accountName: req.session.name
+            accountName: req.session.name,
+            success: req.flash('success'),
+            error: req.flash('error')
         })
     } else if (role == 'student') {
         res.render('projects/create', {
@@ -121,7 +138,9 @@ router.get('/projects/create', auth, async(req, res) => {
             notification: Arr,
             notificationCount: notificationCount,
             accAvatar: req.session.avatar,
-            accountName: req.session.name
+            accountName: req.session.name,
+            success: req.flash('success'),
+            error: req.flash('error')
         })
     } else if (role == 'teacher') {
         res.render('projects/create', {
@@ -131,7 +150,9 @@ router.get('/projects/create', auth, async(req, res) => {
             notification: Arr,
             notificationCount: notificationCount,
             accAvatar: req.session.avatar,
-            accountName: req.session.name
+            accountName: req.session.name,
+            success: req.flash('success'),
+            error: req.flash('error')
         })
     }
 })
@@ -179,7 +200,8 @@ router.get('/projects/update/:id', auth, async(req, res) => {
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
-                success: req.flash('success')
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         } else if (role == 'teacher') {
             res.render('projects/update', {
@@ -191,7 +213,8 @@ router.get('/projects/update/:id', auth, async(req, res) => {
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
-                success: req.flash('success')
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         } else if (role == 'student') {
             res.render('projects/update', {
@@ -203,7 +226,8 @@ router.get('/projects/update/:id', auth, async(req, res) => {
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
-                success: req.flash('success')
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         }
 
@@ -245,6 +269,10 @@ router.post('/projects/delete/:id', auth, async(req, res) => {
 
     try {
         await Project.findOneAndDelete({ _id: id })
+        await Request.findOneAndDelete({ projectID: id })
+        await myProject.findOneAndDelete({ projectID: id })
+
+
         console.log("deleted Successfully")
         req.flash('success', 'Project deleted successfully')
         if (role == 'admin') {
@@ -281,7 +309,8 @@ router.get('/viewproject/:id', auth, async(req, res) => {
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
-                success: req.flash('success')
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         } else if (role == 'student') {
             res.render('projects/viewproject', {
@@ -293,7 +322,8 @@ router.get('/viewproject/:id', auth, async(req, res) => {
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
-                success: req.flash('success')
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         } else if (role == 'teacher') {
             res.render('projects/viewproject', {
@@ -305,7 +335,8 @@ router.get('/viewproject/:id', auth, async(req, res) => {
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
-                success: req.flash('success')
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         }
 

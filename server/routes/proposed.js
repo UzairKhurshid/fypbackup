@@ -1,4 +1,5 @@
 const express = require('express')
+const mongoose = require('mongoose')
 const auth = require('../middleware/auth')
 const router = new express.Router()
 const Project = require('../models/project')
@@ -36,7 +37,8 @@ router.get('/proposed/allProposedProjects', auth, async(req, res) => {
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
-                success: req.flash('success')
+                success: req.flash('success'),
+                error: req.flash('error')
             })
 
         } else if (role == "teacher") {
@@ -51,7 +53,8 @@ router.get('/proposed/allProposedProjects', auth, async(req, res) => {
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
-                success: req.flash('success')
+                success: req.flash('success'),
+                error: req.flash('error')
             })
 
         }
@@ -76,18 +79,21 @@ router.get('/selfProposed', auth, async(req, res) => {
 
         if (role == 'student') {
             const account = await Account.findOne({ email, role })
-            await account.populate('projects').execPopulate()
+            const accID = account._id
+            const projs = await Project.find({ ownerID: accID })
+
 
             return res.render('proposed/self_proposed_projects', {
                 title: 'Self Proposed',
                 Projects: true,
                 studentLogin: 'true',
-                project: account.projects,
+                project: projs,
                 notification: Arr,
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
-                success: req.flash('success')
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         } else if (role == 'teacher') {
             const account = await Account.findOne({ email, role })
@@ -102,7 +108,8 @@ router.get('/selfProposed', auth, async(req, res) => {
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
-                success: req.flash('success')
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         }
 
@@ -124,17 +131,21 @@ router.get('/proposed/proposeNewProject', auth, async(req, res) => {
         if (role == "student") {
 
             const account = await Account.findOne({ email, role })
+            const teachers = await Account.find({ role: 'teacher' })
             return res.render('proposed/proposeNewProject', {
                 title: 'Propose New Project',
                 studentLogin: 'true',
                 Projects: true,
+                teachers: teachers,
                 ownerName: account.name,
                 ownerID: account.id,
                 ownerRole: role,
                 notification: Arr,
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
-                accountName: req.session.name
+                accountName: req.session.name,
+                success: req.flash('success'),
+                error: req.flash('error')
             })
 
         } else if (role == "teacher") {
@@ -150,7 +161,9 @@ router.get('/proposed/proposeNewProject', auth, async(req, res) => {
                 notification: Arr,
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
-                accountName: req.session.name
+                accountName: req.session.name,
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         }
     } catch (e) {
@@ -162,19 +175,70 @@ router.get('/proposed/proposeNewProject', auth, async(req, res) => {
 })
 
 router.post('/proposed/proposeNewProject', auth, async(req, res) => {
+    const email = req.session.email
+    const role = req.session.role
     try {
-        const project = new Project(req.body)
-        project.status = 'proposed'
-        await project.save()
-        await createNotification('A new Project is Proposed by ' + req.session.name + ' ( ' + req.session.role + '). please review proposed Projects.', 'Project', '/proposed/allProposedProjects', '', '')
+        if (role == 'student') {
 
-        console.log("project saves successfully")
-        req.flash('success', 'Projectd Created Successfully')
-        res.redirect('/selfProposed')
+            //checking student already working on a project or not  
+            const studentAcc = await Account.findOne({ email, role })
+            const studentAccID = studentAcc._id
+            const stdFYP = await myProject.find({ requestedByID: studentAccID })
+
+            if (!stdFYP === undefined || !stdFYP.length == 0) {
+                throw new Error('You are already working on a project . You cannot propose project.')
+            }
+
+            //checking teacher exists or not
+            const teacherRegNo = req.body.teacherRegNo
+            const teacherAcc = await Account.findOne({ regNo: teacherRegNo })
+            const teacherAccID = teacherAcc._id
+            if (!teacherAcc) {
+                throw new Error('Teacher With this Registeration No doesnt Exists.')
+            }
+
+            //creating project
+            const projYear = req.body.year
+            const todaysDate = new Date()
+            const currentYear = todaysDate.getFullYear()
+            if (projYear < currentYear) {
+                throw new Error('You cannot propose an outdated project')
+            }
+            const project = new Project(req.body)
+            project.status = 'proposed'
+            await project.save()
+            await createNotification('A new Project is Proposed by ' + req.session.name + ' ( ' + req.session.role + ') and Requested Your Supervision. please review your Requests.', 'Project', '/projects/requests', teacherAccID, 'teacher')
+
+
+            //creating request 
+            const proposedProj = await Project.findOne({ ownerID: studentAccID })
+            const proposedProjID = proposedProj._id
+            const request = new Request()
+            request.ownerID = teacherAccID
+            request.projectID = proposedProjID
+            request.requestedByID = studentAcc._id
+            request.requestedByRole = role
+            request.status = 'requested'
+            await request.save()
+
+
+            console.log("project Proposed successfully")
+            req.flash('success', 'Project Proposed Successfully')
+            res.redirect('/selfProposed')
+        } else {
+            const project = new Project(req.body)
+            project.status = 'proposed'
+            await project.save()
+            await createNotification('A new Project is Proposed by ' + req.session.name + ' ( ' + req.session.role + '). please review proposed Projects.', 'Project', '/proposed/allProposedProjects', '', '')
+
+            console.log("project Proposed successfully")
+            req.flash('success', 'Project Proposed Successfully')
+            res.redirect('/selfProposed')
+        }
     } catch (e) {
         console.log(e.message)
         req.flash('error', e.message)
-        res.redirect('/dashboard')
+        res.redirect('/proposed/proposeNewProject')
     }
 })
 
@@ -202,7 +266,8 @@ router.get('/projects/requests', async(req, res) => {
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
-                success: req.flash('success')
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         } else if (role == 'teacher') {
 
@@ -215,7 +280,8 @@ router.get('/projects/requests', async(req, res) => {
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
-                success: req.flash('success')
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         }
 
@@ -231,9 +297,11 @@ router.get('/projects/requests', async(req, res) => {
 
 
 router.post('/projects/deleteRequest/:id', async(req, res) => {
+    const email = req.session.email
+    const role = req.session.role
     const id = req.params.id
     try {
-        const acc = await Account.findOne({ email: req.body.requestedByEmail })
+        const acc = await Account.findOne({ email, role })
         const accID = acc.id
         await Request.findByIdAndDelete(id)
         await createNotification('Your request to project is deleted . please review Your requests .', 'Request', '/projects/requests', accID, 'student')
@@ -258,10 +326,33 @@ router.post('/projects/acceptRequest/:id', async(req, res) => {
         if (role == 'teacher') {
             const account = await Account.findOne({ email, role: 'student' })
             await account.populate('myProjectRequestedByID').execPopulate()
+
+            //checking that student already working on a project or not
+            if (account.myProjectRequestedByID === undefined || account.myProjectRequestedByID.length == 0) {
+                let flag = 'false'
+                const myProj = await myProject.find({})
+                if (myProj === undefined || myProj == 0) {} else {
+                    myProj.forEach(proj => {
+                        var members = proj.members
+                        if (members === undefined || members.length == 0) {} else {
+                            members.forEach(mem => {
+                                if (mem.accID == account._id) {
+                                    flag = 'true'
+                                }
+                            });
+                        }
+                    });
+                }
+                if (flag == 'true') {
+                    req.flash('success', 'Project Assignation Failed . Student Already Working on a project')
+                    return res.redirect('/projects/requests')
+                }
+            }
             if (Object.entries(account.myProjectRequestedByID).length !== 0) {
                 req.flash('success', 'Project Assignation Failed . Student Already Working on a project')
                 return res.redirect('/projects/requests')
             }
+
             const ownerEmail = req.body.ownerEmail
             const requestedByEmail = req.body.requestedByEmail
             const ownerAcc = await Account.findOne({ email: ownerEmail, role: 'teacher' })
@@ -304,10 +395,22 @@ router.post('/projects/requestProject/:id', auth, async(req, res) => {
         request.requestedByRole = account.role
         request.status = 'requested'
 
-        const prevReq = await Request.find({ projectID: req.params.id })
+        //checking that Already requested or not
+        const prevReq = await Request.find({ projectID: req.params.id, requestedByID: account._id })
         if (!prevReq.length <= 0) {
             throw new Error('Already requested for this project')
         }
+
+        //checking that request is outdated or not 
+        const projID = req.params.id
+        const proj = await Project.findOne({ _id: mongoose.Types.ObjectId(projID) })
+        const todaysDate = new Date()
+        const currentYear = todaysDate.getFullYear()
+        if (proj.year < currentYear) {
+            console.log('a')
+            throw new Error('choose ' + currentYear + ' projects . you cannot request this project .')
+        }
+
         await request.save()
         sendProjectRequestMail(req.session.email)
         await createNotification('You have a new request by ' + req.session.name + '  . please review Your requests .', 'Request', '/projects/requests', req.body.ownerID, 'teacher')
@@ -318,7 +421,7 @@ router.post('/projects/requestProject/:id', auth, async(req, res) => {
     } catch (e) {
         console.log(e.message)
         req.flash('error', e.message)
-        res.redirect('/dashboard')
+        res.redirect('/proposed/allProposedProjects')
     }
 
 })

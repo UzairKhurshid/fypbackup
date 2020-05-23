@@ -36,6 +36,14 @@ const myProjectSchema = new mongoose.Schema({
             type: String
         }
     }],
+    members: [{
+        accID: {
+            type: String
+        },
+        status: {
+            type: String
+        }
+    }],
     chats: [{
         ownerEmail: {
             type: String

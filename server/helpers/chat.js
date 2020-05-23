@@ -1,10 +1,11 @@
 const mongoose = require('mongoose')
 const myProject = require('../models/myProject')
 
-const generateMessage = (msg, name) => {
+const generateMessage = (msg, name, email) => {
     return {
         msg,
         name,
+        email,
         createdAt: new Date().getTime()
     }
 }

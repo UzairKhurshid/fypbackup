@@ -1,6 +1,7 @@
 const express = require('express')
 const auth = require('../middleware/auth')
 const Project = require('../models/project')
+const Account = require('../models/account')
 const Notification = require('../models/notification')
 const { getAllNotifications } = require('../helpers/notification')
 const { getAdminData, getTeacherData, getStudentData } = require('../helpers/dashboard')
@@ -15,47 +16,54 @@ router.get('/dashboard', auth, async(req, res) => {
 
         const Arr = await getAllNotifications(email, role)
         const notificationCount = Arr.length
-        const supervisingArr = await getArr(email, role)
-        const supervisingCount = supervisingArr.length
         if (role === "admin") {
-            const adminData = await getAdminData(email, role)
+            //const adminData = await getAdminData(email, role)
+
             res.render('dashboard/index', {
                 title: 'Admin Dashboard',
                 adminLogin: 'true',
                 Dashboard: true,
                 notification: Arr,
-                adminData:adminData,
+                //adminData: adminData,
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
-                success: req.flash('success')
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         } else if (role === "student") {
-            const studentData = await getStudentData(email, role)
+            //const studentData = await getStudentData(email, role)
+
             res.render('dashboard/index', {
                 title: 'Student Dashboard',
                 studentLogin: 'true',
                 Dashboard: true,
-                studentData: studentData,
+                //studentData: studentData,
                 notification: Arr,
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
-                success: req.flash('success')
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         } else if (role === "teacher") {
-            const teacherData = await getTeacherData(email, role)
+            // const teacherData = await getTeacherData(email, role)
+            // const acc = await Account.findOne({ email, role })
+            // const supervisingArr = await getArr(acc._id, role)
+            // const supervisingCount = supervisingArr.length
+
             res.render('dashboard/index', {
                 title: 'Teacher Dashboard',
                 teacherLogin: 'true',
                 Dashboard: true,
-                teacherData: teacherData,
+                //teacherData: teacherData,
                 notification: Arr,
                 notificationCount: notificationCount,
-                supervisingCount: supervisingCount,
+                //supervisingCount: supervisingCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
-                success: req.flash('success')
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         }
     } catch (e) {
@@ -71,10 +79,11 @@ router.post('/clearAllNotifications', auth, async(req, res) => {
     const role = req.session.role
     const email = req.session.email
     try {
+        const acc = await Account.findOne({ email, role })
         if (role == 'admin') {
             await Notification.deleteMany({ role: "admin" })
         } else {
-            await Notification.deleteMany({ ownerEmail: email })
+            await Notification.deleteMany({ ownerID: acc._id })
         }
 
 

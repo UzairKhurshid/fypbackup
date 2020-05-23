@@ -42,10 +42,28 @@
         <div class="col-xl-12">
             <section class="hk-sec-wrapper">
                 <h5 class="hk-sec-title text-capitalize">{{project.name}} {{project.year}} Project Information</h5>
-                <p class="mb-40">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dignissimos
+                {{!-- <p class="mb-40">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dignissimos
                     perspiciatis sapiente sunt veniam. Dolorem dolorum ipsam praesentium, quis ratione velit. Asperiores
                     eaque eos laudantium modi! Nisi odio quasi totam.
-                </p>
+                </p> --}}
+                {{#if success}}
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                                <span class="alert-text"><strong>Success!</strong> {{success}}</span>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                        {{/if}}
+                        {{#if error}}
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                                <span class="alert-text"><strong>Error!</strong> {{error}}</span>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                        {{/if}}
                 <div class="row">
                     <div class="col-sm">
                         <form>
@@ -114,6 +132,15 @@
                                         <label for="year" class="form-control-label">Year</label>
                                         <input value="{{project.year}}" required placeholder="Enter year of Project"
                                                type="text" id="year" class="form-control" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="year" class="form-control-label">Season</label>
+                                        <input value="{{project.season}}" required placeholder="Enter Season of Project"
+                                               type="text" id="season" class="form-control" readonly>
                                     </div>
                                 </div>
                             </div>

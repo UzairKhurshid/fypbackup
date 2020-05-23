@@ -31,7 +31,8 @@ router.get('/adminAccounts', auth, async(req, res) => {
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
-                success: req.flash('success')
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         } else if (req.query.role == 'student') {
             const acc = await Account.find({ role: 'student' })
@@ -50,7 +51,8 @@ router.get('/adminAccounts', auth, async(req, res) => {
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
-                success: req.flash('success')
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         } else if (req.query.role == 'admin') {
             const acc = await Account.find({ role: 'admin' })
@@ -68,7 +70,8 @@ router.get('/adminAccounts', auth, async(req, res) => {
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
-                success: req.flash('success')
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         } else {
             const acc = await Account.find({ email: { $ne: email } })
@@ -85,7 +88,8 @@ router.get('/adminAccounts', auth, async(req, res) => {
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
-                success: req.flash('success')
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         }
     } catch (e) {
@@ -154,7 +158,8 @@ router.get('/adminAccount/update/:id', auth, async(req, res) => {
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
-                success: req.flash('success')
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         }
         if (acc.role == 'teacher') {
@@ -168,7 +173,8 @@ router.get('/adminAccount/update/:id', auth, async(req, res) => {
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
-                success: req.flash('success')
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         } else if (acc.role == 'student') {
             res.render('accounts/update', {
@@ -181,7 +187,8 @@ router.get('/adminAccount/update/:id', auth, async(req, res) => {
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
-                success: req.flash('success')
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         }
 

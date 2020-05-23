@@ -23,7 +23,8 @@ router.get('/profile', auth, async(req, res) => {
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
-                success: req.flash('success')
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         } else if (role == 'student') {
             res.render('profile/profile', {
@@ -33,7 +34,8 @@ router.get('/profile', auth, async(req, res) => {
                 notification: Arr,
                 notificationCount: notificationCount,
                 accountName: req.session.name,
-                success: req.flash('success')
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         } else if (role == 'teacher') {
             res.render('profile/profile', {
@@ -44,7 +46,8 @@ router.get('/profile', auth, async(req, res) => {
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
-                success: req.flash('success')
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         }
     } catch (e) {

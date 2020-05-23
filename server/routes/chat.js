@@ -2,6 +2,7 @@ const express = require('express')
 const auth = require('../middleware/auth')
 const myProject = require('../models/myProject')
 const Project = require('../models/project')
+const Account = require('../models/account')
 const getArr = require('../helpers/supervisingFun')
 const mongoose = require('mongoose')
 const { getAllNotifications } = require('../helpers/notification')
@@ -17,9 +18,11 @@ router.get('/chat', auth, async(req, res) => {
     try {
         const notificationArr = await getAllNotifications(email, role)
         const notificationCount = notificationArr.length
+        const acc = await Account.findOne({ email: email, role: role })
 
         if (role == 'teacher') {
-            const Arr = await getArr(email, role)
+
+            const Arr = await getArr(acc._id, role)
 
             res.render('chatroom/ali_chat', {
                 title: 'Chat Room',
@@ -29,9 +32,12 @@ router.get('/chat', auth, async(req, res) => {
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         } else if (role == 'student') {
-            const myprojects = await myProject.findOne({ requestedByEmail: email })
+
+            const myprojects = await myProject.findOne({ requestedByID: acc._id })
             const id = myprojects.projectID
             const project = await Project.findOne({ _id: id })
 
@@ -44,6 +50,8 @@ router.get('/chat', auth, async(req, res) => {
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         }
     } catch (e) {
@@ -59,14 +67,13 @@ router.get('/chat/:id', auth, async(req, res) => {
     const FYPID = req.params.id
     const projectName = req.query.projectName || ''
 
-    // chat/5e9d7ec21a652412ec4f7ec0?projectName=School Managment System
-    //ObjectId
     try {
         const notificationArr = await getAllNotifications(email, role)
         const notificationCount = notificationArr.length
+        const acc = await Account.findOne({ email: email, role: role })
 
         if (role == 'teacher') {
-            const Arr = await getArr(email, role)
+            const Arr = await getArr(acc._id, role)
             const proj = await myProject.findOne({ _id: mongoose.Types.ObjectId(FYPID) })
 
             res.render('chatroom/ali_chat', {
@@ -81,10 +88,11 @@ router.get('/chat/:id', auth, async(req, res) => {
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
-                success: req.flash('success')
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         } else if (role == 'student') {
-            const myprojects = await myProject.findOne({ requestedByEmail: email })
+            const myprojects = await myProject.findOne({ requestedByID: acc._id })
             const id = myprojects.projectID
             const project = await Project.findOne({ _id: id })
 
@@ -100,7 +108,8 @@ router.get('/chat/:id', auth, async(req, res) => {
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
-                success: req.flash('success')
+                success: req.flash('success'),
+                error: req.flash('error')
             })
         }
     } catch (e) {

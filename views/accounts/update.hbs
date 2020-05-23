@@ -29,10 +29,24 @@
         <div class="col-xl-12">
             <section class="hk-sec-wrapper">
                 <h5 class="hk-sec-title text-capitalize">Edit {{account.name}} Account Information</h5>
-                <p class="mb-40">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dignissimos
-                    perspiciatis sapiente sunt veniam. Dolorem dolorum ipsam praesentium, quis ratione velit. Asperiores
-                    eaque eos laudantium modi! Nisi odio quasi totam.
-                </p>
+                {{#if success}}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                                    <span class="alert-text"><strong>Success!</strong> {{success}}</span>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                            {{/if}}
+                {{#if error}}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                                    <span class="alert-text"><strong>Error!</strong> {{error}}</span>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                            {{/if}}
                 <div class="row">
                     <div class="col-sm">
                         <form method="POST" action="/adminAccount/update/{{account.id}}">

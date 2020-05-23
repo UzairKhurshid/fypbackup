@@ -49,7 +49,7 @@ router.post('/login/:role', async(req, res) => {
         req.session.avatar = account.avatar
         req.session.name = account.name
         req.session.role = role
-        req.session.email = req.body.email
+        req.session.email = account.email
 
 
         res.redirect('/dashboard')

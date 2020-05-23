@@ -38,6 +38,11 @@ const projectSchema = new mongoose.Schema({
         trim: true,
         required: true
     },
+    season: {
+        type: String,
+        trim: true,
+        required: true
+    },
     description: {
         type: String,
         trim: true,

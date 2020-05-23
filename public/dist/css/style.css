@@ -24582,6 +24582,14 @@ table.dataTable>tbody>tr.child span.dtr-data {
 
 /*Avatar*/
 
+#memberAvatar:hover {
+    -ms-transform: scale(1.5);
+    /* IE 9 */
+    -webkit-transform: scale(1.5);
+    /* Safari 3-8 */
+    transform: scale(3.5);
+}
+
 .avatar {
     font-size: 1rem;
     position: relative;
@@ -28005,8 +28013,8 @@ table.dataTable>tbody>tr.child span.dtr-data {
     /* IE11 */
 }
 
-.swal2-confirm{
-    border-color:#603bab !important;
+.swal2-confirm {
+    border-color: #603bab !important;
     background: linear-gradient(45deg, #3650ab, #603bab) !important;
 }
 

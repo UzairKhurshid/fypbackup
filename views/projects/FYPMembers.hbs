@@ -1,0 +1,118 @@
+<!-- Breadcrumb -->
+<nav class="hk-breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb breadcrumb-light bg-transparent">
+        <li class="breadcrumb-item"><a href="#">Projects</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Tasks</li>
+    </ol>
+</nav>
+<!-- /Breadcrumb -->
+
+<!-- Container -->
+<div class="container-fluid">
+
+    <!-- Title -->
+    <div class="hk-pg-header">
+        <div class="row w-100">
+            <div class="col-md-6">
+                <h4 class="hk-pg-title text-capitalize"><span class="pg-title-icon"><span class="feather-icon text-primary"><i
+                        data-feather="file"></i></span></span>{{accountName}} Project Members</h4>
+            </div>
+            <div class="col-md-6 pr-0 text-md-right">
+                {{#if studentLogin}}
+                    <input type="hidden" name="memberStatusInput" value="{{memberStatus}}" id="memberStatusInput">
+                    <form method="POST" action="/FYP/newMember/{{projID}}" id="addMemberForm">
+                        <input type="number" name="regNo" placeholder="Registeration No" required>
+                        <input type="hidden" name="_csrf" value="{{csrfToken}}" class="form-control">
+                        <button class="btn btn-sm btn-gradient-info" type="submit">Add New Member</button>
+                    </form>
+                {{/if}}
+                <script type="text/javascript">
+                    window.onload = function() {
+                        var addMemberform=document.getElementById('addMemberForm')
+                        var memberStatusInput=document.getElementById('memberStatusInput').value
+                        if(memberStatusInput == 'leader' || memberStatusInput == ''){
+                            
+                        }
+                        else{
+                            addMemberform.style.display = "none";
+                        }
+                    };
+                </script>
+            </div>
+        </div>
+    </div>
+    <!-- /Title -->
+
+    <!-- Row -->
+    <div class="row">
+        <div class="col-xl-12">
+            <section class="hk-sec-wrapper">
+                <h5 class="hk-sec-title">{{accountName}} Project Members Details</h5>
+                {{!-- <p class="mb-40">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dignissimos
+                    perspiciatis sapiente sunt veniam. Dolorem dolorum ipsam praesentium, quis ratione velit. Asperiores
+                    eaque eos laudantium modi! Nisi odio quasi totam.
+                </p> --}}
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="table-wrap">
+                            {{#if success}}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                                    <span class="alert-text"><strong>Success!</strong> {{success}}</span>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                            {{/if}}
+                            {{#if error}}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                                    <span class="alert-text"><strong>Error!</strong> {{error}}</span>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                            {{/if}}
+                            <table id="datable_1" class="table table-hover w-100 display pb-30">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Reg No</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                        {{#if members}}
+                                            {{#each members}}
+                                                <tr> 
+                                                    <td>
+                                                        <div class="avatar" id="memberAvatar">
+                                                            <img style="border: 1px solid white;" src="data:image/jpeg;base64, {{this.avatar}}" alt="user" class="avatar-img rounded-circle">
+                                                        </div>    
+                                                    </td>
+                                                    <td class="text-capitalize">{{this.regNo}}</td>
+                                                    <td>{{this.name}}</td>
+                                                    <td>{{this.email}}</td>
+                                                    <td>{{this.status}}</td>
+                                                </tr>
+                                            {{/each}}
+                                        {{else}}
+                                            <tr>
+                                                <p>No Group Member</p>
+                                            </tr>
+                                        {{/if}}
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <!-- /Row -->
+</div>
+<!-- /Container -->

@@ -91,12 +91,13 @@ hbs.registerHelper('chkNotification', (val) => {
         res = "T"
     } else if (val == 'Request') {
         res = "R"
+    } else if (val == 'Group') {
+        res = "G"
     } else {
         res = 'X'
     }
     return res
 })
-
 
 //**************************************************************************************** */
 
@@ -151,7 +152,7 @@ io.on('connection', (socket) => {
     socket.emit('message', generateMessage('', '', '', 'welcome ', ''))
     socket.broadcast.emit('message', generateMessage('', '', '', 'A User has joined', ''))
     socket.on('sendMessage', (FYPID, ownerEmail, name, msg, createdAt, callback) => {
-        io.emit('message', generateMessage(msg, name))
+        io.emit('message', generateMessage(msg, name, ownerEmail))
         saveMessage(FYPID, ownerEmail, name, msg, createdAt)
         callback()
     })

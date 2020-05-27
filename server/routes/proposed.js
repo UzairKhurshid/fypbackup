@@ -181,12 +181,33 @@ router.post('/proposed/proposeNewProject', auth, async(req, res) => {
         if (role == 'student') {
 
             //checking student already working on a project or not  
-            const studentAcc = await Account.findOne({ email, role })
-            const studentAccID = studentAcc._id
-            const stdFYP = await myProject.find({ requestedByID: studentAccID })
+            const account = await Account.findOne({ email, role })
+            studentAccID = account._id
+            await account.populate('myProjectRequestedByID').execPopulate()
 
-            if (!stdFYP === undefined || !stdFYP.length == 0) {
-                throw new Error('You are already working on a project . You cannot propose project.')
+            if (account.myProjectRequestedByID === undefined || account.myProjectRequestedByID.length == 0) {
+                let flag = 'false'
+                const myProj = await myProject.find({})
+                if (myProj === undefined || myProj == 0) {} else {
+                    myProj.forEach(proj => {
+                        var members = proj.members
+                        if (members === undefined || members.length == 0) {} else {
+                            members.forEach(mem => {
+                                if (mem.accID == account._id) {
+                                    flag = 'true'
+                                }
+                            });
+                        }
+                    });
+                }
+                if (flag == 'true') {
+                    req.flash('error', 'Failed .Cannot propose project when Already Working on a project ')
+                    return res.redirect('/selfProposed')
+                }
+            }
+            if (Object.entries(account.myProjectRequestedByID).length !== 0) {
+                req.flash('error', 'Failed .Cannot propose project when Already Working on a project ')
+                return res.redirect('/selfProposed')
             }
 
             //checking teacher exists or not
@@ -216,7 +237,7 @@ router.post('/proposed/proposeNewProject', auth, async(req, res) => {
             const request = new Request()
             request.ownerID = teacherAccID
             request.projectID = proposedProjID
-            request.requestedByID = studentAcc._id
+            request.requestedByID = studentAccID
             request.requestedByRole = role
             request.status = 'requested'
             await request.save()
@@ -352,6 +373,7 @@ router.post('/projects/acceptRequest/:id', async(req, res) => {
                 req.flash('success', 'Project Assignation Failed . Student Already Working on a project')
                 return res.redirect('/projects/requests')
             }
+
 
             const ownerEmail = req.body.ownerEmail
             const requestedByEmail = req.body.requestedByEmail

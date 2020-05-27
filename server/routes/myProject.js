@@ -305,7 +305,9 @@ router.get('/FYP/acceptRequest/member/:id', auth, async(req, res) => {
         const acc = await Account.findOne({ email, role })
         const proj = await myProject.findOne({ _id: id })
         const members = proj.members
-
+        if (members.length >= 3) {
+            throw new Error('Group limit reached . you cannot join this project')
+        }
         members.forEach(mem => {
             if (mem.accID == acc._id) {
                 //console.log(' request Already accepted')

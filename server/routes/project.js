@@ -6,7 +6,9 @@ const Account = require('../models/account')
 const Request = require('../models/request')
 const myProject = require('../models/myProject')
 const { createNotification, getAllNotifications } = require('../helpers/notification')
-
+    // can accept request from notification if limit reached .
+    // cannot propose a project if member of any project
+    //
 router.get('/projects', auth, async(req, res) => {
 
     const email = req.session.email

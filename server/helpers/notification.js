@@ -20,7 +20,7 @@ const createNotification = async(text, refTable, refRoute, ownerID, role) => {
     notification.refRoute = refRoute
     notification.ownerID = ownerID
     notification.role = role
-    notification.createdAt = strTime
+    notification.time = strTime
     notification.status = 'unread'
 
     await notification.save()
@@ -34,17 +34,17 @@ const getAllNotifications = async(email, role) => {
         txt: 'abc',
         refTable: 'abc',
         refRoute: 'abc',
-        createdAt: 'abc'
+        time: 'abc'
     }
 
     if (role == 'admin') {
-        const noti = await Notification.find({ role: "admin" })
+        const noti = await Notification.find({ role: "admin" }).sort({ createdAt: -1 })
         for (i = 0; i < noti.length; i++) {
             let obj = Object.create(newObj)
             obj.txt = noti[i].text
             obj.refTable = noti[i].refTable
             obj.refRoute = noti[i].refRoute
-            obj.createdAt = noti[i].createdAt
+            obj.time = noti[i].time
             Arr[i] = obj
         }
     } else {
@@ -59,7 +59,7 @@ const getAllNotifications = async(email, role) => {
                 obj.txt = noti[i].text
                 obj.refTable = noti[i].refTable
                 obj.refRoute = noti[i].refRoute
-                obj.createdAt = noti[i].createdAt
+                obj.time = noti[i].time
                 Arr[i] = obj
             }
         }
@@ -70,7 +70,7 @@ const getAllNotifications = async(email, role) => {
                 obj.txt = noti2[i].text
                 obj.refTable = noti2[i].refTable
                 obj.refRoute = noti2[i].refRoute
-                obj.createdAt = noti2[i].createdAt
+                obj.time = noti2[i].time
                 Arr[j] = obj
                 j++
             }

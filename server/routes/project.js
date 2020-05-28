@@ -21,7 +21,7 @@ router.get('/projects', auth, async(req, res) => {
         if (req.query.season) {
             const season = req.query.season
             const proj = await Project.find({ status: 'accepted' })
-            projects = await Project.find({ status: 'accepted', season }).sort({ year: -1, name: 'asc' })
+            projects = await Project.find({ status: 'accepted', season }).sort({ year: 1, name: 'asc' })
             count = Object.keys(proj).length
         } else {
             const proj = await Project.find({ status: 'accepted' })
@@ -84,13 +84,23 @@ router.get('/admin/proposedProjects', auth, async(req, res) => {
 
     const role = req.session.role
     const email = req.session.email
+    let projects = []
+    let count = 2
 
     try {
-        const proj = await Project.find({ status: 'proposed' })
-        const projects = await Project.find({ status: 'proposed' }).sort({ year: -1, name: 'asc' })
-        const count = Object.keys(proj).length
         const Arr = await getAllNotifications(email, role)
         const notificationCount = Arr.length
+        if (req.query.season) {
+            const season = req.query.season
+            const proj = await Project.find({ status: 'proposed' })
+            projects = await Project.find({ status: 'proposed', season }).sort({ year: -1, name: 'asc' })
+            count = Object.keys(proj).length
+        } else {
+            const proj = await Project.find({ status: 'proposed' })
+            projects = await Project.find({ status: 'proposed' }).sort({ year: -1, name: 'asc' })
+            count = Object.keys(proj).length
+        }
+
 
         res.render('projects/index', {
             title: 'Proposed Projects',

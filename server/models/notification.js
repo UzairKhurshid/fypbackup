@@ -20,13 +20,15 @@ const notificationSchema = new mongoose.Schema({
     role: {
         type: String
     },
-    createdAt: {
+    time: {
         type: String,
         required: true
     },
     status: {
         type: String
     }
+}, {
+    timestamps: true
 })
 
 const Notification = mongoose.model('Notification', notificationSchema)

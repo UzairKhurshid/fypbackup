@@ -18,12 +18,23 @@ router.get('/proposed/allProposedProjects', auth, async(req, res) => {
 
     const email = req.session.email
     const role = req.session.role
+    let projects = []
+    let count = 2
+
     try {
-        const proj = await Project.find({ ownerRole: 'teacher', status: 'proposed' })
-        const projects = await Project.find({ ownerRole: 'teacher', status: 'proposed' }).sort({ year: -1, name: 'asc' })
-        const count = Object.keys(proj).length
         const Arr = await getAllNotifications(email, role)
         const notificationCount = Arr.length
+        if (req.query.season) {
+            const season = req.query.season
+            const proj = await Project.find({ ownerRole: 'teacher', status: 'proposed' })
+            projects = await Project.find({ ownerRole: 'teacher', status: 'proposed', season }).sort({ year: -1, name: 'asc' })
+            count = Object.keys(proj).length
+        } else {
+            const proj = await Project.find({ ownerRole: 'teacher', status: 'proposed' })
+            projects = await Project.find({ ownerRole: 'teacher', status: 'proposed' }).sort({ year: -1, name: 'asc' })
+            count = Object.keys(proj).length
+        }
+
 
         if (role == "student") {
 

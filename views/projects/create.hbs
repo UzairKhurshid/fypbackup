@@ -53,7 +53,7 @@
                                     </button>
                                 </div>
                             {{/if}}
-                        <form method="POST" action="/projects/create">
+                        <form method="POST" action="/projects/create" enctype="multipart/form-data">
                             <input type="hidden" name="_csrf" value="{{csrfToken}}"
                                    class="form-control">
                             <div class="form-row">

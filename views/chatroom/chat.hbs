@@ -28,13 +28,7 @@
 
                     <div class="chatroom" style=" width: 100%;  height:300px; overflow-y:scroll;  ">
                         
-                        {{#if chats}}
-                            {{#each  chats}}
-                                <h5>{{this.name}}</h5>
-                                <p>{{this.msg}}</p>
-                                <br><br>
-                            {{/each}}
-                        {{/if}}
+                      
                         
 
                         <form action="/chat" method="POST">

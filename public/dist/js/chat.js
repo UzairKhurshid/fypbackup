@@ -5,7 +5,23 @@ socket.on('message', (message) => {
     console.log('New Message :' + message.msg)
     console.log('Email :' + message.email)
     console.log('createdAt :' + moment(message.createdAt).format('h:mm a'))
-    $('messages').append('<div><h5>' + message.name + '</h5><br><h5>' + message.email + '</h5><br><h5>' + message.msg + '</h5></div>')
+        //$('messages').append('<div><h5>' + message.name + '</h5><br><h5>' + message.email + '</h5><br><h5>' + message.msg + '</h5></div>')
+    let sent = '  <li class="media sent">\n' +
+        '                                    <div class="media-body">\n' +
+        '                                        <div class="msg-box">\n' +
+        '                                            <div>\n' +
+        '                                                <p>' + message.name + '</p>\n' +
+        '                                                <p>' + message.email + '</p>\n' +
+        '                                                <p>' + message.msg + '</p>\n' +
+        '                                                <span class="chat-time">' + message.createdAt + '</span>\n' +
+        '                                                <div class="arrow-triangle-wrap">\n' +
+        '                                                    <div class="arrow-triangle left"></div>\n' +
+        '                                                </div>\n' +
+        '                                            </div>\n' +
+        '                                        </div>\n' +
+        '                                    </div>\n' +
+        '                                </li>';
+    $("#messages").append(sent);
 })
 
 document.querySelector('#message-form').addEventListener('submit', (e) => {
@@ -27,18 +43,5 @@ document.querySelector('#message-form').addEventListener('submit', (e) => {
         console.log('sent')
     })
 
-    let sent = '  <li class="media sent">\n' +
-        '                                    <div class="media-body">\n' +
-        '                                        <div class="msg-box">\n' +
-        '                                            <div>\n' +
-        '                                                <p>' + message + '</p>\n' +
-        '                                                <span class="chat-time">' + createdAt + '</span>\n' +
-        '                                                <div class="arrow-triangle-wrap">\n' +
-        '                                                    <div class="arrow-triangle left"></div>\n' +
-        '                                                </div>\n' +
-        '                                            </div>\n' +
-        '                                        </div>\n' +
-        '                                    </div>\n' +
-        '                                </li>';
-    $("#messages").append(sent);
+
 })

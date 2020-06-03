@@ -38,8 +38,37 @@ router.get('/chat', auth, async(req, res) => {
         } else if (role == 'student') {
 
             const myprojects = await myProject.findOne({ requestedByID: acc._id })
-            const id = myprojects.projectID
-            const project = await Project.findOne({ _id: id })
+
+            let id = ""
+            let project = []
+            if (myprojects == null) {
+                studentAccID = acc._id
+
+                let flag = 'false'
+                const myProj = await myProject.find({})
+                if (myProj === undefined || myProj.length == 0) {} else {
+                    myProj.forEach(proj => {
+                        var members = proj.members
+                        if (members === undefined || members.length == 0) {} else {
+                            members.forEach(mem => {
+                                if (mem.accID == acc._id) {
+                                    flag = 'true'
+                                }
+                            });
+                        }
+                    });
+                }
+                if (flag == 'true') {
+                    project = myProj
+                    id = myProj[0].projectID
+                    project = await Project.findOne({ _id: id })
+                }
+
+            } else {
+                id = myprojects.projectID
+                project = await Project.findOne({ _id: id })
+            }
+
 
             res.render('chatroom/ali_chat', {
                 title: 'Chat Room',
@@ -67,6 +96,7 @@ router.get('/chat/:id', auth, async(req, res) => {
     const FYPID = req.params.id
     const projectName = req.query.projectName || ''
 
+
     try {
         const notificationArr = await getAllNotifications(email, role)
         const notificationCount = notificationArr.length
@@ -92,7 +122,8 @@ router.get('/chat/:id', auth, async(req, res) => {
                 error: req.flash('error')
             })
         } else if (role == 'student') {
-            const myprojects = await myProject.findOne({ requestedByID: acc._id })
+            const myprojects = await myProject.findOne({ _id: mongoose.Types.ObjectId(FYPID) })
+            console.log(myprojects)
             const id = myprojects.projectID
             const project = await Project.findOne({ _id: id })
 
@@ -102,7 +133,7 @@ router.get('/chat/:id', auth, async(req, res) => {
                 projectList: project,
                 chats: myprojects.chats,
                 FYPID: FYPID,
-                projectName: projectName,
+                projectName: project.name,
                 email: email,
                 notification: notificationArr,
                 notificationCount: notificationCount,

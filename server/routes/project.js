@@ -171,13 +171,18 @@ router.get('/projects/create', auth, async(req, res) => {
 
 router.post('/projects/create', auth, async(req, res) => {
     const role = req.session.role
-    const project = new Project(req.body)
-    project.ownerRole = role
-    project.status = 'accepted'
 
     try {
-        //Creating Notification
+
+        console.log(req.file)
+
+        //Creating Project
+        const project = new Project(req.body)
+        project.ownerRole = role
+        project.status = 'accepted'
         await project.save()
+
+        //Creating Notification
         await createNotification('A new Project is added . please review Projects .', 'Project', '/projects', '', '')
 
         req.flash('success', 'Projectd Created Successfully')

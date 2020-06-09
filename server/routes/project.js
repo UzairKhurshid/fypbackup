@@ -2,6 +2,7 @@ const express = require('express')
 const auth = require('../middleware/auth')
 const router = new express.Router()
 const Project = require('../models/project')
+const projectDetails = require('../models/projectDetails')
 const Account = require('../models/account')
 const Request = require('../models/request')
 const myProject = require('../models/myProject')
@@ -174,13 +175,15 @@ router.post('/projects/create', auth, async(req, res) => {
 
     try {
 
-        console.log(req.file)
 
         //Creating Project
         const project = new Project(req.body)
         project.ownerRole = role
         project.status = 'accepted'
         await project.save()
+
+        // const projDetails = new projectDetails()
+        // await projDetails.save()
 
         //Creating Notification
         await createNotification('A new Project is added . please review Projects .', 'Project', '/projects', '', '')

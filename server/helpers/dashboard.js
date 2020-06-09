@@ -6,17 +6,17 @@ const mongoose = require('mongoose')
 
 const getAdminData = async(email, role) => {
     const accounts = await Account.find({ status: 'disable' }).sort({ name: 'asc' });
-    const teachers = await Account.find({ role: 'admin' });
+    const teachers = await Account.find({ role: 'teacher' });
     const students = await Account.find({ role: 'student' });
     const projects = await Project.find({});
 
     data = {
-        accounts:accounts,
-        studentsCount:students.length,
-        teachersCount:teachers.length,
-        projectsCount:projects.length
+        accounts: accounts,
+        studentsCount: students.length,
+        teachersCount: teachers.length,
+        projectsCount: projects.length
     };
-     return data;
+    return data;
 }
 
 const getTeacherData = async(email, role) => {
@@ -38,7 +38,7 @@ const getTeacherData = async(email, role) => {
         projectYear: 'abc',
         projectDescription: 'abc',
         projectTasks: [],
-        projectTasksCount:'abc',
+        projectTasksCount: 'abc',
         studentID: 'abc',
         studentregNo: 'abc',
         studentName: 'abc',
@@ -47,7 +47,7 @@ const getTeacherData = async(email, role) => {
         studentCampus: 'abc',
         studentDepartment: 'abc',
         studentSemester: 'abc',
-        studentAvatar:'abc'
+        studentAvatar: 'abc'
     }
     const account = await Account.findOne({ email, role })
     await account.populate('myProjectOwnerID').execPopulate()
@@ -85,12 +85,34 @@ const getTeacherData = async(email, role) => {
 }
 
 const getStudentData = async(email, role) => {
+    let project = []
+    let teacher = {}
     const account = await Account.findOne({ email, role })
-    const myproject = await myProject.findOne({ requestedByID : account._id })
-    const project = await  Project.findOne({ _id : myproject.projectID})
-    const teacher = await Account.findOne({ _id:myproject.ownerID })
-    obj = {project_data:myproject,project:project,teacher:teacher}
+    const myproject = await myProject.findOne({ requestedByID: account._id })
+
+    if (myproject === null) {
+        let flag = 'false'
+        const myProj = await myProject.find({})
+        if (myProj === undefined || myProj == 0) {} else {
+            myProj.forEach(proj => {
+                var members = proj.members
+                if (members === undefined || members.length == 0) {} else {
+                    members.forEach(async(mem) => {
+                        if (mem.accID == account._id) {
+                            flag = 'true'
+                            project = myProj
+                            teacher = await Account.findOne({ _id: myProj.ownerID })
+                        }
+                    });
+                }
+            });
+        }
+    } else {
+        project = await Project.findOne({ _id: myproject.projectID })
+        teacher = await Account.findOne({ _id: myproject.ownerID })
+    }
+    obj = { project_data: myproject, project: project, teacher: teacher }
     return obj;
 }
 
-module.exports = { getAdminData, getTeacherData,getStudentData}
+module.exports = { getAdminData, getTeacherData, getStudentData }

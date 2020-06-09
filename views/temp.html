@@ -1,0 +1,239 @@
+<!-- Container -->
+<div class="container-fluid">
+    <!-- Row -->
+    <div class="row">
+        <div class="col-xl-12 pa-0">
+            <div class="chatapp-wrap">
+                <div class="chatapp-left">
+                    <header>
+                        <a href="javascript:void(0)" class="chat-more">
+                            <span class="feather-icon"><i data-feather="more-vertical"></i></span>
+                        </a>
+                        <span class="">Chats</span>
+                        <a href="javascript:void(0)" class="chat-compose">
+                            <span class="feather-icon"><i data-feather="edit"></i></span>
+                        </a>
+                    </header>
+                    <form role="search" action="javascript:void(0);" class="chat-search">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="feather-icon"><i data-feather="search"></i></span>
+                            </div>
+                            <input id="project-search" type="text" class="form-control" placeholder="Search">
+                        </div>
+                    </form>
+                    <div class="chatapp-users-list">
+                        <div class="nicescroll-bar">
+                            <ul id="project-list">
+                                {{#if teacherLogin}}
+                                {{#if projectList}}
+                                {{#each projectList}}
+                                <li data-name={{this.projectName}}>
+                                    <a class="media"
+                                       href='/chat/{{this.FYPID}}?projectName={{this.projectName}}'>
+                                        <div class="media-img-wrap">
+                                            <div class="avatar">
+                                                <img src="/dist/img/avatar1.jpg" alt="user"
+                                                     class="avatar-img rounded-circle">
+                                            </div>
+                                            <span class="badge badge-warning badge-indicator"></span>
+                                        </div>
+                                        <div class="media-body">
+                                            <div>
+                                                <div class="user-name">{{this.projectName}}</div>
+                                                <div class="user-last-chat">{{this.projectYear}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="chat-hr-wrap">
+                                            <hr>
+                                        </div>
+                                    </a>
+                                </li>
+                                {{/each}}
+                                {{/if}}
+                                {{/if}}
+                                {{#if studentLogin}}
+                                {{#if projectList}}
+                                <li data-name="{{projectList.name}}">
+                                    <a href='/chat/{{FYPID}}?projectName={{projectList.name}}" class="media'>
+                                        <div class="media-img-wrap">
+                                            <div class="avatar">
+                                                <img src="/dist/img/avatar1.jpg" alt="user"
+                                                     class="avatar-img rounded-circle">
+                                            </div>
+                                            <span class="badge badge-warning badge-indicator"></span>
+                                        </div>
+                                        <div class="media-body">
+                                            <div>
+                                                <div class="user-name">{{projectList.name}}</div>
+                                                <div class="user-last-chat">{{projectList.year}}</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="chat-hr-wrap">
+                                            <hr>
+                                        </div>
+                                    </a>
+                                </li>
+                                {{/if}}
+                                {{/if}}
+                            </ul>
+                            <script type="text/javascript">
+                                $(document).ready(function () {
+                                    $("#project-search").on("keyup", function () {
+                                        var value = $(this).val().toLowerCase();
+                                        $("#project-list li").filter(function () {
+                                            $(this).toggle($(this).data('name').toLowerCase().indexOf(value) > -1);
+                                        });
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chatapp-right">
+                    {{#if projectName}}
+                    <header>
+                        <a id="back_user_list" href="javascript:void(0)" class="back-user-list">
+                            <span class="feather-icon"><i data-feather="chevron-left"></i></span>
+                        </a>
+                        <div class="media">
+                            <div class="media-img-wrap">
+                                <div class="avatar">
+                                    <img src="/dist/img/avatar2.jpg" alt="user" class="avatar-img rounded-circle">
+                                </div>
+                                <span class="badge badge-success badge-indicator"></span>
+                            </div>
+                            <div class="media-body">
+                                <div class="user-name">{{projectName}}</div>
+                                <div class="user-status">online</div>
+                            </div>
+                        </div>
+                        <div class="chat-options-wrap">
+                            <a href="javascript:void(0)" class=""><span class="feather-icon"><i
+                                    data-feather="video"></i></span></a>
+                            <a href="javascript:void(0)" class=""><span class="feather-icon"><i
+                                    data-feather="phone"></i></span></a>
+                        </div>
+                    </header>
+                    {{#if chats}}
+                    <div id="messages">
+                        {{#each chats}}
+                        <h5>{{this.name}}</h5>
+                        <p>{{this.msg}}</p><span>{{this.createdAt}}</span>
+                        {{/each}}
+                    </div>
+
+                    {{!-- <div class="chat-body">
+                    <div class="nicescroll-bar">
+                        <ul class="list-unstyled">
+                            <li class="media received">
+                                <div class="avatar">
+                                    <img src="dist/img/avatar2.jpg" alt="user" class="avatar-img rounded-circle">
+                                </div>
+                                <div class="media-body">
+                                    <div class="msg-box">
+                                        <div>
+                                            <p>Cool, lets talk about it tomorrow</p>
+                                            <span class="chat-time">10:55 AM</span>
+                                            <div class="arrow-triangle-wrap">
+                                                <div class="arrow-triangle right"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="msg-box">
+                                        <div>
+                                            <p>Images for new marketing pages have been sent</p>
+                                            <span class="chat-time">10:56 AM</span>
+                                            <div class="arrow-triangle-wrap">
+                                                <div class="arrow-triangle right"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="media sent">
+                                <div class="media-body">
+                                    <div class="msg-box">
+                                        <div>
+                                            <p>Sure, on my way to office. Please give me quick update.</p>
+                                            <span class="chat-time">11:45 AM</span>
+                                            <div class="arrow-triangle-wrap">
+                                                <div class="arrow-triangle left"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="day-sep">today</li>
+                            <li class="media received">
+                                <div class="avatar">
+                                    <img src="dist/img/avatar2.jpg" alt="user" class="avatar-img rounded-circle">
+                                </div>
+                                <div class="media-body">
+                                    <div class="msg-box">
+                                        <div>
+                                            <p>
+                                                Me: Can you please grow?
+                                                <br/> Hair: Nah..!
+                                                <br/> Muscle: Nope..!!
+                                                <br/> Salary: Don't even dream..!!!
+                                                <br/> Stomach: Anything for you dear..</p>
+                                            <span class="chat-time">7:24 PM</span>
+                                            <div class="arrow-triangle-wrap">
+                                                <div class="arrow-triangle right"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="media sent">
+                                <div class="media-body">
+                                    <div class="msg-box">
+                                        <div>
+                                            <p>Haha, this joke is hilarious. Is it what your heart feel about the
+                                                salary?</p>
+                                            <span class="chat-time">7:57 PM</span>
+                                            <div class="arrow-triangle-wrap">
+                                                <div class="arrow-triangle left"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div> --}}
+                    {{/if}}
+                    <footer>
+                        <div class="input-group">
+                            <form id="message-form">
+                                <input type="hidden" name="FYPID" id="FYPID" value="{{FYPID}}">
+                                <input type="hidden" id="name" name="name" value="{{accountName}}">
+                                <input type="hidden" id="email" name="email" value="{{email}}">
+                                <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                                <input type="text" id="txtMsg" name="txtMsg"
+                                       class="input-msg-send form-control" placeholder="Type something">
+                                <div class="input-group-append">
+                                    <button id="sendBtn" class="btn  btn-light  dropdown-toggle no-caret">Send
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </footer>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Row -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/dist/js/chat.js"></script>
+</div>
+<!-- /Container -->

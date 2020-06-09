@@ -182,7 +182,7 @@ router.post('/projects/create', auth, async(req, res) => {
         project.status = 'accepted'
         await project.save()
 
-        // const projDetails = new projectDetails()
+        // const projDetails = new projectDetails()               
         // await projDetails.save()
 
         //Creating Notification

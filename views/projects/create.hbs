@@ -60,7 +60,7 @@
                                             <div class="col-sm p-4">
                                                 <input type="hidden" class="form-control" name="_csrf"
                                                        value="{{csrfToken}}">
-                                                <input type="file" name="avatar" class="dropify"  accept=".docx" />
+                                                <input onchange="return verify_doc(this);" type="file" name="avatar" class="dropify"  accept=".docx" />
                                             </div>
                                         </div>
                                        <div class="alert alert-warning font-weight-bold text-captalize" role="alert">
@@ -68,6 +68,17 @@
                                         </div>
                             </form>
                         </div>
+
+                        <script type="javascript">
+                            function verify_doc(fileElement){
+                                var files = inputElement.files || [];
+                                if (!files.length) return;
+                                var file = files[0];
+                                
+
+
+                            }
+                        </script>
 
                         <div class="after-verfiy d-none">
                                 <form method="POST" action="/projects/create" enctype="multipart/form-data">

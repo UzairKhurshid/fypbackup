@@ -1,0 +1,16 @@
+.my-invisible{
+    visibility: hidden !important;
+    height:0 !important;
+}
+
+.navbar-nav .dropdown-menu {
+    top: 97% !important;
+}
+.table-condensed .active{
+    background-image:none !important;
+    background-color: #3a55b1 !important;
+    border-color: #3a55b1 !important;
+}
+.dash-super .media:last-child::after{
+    width:0px !important;
+}

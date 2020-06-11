@@ -45,165 +45,171 @@
                             </div>
                         {{/if}}
                         {{#if error}}
-                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                    <span class="alert-icon"><i class="ni ni-like-2"></i></span>
-                                    <span class="alert-text"><strong>Error!</strong> {{error}}</span>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                                <span class="alert-text"><strong>Error!</strong> {{error}}</span>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                        {{/if}}
+
+
+
+
+                        <form method="POST" action="/projects/create" enctype="multipart/form-data" >
+
+                            <div class="verify-doc">
+
+                                    <div class="row text-center">
+                                        <div class="col-sm p-4">
+
+                                            <input id="before_docx" onchange="verify_docx(this)" type="file"
+                                                   name="avatar" class="dropify" accept=".docx"/>
+                                        </div>
+                                    </div>
+                                    <div class="alert alert-warning font-weight-bold text-captalize" role="alert">
+                                        Upload Project Document To Continue.
+                                    </div>
+
+                            </div>
+
+                            <div class="after-verfiy d-none">
+                                <div class="hidden_fields">
+                                    <input id="csrf" type="hidden" name="_csrf" value="{{csrfToken}}">
+                                    <input id="docx_introduction" required type="hidden" name="introduction" value="">
+                                    <input id="docx_objectives" required type="hidden" name="objectives" value="">
+                                    <input id="docx_outcome" required type="hidden" name="outcome" value="">
+                                    <input id="docx_project_methodology" required type="hidden"
+                                           name="project_methodology" value="">
                                 </div>
-                            {{/if}}
-                        
-                        <div class="verify-doc">
-                            <form role="contentinfo" action="javascript:void(0)">
-                                <div class="row text-center">
-                                            <div class="col-sm p-4">
-                                                <input type="hidden" class="form-control" name="_csrf"
-                                                       value="{{csrfToken}}">
-                                                <input onchange="return verify_doc(this);" type="file" name="avatar" class="dropify"  accept=".docx" />
-                                            </div>
-                                        </div>
-                                       <div class="alert alert-warning font-weight-bold text-captalize" role="alert">
-                                       Upload Project Document To Continue.
-                                        </div>
-                            </form>
-                        </div>
 
-                        <script type="javascript">
-                            function verify_doc(fileElement){
-                                var files = inputElement.files || [];
-                                if (!files.length) return;
-                                var file = files[0];
-                                
-
-
-                            }
-                        </script>
-
-                        <div class="after-verfiy d-none">
-                                <form method="POST" action="/projects/create" enctype="multipart/form-data">
-                                    <input type="hidden" name="_csrf" value="{{csrfToken}}"
-                                        class="form-control">
-                                    <div class="form-row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="name" class="form-control-label">Title</label>
-                                                <input required type="text"
-                                                    placeholder="Enter Project Name" name="name" class="form-control"
-                                                    id="name">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="type" class="form-control-label">Season</label>
-                                                <select required class="form-control custom-select" name="season" id="season">
-                                                    <option disabled selected value="">Select Season</option>
-                                                    <option value="Fall">Fall</option>
-                                                    <option value="Spring">Spring</option>
-                                                </select>
-                                            </div>
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name" class="form-control-label">Title</label>
+                                            <input required type="text"
+                                                   placeholder="Enter Project Name" name="name" class="form-control"
+                                                   id="name">
                                         </div>
                                     </div>
-                                    <div class="form-row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="language" class="form-control-label">Language</label>
-                                                <select required class="form-control custom-select" name="language" id="language">
-                                                    <option disabled selected value="">Select Language</option>
-                                                    <option value="C">C</option>
-                                                    <option value="C#">C#</option>
-                                                    <option value="C++">C++</option>
-                                                    <option value="Java">Java</option>
-                                                    <option value="Node js">Node js</option>
-                                                    <option value="php">Php</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="IDE" class="form-control-label">Integrated Development
-                                                    Environment </label>
-                                                <select required class="form-control custom-select" name="IDE" id="IDE">
-                                                    <option disabled selected value="">Select IDE</option>
-                                                    <option value="Dev++">Dev++</option>
-                                                    <option value="NetBeans">NetBeans</option>
-                                                    <option value="Visual Studio">Visual Studio</option>
-                                                    <option value="Visual Studio Code">Visual Studio Code</option>
-                                                    <option value="Android Studio">Android Studio</option>
-                                                </select>
-                                            </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="type" class="form-control-label">Season</label>
+                                            <select required class="form-control custom-select" name="season"
+                                                    id="season">
+                                                <option disabled selected value="">Select Season</option>
+                                                <option value="Fall">Fall</option>
+                                                <option value="Spring">Spring</option>
+                                            </select>
                                         </div>
                                     </div>
-        
-                                    <div class="form-row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="type" class="form-control-label">Type</label>
-                                                <select required class="form-control custom-select" name="type" id="type">
-                                                    <option disabled selected value="">Select Type</option>
-                                                    <option value="Desktop Application">Desktop Application</option>
-                                                    <option value="Mobile Application">Mobile Application</option>
-                                                    <option value="Web Application">Web Application</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="department" class="form-control-label">Department</label>
-                                                <select required class="form-control custom-select" name="department" id="department">
-                                                    <option disabled selected value="">Select Department</option>
-                                                    <option value="cs">Computer Science</option>
-                                                    <option value="se">Software Engineering</option>
-                                                </select>
-                                            </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="language" class="form-control-label">Language</label>
+                                            <select required class="form-control custom-select" name="language"
+                                                    id="language">
+                                                <option disabled selected value="">Select Language</option>
+                                                <option value="C">C</option>
+                                                <option value="C#">C#</option>
+                                                <option value="C++">C++</option>
+                                                <option value="Java">Java</option>
+                                                <option value="Node js">Node js</option>
+                                                <option value="php">Php</option>
+                                            </select>
                                         </div>
                                     </div>
-
-                                    <div class="form-row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="semester" class="form-control-label">Semester</label>
-                                                <select required class="form-control custom-select" name="semester" id="semester">
-                                                    <option disabled selected value="">Select Semester</option>
-                                                    <option value="6">Sixth Semester</option>
-                                                    <option value="7">Seventh Semester</option>
-                                                </select>
-                                            </div>
-
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="year" class="form-control-label">Year</label>
-                                                <input name="year" required placeholder="Select year of Project"
-                                                    type="text" id="year" class="form-control">
-                                            </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="IDE" class="form-control-label">Integrated Development
+                                                Environment </label>
+                                            <select required class="form-control custom-select" name="IDE" id="IDE">
+                                                <option disabled selected value="">Select IDE</option>
+                                                <option value="Dev++">Dev++</option>
+                                                <option value="NetBeans">NetBeans</option>
+                                                <option value="Visual Studio">Visual Studio</option>
+                                                <option value="Visual Studio Code">Visual Studio Code</option>
+                                                <option value="Android Studio">Android Studio</option>
+                                            </select>
                                         </div>
                                     </div>
+                                </div>
 
-
-
-                                    <div class="form-row">
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label for="description" class="form-control-label">Description</label>
-                                                <textarea name="description" required
-                                                        placeholder="Enter Description About Project"
-                                                        rows="5" id="description" class="form-control"></textarea>
-                                            </div>
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="type" class="form-control-label">Type</label>
+                                            <select required class="form-control custom-select" name="type" id="type">
+                                                <option disabled selected value="">Select Type</option>
+                                                <option value="Desktop Application">Desktop Application</option>
+                                                <option value="Mobile Application">Mobile Application</option>
+                                                <option value="Web Application">Web Application</option>
+                                            </select>
                                         </div>
                                     </div>
-
-                                    <div class="form-row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-outline-success">Add Project</button>
-                                            </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="department" class="form-control-label">Department</label>
+                                            <select required class="form-control custom-select" name="department"
+                                                    id="department">
+                                                <option disabled selected value="">Select Department</option>
+                                                <option value="cs">Computer Science</option>
+                                                <option value="se">Software Engineering</option>
+                                            </select>
                                         </div>
                                     </div>
+                                </div>
 
-                                </form>
-                        </div>
-                        
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="semester" class="form-control-label">Semester</label>
+                                            <select required class="form-control custom-select" name="semester"
+                                                    id="semester">
+                                                <option disabled selected value="">Select Semester</option>
+                                                <option value="6">Sixth Semester</option>
+                                                <option value="7">Seventh Semester</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="year" class="form-control-label">Year</label>
+                                            <input name="year" required placeholder="Select year of Project"
+                                                   type="text" id="year" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="description" class="form-control-label">Description</label>
+                                            <textarea name="description" required
+                                                      placeholder="Enter Description About Project"
+                                                      rows="5" id="description" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-outline-success">Add Project</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </form>
+
+
                     </div>
                 </div>
             </section>

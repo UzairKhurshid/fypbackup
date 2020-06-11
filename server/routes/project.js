@@ -9,7 +9,6 @@ const myProject = require('../models/myProject')
 const { createNotification, getAllNotifications } = require('../helpers/notification')
     // can accept request from notification if limit reached .
     // cannot propose a project if member of any project
-    //
 router.get('/projects', auth, async(req, res) => {
 
     const email = req.session.email
@@ -81,6 +80,7 @@ router.get('/projects', auth, async(req, res) => {
         res.redirect('/dashboard')
     }
 })
+
 router.get('/admin/proposedProjects', auth, async(req, res) => {
 
     const role = req.session.role
@@ -122,8 +122,6 @@ router.get('/admin/proposedProjects', auth, async(req, res) => {
         res.redirect('/dashboard')
     }
 })
-
-
 
 router.get('/projects/create', auth, async(req, res) => {
     const role = req.session.role
@@ -170,21 +168,12 @@ router.get('/projects/create', auth, async(req, res) => {
     }
 })
 
-router.post('/projects/create', auth, async(req, res) => {
-    const role = req.session.role
-
-    try {
-
-
+router.post('/projects/create', auth, async(req, re
         //Creating Project
         const project = new Project(req.body)
         project.ownerRole = role
         project.status = 'accepted'
-        await project.save()
-
-        // const projDetails = new projectDetails()               
-        // await projDetails.save()
-
+        await project.sav
         //Creating Notification
         await createNotification('A new Project is added . please review Projects .', 'Project', '/projects', '', '')
 
@@ -196,9 +185,6 @@ router.post('/projects/create', auth, async(req, res) => {
         res.redirect('/dashboard')
     }
 })
-
-
-
 
 router.get('/projects/update/:id', auth, async(req, res) => {
     const role = req.session.role
@@ -282,7 +268,6 @@ router.post('/projects/update/:id', auth, async(req, res) => {
     }
 })
 
-
 router.post('/projects/delete/:id', auth, async(req, res) => {
     const role = req.session.role
     const id = req.params.id
@@ -305,9 +290,6 @@ router.post('/projects/delete/:id', auth, async(req, res) => {
         res.redirect('/dashboard')
     }
 })
-
-
-
 
 router.get('/viewproject/:id', auth, async(req, res) => {
     const id = req.params.id
@@ -361,6 +343,22 @@ router.get('/viewproject/:id', auth, async(req, res) => {
         }
 
 
+    } catch (e) {
+        console.log(e.message)
+        req.flash('error', e.message)
+        res.redirect('/dashboard')
+    }
+})
+
+
+router.post('/project/verify', auth, async(req, res) => {
+    try {
+        // console.log("BOdy"+req.body.docx.outcome)
+        let random_boolean = Math.random() >= 0.5;
+        res.json({
+            success: true
+            ,verify:random_boolean
+        })
     } catch (e) {
         console.log(e.message)
         req.flash('error', e.message)

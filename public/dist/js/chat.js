@@ -42,6 +42,4 @@ document.querySelector('#message-form').addEventListener('submit', (e) => {
         document.getElementById('txtMsg').focus()
         console.log('sent')
     })
-
-
 })

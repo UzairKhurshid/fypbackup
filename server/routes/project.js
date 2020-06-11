@@ -6,10 +6,10 @@ const projectDetails = require('../models/projectDetails')
 const Account = require('../models/account')
 const Request = require('../models/request')
 const myProject = require('../models/myProject')
-const { createNotification, getAllNotifications } = require('../helpers/notification')
-    // can accept request from notification if limit reached .
-    // cannot propose a project if member of any project
-router.get('/projects', auth, async(req, res) => {
+const {createNotification, getAllNotifications} = require('../helpers/notification')
+// can accept request from notification if limit reached .
+// cannot propose a project if member of any project
+router.get('/projects', auth, async (req, res) => {
 
     const email = req.session.email
     const role = req.session.role
@@ -20,12 +20,12 @@ router.get('/projects', auth, async(req, res) => {
         const notificationCount = Arr.length
         if (req.query.season) {
             const season = req.query.season
-            const proj = await Project.find({ status: 'accepted' })
-            projects = await Project.find({ status: 'accepted', season }).sort({ year: 1, name: 'asc' })
+            const proj = await Project.find({status: 'accepted'})
+            projects = await Project.find({status: 'accepted', season}).sort({year: 1, name: 'asc'})
             count = Object.keys(proj).length
         } else {
-            const proj = await Project.find({ status: 'accepted' })
-            projects = await Project.find({ status: 'accepted' }).sort({ year: -1, name: 'asc' })
+            const proj = await Project.find({status: 'accepted'})
+            projects = await Project.find({status: 'accepted'}).sort({year: -1, name: 'asc'})
             count = Object.keys(proj).length
         }
 
@@ -81,7 +81,7 @@ router.get('/projects', auth, async(req, res) => {
     }
 })
 
-router.get('/admin/proposedProjects', auth, async(req, res) => {
+router.get('/admin/proposedProjects', auth, async (req, res) => {
 
     const role = req.session.role
     const email = req.session.email
@@ -93,12 +93,12 @@ router.get('/admin/proposedProjects', auth, async(req, res) => {
         const notificationCount = Arr.length
         if (req.query.season) {
             const season = req.query.season
-            const proj = await Project.find({ status: 'proposed' })
-            projects = await Project.find({ status: 'proposed', season }).sort({ year: -1, name: 'asc' })
+            const proj = await Project.find({status: 'proposed'})
+            projects = await Project.find({status: 'proposed', season}).sort({year: -1, name: 'asc'})
             count = Object.keys(proj).length
         } else {
-            const proj = await Project.find({ status: 'proposed' })
-            projects = await Project.find({ status: 'proposed' }).sort({ year: -1, name: 'asc' })
+            const proj = await Project.find({status: 'proposed'})
+            projects = await Project.find({status: 'proposed'}).sort({year: -1, name: 'asc'})
             count = Object.keys(proj).length
         }
 
@@ -123,7 +123,7 @@ router.get('/admin/proposedProjects', auth, async(req, res) => {
     }
 })
 
-router.get('/projects/create', auth, async(req, res) => {
+router.get('/projects/create', auth, async (req, res) => {
     const role = req.session.role
     const email = req.session.email
     const Arr = await getAllNotifications(email, role)
@@ -168,8 +168,9 @@ router.get('/projects/create', auth, async(req, res) => {
     }
 })
 
-router.post('/projects/create', auth, async(req, re
-        //Creating Project
+router.post('/projects/create', auth, async (req, res) => {
+    const role = req.session.role
+    try {
         const project = new Project(req.body)
         project.ownerRole = role
         project.status = 'accepted'
@@ -186,13 +187,13 @@ router.post('/projects/create', auth, async(req, re
     }
 })
 
-router.get('/projects/update/:id', auth, async(req, res) => {
+router.get('/projects/update/:id', auth, async (req, res) => {
     const role = req.session.role
     const email = req.session.email
 
     try {
         const id = req.params.id
-        const prj = await Project.findOne({ _id: id })
+        const prj = await Project.findOne({_id: id})
         const Arr = await getAllNotifications(email, role)
         const notificationCount = Arr.length
 
@@ -243,14 +244,14 @@ router.get('/projects/update/:id', auth, async(req, res) => {
     }
 })
 
-router.post('/projects/update/:id', auth, async(req, res) => {
+router.post('/projects/update/:id', auth, async (req, res) => {
     const role = req.session.role
     const updates = Object.keys(req.body)
     const id = req.params.id
 
     try {
 
-        const project = await Project.findOne({ _id: id })
+        const project = await Project.findOne({_id: id})
         updates.forEach((update) => project[update] = req.body[update])
         await project.save()
 
@@ -268,14 +269,14 @@ router.post('/projects/update/:id', auth, async(req, res) => {
     }
 })
 
-router.post('/projects/delete/:id', auth, async(req, res) => {
+router.post('/projects/delete/:id', auth, async (req, res) => {
     const role = req.session.role
     const id = req.params.id
 
     try {
-        await Project.findOneAndDelete({ _id: id })
-        await Request.findOneAndDelete({ projectID: id })
-        await myProject.findOneAndDelete({ projectID: id })
+        await Project.findOneAndDelete({_id: id})
+        await Request.findOneAndDelete({projectID: id})
+        await myProject.findOneAndDelete({projectID: id})
 
 
         console.log("deleted Successfully")
@@ -291,13 +292,13 @@ router.post('/projects/delete/:id', auth, async(req, res) => {
     }
 })
 
-router.get('/viewproject/:id', auth, async(req, res) => {
+router.get('/viewproject/:id', auth, async (req, res) => {
     const id = req.params.id
     const role = req.session.role
     const email = req.session.email
     try {
 
-        const proj = await Project.findOne({ _id: id })
+        const proj = await Project.findOne({_id: id})
         const Arr = await getAllNotifications(email, role)
         const notificationCount = Arr.length
 
@@ -351,13 +352,13 @@ router.get('/viewproject/:id', auth, async(req, res) => {
 })
 
 
-router.post('/project/verify', auth, async(req, res) => {
+router.post('/project/verify', auth, async (req, res) => {
     try {
         // console.log("BOdy"+req.body.docx.outcome)
         let random_boolean = Math.random() >= 0.5;
         res.json({
             success: true
-            ,verify:random_boolean
+            , verify: random_boolean
         })
     } catch (e) {
         console.log(e.message)

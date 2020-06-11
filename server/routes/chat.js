@@ -69,7 +69,6 @@ router.get('/chat', auth, async(req, res) => {
                 project = await Project.findOne({ _id: id })
             }
 
-
             res.render('chatroom/ali_chat', {
                 title: 'Chat Room',
                 studentLogin: 'true',
@@ -79,6 +78,7 @@ router.get('/chat', auth, async(req, res) => {
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
                 accountName: req.session.name,
+                currentEmail:email,
                 success: req.flash('success'),
                 error: req.flash('error')
             })
@@ -106,6 +106,10 @@ router.get('/chat/:id', auth, async(req, res) => {
             const Arr = await getArr(acc._id, role)
             const proj = await myProject.findOne({ _id: mongoose.Types.ObjectId(FYPID) })
 
+            proj.chats.forEach(element => {
+                element.ownerEmail = element.ownerEmail.substring(0,element.ownerEmail.indexOf( "@"))
+            });
+            // console.log(proj.chats)
             res.render('chatroom/ali_chat', {
                 title: 'Chat Room',
                 teacherLogin: 'true',
@@ -117,6 +121,7 @@ router.get('/chat/:id', auth, async(req, res) => {
                 notification: notificationArr,
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,
+                currentEmail:email.substring(0,email.indexOf( "@")),
                 accountName: req.session.name,
                 success: req.flash('success'),
                 error: req.flash('error')
@@ -127,6 +132,7 @@ router.get('/chat/:id', auth, async(req, res) => {
             const id = myprojects.projectID
             const project = await Project.findOne({ _id: id })
 
+
             res.render('chatroom/ali_chat', {
                 title: 'Chat Room',
                 studentLogin: 'true',
@@ -135,6 +141,7 @@ router.get('/chat/:id', auth, async(req, res) => {
                 FYPID: FYPID,
                 projectName: project.name,
                 email: email,
+                currentEmail:email.substring(0,email.indexOf( "@")),
                 notification: notificationArr,
                 notificationCount: notificationCount,
                 accAvatar: req.session.avatar,

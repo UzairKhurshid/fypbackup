@@ -1,6 +1,7 @@
 const socket = io()
 
 const $messages = document.querySelector('#messages')
+
 socket.on('message', (message) => {
     console.log('New Message :' + message.msg)
     console.log('Email :' + message.email)
@@ -21,7 +22,7 @@ socket.on('message', (message) => {
         '                                        </div>\n' +
         '                                    </div>\n' +
         '                                </li>';
-    $("#messages").append(sent);
+     $("#messages").append(sent);
 })
 
 document.querySelector('#message-form').addEventListener('submit', (e) => {

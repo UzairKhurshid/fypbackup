@@ -9,6 +9,7 @@ const generateMessage = (msg, name, email) => {
         createdAt: new Date().getTime()
     }
 }
+
 const saveMessage = async(FYPID, ownerEmail, name, msg, createdAt) => {
     try {
 

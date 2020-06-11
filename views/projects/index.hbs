@@ -28,14 +28,31 @@
     </div>
     <!-- /Title -->
     <div class="col-md-6 pr-0">
-        <a class="btn btn-sm btn-gradient-info" href="/projects?season=Fall">Fall</a>
-        <a class="btn btn-sm btn-gradient-success" href="/projects?season=Spring">Spring</a>
+
     </div>
     <!-- Row -->
     <div class="row">
         <div class="col-xl-12">
             <section class="hk-sec-wrapper">
-                <h5 class="hk-sec-title">Projects</h5>
+                <div class="row">
+                    <div class="col-md-8">
+                        <h5 class="hk-sec-title">Projects</h5>
+                    </div>
+                    <div class="col-md-4">
+                        <form method="get" role="search" action="/projects" class="form-inline pull-right">
+                            <div class="form-group mb-2">
+                                <select required="" name="season" class="custom-select">
+                                    <option value="">Select to filter</option>
+                                    <option value="Fall">Fall</option>
+                                    <option value="Spring">Spring</option>
+                                </select>
+                                <button type="submit" class="btn btn-gradient-success ml-2">Season Filter</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
                 {{!-- <p class="mb-40">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dignissimos
                     perspiciatis sapiente sunt veniam. Dolorem dolorum ipsam praesentium, quis ratione velit. Asperiores
                     eaque eos laudantium modi! Nisi odio quasi totam.

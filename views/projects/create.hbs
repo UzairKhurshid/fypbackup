@@ -54,7 +54,7 @@
                             </div>
                         {{/if}}
 
-                        <form method="POST" action="/projects/create" enctype="multipart/form-data" >
+                        <form id="docx-verify-form" method="POST" action="/projects/create" enctype="multipart/form-data" >
 
                             <div class="verify-doc">
 
@@ -237,7 +237,6 @@
 <!--                        Error Modal End-->
 
 <!--                        Initial Modal-->
-
                         <div class="modal  fade" id="initModal" tabindex="-1" role="dialog" aria-labelledby="errorModal" style="display: none;" aria-hidden="true">
                             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                 <div class="modal-content">
@@ -256,13 +255,70 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <h1 class="display-4 text-white mb-3">Welcome to<br> Project Verification</h1>
-                                                <p class="lead text-white">Please upload your project document so we can start doing our and you yours :) .</p>
+                                                <p class="lead text-white">Please upload your project document so we can start doing our magic and you yours :) .</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+<!--                        Initial Modal End-->
+
+                        <!--                        Verification Failed Modal-->
+                        <div class="modal  fade" id="verify_failedModal" tabindex="-1" role="dialog" aria-labelledby="errorModal" style="display: none;" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header border-0">
+                                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="container-fluid p-3">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <lottie-player src="https://assets5.lottiefiles.com/datafiles/tawau8o8xa7TTxx/data.json"
+                                                               background="transparent" speed="1.5" style="width: auto; height:265px"
+                                                               loop
+                                                               autoplay></lottie-player>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h1 class="display-4 text-white mb-3">Document Verification<br> Failed</h1>
+                                                <p class="lead text-white">Your project documentation failed to verify. Previous match found.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--                        Verification Failed Modal End-->
+
+                        <!--                        Verified Modal-->
+                        <div class="modal  fade" id="verifiedModal" tabindex="-1" role="dialog" aria-labelledby="errorModal" style="display: none;" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header border-0">
+                                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="container-fluid p-3">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_omCtZv.json"
+                                                               background="transparent" speed="1.5" style="width: auto; height:265px"
+                                                               loop
+                                                               autoplay></lottie-player>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h1 class="display-4 text-white mb-3">FYP Document<br> Verified</h1>
+                                                <p class="lead text-white">Hooray ! , You all done just fill the form and your good to go. Do your magic! :)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--                        Verified Modal End-->
 
                     </div>
                 </div>

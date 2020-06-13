@@ -7,6 +7,7 @@ const Account = require('../models/account')
 const Request = require('../models/request')
 const myProject = require('../models/myProject')
 const {createNotification, getAllNotifications} = require('../helpers/notification')
+
 // can accept request from notification if limit reached .
 // cannot propose a project if member of any project
 router.get('/projects', auth, async (req, res) => {
@@ -354,16 +355,31 @@ router.get('/viewproject/:id', auth, async (req, res) => {
 
 router.post('/project/verify', auth, async (req, res) => {
     try {
-        // console.log("BOdy"+req.body.docx.outcome)
+        // console.log("BOdy"+req.body.docx)
+        let projects = []
+        projects = await projectDetails.find({});
+
+        if( projects.length <= 0){
+            res.json({
+                success: true
+                , verify: true
+            })
+        }
+
+        // console.log("projects_Details "+projects.length)
+
         let random_boolean = Math.random() >= 0.5;
         res.json({
             success: true
-            , verify: random_boolean
+            , verify: false
         })
     } catch (e) {
         console.log(e.message)
-        req.flash('error', e.message)
-        res.redirect('/dashboard')
+        // req.flash('error', e.message)
+        res.json({
+            success: false
+            , verify: random_boolean
+        })
     }
 })
 

@@ -1,3 +1,6 @@
+// Create project form
+const form = $('#docx-verify-form');
+
 function verify_docx(fileElement){
 
     var files = fileElement.files || [];
@@ -23,54 +26,6 @@ function verify_docx(fileElement){
 
         };
     reader.readAsArrayBuffer(file);
-}
-
-function perform_verify(resultDocx){
-    if(resultDocx.introduction == "" || resultDocx.outcome == "" || resultDocx.objectives == ""
-        || resultDocx.project_methodology == "" ){
-        $('#errorModal').modal('show');
-        return;
-    }
-    let csrf = $("#csrf").val()
-    $.ajax({
-        url: "/project/verify",
-        method:'POST',
-        data:{docx:resultDocx,_csrf:csrf}
-        , success: function(result){
-            if(!result.success){
-                alert('Api Error');
-                return;
-            }
-
-            if(!result.verify){
-
-            }
-
-
-
-            $('.after-verfiy').removeClass('d-none');
-
-            // var before_docx = $("#before_docx"),
-            //     report = before_docx.clone();
-            // report.attr("class", "invisible");
-            // report.insertAfter(".hidden_fields");
-
-             $('.verify-doc').addClass('my-invisible');
-            //$('.verify-doc').remove();
-
-
-            // Setting up fields
-            $("#docx_introduction").val(resultDocx.introduction)
-            $("#docx_objectives").val(resultDocx.objectives)
-            $("#docx_outcome").val(resultDocx.outcome)
-            $("#docx_project_methodology").val(resultDocx.objectives)
-
-        },
-        error:function(result){
-          alert('Ajax Error')
-            return;
-        },
-    });
 }
 
 function extractMain(array){
@@ -127,4 +82,62 @@ function extractMain(array){
 
     return output;
     // console.log(getSimilarityScore(textCosineSimilarity(output.objectives,output.objectives)));
+}
+
+
+
+function perform_verify(resultDocx){
+    if(resultDocx.introduction == "" || resultDocx.outcome == "" || resultDocx.objectives == ""
+        || resultDocx.project_methodology == "" ){
+        $('#errorModal').modal('show');
+        return;
+    }
+    let csrf = $("#csrf").val()
+    $.ajax({
+        url: "/project/verify",
+        method:'POST',
+        data:{docx:resultDocx,_csrf:csrf}
+        , success: function(result){
+            if(!result.success){
+                fire_alert()
+                return;
+            }
+
+            if(!result.verify){
+                $('#verify_failedModal').modal('show');
+                return;
+            }
+
+            $('.after-verfiy').removeClass('d-none');
+
+            // var before_docx = $("#before_docx"),
+            //     report = before_docx.clone();
+            // report.attr("class", "invisible");
+            // report.insertAfter(".hidden_fields");
+
+            $('.verify-doc').addClass('my-invisible');
+            //$('.verify-doc').remove();
+            $('#verifiedModal').modal('show');
+
+            // Setting up fields
+            $("#docx_introduction").val(resultDocx.introduction)
+            $("#docx_objectives").val(resultDocx.objectives)
+            $("#docx_outcome").val(resultDocx.outcome)
+            $("#docx_project_methodology").val(resultDocx.objectives)
+
+        },
+        error:function(result){
+            fire_alert()
+            return;
+        },
+    });
+}
+
+function fire_alert(icon = 'error',title = 'Oops..',text = 'We are having some issue right now. <br> Please try after some time.'){
+
+    Swal.fire({
+        icon: icon,
+        title:title,
+        html:text,
+    })
 }

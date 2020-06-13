@@ -16,11 +16,16 @@ const projectDetailsSchema = new mongoose.Schema({
         trim: true,
         required: true
     },
-    project_methodology: {
+    tilt: {
         type: String,
         trim: true,
         required: true
     },
+    // project_methodology: {
+    //     type: String,
+    //     trim: true,
+    //     required: true
+    // },
     projectID: {
         type: String,
         required: true

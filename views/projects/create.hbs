@@ -32,7 +32,7 @@
     <div class="row">
         <div class="col-xl-12">
             <section class="hk-sec-wrapper">
-                <h5 class="hk-sec-title text-capitalize">Add New Project</h5>
+                        <h5 class="hk-sec-title text-capitalize">Add New Project</h5>
                 <div class="row">
                     <div class="col-sm">
                         {{#if success}}
@@ -54,23 +54,22 @@
                             </div>
                         {{/if}}
 
-
-
-
                         <form method="POST" action="/projects/create" enctype="multipart/form-data" >
 
                             <div class="verify-doc">
 
                                     <div class="row text-center">
                                         <div class="col-sm p-4">
-
                                             <input id="before_docx" onchange="verify_docx(this)" type="file"
                                                    name="avatar" class="dropify" accept=".docx"/>
                                         </div>
                                     </div>
-                                    <div class="alert alert-warning font-weight-bold text-captalize" role="alert">
-                                        Upload Project Document To Continue.
+
+                                <div class="alert alert-warning font-weight-bold text-captalize" role="alert">
+                                          Only .docx file is supported.
                                     </div>
+
+
 
                             </div>
 
@@ -209,6 +208,61 @@
 
                         </form>
 
+<!--                        Error Modal-->
+                        <div class="modal  fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModal" style="display: none;" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header border-0">
+                                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="container-fluid p-3">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <lottie-player src="https://assets1.lottiefiles.com/temp/lf20_H9oy8h.json"
+                                                               background="transparent" speed="1.5" style="width: auto; height:265px"
+                                                               loop
+                                                               autoplay></lottie-player>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h1 class="display-4 text-white mb-3">Document Verification <br> Failed</h1>
+                                                <p class="lead text-white">Please check that your document contains all the headings and proper formatting.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+<!--                        Error Modal End-->
+
+<!--                        Initial Modal-->
+
+                        <div class="modal  fade" id="initModal" tabindex="-1" role="dialog" aria-labelledby="errorModal" style="display: none;" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header border-0">
+                                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="container-fluid p-3">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_2HrLrc.json"
+                                                               background="transparent" speed="1.5" style="width: auto; height:265px"
+                                                               loop
+                                                               autoplay></lottie-player>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h1 class="display-4 text-white mb-3">Welcome to<br> Project Verification</h1>
+                                                <p class="lead text-white">Please upload your project document so we can start doing our and you yours :) .</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>

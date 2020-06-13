@@ -34,6 +34,8 @@ router.get('/dashboard', auth, async(req, res) => {
         } else if (role === "student") {
             const studentData = await getStudentData(email, role)
 
+            // console.log(studentData)
+
             res.render('dashboard/index', {
                 title: 'Student Dashboard',
                 studentLogin: 'true',

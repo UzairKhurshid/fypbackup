@@ -2,7 +2,7 @@
 <nav class="hk-breadcrumb" aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-light bg-transparent">
         <li class="breadcrumb-item"><a href="#">Projects</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Tasks</li>
+        <li class="breadcrumb-item active" aria-current="page">Members</li>
     </ol>
 </nav>
 <!-- /Breadcrumb -->
@@ -13,17 +13,23 @@
     <!-- Title -->
     <div class="hk-pg-header">
         <div class="row w-100">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <h4 class="hk-pg-title text-capitalize"><span class="pg-title-icon"><span class="feather-icon text-primary"><i
                         data-feather="file"></i></span></span>{{accountName}} Project Members</h4>
             </div>
-            <div class="col-md-6 pr-0 text-md-right">
+            <div class="col-md-4 pr-0 text-md-right">
                 {{#if studentLogin}}
                     <input type="hidden" name="memberStatusInput" value="{{memberStatus}}" id="memberStatusInput">
                     <form method="POST" action="/FYP/newMember/{{projID}}" id="addMemberForm">
-                        <input type="number" name="regNo" placeholder="Registeration No" required>
                         <input type="hidden" name="_csrf" value="{{csrfToken}}" class="form-control">
-                        <button class="btn btn-sm btn-gradient-info" type="submit">Add New Member</button>
+                        <div class="form-group row flex-wrap">
+                           <div class="col-md-8 p-0">
+                               <input type="text" class="form-control" name="regNo" placeholder="Registeration No" required>
+                           </div>
+                            <div class="col-md-4">
+                                <button class="btn pull-left btm-md btn-gradient-info" type="submit">Add New Member</button>
+                            </div>
+                        </div>
                     </form>
                 {{/if}}
                 <script type="text/javascript">
@@ -47,7 +53,7 @@
     <div class="row">
         <div class="col-xl-12">
             <section class="hk-sec-wrapper">
-                <h5 class="hk-sec-title">{{accountName}} Project Members Details</h5>
+                <h5 class="hk-sec-title text-capitalize">FYP Members </h5>
                 {{!-- <p class="mb-40">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dignissimos
                     perspiciatis sapiente sunt veniam. Dolorem dolorum ipsam praesentium, quis ratione velit. Asperiores
                     eaque eos laudantium modi! Nisi odio quasi totam.
@@ -89,9 +95,14 @@
                                             {{#each members}}
                                                 <tr> 
                                                     <td>
-                                                        <div class="avatar" id="memberAvatar">
-                                                            <img style="border: 1px solid white;" src="data:image/jpeg;base64, {{this.avatar}}" alt="user" class="avatar-img rounded-circle">
-                                                        </div>    
+                                                        <div class="avatar">
+                                                            {{#if avatar}}
+                                                                <img src="data:image/jpeg;base64, {{this.avatar}}" alt="{{this.name}}" class="avatar-img rounded-circle">
+                                                            {{else}}
+                                                                <img style="border: 1px solid white;" src="/dist/img/avatar_student.jpg" alt="user" class="avatar-img rounded-circle">
+                                                            {{/if}}
+
+                                                        </div>
                                                     </td>
                                                     <td class="text-capitalize">{{this.regNo}}</td>
                                                     <td>{{this.name}}</td>

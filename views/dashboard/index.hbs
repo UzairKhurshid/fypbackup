@@ -35,7 +35,7 @@
                         <div style="min-height:265px" class="card border-0">
                             <div class="card-body w-100 d-flex justify-content-start pa-0">
                                 <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_M4H0kx.json"
-                                               background="transparent" speed="1.5" style="width: auto; height:265px"
+                                               background="transparent" speed="1.5" style="width: auto; height:100%"
                                                loop
                                                autoplay></lottie-player>
                             </div>
@@ -247,8 +247,13 @@
                                         <div class="media">
                                             <div class="media-img-wrap">
                                                 <div class="avatar avatar-xs">
-                                                    <img src="data:image/jpeg;base64, {{studentData.teacher.avatar}}"
-                                                         alt="user" class="avatar-img rounded-circle">
+                                                    {{#if studentData.teacher.avatar}}
+                                                        <img src="data:image/jpeg;base64, {{studentData.teacher.avatar}}"
+                                                             alt="{{studentData.teacher.name}}" class="avatar-img rounded-circle">
+                                                    {{else}}
+                                                        <img style="border: 1px solid white;" src="/dist/img/avatar_student.jpg" alt="user" class="avatar-img rounded-circle">
+                                                    {{/if}}
+
                                                 </div>
                                             </div>
                                             <div class="media-body">

@@ -18,17 +18,17 @@ function verify_docx(fileElement){
             mammoth.extractRawText({arrayBuffer: arrayBuffer}).then(function (resultObject) {
                 resultedFilter = resultObject.value.replace('  ','')
                 arrayText = resultedFilter.split("\n")
-                perform_verify(extractMain(arrayText),file)
+                perform_verify(extractMain(arrayText))
             });
 
         };
     reader.readAsArrayBuffer(file);
 }
 
-function perform_verify(resultDocx,fileDocx){
+function perform_verify(resultDocx){
     if(resultDocx.introduction == "" || resultDocx.outcome == "" || resultDocx.objectives == ""
         || resultDocx.project_methodology == "" ){
-        alert('Please upload docx with proper formatting and headings.')
+        $('#errorModal').modal('show');
         return;
     }
     let csrf = $("#csrf").val()
@@ -64,7 +64,6 @@ function perform_verify(resultDocx,fileDocx){
             $("#docx_objectives").val(resultDocx.objectives)
             $("#docx_outcome").val(resultDocx.outcome)
             $("#docx_project_methodology").val(resultDocx.objectives)
-            $("#docx_file").files = fileDocx;
 
         },
         error:function(result){
@@ -80,7 +79,7 @@ function extractMain(array){
         introduction : "",
         objectives  : "",
         outcome: "",
-        project_methodology : ""
+        title : ""
 
     };
 
@@ -90,39 +89,39 @@ function extractMain(array){
 
         if( myVal === '' ) return ;
 
-        if( flag && myVal.replace(/ +/g,'').toLowerCase() == "objectives" ){
+        if( flag && myVal.replace(/ +/g,'').toLowerCase() == "projectobjective(s)" ){
             output.introduction = myText
             myText = '';
             flag = false;
         }
 
-        if( flag && myVal.replace(/ +/g,'').replace(":", "").toLowerCase() == "tools/languages" ) {
+        if( flag && myVal.replace(/ +/g,'').replace(":", "").toLowerCase() == "expectedresult(s)/outcome(s)" ) {
             output.objectives = myText
             myText = '';
             flag = false;
         }
 
-        if( flag && myVal.replace(/ +/g,'').replace(":", "").toLowerCase() == "finaldeliverableoftheproject" ){
+        if( flag && myVal.replace(/ +/g,'').replace(":", "").toLowerCase() == "remarks" ){
             output.outcome = myText;
             myText = '';
             flag = false;
         }
 
-        if( flag && myVal.replace(/ +/g,'').replace(":", "").toLowerCase() == "projectschedule" ) {
-            output.project_methodology = myText
+        if( flag && myVal.replace(/ +/g,'').replace(":", "").toLowerCase() == "projectcategory(chooseone)" ) {
+            output.title = myText
             myText = '';
             flag = false;
         }
 
         if(flag) myText += myVal ;
 
-        if(myVal.replace(/ +/g,'').toLowerCase() === "introduction") flag = true;
+        if(myVal.replace(/ +/g,'').toLowerCase() === "summaryofproposedproject(maximum300words)") flag = true;
 
-        if(myVal.replace(/ +/g,'').replace(":","").toLowerCase() === "objectives") flag = true ;
+        if(myVal.replace(/ +/g,'').replace(":","").toLowerCase() === "projectobjective(s)") flag = true ;
 
-        if(myVal.replace(/ +/g,'').replace(":","").toLowerCase() === "outcome") flag = true ;
+        if(myVal.replace(/ +/g,'').replace(":","").toLowerCase() === "expectedresult(s)/outcome(s)") flag = true ;
 
-        if(myVal.replace(/ +/g,'').replace(":","").toLowerCase() === "projectmethodology") flag = true ;
+        if(myVal.replace(/ +/g,'').replace(":","").toLowerCase() === "titleofproposedproject") flag = true ;
 
     });
 

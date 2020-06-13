@@ -88,7 +88,8 @@ const getStudentData = async(email, role) => {
     let project = []
     let teacher = {}
     const account = await Account.findOne({ email, role })
-    const myproject = await myProject.findOne({ requestedByID: account._id })
+    const myproject = await myProject.findOne( { requestedByID: account._id })
+    let teacherAvatar ;
 
     if (myproject === null) {
         let flag = 'false'
@@ -108,6 +109,7 @@ const getStudentData = async(email, role) => {
             });
         }
     } else {
+
         project = await Project.findOne({ _id: myproject.projectID })
         teacher = await Account.findOne({ _id: myproject.ownerID })
     }

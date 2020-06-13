@@ -42,9 +42,9 @@ const store = new mongoDbStore({
     collection: 'sessions'
 })
 const fileFilter = (req, file, cb) => {
-    console.log('asaaaaaaaaaaaaaaaaaaaaaa')
-    console.log(file.mimetype)
-    if (file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg' || file.mimetype  === 'application/octet-stream') {
+    // console.log('asaaaaaaaaaaaaaaaaaaaaaa')
+    // console.log(file.mimetype)
+    if (file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg' || file.mimetype === 'application/octet-stream') {
         cb(null, true)
     } else {
         cb(null, false)

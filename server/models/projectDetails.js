@@ -16,7 +16,7 @@ const projectDetailsSchema = new mongoose.Schema({
         trim: true,
         required: true
     },
-    tilt: {
+    title: {
         type: String,
         trim: true,
         required: true

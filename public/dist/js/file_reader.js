@@ -123,7 +123,7 @@ function perform_verify(resultDocx){
             $("#docx_introduction").val(resultDocx.introduction)
             $("#docx_objectives").val(resultDocx.objectives)
             $("#docx_outcome").val(resultDocx.outcome)
-            $("#docx_project_methodology").val(resultDocx.objectives)
+            $("#docx_title").val(resultDocx.title)
 
         },
         error:function(result){

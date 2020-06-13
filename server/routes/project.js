@@ -7,6 +7,8 @@ const Account = require('../models/account')
 const Request = require('../models/request')
 const myProject = require('../models/myProject')
 const {createNotification, getAllNotifications} = require('../helpers/notification')
+const {checkSimilarity} = require('../helpers/cosuine _similarity')
+
 
 // can accept request from notification if limit reached .
 // cannot propose a project if member of any project
@@ -175,7 +177,8 @@ router.post('/projects/create', auth, async (req, res) => {
         const project = new Project(req.body)
         project.ownerRole = role
         project.status = 'accepted'
-        await project.sav
+        proj = await project.save();
+        console(proj._id)
         //Creating Notification
         await createNotification('A new Project is added . please review Projects .', 'Project', '/projects', '', '')
 
@@ -366,19 +369,47 @@ router.post('/project/verify', auth, async (req, res) => {
             })
         }
 
+        detected = []
+
+        projects.forEach(proj => {
+
+              // Checking Title
+             titleScore =  checkSimilarity(req.body.docx.title,proj.title)
+              //Checking Introduction
+              introductionScore = checkSimilarity(req.body.docx.introduction,proj.introduction)
+              //Checking Objectives
+              objectivesScore = checkSimilarity(req.body.docx.objectives,proj.objectives)
+             //  Checking outcome
+             outcomeScore = Similarity(req.body.docx.outcome,proj.outcome)
+
+            averageScore = (((titleScore + introductionScore + objectivesScore + outcomeScore)/4)*100)
+
+            if(averageScore >= 70){
+                detected.push(proj.projectID)
+            }
+
+        });
+
         // console.log("projects_Details "+projects.length)
 
-        let random_boolean = Math.random() >= 0.5;
+        if(detected.length > -1){
+
+            res.json({
+                success: true
+                , verify: false
+            })
+        }
+
         res.json({
             success: true
-            , verify: false
+            , verify: true
         })
     } catch (e) {
         console.log(e.message)
         // req.flash('error', e.message)
         res.json({
             success: false
-            , verify: random_boolean
+            , verify: false
         })
     }
 })

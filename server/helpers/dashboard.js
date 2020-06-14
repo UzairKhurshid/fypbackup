@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 
 
 const getAdminData = async(email, role) => {
-    const accounts = await Account.find({ status: 'disable' }).sort({ name: 'asc' });
+    const accounts = await Account.find({ status: 'disable' }).sort({ name: 'desc' });
     const teachers = await Account.find({ role: 'teacher' });
     const students = await Account.find({ role: 'student' });
     const projects = await Project.find({});

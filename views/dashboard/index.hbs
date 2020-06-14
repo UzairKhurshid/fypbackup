@@ -332,61 +332,36 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <h6 class="pb-5 text-uppercase">Project Members</h6>
                                     <div class="d-flex flex-wrap justify-content-between">
-                                        <div class="">
-                                            <div class="card d-inline-block w-sm-360p">
-                                                <div class="card-body">
-                                                    <div class="d-flex flex-wrap">
-                                                        <img class="d-86 rounded mb-15 mr-15" src="dist/img/img-thumb1.jpg" alt="thumb">
-                                                        <div class="w-65">
-                                                            <h6 class="mb-5">Ali Raza</h6>
-                                                            <p>A fan club for josh groben songs</p>
-
+                                        {{#if studentData.projMembers}}
+                                            {{#each studentData.projMembers }}
+                                                <div class="proj_memeber">
+                                                    <div class="card d-inline-block w-sm-360p">
+                                                        <div class="card-body">
+                                                            <div class="d-flex flex-wrap">
+                                                                {{#if this.avatar}}
+                                                                    <img class="d-86 rounded mb-15 mr-15" src="data:image/jpeg;base64, {{this.avatar}}" alt="{{this.name}}">
+                                                                {{else}}
+                                                                    <img class="d-86 rounded mb-15 mr-15" src="/dist/img/avatar_student.jpg" alt="{{this.name}}">
+                                                                {{/if}}
+                                                                <div class="w-65">
+                                                                    <h6 class="mb-5">{{this.name}}</h6>
+                                                                    <p>Connect me through email. My email is {{this.email}}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-footer text-muted justify-content-between">
+                                                            <div><span class="text-dark">CS</span> Semester {{this.semester}}</div>
+                                                            <span  class="badge badge-primary ml-15 w-sm-100p">RegNo: {{this.regNo}}</span>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="card-footer text-muted justify-content-between">
-                                                    <div><span class="text-dark">CS</span> Semester 8</div>
-                                                    <button class="btn btn-xs btn-primary ml-15 w-sm-100p">Chat</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="">
-                                            <div class="card d-inline-block w-sm-360p">
-                                                <div class="card-body">
-                                                    <div class="d-flex flex-wrap">
-                                                        <img class="d-86 rounded mb-15 mr-15" src="dist/img/img-thumb1.jpg" alt="thumb">
-                                                        <div class="w-65">
-                                                            <h6 class="mb-5">Sana Iqbal Arbi</h6>
-                                                            <p>A fan club for josh groben songs</p>
+                                            {{/each}}
+                                        {{else}}
+                                         <p class="lead">Add project member to see thier details.</p>
+                                        {{/if}}
 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-footer text-muted justify-content-between">
-                                                    <div><span class="text-dark">CS</span> Semester 8</div>
-                                                    <button class="btn btn-xs btn-primary ml-15 w-sm-100p">Chat</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="">
-                                            <div class="card d-inline-block w-sm-360p">
-                                                <div class="card-body">
-                                                    <div class="d-flex flex-wrap">
-                                                        <img class="d-86 rounded mb-15 mr-15" src="dist/img/img-thumb1.jpg" alt="thumb">
-                                                        <div class="w-65">
-                                                            <h6 class="mb-5">Uzair Khurshid</h6>
-                                                            <p>A fan club for josh groben songs</p>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-footer text-muted justify-content-between">
-                                                    <div><span class="text-dark">CS</span> Semester 8</div>
-                                                    <button class="btn btn-xs btn-primary ml-15 w-sm-100p">Chat</button>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-12">
@@ -394,8 +369,12 @@
                                                     <div class="card-header">Supervisor</div>
                                                     <div class="card-body text-primary">
                                                         <div class="d-flex flex-wrap">
-                                                            <img class="d-86 rounded mb-15 mr-15" src="data:image/jpeg;base64, {{studentData.teacher.avatar}}" alt="thumb">
-                                                            <div class="w-65">
+                                                            {{#if student.techer.avatar}}
+                                                                <img class="d-86 rounded mb-15 mr-15" src="data:image/jpeg;base64, {{studentData.teacher.avatar}}" alt="{{studentData.teacher.name}}">
+                                                                {{else}}
+                                                                <img class="d-86 rounded mb-15 mr-15" src="/dist/img/avatar_student.jpg" alt="{{studentData.teacher.name}}">
+                                                            {{/if}}
+                                                                    <div class="w-65">
                                                                 <h6 class="mb-5 text-capitalize text-primary">  {{studentData.teacher.name}}</h6>
                                                                 <p class="text-dark"> {{studentData.teacher.email}}</p>
                                                                 <div class="avatar-group avatar-group-sm avatar-group-overlapped mt-10">

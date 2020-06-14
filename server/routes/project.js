@@ -8,7 +8,19 @@ const Request = require('../models/request')
 const myProject = require('../models/myProject')
 const { createNotification, getAllNotifications } = require('../helpers/notification')
 const checkSimilarity = require('../helpers/cosuine _similarity')
+var fs = require('fs');
 
+
+
+router.get('/projects/file',auth,(req,res)=>{
+    res.render('projects/file')
+})
+router.post('/projects/file',auth,(req,res)=>{
+    console.log(req.file.destination)
+    // var oldpath = req.file.path;
+    // var newpath = '../../public/upload' + files.filetoupload.name;
+    return res.redirect('/projects/file')
+})
 
 // can accept request from notification if limit reached .
 // cannot propose a project if member of any project
@@ -24,11 +36,11 @@ router.get('/projects', auth, async(req, res) => {
         if (req.query.season) {
             const season = req.query.season
             const proj = await Project.find({ status: 'accepted' })
-            projects = await Project.find({ status: 'accepted', season }).sort({ year: 1, name: 'asc' })
+            projects = await Project.find({ status: 'accepted', season }).sort({ year: 1, name: 'desc' })
             count = Object.keys(proj).length
         } else {
             const proj = await Project.find({ status: 'accepted' })
-            projects = await Project.find({ status: 'accepted' }).sort({ year: -1, name: 'asc' })
+            projects = await Project.find({ status: 'accepted' }).sort({ year: -1, name: 'desc' })
             count = Object.keys(proj).length
         }
 
@@ -176,9 +188,6 @@ router.post('/projects/create', auth, async(req, res) => {
     const role = req.session.role
 
     try {
-
-        console.log(req.file.originalname)
-        return res.redirect('/projects')
         const project = new Project(req.body)
 
         project.ownerRole = role
@@ -394,22 +403,22 @@ router.post('/project/verify', auth, async(req, res) => {
                 //  Checking outcome
             outcomeScore = checkSimilarity(req.body.docx.outcome, proj.outcome)
 
-            averageScore = (((titleScore + introductionScore + objectivesScore + outcomeScore) / 4) * 100)
+            averageScore = (((titleScore + introductionScore + objectivesScore + outcomeScore) / 400) * 100)
 
             if (averageScore >= 70) {
+                // console.log("SCore: "+averageScore)
                 detected.push(proj.projectID)
             }
 
         });
-        const detectedProject = await Project.findOne({ _id: detected })
-        console.log(detectedProject)
+
+
             // console.log("projects_Details "+projects.length)
 
-        if (detected.length > -1) {
-
+        if (detected.length > 0) {
             res.json({
                 success: true,
-                verify: false
+                verify: false,
             })
         }
 

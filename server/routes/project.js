@@ -174,10 +174,11 @@ router.get('/projects/create', auth, async(req, res) => {
 
 router.post('/projects/create', auth, async(req, res) => {
     const role = req.session.role
-    console.log(req.file.fieldname)
-    res.redirect('/projects')
 
     try {
+
+        console.log(req.file.originalname)
+        return res.redirect('/projects')
         const project = new Project(req.body)
 
         project.ownerRole = role

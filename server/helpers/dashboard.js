@@ -86,13 +86,16 @@ const getTeacherData = async(email, role) => {
 
 const getStudentData = async(email, role) => {
     let project = []
-    let teacher = {}
+    let teacher = []
+    let projMembers = []
+    let membersData = []
+    let fyp = []
     const account = await Account.findOne({ email, role })
-    const myproject = await myProject.findOne( { requestedByID: account._id })
-    let teacherAvatar ;
+    const myproject = await myProject.findOne({ requestedByID: account._id })
+    let teacherAvatar;
+    let flag = false
 
     if (myproject === null) {
-        let flag = 'false'
         const myProj = await myProject.find({})
         if (myProj === undefined || myProj == 0) {} else {
             myProj.forEach(proj => {
@@ -100,20 +103,33 @@ const getStudentData = async(email, role) => {
                 if (members === undefined || members.length == 0) {} else {
                     members.forEach(async(mem) => {
                         if (mem.accID == account._id) {
-                            flag = 'true'
-                            project = myProj
-                            teacher = await Account.findOne({ _id: myProj.ownerID })
+                            fyp = proj
+                            flag = true
                         }
                     });
+
                 }
             });
+
         }
     } else {
-
-        project = await Project.findOne({ _id: myproject.projectID })
-        teacher = await Account.findOne({ _id: myproject.ownerID })
+        flag = true
+        fyp = myproject
     }
-    obj = { project_data: myproject, project: project, teacher: teacher }
+
+    if (flag == true) {
+        membersData = fyp.members
+        if (membersData === undefined || membersData.length == 0) {} else {
+            membersData.forEach(async(projMem) => {
+                let stdAccData = await Account.findOne({ _id: projMem.accID })
+                projMembers.push(stdAccData)
+            });
+        }
+        project = await Project.findOne({ _id: fyp.projectID })
+        teacher = await Account.findOne({ _id: fyp.ownerID })
+    }
+
+    obj = { project_data: fyp, project: project, projMembers: projMembers, teacher: teacher }
     return obj;
 }
 

@@ -80,8 +80,8 @@
                 </form>
                 <div class="notifications-nicescroll-bar">
                     {{#if notification}}
-                        {{#each notification}}
-                            <a href="{{this.refRoute}}" class="dropdown-item" onsubmit="return notification_confirm({{chkNotification this.refTable}});">
+                        {{#each notification}} 
+                            <a href="{{this.refRoute}}" class="dropdown-item notify" onsubmit="return notification_confirm({{chkNotification this.refTable}});">
                                 <div class="media">
                                     <div class="media-img-wrap">
                                         <div class="avatar avatar-sm">

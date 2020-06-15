@@ -590,7 +590,7 @@
                                                             </tr>
                                                             </thead>
                                                             <tbody>
-                                                            {{#if adminData}}
+                                                            {{#if adminData.accounts}}
                                                                 {{#each adminData.accounts}}
                                                                     <!-- <th class="text-center" colspan="6">Show All Students Here.</th> -->
                                                                     <tr>
@@ -646,6 +646,8 @@
                                                                         return false;
                                                                     }
                                                                 </script>
+                                                              {{else}}
+                                                                <td colspan="6" class="text-capitalize text-center">No Deactivated Users At This Moment.</td>
                                                             {{/if}}
                                                             </tbody>
                                                         </table>

@@ -32,7 +32,7 @@
     <div class="row">
         <div class="col-xl-12">
             <section class="hk-sec-wrapper">
-                        <h5 class="hk-sec-title text-capitalize">Add New Project</h5>
+                <h5 class="hk-sec-title text-capitalize">Add New Project</h5>
                 <div class="row">
                     <div class="col-sm">
                         {{#if success}}
@@ -54,23 +54,48 @@
                             </div>
                         {{/if}}
 
-                        <form id="docx-verify-form" method="POST" action="/projects/create" enctype="multipart/form-data" >
+                        <form id="docx-verify-form" method="POST" action="/projects/create"
+                              enctype="multipart/form-data">
 
                             <div class="verify-doc">
 
-                                    <div class="row text-center">
-                                        <div class="col-sm p-4">
-                                            <input  onchange="verify_docx(this)" type="file"
-                                                   name="avatar" class="dropify" accept=".docx"/>
-                                        </div>
+                                <div class="row text-center">
+                                    <div class="col-sm p-4">
+                                        <input onchange="verify_docx(this)" type="file"
+                                               name="avatar" class="dropify" accept=".docx"/>
                                     </div>
+                                </div>
 
                                 <div class="alert alert-warning font-weight-bold text-captalize" role="alert">
-                                          Only .docx file is supported.
+                                    Only .docx file is supported.
+                                </div>
+
+
+                            </div>
+
+                            <div class="verify-wait my-modal ">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div id="waitModal" class="modal-content w-100">
+                                        <div class="container-fluid p-3">
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <lottie-player
+                                                            src="https://assets4.lottiefiles.com/packages/lf20_RpkAZX.json"
+                                                            background="transparent" speed="1.5"
+                                                            style="width: auto; height:265px"
+                                                            loop
+                                                            autoplay></lottie-player>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <h1 class="display-4 text-white mb-3">Document Verification <br> In
+                                                        Progress</h1>
+                                                    <p class="lead  text-white">Please be patient. We are performing
+                                                        magic :) </p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-
-
-
+                                </div>
                             </div>
 
                             <div class="after-verfiy d-none">
@@ -80,8 +105,9 @@
                                     <input id="docx_objectives" required type="hidden" name="objectives" value="">
                                     <input id="docx_outcome" required type="hidden" name="outcome" value="">
                                     <input id="docx_title" required type="hidden" name="title" value="">
-<!--                                    <input  required type="hidden"-->
-<!--                                           name="title" value="">-->
+                                    <input id="docx_area" required type="hidden" name="area" value="">
+                                    <!--                                    <input  required type="hidden"-->
+                                    <!--                                           name="title" value="">-->
                                 </div>
 
                                 <div class="form-row">
@@ -179,7 +205,7 @@
                                         <div class="form-group">
                                             <label for="year" class="form-control-label">Year</label>
                                             <input name="year" required placeholder="Select year of Project"
-                                                   type="text" id="year" class="form-control">
+                                                   type="text" value="" id="year" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -191,7 +217,7 @@
                                             <label for="description" class="form-control-label">Description</label>
                                             <textarea name="description" required
                                                       placeholder="Enter Description About Project"
-                                                      rows="5" id="description" class="form-control"></textarea>
+                                                      rows="5" id="proj_description" class="form-control"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -208,83 +234,107 @@
 
                         </form>
 
-<!--                        Error Modal-->
-                        <div class="modal  fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModal" style="display: none;" aria-hidden="true">
-                            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header border-0">
-                                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">×</span>
-                                        </button>
-                                    </div>
-                                    <div class="container-fluid p-3">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <lottie-player src="https://assets1.lottiefiles.com/temp/lf20_H9oy8h.json"
-                                                               background="transparent" speed="1.5" style="width: auto; height:265px"
-                                                               loop
-                                                               autoplay></lottie-player>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <h1 class="display-4 text-white mb-3">Document Verification <br> Failed</h1>
-                                                <p class="lead text-white">Please check that your document contains all the headings and proper formatting.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-<!--                        Error Modal End-->
 
-<!--                        Initial Modal-->
-                        <div class="modal  fade" id="initModal" tabindex="-1" role="dialog" aria-labelledby="errorModal" style="display: none;" aria-hidden="true">
+                        <!--                        Error Modal-->
+                        <div class="modal  fade" id="errorModal" tabindex="-1" role="dialog"
+                             aria-labelledby="errorModal" style="display: none;" aria-hidden="true">
                             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header border-0">
-                                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                        <button type="button" class="close text-white" data-dismiss="modal"
+                                                aria-label="Close">
                                             <span aria-hidden="true">×</span>
                                         </button>
                                     </div>
                                     <div class="container-fluid p-3">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_2HrLrc.json"
-                                                               background="transparent" speed="1.5" style="width: auto; height:265px"
-                                                               loop
-                                                               autoplay></lottie-player>
+                                                <lottie-player
+                                                        src="https://assets1.lottiefiles.com/temp/lf20_H9oy8h.json"
+                                                        background="transparent" speed="1.5"
+                                                        style="width: auto; height:265px"
+                                                        loop
+                                                        autoplay></lottie-player>
                                             </div>
                                             <div class="col-md-6">
-                                                <h1 class="display-4 text-white mb-3">Welcome to<br> Project Verification</h1>
-                                                <p class="lead text-white">Please upload your project document so we can start doing our magic and you yours :) .</p>
+                                                <h1 class="display-4 text-white mb-3">Document Verification <br> Failed
+                                                </h1>
+                                                <p class="lead text-white">Please check that your document contains all
+                                                    the headings and proper formatting. <br> Title, Summary, Objectives And Outcome are necessary for document verification.</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-<!--                        Initial Modal End-->
+                        <!--                        Error Modal End-->
+
+                        <!--                        Initial Modal-->
+                        <div class="modal  fade" id="initModal" tabindex="-1" role="dialog" aria-labelledby="errorModal"
+                             style="display: none;" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header border-0">
+                                        <button type="button" class="close text-white" data-dismiss="modal"
+                                                aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="container-fluid p-3">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <lottie-player
+                                                        src="https://assets8.lottiefiles.com/packages/lf20_2HrLrc.json"
+                                                        background="transparent" speed="1.5"
+                                                        style="width: auto; height:265px"
+                                                        loop
+                                                        autoplay></lottie-player>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h1 class="display-4 text-white mb-3">Welcome to<br> Project
+                                                    Verification</h1>
+                                                <p class="lead text-white">Please upload your project document so we can
+                                                    start doing our magic and you yours :) .</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--                        Initial Modal End-->
 
                         <!--                        Verification Failed Modal-->
-                        <div class="modal  fade" id="verify_failedModal" tabindex="-1" role="dialog" aria-labelledby="errorModal" style="display: none;" aria-hidden="true">
+                        <div class="modal  fade" id="verify_failedModal" tabindex="-1" role="dialog"
+                             aria-labelledby="errorModal" style="display: none;" aria-hidden="true">
                             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header border-0">
-                                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                        <button type="button" class="close text-white" data-dismiss="modal"
+                                                aria-label="Close">
                                             <span aria-hidden="true">×</span>
                                         </button>
                                     </div>
                                     <div class="container-fluid p-3">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <lottie-player src="https://assets5.lottiefiles.com/datafiles/tawau8o8xa7TTxx/data.json"
-                                                               background="transparent" speed="1.5" style="width: auto; height:265px"
-                                                               loop
-                                                               autoplay></lottie-player>
+                                                <lottie-player
+                                                        src="https://assets5.lottiefiles.com/datafiles/tawau8o8xa7TTxx/data.json"
+                                                        background="transparent" speed="1.5"
+                                                        style="width: auto; height:265px"
+                                                        loop
+                                                        autoplay></lottie-player>
                                             </div>
                                             <div class="col-md-6">
-                                                <h1 class="display-4 text-white mb-3">Document Verification<br> Failed</h1>
-                                                <p class="lead text-white">Your project documentation failed to verify. Previous match found.</p>
-                                                <p class="mt-4"><button class="btn btn-danger">Show Matched</button></p>
+                                                <h1 class="display-4 text-white mb-3">Document Verification<br> Failed
+                                                </h1>
+                                                <p class="lead text-white">Your project documentation failed to verify.
+                                                    Previous match found.</p>
+                                                <p class="mt-4">
+                                                    <button data-dismiss="modal" data-toggle="modal"
+                                                            data-target="#matchModal" class="btn btn-danger">Show
+                                                        Matched
+                                                    </button>
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -293,26 +343,52 @@
                         </div>
                         <!--                        Verification Failed Modal End-->
 
-                        <!--                        Verified Modal-->
-                        <div class="modal  fade" id="verifiedModal" tabindex="-1" role="dialog" aria-labelledby="errorModal" style="display: none;" aria-hidden="true">
+                        <!--                        Match  Modal-->
+                        <div class="modal  fade" id="matchModal" tabindex="-1" role="dialog"
+                             aria-labelledby="errorModal" style="display: none;" aria-hidden="true">
                             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header border-0">
-                                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                        <h5 class="modal-title display-5  font-weight-bold text-white">Similar
+                                            Projects</h5>
+                                        <button type="button" class="close text-white" data-dismiss="modal"
+                                                aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="container-fluid p-3">
+                                        <div id="match_projs" class="d-flex flex-wrap justify-content-center"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--                        Match Modal End-->
+
+                        <!--                        Verified Modal-->
+                        <div class="modal  fade" id="verifiedModal" tabindex="-1" role="dialog"
+                             aria-labelledby="errorModal" style="display: none;" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header border-0">
+                                        <button type="button" class="close text-white" data-dismiss="modal"
+                                                aria-label="Close">
                                             <span aria-hidden="true">×</span>
                                         </button>
                                     </div>
                                     <div class="container-fluid p-3">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_omCtZv.json"
-                                                               background="transparent" speed="1.5" style="width: auto; height:265px"
-                                                               loop
-                                                               autoplay></lottie-player>
+                                                <lottie-player
+                                                        src="https://assets5.lottiefiles.com/packages/lf20_omCtZv.json"
+                                                        background="transparent" speed="1.5"
+                                                        style="width: auto; height:265px"
+                                                        loop
+                                                        autoplay></lottie-player>
                                             </div>
                                             <div class="col-md-6">
                                                 <h1 class="display-4 text-white mb-3">FYP Document<br> Verified</h1>
-                                                <p class="lead text-white">Hooray ! , You all done just fill the form and your good to go. Do your magic! :)</p>
+                                                <p class="lead text-white">Hooray ! , You all done just fill the form
+                                                    and your good to go. Do your magic! :)</p>
                                             </div>
                                         </div>
                                     </div>

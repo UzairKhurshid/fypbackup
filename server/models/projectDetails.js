@@ -21,6 +21,11 @@ const projectDetailsSchema = new mongoose.Schema({
         trim: true,
         required: true
     },
+    area: {
+        type: String,
+        trim: true,
+        required: true
+    },
     // project_methodology: {
     //     type: String,
     //     trim: true,
@@ -30,6 +35,7 @@ const projectDetailsSchema = new mongoose.Schema({
         type: String,
         required: true
     }
+
 
 
 }, {

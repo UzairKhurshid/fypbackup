@@ -1,4 +1,5 @@
 const express = require('express')
+const mongoose = require('mongoose')
 const auth = require('../middleware/auth')
 const router = new express.Router()
 const Project = require('../models/project')
@@ -8,19 +9,6 @@ const Request = require('../models/request')
 const myProject = require('../models/myProject')
 const { createNotification, getAllNotifications } = require('../helpers/notification')
 const checkSimilarity = require('../helpers/cosuine _similarity')
-var fs = require('fs');
-
-
-
-router.get('/projects/file',auth,(req,res)=>{
-    res.render('projects/file')
-})
-router.post('/projects/file',auth,(req,res)=>{
-    console.log(req.file.destination)
-    // var oldpath = req.file.path;
-    // var newpath = '../../public/upload' + files.filetoupload.name;
-    return res.redirect('/projects/file')
-})
 
 // can accept request from notification if limit reached .
 // cannot propose a project if member of any project
@@ -384,14 +372,13 @@ router.post('/project/verify', auth, async(req, res) => {
         projects = await projectDetails.find({});
 
         if (projects.length <= 0) {
-            res.json({
+           return  res.json({
                 success: true,
                 verify: true
             })
         }
 
         detected = []
-
         projects.forEach(proj => {
 
             // Checking Title
@@ -403,33 +390,41 @@ router.post('/project/verify', auth, async(req, res) => {
                 //  Checking outcome
             outcomeScore = checkSimilarity(req.body.docx.outcome, proj.outcome)
 
-            averageScore = (((titleScore + introductionScore + objectivesScore + outcomeScore) / 400) * 100)
+            //  Checking area of specialization
+            areaScore = checkSimilarity(req.body.docx.area, proj.area)
 
+            averageScore = (((titleScore + introductionScore + objectivesScore + outcomeScore + areaScore) / 500) * 100)
+
+            console.log("SCore: "+averageScore)
             if (averageScore >= 70) {
-                // console.log("SCore: "+averageScore)
-                detected.push(proj.projectID)
+                detected.push( mongoose.Types.ObjectId(proj.projectID))
             }
 
         });
 
 
-            // console.log("projects_Details "+projects.length)
-
         if (detected.length > 0) {
-            res.json({
+           let detectedProjects = await Project.find({
+                _id : { $in:detected}
+            })
+           // console.log(detectedProjects)
+            return  res.json({
                 success: true,
                 verify: false,
+                detects:detectedProjects
             })
+
         }
 
-        res.json({
-            success: true,
-            verify: true
-        })
+            return  res.json({
+                success: true,
+                verify: true
+            })
+
     } catch (e) {
-        console.log(e.message)
+        console.log(e.message + " Catch Verify error")
             // req.flash('error', e.message)
-        res.json({
+        return  res.json({
             success: false,
             verify: false
         })

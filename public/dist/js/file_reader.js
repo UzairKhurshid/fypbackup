@@ -3,12 +3,17 @@ function verify_docx(fileElement) {
     var files = fileElement.files || [];
 
     if (!files.length) {
-        console.log('no file found');
+        fire_alert('No file found')
         return;
     }
 
     var file = files[0];
 
+
+    if (file.name.split('.').pop()!== 'docx') {
+       fire_alert('Files with docx extension are supported')
+        return;
+    }
 
     let reader = new FileReader();
     reader.onloadend = function(event) {
@@ -18,6 +23,7 @@ function verify_docx(fileElement) {
         mammoth.extractRawText({ arrayBuffer: arrayBuffer }).then(function(resultObject) {
             resultedFilter = resultObject.value.replace('  ', '')
             arrayText = resultedFilter.split("\n")
+            console.log(arrayText)
             perform_verify(extractMain(arrayText))
         });
 
@@ -31,7 +37,8 @@ function extractMain(array) {
         introduction: "",
         objectives: "",
         outcome: "",
-        title: ""
+        title: "",
+        area:"",
 
     };
 
@@ -53,7 +60,7 @@ function extractMain(array) {
             flag = false;
         }
 
-        if (flag && myVal.replace(/ +/g, '').replace(":", "").toLowerCase() == "remarks") {
+        if (flag && (myVal.replace(/ +/g, '').replace(":", "").toLowerCase() == "remarks" || myVal.replace(/ +/g, '').replace(":", "").toLowerCase() == "forresearchgroupheadonly")) {
             output.outcome = myText;
             myText = '';
             flag = false;
@@ -61,6 +68,12 @@ function extractMain(array) {
 
         if (flag && myVal.replace(/ +/g, '').replace(":", "").toLowerCase() == "projectcategory(chooseone)") {
             output.title = myText
+            myText = '';
+            flag = false;
+        }
+
+        if (flag && myVal.replace(/ +/g, '').replace(":", "").toLowerCase() == "summaryofproposedproject(maximum300words)") {
+            output.area = myText
             myText = '';
             flag = false;
         }
@@ -75,8 +88,11 @@ function extractMain(array) {
 
         if (myVal.replace(/ +/g, '').replace(":", "").toLowerCase() === "titleofproposedproject") flag = true;
 
+        if (myVal.replace(/ +/g, '').replace(":", "").toLowerCase() === "area/specialization") flag = true;
+
     });
 
+    console.log(output)
     return output;
     // console.log(getSimilarityScore(textCosineSimilarity(output.objectives,output.objectives)));
 }
@@ -84,34 +100,37 @@ function extractMain(array) {
 
 
 function perform_verify(resultDocx) {
+    // console.log(resultDocx)
     if (resultDocx.introduction == "" || resultDocx.outcome == "" || resultDocx.objectives == "" ||
-        resultDocx.project_methodology == "") {
+        resultDocx.title == ""||
+        resultDocx.area == "") {
         $('#errorModal').modal('show');
         return;
     }
+
     let csrf = $("#csrf").val()
+    let verifyWait = $('.verify-wait')
+    verifyWait.fadeIn();
     $.ajax({
         url: "/project/verify",
         method: 'POST',
         data: { docx: resultDocx, _csrf: csrf },
         success: function(result) {
+            verifyWait.fadeOut();
             if (!result.success) {
                 fire_alert()
+                console.log('Server Error')
                 return;
             }
 
             if (!result.verify) {
+
                 $('#verify_failedModal').modal('show');
+                matches(result.detects)
                 return;
             }
 
             $('.after-verfiy').removeClass('d-none');
-
-            // var before_docx = $("#before_docx"),
-            //     report = before_docx.clone();
-            // report.attr("class", "invisible");
-            // report.insertAfter(".hidden_fields");
-
             $('.verify-doc').addClass('my-invisible');
             //$('.verify-doc').remove();
             $('#verifiedModal').modal('show');
@@ -122,16 +141,20 @@ function perform_verify(resultDocx) {
             $("#docx_outcome").val(resultDocx.outcome)
             $("#docx_title").val(resultDocx.title)
             $("#proj_title").val(resultDocx.title)
+            $("#docx_area").val(resultDocx.area)
+            $("#proj_description").val(resultDocx.introduction.substring(0,200)+'.........');
 
         },
         error: function(result) {
+            verifyWait.fadeOut();
+            console.log('Ajax Error')
             fire_alert()
             return;
         },
     });
 }
 
-function fire_alert(icon = 'error', title = 'Oops..', text = 'We are having some issue right now. <br> Please try after some time.') {
+function fire_alert( text = 'We are having some issue right now. <br> Please try after some time.',icon = 'error', title = 'Oops..') {
 
     Swal.fire({
         icon: icon,

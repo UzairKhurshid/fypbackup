@@ -34,7 +34,7 @@
                     perspiciatis sapiente sunt veniam. Dolorem dolorum ipsam praesentium, quis ratione velit. Asperiores
                     eaque eos laudantium modi! Nisi odio quasi totam.
                 </p>  --}}
-                
+
                 {{#if success}}
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <span class="alert-icon"><i class="ni ni-like-2"></i></span>
@@ -53,167 +53,240 @@
                         </button>
                     </div>
                 {{/if}}
-                
+
                 <div class="row">
                     <div class="col-sm">
-                        {{#if studentLogin}}
-                            <form method="POST" action="/proposed/proposeNewProject">
-                                <input required type="hidden" value={{ownerRole}} class="form-control" name="ownerRole"
-                                    id="ownerRole" readonly>
-                                <input required type="hidden" value={{ownerName}} class="form-control" name="ownerName"
-                                    id="ownerName" readonly>
-                                <input required type="hidden" value={{ownerID}} class="form-control" name="ownerID"
-                                    id="ownerID" readonly>
-                                <input type="hidden" name="_csrf" value="{{csrfToken}}" class="form-control">
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="Name" class="form-control-label">Name</label>
-                                            <input required type="text" placeholder="Enter Project Name "
-                                                class="form-control" name="name" id="name">
+                        {{#if studentLogin}}
+
+
+
+                            <form method="POST" action="/proposed/proposeNewProject">
+
+                                <div class="verify-doc">
+
+                                    <div class="row text-center">
+                                        <div class="col-sm p-4">
+                                            <input onchange="verify_docx(this)" type="file"
+                                                   name="avatar" class="dropify" accept=".docx"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="alert alert-warning font-weight-bold text-captalize" role="alert">
+                                        Only .docx file is supported.
+                                    </div>
+
+
+                                </div>
+
+                                <div class="verify-wait my-modal ">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div id="waitModal" class="modal-content w-100">
+                                            <div class="container-fluid p-3">
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <lottie-player
+                                                                src="https://assets4.lottiefiles.com/packages/lf20_RpkAZX.json"
+                                                                background="transparent" speed="1.5"
+                                                                style="width: auto; height:265px"
+                                                                loop
+                                                                autoplay></lottie-player>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <h1 class="display-4 text-white mb-3">Document Verification <br>
+                                                            In
+                                                            Progress</h1>
+                                                        <p class="lead  text-white">Please be patient. We are performing
+                                                            magic :) </p>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="language" class="form-control-label">Language</label>
-                                            <select required class="custom-select" name="language" id="language">
-                                                <option disabled selected value="">Select Language</option>
-                                                <option value="C">C</option>
-                                                <option value="C#">C#</option>
-                                                <option value="C++">C++</option>
-                                                <option value="Java">Java</option>
-                                                <option value="Node js">Node js</option>
-                                                <option value="php">Php</option>
-                                            </select>
+
+                                <div class="after-verfiy d-none">
+                                    <div class="hidden_fields">
+                                        <input id="csrf" type="hidden" name="_csrf" value="{{csrfToken}}">
+                                        <input id="docx_introduction" required type="hidden" name="introduction"
+                                               value="">
+                                        <input id="docx_objectives" required type="hidden" name="objectives" value="">
+                                        <input id="docx_outcome" required type="hidden" name="outcome" value="">
+                                        <input id="docx_title" required type="hidden" name="title" value="">
+                                        <input id="docx_area" required type="hidden" name="area" value="">
+                                        <!--                                    <input  required type="hidden"-->
+                                        <!--                                           name="title" value="">-->
+                                    </div>
+                                    <input required type="hidden" value={{ownerRole}} class="form-control"
+                                           name="ownerRole"
+                                           id="ownerRole" readonly>
+                                    <input required type="hidden" value={{ownerName}} class="form-control"
+                                           name="ownerName"
+                                           id="ownerName" readonly>
+                                    <input required type="hidden" value={{ownerID}} class="form-control" name="ownerID"
+                                           id="ownerID" readonly>
+                                    <input type="hidden" name="_csrf" value="{{csrfToken}}" class="form-control">
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="Name" class="form-control-label">Name</label>
+                                                <input required type="text" placeholder="Enter Project Name "
+                                                       class="form-control" name="name" id="name">
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="IDE" class="form-control-label">IDE</label>
-                                            <select required class="custom-select" name="IDE" id="IDE">
-                                                <option disabled selected value="">Select IDE</option>
-                                                <option value="Dev++">Dev++</option>
-                                                <option value="NetBeans">NetBeans</option>
-                                                <option value="Visual Studio">Visual Studio</option>
-                                                <option value="Visual Studio Code">Visual Studio Code</option>
-                                                <option value="Android Studio">Android Studio</option>
-                                            </select>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="language" class="form-control-label">Language</label>
+                                                <select required class="custom-select" name="language" id="language">
+                                                    <option disabled selected value="">Select Language</option>
+                                                    <option value="C">C</option>
+                                                    <option value="C#">C#</option>
+                                                    <option value="C++">C++</option>
+                                                    <option value="Java">Java</option>
+                                                    <option value="Node js">Node js</option>
+                                                    <option value="php">Php</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="IDE" class="form-control-label">IDE</label>
+                                                <select required class="custom-select" name="IDE" id="IDE">
+                                                    <option disabled selected value="">Select IDE</option>
+                                                    <option value="Dev++">Dev++</option>
+                                                    <option value="NetBeans">NetBeans</option>
+                                                    <option value="Visual Studio">Visual Studio</option>
+                                                    <option value="Visual Studio Code">Visual Studio Code</option>
+                                                    <option value="Android Studio">Android Studio</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="type" class="form-control-label">Type</label>
+                                                <select required class="custom-select" name="type" id="type">
+                                                    <option disabled selected value="">Select Type</option>
+                                                    <option value="Desktop Application">Desktop Application</option>
+                                                    <option value="Mobile Application">Mobile Application</option>
+                                                    <option value="Web Application">Web Application</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="department" class="form-control-label">Department</label>
+                                                <select required class="custom-select" name="department"
+                                                        id="department">
+                                                    <option disabled selected value="">Select Department</option>
+                                                    <option value="cs">Computer Science</option>
+                                                    <option value="se">Software Engineering</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="semester" class="form-control-label">Semester</label>
+                                                <select required class="custom-select" name="semester" id="semester">
+                                                    <option disabled selected value="">Select Semester</option>
+                                                    <option value="6">Sixth Semester</option>
+                                                    <option value="7">Seventh Semester</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="year" class="form-control-label">Year Of Project</label>
+                                                <input type="text" id="year" min="2010" max="2099" name="year" required
+                                                       class="form-control" placeholder="select year of project">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="type" class="form-control-label">Season</label>
+                                                <select required class="custom-select" name="season" id="season">
+                                                    <option disabled selected value="">Select Season</option>
+                                                    <option value="Fall">Fall</option>
+                                                    <option value="Spring">Spring</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="type" class="form-control-label">Select Teacher Reg
+                                                    No</label>
+                                                <select required class="custom-select" name="teacherRegNo"
+                                                        id="teacherRegNo"
+                                                        onChange="populateSelect()">
+                                                    <option disabled selected value="">Select Teacher Registeration No
+                                                    </option>
+                                                    {{#if teachers}}
+                                                        {{#each teachers}}
+                                                            <option value="{{this.regNo}}">{{this.regNo}}</option>
+                                                        {{/each}}
+                                                    {{/if}}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="type" class="form-control-label">Selected Teacher
+                                                    Name </label>
+                                                <select disabled class="custom-select" name="teacherName"
+                                                        id="teacherName">
+                                                    <option disabled selected value="">Teacher Name</option>
+                                                    {{#if teachers}}
+                                                        {{#each teachers}}
+                                                            <option value="{{this.regNo}}">{{this.name}}</option>
+                                                        {{/each}}
+                                                    {{/if}}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="type" class="form-control-label">Selected Teacher
+                                                    Email </label>
+                                                <select disabled class="custom-select" name="teacherEmail"
+                                                        id="teacherEmail"
+                                                        readonly>
+                                                    <option disabled selected value="">Teacher Email</option>
+                                                    {{#if teachers}}
+                                                        {{#each teachers}}
+                                                            <option value="{{this.regNo}}">{{this.email}}</option>
+                                                        {{/each}}
+                                                    {{/if}}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="description" class="form-control-label">Description</label>
+                                                <textarea required placeholder="Enter Description About Project"
+                                                          rows="5" name="description" id="description"
+                                                          class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-outline-success">Propose Project</button>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="type" class="form-control-label">Type</label>
-                                            <select required class="custom-select" name="type" id="type">
-                                                <option disabled selected value="">Select Type</option>
-                                                <option value="Desktop Application">Desktop Application</option>
-                                                <option value="Mobile Application">Mobile Application</option>
-                                                <option value="Web Application">Web Application</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="department" class="form-control-label">Department</label>
-                                            <select required class="custom-select" name="department" id="department">
-                                                <option disabled selected value="">Select Department</option>
-                                                <option value="cs">Computer Science</option>
-                                                <option value="se">Software Engineering</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="semester" class="form-control-label">Semester</label>
-                                            <select required class="custom-select" name="semester" id="semester">
-                                                <option disabled selected value="">Select Semester</option>
-                                                <option value="6">Sixth Semester</option>
-                                                <option value="7">Seventh Semester</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="year" class="form-control-label">Year Of Project</label>
-                                            <input type="text" id="year" min="2010" max="2099" name="year" required
-                                                class="form-control" placeholder="select year of project">
-                                        </div>
-                                    </div>
-                                </div> 
-                                <div class="form-row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="type" class="form-control-label">Season</label>
-                                            <select required class="custom-select" name="season" id="season">
-                                                <option disabled selected value="">Select Season</option>
-                                                <option value="Fall">Fall</option>
-                                                <option value="Spring">Spring</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="type" class="form-control-label">Select Teacher Reg No</label>
-                                            <select required class="custom-select" name="teacherRegNo" id="teacherRegNo" onChange="populateSelect()">
-                                                <option disabled selected value="">Select Teacher Registeration No</option>
-                                                {{#if teachers}}
-                                                    {{#each teachers}}
-                                                        <option value="{{this.regNo}}">{{this.regNo}}</option>
-                                                    {{/each}}
-                                                {{/if}}
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="type" class="form-control-label">Selected Teacher Name </label>
-                                            <select disabled class="custom-select" name="teacherName" id="teacherName" >
-                                                <option disabled selected value="">Teacher Name </option>
-                                                {{#if teachers}}
-                                                    {{#each teachers}}
-                                                        <option value="{{this.regNo}}">{{this.name}}</option>
-                                                    {{/each}}
-                                                {{/if}}
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="type" class="form-control-label">Selected Teacher Email </label>
-                                            <select disabled class="custom-select" name="teacherEmail" id="teacherEmail" readonly>
-                                                <option disabled selected value="">Teacher Email </option>
-                                                {{#if teachers}}
-                                                    {{#each teachers}}
-                                                        <option value="{{this.regNo}}">{{this.email}}</option>
-                                                    {{/each}}
-                                                {{/if}}
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label for="description" class="form-control-label">Description</label>
-                                            <textarea required placeholder="Enter Description About Project"
-                                                    rows="5" name="description" id="description" class="form-control"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-outline-success">Propose Project</button>
                             </form>
-                            ,<script type="text/javascript">
-                                function populateSelect(){
-                                    var teacherRegNo= document.getElementById("teacherRegNo");
-                                    var teacherRegNoIndex=document.getElementById("teacherRegNo").selectedIndex;
+                            <script type="text/javascript">
+                                function populateSelect() {
+                                    var teacherRegNo = document.getElementById("teacherRegNo");
+                                    var teacherRegNoIndex = document.getElementById("teacherRegNo").selectedIndex;
                                     //alert(teacherRegNoIndex)
                                     document.getElementById("teacherName").selectedIndex = teacherRegNoIndex;
                                     document.getElementById("teacherEmail").selectedIndex = teacherRegNoIndex;
@@ -222,120 +295,345 @@
                         {{/if}}
                         {{#if teacherLogin}}
                             <form method="POST" action="/proposed/proposeNewProject">
-                                <input required type="hidden" value={{ownerRole}} class="form-control" name="ownerRole"
-                                    id="ownerRole" readonly>
-                                <input required type="hidden" value={{ownerName}} class="form-control" name="ownerName"
-                                    id="ownerName" readonly>
-                                <input required type="hidden" value={{ownerID}} class="form-control" name="ownerID"
-                                    id="ownerID" readonly>
-                                <input type="hidden" name="_csrf" value="{{csrfToken}}" class="form-control">
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="Name" class="form-control-label">Name</label>
-                                            <input required type="text" placeholder="Enter Project Name "
-                                                class="form-control" name="name" id="name">
+                                <div class="verify-doc">
+
+                                    <div class="row text-center">
+                                        <div class="col-sm p-4">
+                                            <input onchange="verify_docx(this)" type="file"
+                                                   name="avatar" class="dropify" accept=".docx"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="alert alert-warning font-weight-bold text-captalize" role="alert">
+                                        Only .docx file is supported.
+                                    </div>
+
+
+                                </div>
+
+                                <div class="verify-wait my-modal ">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div id="waitModal" class="modal-content w-100">
+                                            <div class="container-fluid p-3">
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <lottie-player
+                                                                src="https://assets4.lottiefiles.com/packages/lf20_RpkAZX.json"
+                                                                background="transparent" speed="1.5"
+                                                                style="width: auto; height:265px"
+                                                                loop
+                                                                autoplay></lottie-player>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <h1 class="display-4 text-white mb-3">Document Verification <br>
+                                                            In
+                                                            Progress</h1>
+                                                        <p class="lead  text-white">Please be patient. We are performing
+                                                            magic :) </p>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="language" class="form-control-label">Language</label>
-                                            <select required class="custom-select" name="language" id="language">
-                                                <option disabled selected value="">Select Language</option>
-                                                <option value="C">C</option>
-                                                <option value="C#">C#</option>
-                                                <option value="C++">C++</option>
-                                                <option value="Java">Java</option>
-                                                <option value="Node js">Node js</option>
-                                                <option value="php">Php</option>
-                                            </select>
+
+                                <div class="after-verfiy d-none">
+
+                                    <div class="hidden_fields">
+                                        <input id="csrf" type="hidden" name="_csrf" value="{{csrfToken}}">
+                                        <input id="docx_introduction" required type="hidden" name="introduction"
+                                               value="">
+                                        <input id="docx_objectives" required type="hidden" name="objectives" value="">
+                                        <input id="docx_outcome" required type="hidden" name="outcome" value="">
+                                        <input id="docx_title" required type="hidden" name="title" value="">
+                                        <input id="docx_area" required type="hidden" name="area" value="">
+                                        <!--                                    <input  required type="hidden"-->
+                                        <!--                                           name="title" value="">-->
+                                    </div>
+
+                                    <input required type="hidden" value={{ownerRole}} class="form-control"
+                                           name="ownerRole"
+                                           id="ownerRole" readonly>
+                                    <input required type="hidden" value={{ownerName}} class="form-control"
+                                           name="ownerName"
+                                           id="ownerName" readonly>
+                                    <input required type="hidden" value={{ownerID}} class="form-control" name="ownerID"
+                                           id="ownerID" readonly>
+
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="Name" class="form-control-label">Name</label>
+                                                <input required type="text" placeholder="Enter Project Name "
+                                                       class="form-control" name="name" id="name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="type" class="form-control-label">Season</label>
+                                                <select required class="custom-select" name="season" id="season">
+                                                    <option disabled selected value="">Select Season</option>
+                                                    <option value="Fall">Fall</option>
+                                                    <option value="Spring">Spring</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="IDE" class="form-control-label">IDE</label>
-                                            <select required class="custom-select" name="IDE" id="IDE">
-                                                <option disabled selected value="">Select IDE</option>
-                                                <option value="Dev++">Dev++</option>
-                                                <option value="NetBeans">NetBeans</option>
-                                                <option value="Visual Studio">Visual Studio</option>
-                                                <option value="Visual Studio Code">Visual Studio Code</option>
-                                                <option value="Android Studio">Android Studio</option>
-                                            </select>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="language" class="form-control-label">Language</label>
+                                                <select required class="custom-select" name="language" id="language">
+                                                    <option disabled selected value="">Select Language</option>
+                                                    <option value="C">C</option>
+                                                    <option value="C#">C#</option>
+                                                    <option value="C++">C++</option>
+                                                    <option value="Java">Java</option>
+                                                    <option value="Node js">Node js</option>
+                                                    <option value="php">Php</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="IDE" class="form-control-label">IDE</label>
+                                                <select required class="custom-select" name="IDE" id="IDE">
+                                                    <option disabled selected value="">Select IDE</option>
+                                                    <option value="Dev++">Dev++</option>
+                                                    <option value="NetBeans">NetBeans</option>
+                                                    <option value="Visual Studio">Visual Studio</option>
+                                                    <option value="Visual Studio Code">Visual Studio Code</option>
+                                                    <option value="Android Studio">Android Studio</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="type" class="form-control-label">Type</label>
+                                                <select required class="custom-select" name="type" id="type">
+                                                    <option disabled selected value="">Select Type</option>
+                                                    <option value="Desktop Application">Desktop Application</option>
+                                                    <option value="Mobile Application">Mobile Application</option>
+                                                    <option value="Web Application">Web Application</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="department" class="form-control-label">Department</label>
+                                                <select required class="custom-select" name="department"
+                                                        id="department">
+                                                    <option disabled selected value="">Select Department</option>
+                                                    <option value="cs">Computer Science</option>
+                                                    <option value="se">Software Engineering</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="semester" class="form-control-label">Semester</label>
+                                                <select required class="custom-select" name="semester" id="semester">
+                                                    <option disabled selected value="">Select Semester</option>
+                                                    <option value="6">Sixth Semester</option>
+                                                    <option value="7">Seventh Semester</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="year" class="form-control-label">Year Of Project</label>
+                                                <input type="text" id="year" min="2010" max="2099" name="year" required
+                                                       class="form-control" placeholder="select year of project">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="description" class="form-control-label">Description</label>
+                                                <textarea required placeholder="Enter Description About Project"
+                                                          rows="5" name="description" id="description"
+                                                          class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-outline-success">Propose Project</button>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="type" class="form-control-label">Type</label>
-                                            <select required class="custom-select" name="type" id="type">
-                                                <option disabled selected value="">Select Type</option>
-                                                <option value="Desktop Application">Desktop Application</option>
-                                                <option value="Mobile Application">Mobile Application</option>
-                                                <option value="Web Application">Web Application</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="department" class="form-control-label">Department</label>
-                                            <select required class="custom-select" name="department" id="department">
-                                                <option disabled selected value="">Select Department</option>
-                                                <option value="cs">Computer Science</option>
-                                                <option value="se">Software Engineering</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="semester" class="form-control-label">Semester</label>
-                                            <select required class="custom-select" name="semester" id="semester">
-                                                <option disabled selected value="">Select Semester</option>
-                                                <option value="6">Sixth Semester</option>
-                                                <option value="7">Seventh Semester</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="year" class="form-control-label">Year Of Project</label>
-                                            <input type="text" id="year" min="2010" max="2099" name="year" required
-                                                class="form-control" placeholder="select year of project">
-                                        </div>
-                                    </div>
-                                </div> 
-                                <div class="form-row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="type" class="form-control-label">Season</label>
-                                            <select required class="custom-select" name="season" id="season">
-                                                <option disabled selected value="">Select Season</option>
-                                                <option value="Fall">Fall</option>
-                                                <option value="Spring">Spring</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label for="description" class="form-control-label">Description</label>
-                                            <textarea required placeholder="Enter Description About Project"
-                                                    rows="5" name="description" id="description" class="form-control"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-outline-success">Propose Project</button>
+
                             </form>
                         {{/if}}
                     </div>
                 </div>
+
+                <!--                        Error Modal-->
+                <div class="modal  fade" id="errorModal" tabindex="-1" role="dialog"
+                     aria-labelledby="errorModal" style="display: none;" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header border-0">
+                                <button type="button" class="close text-white" data-dismiss="modal"
+                                        aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="container-fluid p-3">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <lottie-player
+                                                src="https://assets1.lottiefiles.com/temp/lf20_H9oy8h.json"
+                                                background="transparent" speed="1.5"
+                                                style="width: auto; height:265px"
+                                                loop
+                                                autoplay></lottie-player>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h1 class="display-4 text-white mb-3">Document Verification <br> Failed
+                                        </h1>
+                                        <p class="lead text-white">Please check that your document contains all
+                                            the headings and proper formatting. <br> Title, Summary, Objectives And
+                                            Outcome are necessary for document verification.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--                        Error Modal End-->
+
+                <!--                        Initial Modal-->
+                <div class="modal  fade" id="initModal" tabindex="-1" role="dialog" aria-labelledby="errorModal"
+                     style="display: none;" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header border-0">
+                                <button type="button" class="close text-white" data-dismiss="modal"
+                                        aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="container-fluid p-3">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <lottie-player
+                                                src="https://assets8.lottiefiles.com/packages/lf20_2HrLrc.json"
+                                                background="transparent" speed="1.5"
+                                                style="width: auto; height:265px"
+                                                loop
+                                                autoplay></lottie-player>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h1 class="display-4 text-white mb-3">Welcome to<br> Project
+                                            Verification</h1>
+                                        <p class="lead text-white">Please upload your project document so we can
+                                            start doing our magic and you yours :) .</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--                        Initial Modal End-->
+
+                <!--                        Verification Failed Modal-->
+                <div class="modal  fade" id="verify_failedModal" tabindex="-1" role="dialog"
+                     aria-labelledby="errorModal" style="display: none;" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header border-0">
+                                <button type="button" class="close text-white" data-dismiss="modal"
+                                        aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="container-fluid p-3">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <lottie-player
+                                                src="https://assets5.lottiefiles.com/datafiles/tawau8o8xa7TTxx/data.json"
+                                                background="transparent" speed="1.5"
+                                                style="width: auto; height:265px"
+                                                loop
+                                                autoplay></lottie-player>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h1 class="display-4 text-white mb-3">Document Verification<br> Failed
+                                        </h1>
+                                        <p class="lead text-white">Your project documentation failed to verify.
+                                            Previous match found.</p>
+                                        <p class="mt-4">
+                                            <button data-dismiss="modal" data-toggle="modal"
+                                                    data-target="#matchModal" class="btn btn-danger">Show
+                                                Matched
+                                            </button>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--                        Verification Failed Modal End-->
+
+                <!--                        Match  Modal-->
+                <div class="modal  fade" id="matchModal" tabindex="-1" role="dialog"
+                     aria-labelledby="errorModal" style="display: none;" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header border-0">
+                                <h5 class="modal-title display-5  font-weight-bold text-white">Similar
+                                    Projects</h5>
+                                <button type="button" class="close text-white" data-dismiss="modal"
+                                        aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="container-fluid p-3">
+                                <div id="match_projs" class="d-flex flex-wrap justify-content-center"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--                        Match Modal End-->
+
+                <!--                        Verified Modal-->
+                <div class="modal  fade" id="verifiedModal" tabindex="-1" role="dialog"
+                     aria-labelledby="errorModal" style="display: none;" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header border-0">
+                                <button type="button" class="close text-white" data-dismiss="modal"
+                                        aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="container-fluid p-3">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <lottie-player
+                                                src="https://assets5.lottiefiles.com/packages/lf20_omCtZv.json"
+                                                background="transparent" speed="1.5"
+                                                style="width: auto; height:265px"
+                                                loop
+                                                autoplay></lottie-player>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h1 class="display-4 text-white mb-3">FYP Document<br> Verified</h1>
+                                        <p class="lead text-white">Hooray ! , You all done just fill the form
+                                            and your good to go. Do your magic! :)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--                        Verified Modal End-->
+
             </section>
         </div>
     </div>

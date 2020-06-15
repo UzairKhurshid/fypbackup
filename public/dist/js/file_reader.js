@@ -23,7 +23,7 @@ function verify_docx(fileElement) {
         mammoth.extractRawText({ arrayBuffer: arrayBuffer }).then(function(resultObject) {
             resultedFilter = resultObject.value.replace('  ', '')
             arrayText = resultedFilter.split("\n")
-            console.log(arrayText)
+            //console.log(arrayText)
             perform_verify(extractMain(arrayText))
         });
 
@@ -92,7 +92,7 @@ function extractMain(array) {
 
     });
 
-    console.log(output)
+    //console.log(output)
     return output;
     // console.log(getSimilarityScore(textCosineSimilarity(output.objectives,output.objectives)));
 }

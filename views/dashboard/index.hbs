@@ -35,7 +35,7 @@
                         <div style="min-height:265px" class="card border-0">
                             <div class="card-body w-100 d-flex justify-content-start pa-0">
                                 <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_M4H0kx.json"
-                                               background="transparent" speed="1.5" style="width: auto; height:100%"
+                                               background="transparent" speed="1.5" style="width: auto; height:265px"
                                                loop
                                                autoplay></lottie-player>
                             </div>
@@ -91,6 +91,8 @@
                                         </div>
                                         <div class="dropdown-divider pb-20"></div>
                                     {{/each}}
+                                    {{else}}
+                                    <h5 class="display-5 font-weight-bold">You are not supervising any projects at this moment.</h5>
                                 {{/if}}
                             </div>
                         </div>
@@ -101,20 +103,20 @@
                             <div class="card-body pa-0">
                                 <div class="table-wrap">
                                     <div class="table-responsive">
-                                        <table class="table table-sm table-hover mb-0">
-                                            <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Project</th>
-                                                <th>Project Progress</th>
-                                                <th>Task</th>
-                                                <th>Description</th>
-                                                <th>Status</th>
-
-                                            </tr>
-                                            </thead>
-                                            <tbody>
                                             {{#if teacherData}}
+                                            <table class="table table-sm table-hover mb-0">
+                                                <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Project</th>
+                                                    <th>Project Progress</th>
+                                                    <th>Task</th>
+                                                    <th>Description</th>
+                                                    <th>Status</th>
+
+                                                </tr>
+                                                </thead>
+                                            <tbody>
                                                 {{#each teacherData}}
                                                     {{#each this.projectTasks}}
                                                         <tr>
@@ -148,6 +150,8 @@
                                                         </tr>
                                                     {{/each}}
                                                 {{/each}}
+                                            {{else}}
+                                                <h5 class="display-5 font-weight-bold p-5">No proposed projects at this moment.</h5>
                                             {{/if}}
                                             </tbody>
                                             <script type="text/javascript">
@@ -243,6 +247,7 @@
                             <div class="card-body">
                                 <div class="user-activity user-activity-sm dash-super">
                                     {{#if studentData}}
+                                        {{#if studentData.teacher.name}}
                                         <!--                                        Teacher Data-->
                                         <div class="media">
                                             <div class="media-img-wrap">
@@ -305,6 +310,9 @@
                                                 </div>
                                             </div>
                                         {{/each}}
+                                        {{else}}
+                                        <h5 class="display-5 font-weight-bold">Request For Fyp or proposed your own now.</h5>
+                                            {{/if}}
                                     {{/if}}
                                 </div>
                             </div>
@@ -319,6 +327,8 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="card">
+                                                {{#if studentData.project.name}}
+
                                                 <h5 class="card-header">
                                                     {{studentData.project.name}}
                                                 </h5>
@@ -329,6 +339,9 @@
                                                                 title="Source Title">{{studentData.project.department}} {{studentData.project.year}}</cite></footer>
                                                     </blockquote>
                                                 </div>
+                                                    {{else}}
+                                                    <h5 class="display-5 font-weight-bold p-5">Request For Fyp or proposed your own now.</h5>
+                                                    {{/if}}
                                             </div>
                                         </div>
                                     </div>
@@ -359,7 +372,7 @@
                                                 </div>
                                             {{/each}}
                                         {{else}}
-                                         <p class="lead">Add project member to see thier details.</p>
+                                         <p class="lead p-2">Add project member to see thier details.</p>
                                         {{/if}}
 
                                     </div>
@@ -368,8 +381,10 @@
                                                 <div class="card text-primary border-primary">
                                                     <div class="card-header">Supervisor</div>
                                                     <div class="card-body text-primary">
-                                                        <div class="d-flex flex-wrap">
+                                    <div class="d-flex flex-wrap">
+                                    {{#if studentData.teacher.name}}
                                                             {{#if student.techer.avatar}}
+
                                                                 <img class="d-86 rounded mb-15 mr-15" src="data:image/jpeg;base64, {{studentData.teacher.avatar}}" alt="{{studentData.teacher.name}}">
                                                                 {{else}}
                                                                 <img class="d-86 rounded mb-15 mr-15" src="/dist/img/avatar_student.jpg" alt="{{studentData.teacher.name}}">
@@ -396,6 +411,9 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                        {{else}}
+                                        <h5 class="display-5 font-weight-bold p-5">No supervisor at this moment</h5>
+                                                            {{/if}}
                                                         </div>
                                                     </div>
                                                 </div>

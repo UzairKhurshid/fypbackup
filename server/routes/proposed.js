@@ -6,6 +6,7 @@ const Project = require('../models/project')
 const Account = require('../models/account')
 const Request = require('../models/request')
 const myProject = require('../models/myProject')
+const projectDetails = require('../models/projectDetails')
 const { createNotification, getAllNotifications } = require('../helpers/notification')
 const getArr = require('../helpers/requestFun')
 const { sendWelcomeMail, sendActivationMail, sendDeActivationMail, sendProjectAcceptanceMail, sendProjectRequestMail } = require('../emailSender/email')
@@ -239,6 +240,12 @@ router.post('/proposed/proposeNewProject', auth, async(req, res) => {
             const project = new Project(req.body)
             project.status = 'proposed'
             await project.save()
+
+            //creating project details
+            const projectDet = new projectDetails(req.body)
+            projectDet.projectID = project._id
+            await projectDet.save()
+
             await createNotification('A new Project is Proposed by ' + req.session.name + ' ( ' + req.session.role + ') and Requested Your Supervision. please review your Requests.', 'Project', '/projects/requests', teacherAccID, 'teacher')
 
 
@@ -261,6 +268,12 @@ router.post('/proposed/proposeNewProject', auth, async(req, res) => {
             const project = new Project(req.body)
             project.status = 'proposed'
             await project.save()
+
+            //creating project details
+            const projectDet = new projectDetails(req.body)
+            projectDet.projectID = project._id
+            await projectDet.save()
+
             await createNotification('A new Project is Proposed by ' + req.session.name + ' ( ' + req.session.role + '). please review proposed Projects.', 'Project', '/proposed/allProposedProjects', '', '')
 
             console.log("project Proposed successfully")

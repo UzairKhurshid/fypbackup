@@ -83,4 +83,12 @@
     height: auto;
 }
 
+.score-wrapper{
+    border: 2px dashed #E74C3C;
+    padding: 15px;
+}
+
+.score{
+    color:#E74C3C;
+}
 

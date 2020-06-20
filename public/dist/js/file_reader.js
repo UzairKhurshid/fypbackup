@@ -124,7 +124,6 @@ function perform_verify(resultDocx) {
             }
 
             if (!result.verify) {
-
                 $('#verify_failedModal').modal('show');
                 matches(result.detects)
                 return;

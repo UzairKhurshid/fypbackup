@@ -379,6 +379,7 @@ router.post('/project/verify', auth, async(req, res) => {
         }
 
         detected = []
+        scores = []
         projects.forEach(proj => {
 
             // Checking Title
@@ -398,16 +399,22 @@ router.post('/project/verify', auth, async(req, res) => {
             console.log("SCore: "+averageScore)
             if (averageScore >= 70) {
                 detected.push( mongoose.Types.ObjectId(proj.projectID))
+                scores.push(averageScore)
             }
 
         });
 
 
         if (detected.length > 0) {
-           let detectedProjects = await Project.find({
-                _id : { $in:detected}
-            })
-           // console.log(detectedProjects)
+
+            let detectedProjects = {
+                projects: await Project.find({
+                    _id : { $in:detected}
+                }),
+                scores:scores
+
+            };
+            console.log(detectedProjects)
             return  res.json({
                 success: true,
                 verify: false,

@@ -100,7 +100,7 @@ function extractMain(array) {
 
 
 function perform_verify(resultDocx) {
-    // console.log(resultDocx)
+    console.log(resultDocx)
     if (resultDocx.introduction == "" || resultDocx.outcome == "" || resultDocx.objectives == "" ||
         resultDocx.title == ""||
         resultDocx.area == "") {

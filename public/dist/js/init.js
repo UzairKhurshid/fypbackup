@@ -22,6 +22,19 @@ $(document).ready(function(){
 	$(document).on("click", "a.disabled,a:disabled",function(e) {
 		 return false;
 	});
+
+	/*Owl Carousel*/
+	$('#owl_demo_1').owlCarousel({
+		items: 1,
+		animateOut: 'fadeOut',
+		loop: true,
+		margin: 10,
+		autoplay: true,
+		mouseDrag: false,
+		dots:false
+
+	});
+
 });
 /*****Ready function end*****/
 

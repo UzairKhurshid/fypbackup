@@ -409,7 +409,7 @@ router.post('/project/verify', auth, async(req, res) => {
             averageScore = (((titleScore + introductionScore + objectivesScore + outcomeScore + areaScore) / 500) * 100)
 
             console.log("SCore: " + averageScore)
-            if (averageScore >= 70) {
+            if (averageScore >= 45) {
                 detected.push(mongoose.Types.ObjectId(proj.projectID))
                 scores.push(averageScore)
             }
@@ -426,7 +426,7 @@ router.post('/project/verify', auth, async(req, res) => {
                 scores: scores
 
             };
-            console.log(detectedProjects)
+            // console.log(detectedProjects)
             return res.json({
                 success: true,
                 verify: false,

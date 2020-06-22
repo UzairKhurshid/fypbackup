@@ -432,7 +432,10 @@ router.post('/projects/acceptRequest/:id', async(req, res) => {
 router.post('/projects/requestProject/:id', auth, async(req, res) => {
     const role = req.session.role
     const email = req.session.email
+    var d = new Date();
+    var n = d.getMonth() + 1;
     try {
+
         const account = await Account.findOne({ email, role })
         const request = new Request()
         request.ownerID = req.body.ownerID
@@ -453,8 +456,17 @@ router.post('/projects/requestProject/:id', auth, async(req, res) => {
         const todaysDate = new Date()
         const currentYear = todaysDate.getFullYear()
         if (proj.year < currentYear) {
-            console.log('a')
             throw new Error('choose ' + currentYear + ' projects . you cannot request this project .')
+        }
+        if (n > 5 && n < 8) {
+            if (proj.season != "Fall") {
+                throw new Error('choose ' + currentYear + ' projects . you cannot request Spring project now.')
+            }
+        }
+        if (n > 11 && n < 2) {
+            if (proj.season != "Spring") {
+                throw new Error('choose ' + currentYear + ' projects . you cannot request fall project now.')
+            }
         }
 
         await request.save()

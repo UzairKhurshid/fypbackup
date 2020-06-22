@@ -98,17 +98,31 @@ router.post('/signup/:role', async(req, res) => {
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     const role = req.params.role
+    let flag = true
 
     try {
-        const account = new Account(req.body)
-        account.status = "disable"
-        account.role = role
-        await account.save()
-        await createNotification('A new Account has been created . Please review accounts.', 'Account', '/adminAccounts', '', 'admin')
-        sendWelcomeMail(req.body.email, req.body.name)
+        const AllAcc = await Account.find({ role })
+        AllAcc.forEach(Acc => {
+            if (Acc.regNo == req.body.regNo) {
+                flag = true
+            }
+        });
+        if (flag == true) {
+            req.flash('error', 'Account With this registeration no already exists')
+            return res.redirect('/login/'.concat(role))
+        } else {
+            const account = new Account(req.body)
+            account.status = "disable"
+            account.role = role
+            await account.save()
+            await createNotification('A new Account has been created . Please review accounts.', 'Account', '/adminAccounts', '', 'admin')
+            sendWelcomeMail(req.body.email, req.body.name)
 
-        req.flash('success', 'Account Created Successfully')
-        return res.redirect('/login/'.concat(role))
+            req.flash('success', 'Account Created Successfully')
+            return res.redirect('/login/'.concat(role))
+        }
+
+
     } catch (e) {
         req.flash('error', e.message)
         return res.redirect('/signup/'.concat(role))

@@ -23,15 +23,27 @@ router.get('/projects', auth, async(req, res) => {
         const notificationCount = Arr.length
         if (req.query.season) {
             const season = req.query.season
-            const proj = await Project.find({ status: 'accepted' })
-            projects = await Project.find({ status: 'accepted', season }).sort({ year: 1, name: 'desc' })
-            count = Object.keys(proj).length
-        } else {
-            const proj = await Project.find({ status: 'accepted' })
-            projects = await Project.find({ status: 'accepted' }).sort({ year: -1, name: 'desc' })
-            count = Object.keys(proj).length
-        }
+            if (role == "admin") {
+                const proj = await Project.find()
+                projects = await Project.find({ season }).sort({ year: 1, name: 'desc' })
+                count = Object.keys(proj).length
+            } else {
+                const proj = await Project.find({ status: 'accepted' })
+                projects = await Project.find({ status: 'accepted', season }).sort({ year: 1, name: 'desc' })
+                count = Object.keys(proj).length
+            }
 
+        } else {
+            if (role == "admin") {
+                const proj = await Project.find()
+                projects = await Project.find().sort({ year: -1, name: 'desc' })
+                count = Object.keys(proj).length
+            } else {
+                const proj = await Project.find({ status: 'accepted' })
+                projects = await Project.find({ status: 'accepted' }).sort({ year: -1, name: 'desc' })
+                count = Object.keys(proj).length
+            }
+        }
 
         if (role == 'admin') {
             res.render('projects/index', {
@@ -372,7 +384,7 @@ router.post('/project/verify', auth, async(req, res) => {
         projects = await projectDetails.find({});
 
         if (projects.length <= 0) {
-           return  res.json({
+            return res.json({
                 success: true,
                 verify: true
             })
@@ -396,9 +408,9 @@ router.post('/project/verify', auth, async(req, res) => {
 
             averageScore = (((titleScore + introductionScore + objectivesScore + outcomeScore + areaScore) / 500) * 100)
 
-            console.log("SCore: "+averageScore)
+            console.log("SCore: " + averageScore)
             if (averageScore >= 70) {
-                detected.push( mongoose.Types.ObjectId(proj.projectID))
+                detected.push(mongoose.Types.ObjectId(proj.projectID))
                 scores.push(averageScore)
             }
 
@@ -409,29 +421,29 @@ router.post('/project/verify', auth, async(req, res) => {
 
             let detectedProjects = {
                 projects: await Project.find({
-                    _id : { $in:detected}
+                    _id: { $in: detected }
                 }),
-                scores:scores
+                scores: scores
 
             };
             console.log(detectedProjects)
-            return  res.json({
+            return res.json({
                 success: true,
                 verify: false,
-                detects:detectedProjects
+                detects: detectedProjects
             })
 
         }
 
-            return  res.json({
-                success: true,
-                verify: true
-            })
+        return res.json({
+            success: true,
+            verify: true
+        })
 
     } catch (e) {
         console.log(e.message + " Catch Verify error")
             // req.flash('error', e.message)
-        return  res.json({
+        return res.json({
             success: false,
             verify: false
         })

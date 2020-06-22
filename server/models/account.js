@@ -11,8 +11,7 @@ const accountSchema = new mongoose.Schema({
     },
     regNo: {
         type: Number,
-        trim: true,
-        unique: true
+        trim: true
     },
     role: {
         type: String,
@@ -25,7 +24,6 @@ const accountSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        trim: true,
         required: true,
         trim: true,
         unique: true,

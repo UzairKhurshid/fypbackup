@@ -126,10 +126,29 @@ router.get('/adminAccount/create', auth, async(req, res) => {
 router.post('/adminAccount/create', auth, async(req, res) => {
 
     try {
-        const account = new Account(req.body)
-        await account.save()
-        req.flash('success', 'Account Created Successfully')
-        res.redirect('/adminAccounts')
+        const role = req.body.role
+        let flag = false
+        if (req.body.role == "admin") {
+            flag = false
+        } else {
+            const AllAcc = await Account.find({ role })
+            AllAcc.forEach(Acc => {
+                if (Acc.regNo == req.body.regNo) {
+                    flag = true
+                }
+            });
+        }
+
+        if (flag == true) {
+            req.flash('error', role + ' Account With This Registeration No Already Exists.')
+            return res.redirect('/adminAccounts')
+        } else {
+            const account = new Account(req.body)
+            await account.save()
+            req.flash('success', role + ' Account Created Successfully')
+            return res.redirect('/adminAccounts')
+        }
+
     } catch (e) {
         console.log(e.message)
         req.flash('error', '' + e.message)

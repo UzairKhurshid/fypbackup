@@ -55,7 +55,7 @@
                             </div>
                         {{/if}}
                         {{#if error}}
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
                                 <span class="alert-icon"><i class="ni ni-like-2"></i></span>
                                 <span class="alert-text"><strong>Error!</strong> {{error}}</span>
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -70,10 +70,7 @@
                                         Update your profile information from here.
                                     </div>
                                     <div class="card-body">
-                                        <p class="card-text mb-30">Lorem ipsum dolor sit amet, consectetur adipisicing
-                                            elit. At distinctio, eligendi illo iste odit qui. Illum officiis recusandae
-                                            soluta sunt voluptas. Debitis eius fuga illum odio. Architecto et laboriosam
-                                            praesentium?</p>
+                                        <p class="card-text mb-30">Manage your account detail here.</p>
                                         <form method="POST" action="/profile/update/{{account.id}}">
                                             <input type="hidden" class="form-control" name="_csrf"
                                                    value="{{csrfToken}}">

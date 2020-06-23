@@ -38,20 +38,41 @@ router.get('/proposed/allProposedProjects', auth, async(req, res) => {
 
 
         if (role == "student") {
+            const stdAcc = await Account.findOne({ email, role })
+            const myProj = await myProject.findOne({ requestedByID: stdAcc._id })
 
-            return res.render('proposed/all_proposed_projects', {
-                title: 'Proposed Projects',
-                Projects: true,
-                studentLogin: true,
-                project: projects,
-                count: count,
-                notification: Arr,
-                notificationCount: notificationCount,
-                accAvatar: req.session.avatar,
-                accountName: req.session.name,
-                success: req.flash('success'),
-                error: req.flash('error')
-            })
+            if (myProj == undefined || myProj == null) {
+                console.log("no project")
+                return res.render('proposed/all_proposed_projects', {
+                    title: 'Proposed Projects',
+                    Projects: true,
+                    fyp_check: true,
+                    studentLogin: true,
+                    project: projects,
+                    count: count,
+                    notification: Arr,
+                    notificationCount: notificationCount,
+                    accAvatar: req.session.avatar,
+                    accountName: req.session.name,
+                    success: req.flash('success'),
+                    error: req.flash('error')
+                })
+            } else {
+                return res.render('proposed/all_proposed_projects', {
+                    title: 'Proposed Projects',
+                    Projects: true,
+                    studentLogin: true,
+                    project: projects,
+                    count: count,
+                    notification: Arr,
+                    notificationCount: notificationCount,
+                    accAvatar: req.session.avatar,
+                    accountName: req.session.name,
+                    success: req.flash('success'),
+                    error: req.flash('error')
+                })
+            }
+
 
         } else if (role == "teacher") {
 
@@ -300,7 +321,6 @@ router.get('/projects/requests', async(req, res) => {
         const notificationCount = notificationArr.length
 
         if (role == 'student') {
-
 
             return res.render('proposed/requests', {
                 title: 'Project Requests',

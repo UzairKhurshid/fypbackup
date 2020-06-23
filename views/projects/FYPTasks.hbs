@@ -64,9 +64,8 @@
                                     <th>Task Start Date</th>
                                     <th>Task End Date</th>
                                     <th>Status</th>
-                                    {{#if teacherLogin}}
-                                        <th>Action</th>
-                                    {{/if}}
+                                    <th>Action</th>
+                                    
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -83,9 +82,15 @@
                                                     <form onsubmit="return form_confirm(this);" method="POST" action="/FYP/markTaskCompleted/{{../projID}}">
                                                         <input type="hidden" name="taskID" value="{{this.id}}">
                                                         <input type="hidden" name="_csrf" value="{{../csrfToken}}">
-                                                        <button class="btn btn-sm btn-outline-blue" >Mark Task As Completed</button>
+                                                        <button class="btn btn-sm mr-2 btn-outline-blue" >Task As Completed</button>
+                                                    </form>
+                                                    <form  method="POST" action="/FYPViewTask/{{../projID}}">
+                                                        <input type="hidden" name="taskID" value="{{this.id}}">
+                                                        <input type="hidden" name="_csrf" value="{{../csrfToken}}">
+                                                        <button class="btn btn-sm btn-outline-blue" >View Task</button>
                                                     </form>
                                                 </td>
+                            
                                             </tr>
                                         {{/each}}
                                         <script>
@@ -117,6 +122,13 @@
                                                 <td>{{this.taskStartDate}}</td>
                                                 <td>{{this.taskEndDate}}</td>
                                                 <td><span class="badge badge-status-{{this.status}}">{{this.status}}</span></td>
+                                                <td class="d-flex justify-content-start">
+                                                    <form method="POST" action="/FYPViewTask/{{../projID}}">
+                                                        <input type="hidden" name="taskID" value="{{this.id}}">
+                                                        <input type="hidden" name="_csrf" value="{{../csrfToken}}">
+                                                        <button class="btn btn-sm btn-outline-blue" >View Task</button>
+                                                    </form>
+                                                </td>
                                             </tr>
                                         {{/each}}
                                     {{/if}}

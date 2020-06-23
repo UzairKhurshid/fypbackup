@@ -74,7 +74,8 @@
                                 <tbody>
                                 {{#if studentLogin}}
                                     {{#if project}}
-                                        {{#each project}}
+                                        {{#if fyp_check}}
+                                            {{#each project}}
                                             <!-- <th class="text-center" colspan="6">Show All Proposed Projects Here.</th> -->
                                             <tr>
                                                 <td class="text-capitalize">{{this.name}}</td>
@@ -90,7 +91,22 @@
                                                     </form>
                                                 </td>
                                             </tr>
-                                        {{/each}}
+                                            {{/each}}
+                                        {{else}}
+                                            {{#each project}}
+                                            <!-- <th class="text-center" colspan="6">Show All Proposed Projects Here.</th> -->
+                                            <tr>
+                                                <td class="text-capitalize">{{this.name}}</td>
+                                                <td>{{this.year}}</td>
+                                                <td>{{this.season}}</td>
+                                                <td class="text-capitalize">{{this.ownerName}}</td>
+                                                <td class="d-flex">
+                                                    <a class="btn btn-sm btn-outline-info mr-5" href="/viewproject/{{this.id}}">View Project</a>
+                                                    
+                                                </td>
+                                            </tr>
+                                            {{/each}}
+                                        {{/if}}
                                         <script>
                                             function form_confirm(form) {
                                                 Swal.fire({

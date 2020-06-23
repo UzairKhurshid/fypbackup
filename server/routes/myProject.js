@@ -389,6 +389,7 @@ router.get('/FYPTasks/:id', auth, async(req, res) => {
 })
 
 
+
 router.get('/FYP/newTask/:id', auth, async(req, res) => {
     const role = req.session.role
     const email = req.session.email
@@ -438,6 +439,56 @@ router.post('/FYP/newTask/:id', async(req, res) => {
 
         req.flash('success', 'Successfully Created New Task For FYP')
         res.redirect('/FYPTasks/' + id)
+    } catch (e) {
+        console.log(e.message)
+        req.flash('error', e.message)
+        res.redirect('/dashboard')
+    }
+})
+
+
+router.post('/FYPViewTask/:id', auth, async(req, res) => {
+    const role = req.session.role
+    const email = req.session.email
+    const id = req.params.id
+    const taskID = req.body.taskID
+    let task = []
+    try {
+        const Arr = await getAllNotifications(email, role)
+        const notificationCount = Arr.length
+
+        const proj = await myProject.findOne({ _id: id })
+        for (i = 0; i < proj.tasks.length; i++) {
+            if (proj.tasks[i]._id == taskID) {
+                task = proj.tasks[i]
+            }
+        }
+        console.log(task)
+        if (role == "student") {
+            res.render('projects/FYPViewTasks', {
+                title: 'FYP New Task',
+                studentLogin: true,
+                task: task,
+                notification: Arr,
+                notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
+                accountName: req.session.name,
+                success: req.flash('success'),
+                error: req.flash('error')
+            })
+        } else {
+            res.render('projects/FYPViewTasks', {
+                title: 'FYP New Task',
+                teacherLogin: true,
+                task: task,
+                notification: Arr,
+                notificationCount: notificationCount,
+                accAvatar: req.session.avatar,
+                accountName: req.session.name,
+                success: req.flash('success'),
+                error: req.flash('error')
+            })
+        }
     } catch (e) {
         console.log(e.message)
         req.flash('error', e.message)

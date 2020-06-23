@@ -98,12 +98,14 @@ router.post('/signup/:role', async(req, res) => {
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     const role = req.params.role
-    let flag = true
+    let flag = false
 
     try {
         const AllAcc = await Account.find({ role })
         AllAcc.forEach(Acc => {
             if (Acc.regNo == req.body.regNo) {
+                console.log(Acc.regNo)
+                console.log(req.body.regNo)
                 flag = true
             }
         });

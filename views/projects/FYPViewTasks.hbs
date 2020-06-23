@@ -1,0 +1,113 @@
+<!-- Breadcrumb -->
+<nav class="hk-breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb breadcrumb-light bg-transparent">
+        <li class="breadcrumb-item"><a href="#">Projects</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Task</li>
+        <li class="breadcrumb-item active" aria-current="page">View</li>
+    </ol>
+</nav>
+<!-- /Breadcrumb -->
+
+<!-- Container -->
+<div class="container-fluid">
+
+    <!-- Title -->
+    <div class="hk-pg-header">
+        <div class="row w-100">
+            <div class="col-md-6">
+                <h4 class="hk-pg-title"><span class="pg-title-icon"><span class="feather-icon text-primary"><i
+                        data-feather="file"></i></span></span>View Project Task</h4>
+            </div>
+            <div class="col-md-6 pr-0 text-md-right">
+                <a class="btn btn-sm btn-gradient-primary" href="/projects">All Projects</a>
+            </div>
+        </div>
+    </div>
+    <!-- /Title -->
+
+    <!-- Row -->
+    <div class="row">
+        <div class="col-xl-12">
+            <section class="hk-sec-wrapper">
+                <h5 class="hk-sec-title">View Projects Task</h5>
+                {{!-- <p class="mb-40">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dignissimos
+                    perspiciatis sapiente sunt veniam. Dolorem dolorum ipsam praesentium, quis ratione velit. Asperiores
+                    eaque eos laudantium modi! Nisi odio quasi totam.
+                </p> --}}
+                {{#if success}}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                                    <span class="alert-text"><strong>Success!</strong> {{success}}</span>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                            {{/if}}
+                            {{#if error}}
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                                    <span class="alert-text"><strong>Error!</strong> {{error}}</span>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                            {{/if}}
+                <div class="row">
+                    <div class="col-sm">
+                        <form method="POST" action="/FYP/newTask/{{projID}}">
+                            <input type="hidden" name="_csrf" value="{{csrfToken}}" class="form-control">
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="taskName" class="form-control-label">Task Name</label>
+                                        <input required type="text" placeholder="Enter Task Name " class="form-control"
+                                               name="taskName" id="taskName" value="{{task.taskName}}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="status" class="form-control-label">Task Status</label>
+                                        <input required type="text" class="form-control" name="status" id="status"
+                                               value="{{task.status}}" readonly>
+                                        <small class="form-text badge badge-soft-warning text-muted">You can not change this field.</small>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="taskStartDate" class="form-control-label">Task Start Date</label>
+                                        <input required type="text" class="form-control"
+                                            id="taskStartDate" name="taskStartDate"
+                                               value="{{task.taskStartDate}}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="taskEndDate" class="form-control-label">Task End Date</label>
+                                        <input required type="text" 
+                                               class="form-control" id="taskEndDate" name="taskEndDate"
+                                               value="{{task.taskEndDate}}" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="taskDescription" class="form-control-label">Task Description</label>
+                                        <textarea class="form-control" name="taskDescription"
+                                                   id="taskDescription" rows="5"
+                                                   readonly>{{task.taskDescription}}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <!-- /Row -->
+</div>
+<!-- /Container -->

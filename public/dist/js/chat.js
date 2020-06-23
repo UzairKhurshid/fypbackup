@@ -11,10 +11,9 @@ socket.on('message', (message) => {
         '                                    <div class="media-body">\n' +
         '                                        <div class="msg-box">\n' +
         '                                            <div>\n' +
-        '                                                <p>' + message.name + '</p>\n' +
-        '                                                <p>' + message.email + '</p>\n' +
+        '                                                <small>' + message.name + '</small>\n' +
         '                                                <p>' + message.msg + '</p>\n' +
-        '                                                <span class="chat-time">' + message.createdAt + '</span>\n' +
+        '                                                <span class="chat-time">' + moment(message.createdAt).format('h:mm a') + '</span>\n' +
         '                                                <div class="arrow-triangle-wrap">\n' +
         '                                                    <div class="arrow-triangle left"></div>\n' +
         '                                                </div>\n' +

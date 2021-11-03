@@ -20,7 +20,7 @@
         "nodemon": "^2.0.3",
         "sharp": "^0.25.2",
         "socket.io": "^2.3.0",
-        "validator": "^12.2.0"
+        "validator": "^13.7.0"
     },
     "devDependencies": {
         "env-cmd": "^8.0.2"
